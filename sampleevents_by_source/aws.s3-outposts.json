@@ -1,0 +1,76 @@
+[
+  {
+    "version": "0",
+    "id": "d59dd9d3-bd79-97c8-a334-f1bc4b352cd9",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.s3-outposts",
+    "account": "123456789012",
+    "time": "2021-03-09T18:03:06Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA4HQ2TCDPIUEKUB3XC:admin",
+        "arn": "arn:aws:sts::123456789012:assumed-role/Admin/admin",
+        "accountId": "123456789012",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROA4HQ2TCDPIUEKUB3XC",
+            "arn": "arn:aws:iam::123456789012:role/Admin",
+            "accountId": "123456789012",
+            "userName": "Admin"
+          },
+          "attributes": {
+            "creationDate": "2021-03-09T18:02:54Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2021-03-09T18:03:06Z",
+      "eventSource": "s3-outposts.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "aws-cli/2.1.29 Python/3.8.8 Linux/4.14.219-161.340.amzn2.x86_64 exe/x86_64.amzn.2 prompt/off command/s3api.get-object",
+      "requestParameters": {
+        "bucketName": "mybucket",
+        "Key": "abc"
+      },
+      "responseElements": null,
+      "additionalEventData": {
+        "CipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
+        "bytesTransferredIn": 0,
+        "x-amz-id-2": "KQ/5gCxQ4ArlhF0jF1JuxsjgRH66RU9HlbqGvbSuV9TBtZWRZPtwoJI/mJQ42ztk",
+        "SignatureVersion": "SigV4",
+        "bytesTransferredOut": 0,
+        "AuthenticationMethod": "AuthHeader"
+      },
+      "requestID": "BECEBE314FA7BB4B",
+      "eventID": "92e1d47d-6830-4705-aad7-a0ca4e425faa",
+      "readOnly": true,
+      "resources": [
+        {
+          "accountId": "123456789012",
+          "type": "AWS::S3Outposts::Object",
+          "ARN": "arn:aws:s3-outposts:us-east-1:123456789012:outpost/ec2/bucket/mybucket/abc"
+        },
+        {
+          "accountId": "123456789012",
+          "type": "AWS::S3Outposts::Bucket",
+          "ARN": "arn:aws:s3-outposts:us-east-1:123456789012:outpost/ec2/bucket/mybucket"
+        }
+      ],
+      "eventType": "AwsApiCall",
+      "managementEvent": false,
+      "recipientAccountId": "123456789012",
+      "edgeDeviceDetails": {
+        "type": "outposts",
+        "deviceID": "ec2"
+      },
+      "eventCategory": "Data"
+    }
+  }
+]

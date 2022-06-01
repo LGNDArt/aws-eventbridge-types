@@ -1,0 +1,162 @@
+[
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Source Server Launch Result",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "RECOVERY_LAUNCH_SUCCEEDED",
+      "job-id": "drsjob-04ca7d0d3fb6afa3e",
+      "is_drill": "FALSE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Source Server Launch Result",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "RECOVERY_LAUNCH_SUCCEEDED",
+      "job-id": "drsjob-04ca7d0d3fb6afa3e",
+      "is_drill": "TRUE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Source Server Launch Result",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "RECOVERY_LAUNCH_FAILED",
+      "job-id": "drsjob-04ca7d0d3fb6afa3e",
+      "is_drill": "FALSE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Source Server Launch Result",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "RECOVERY_LAUNCH_FAILED",
+      "job-id": "drsjob-04ca7d0d3fb6afa3e",
+      "is_drill": "TRUE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Source Server Data Replication Stalled Change",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "STALLED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Source Server Data Replication Stalled Change",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "NOT_STALLED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS PIT Snapshot Taken",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "DrsSnapshotID": "112233",
+      "EbsSnapshotID": "445566",
+      "type": "Daily"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Recovery Instance Failback State Change",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:recovery-instance/i-12345678901234567"
+    ],
+    "detail": {
+      "state": "FAILBACK_IN_PROGRESS"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Recovery Instance Failback State Change",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:recovery-instance/i-12345678901234567"
+    ],
+    "detail": {
+      "state": "FAILBACK_COMPLETED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "DRS Recovery Instance Failback State Change",
+    "source": "aws.drs",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:drs:us-west-2:123456789012:recovery-instance/i-12345678901234567"
+    ],
+    "detail": {
+      "state": "FAILBACK_ERROR"
+    }
+  }
+]

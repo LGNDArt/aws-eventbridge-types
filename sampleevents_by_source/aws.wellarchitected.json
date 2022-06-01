@@ -1,0 +1,122 @@
+[
+  {
+    "version": "0",
+    "id": "00de336a-83cc-b80b-f0e6-f44c88a96050",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.wellarchitected",
+    "account": "123456789012",
+    "time": "2022-02-17T08:01:25Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA4JUSXMN5ZR6S7LZNP:sample-user",
+        "arn": "arn:aws:sts::123456789012:assumed-role/Admin/example-user",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROA4JUSXMN5ZR6S7LZNP",
+            "arn": "arn:aws:iam::123456789012:role/Admin",
+            "accountId": "123456789012",
+            "userName": "Admin"
+          },
+          "webIdFederationData": {},
+          "attributes": {
+            "creationDate": "2022-02-17T07:21:54Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2022-02-17T08:01:25Z",
+      "eventSource": "wellarchitected.amazonaws.com",
+      "eventName": "UpdateAnswer",
+      "awsRegion": "us-west-2",
+      "sourceIPAddress": "10.246.162.39",
+      "userAgent": "aws-internal/3 aws-sdk-java/1.12.127 Linux/5.4.156-94.273.amzn2int.x86_64 OpenJDK_64-Bit_Server_VM/25.312-b07 java/1.8.0_312 vendor/Oracle_Corporation cfg/retry-mode/standard",
+      "requestParameters": {
+        "Status": "Acknowledged",
+        "SelectedChoices": "***",
+        "ChoiceUpdates": "***",
+        "QuestionId": "priorities",
+        "WorkloadId": "ee73fda518f9bd4aa804c6252e4e37b0",
+        "IsApplicable": true,
+        "LensAlias": "wellarchitected",
+        "Reason": "NONE",
+        "Notes": "***"
+      },
+      "responseElements": {
+        "Answer": "***",
+        "LensAlias": "wellarchitected",
+        "WorkloadId": "ee73fda518f9bd4aa804c6252e4e37b0"
+      },
+      "requestID": "7bae1153-26a8-4dc0-9307-68b17b107619",
+      "eventID": "8339c258-4ddd-48aa-ab21-3f82ce9d79cd",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  },
+  {
+    "version": "0",
+    "id": "4054a34b-60a9-53c1-3146-c1a384dba41b",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.wellarchitected",
+    "account": "123456789012",
+    "time": "2022-02-17T08:58:34Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AROA4JUSXMN5ZR6S7LZNP:example-user",
+        "arn": "arn:aws:sts::123456789012:assumed-role/Admin/example-user",
+        "accountId": "123456789012",
+        "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AROA4JUSXMN5ZR6S7LZNP",
+            "arn": "arn:aws:iam::123456789012:role/Admin",
+            "accountId": "123456789012",
+            "userName": "Admin"
+          },
+          "webIdFederationData": {},
+          "attributes": {
+            "creationDate": "2022-02-17T07:21:54Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2022-02-17T08:58:34Z",
+      "eventSource": "wellarchitected.amazonaws.com",
+      "eventName": "CreateLensVersion",
+      "awsRegion": "us-west-2",
+      "sourceIPAddress": "10.246.162.39",
+      "userAgent": "aws-internal/3 aws-sdk-java/1.12.127 Linux/5.4.156-94.273.amzn2int.x86_64 OpenJDK_64-Bit_Server_VM/25.312-b07 java/1.8.0_312 vendor/Oracle_Corporation cfg/retry-mode/standard",
+      "requestParameters": {
+        "IsMajorVersion": true,
+        "LensVersion": "***",
+        "ClientRequestToken": "03f46163-e95c-4455-8479-266373aa09c7",
+        "LensAlias": "***"
+      },
+      "responseElements": {
+        "LensArn": "arn:aws:wellarchitected:us-west-2:123456789012:lens/6261deecb9def44f9aecc938ca25d94e",
+        "LensVersion": "***"
+      },
+      "requestID": "167b7051-980d-42ee-9967-0b4b3163e948",
+      "eventID": "c7ef2b47-419d-45b7-8982-fbade9b558c7",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  }
+]

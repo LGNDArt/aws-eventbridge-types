@@ -1,0 +1,87 @@
+[
+  {
+    "version": "0",
+    "id": "017fcb6d-7ca3-ebf8-819e-3e0fa956ee17",
+    "detail-type": "Forecast Dataset Import Job State Change",
+    "source": "aws.forecast",
+    "account": "123456789012",
+    "time": "2021-02-19T05:45:51Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:forecast:us-west-2:123456789012:dataset/example_data"
+    ],
+    "detail": {
+      "Arn": "arn:aws:forecast:us-west-2:123456789012:dataset/example_data",
+      "Duration": 7200,
+      "Status": "ACTIVE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "017fcb6d-7ca3-ebf8-819e-3e0fa956ee17",
+    "detail-type": "Forecast Forecast Export Job State Change",
+    "source": "aws.forecast",
+    "account": "123456789012",
+    "time": "2021-02-19T05:45:51Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:forecast:us-west-2:123456789012:forecast-export-job/example_forecast_export_job"
+    ],
+    "detail": {
+      "Arn": "arn:aws:forecast:us-west-2:123456789012:forecast-export-job/example_forecast_export_job",
+      "Duration": 7200,
+      "Status": "ACTIVE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "017fcb6d-7ca3-ebf8-819e-3e0fa956ee17",
+    "detail-type": "Forecast Predictor Backtest Export Job State Change",
+    "source": "aws.forecast",
+    "account": "123456789012",
+    "time": "2021-02-19T05:45:51Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:forecast:us-west-2:123456789012:predictor-backtest-export-job/example_predictor_backtest_export_job"
+    ],
+    "detail": {
+      "Arn": "arn:aws:forecast:us-west-2:123456789012:predictor-backtest-export-job/example_predictor_backtest_export_job",
+      "Duration": 7200,
+      "Status": "ACTIVE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "017fcb6d-7ca3-ebf8-819e-3e0fa956ee17",
+    "detail-type": "Forecast Predictor Creation State Change",
+    "source": "aws.forecast",
+    "account": "123456789012",
+    "time": "2021-02-19T05:45:51Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:forecast:us-west-2:123456789012:predictor/example_predictor"
+    ],
+    "detail": {
+      "Arn": "arn:aws:forecast:us-west-2:123456789012:predictor/example_predictor",
+      "Duration": 7200,
+      "Status": "ACTIVE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "017fcb6d-7ca3-ebf8-819e-3e0fa956ee17",
+    "detail-type": "Forecast Forecast Creation State Change",
+    "source": "aws.forecast",
+    "account": "123456789012",
+    "time": "2021-02-19T05:45:51Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:forecast:us-west-2:123456789012:forecast/example_forecast"
+    ],
+    "detail": {
+      "Arn": "arn:aws:forecast:us-west-2:123456789012:forecast/example_forecast",
+      "Duration": 7200,
+      "Status": "ACTIVE"
+    }
+  }
+]

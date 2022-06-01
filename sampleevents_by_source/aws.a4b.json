@@ -1,0 +1,23 @@
+[
+  {
+    "version": "0",
+    "id": "7bf73129-1428-4cd3-a780-95db273d1602",
+    "detail-type": "Alexa for Business Room State Change",
+    "source": "aws.a4b",
+    "account": "123456789012",
+    "time": "2020-01-20T10:00:12Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:a4b:us-east-1:123456789012:room/<org-id>/<room-id>"
+    ],
+    "detail": {
+      "version": "1",
+      "event-type": "a4b:RoomRelease",
+      "mode": "(VoiceInvocation|PresenceDetection|APICall|Timeout)",
+      "calendar-event": {
+        "provider": "amzn1.moneypenny.provider.0b3098bf-f848-432a-ad60-f77b803f5586",
+        "id": "<provider-event-id>"
+      }
+    }
+  }
+]

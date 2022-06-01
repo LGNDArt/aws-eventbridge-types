@@ -1,0 +1,111 @@
+[
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "MGN Source Server Launch Result",
+    "source": "aws.mgn",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mgn:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "TEST_LAUNCH_SUCCEEDED",
+      "job-id": "mgnjob-04ca7d0d3fb6afa3e"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "MGN Source Server Launch Result",
+    "source": "aws.mgn",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mgn:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "TEST_LAUNCH_FAILED",
+      "job-id": "mgnjob-04ca7d0d3fb6afa3e"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "MGN Source Server Launch Result",
+    "source": "aws.mgn",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mgn:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "CUTOVER_LAUNCH_SUCCEEDED",
+      "job-id": "mgnjob-04ca7d0d3fb6afa3e"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "MGN Source Server Launch Result",
+    "source": "aws.mgn",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mgn:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "CUTOVER_LAUNCH_FAILED",
+      "job-id": "mgnjob-04ca7d0d3fb6afa3e"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "MGN Source Server Lifecycle State Change",
+    "source": "aws.mgn",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mgn:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "READY_FOR_TEST"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "MGN Source Server Data Replication Stalled Change",
+    "source": "aws.mgn",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mgn:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "STALLED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9da9af57-9253-4406-87cb-7cc400e43465",
+    "detail-type": "MGN Source Server Data Replication Stalled Change",
+    "source": "aws.mgn",
+    "account": "123456789012",
+    "time": "2016-08-22T20:12:19Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mgn:us-west-2:123456789012:source-server/s-12345678901234567"
+    ],
+    "detail": {
+      "state": "NOT_STALLED"
+    }
+  }
+]

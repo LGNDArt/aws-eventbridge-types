@@ -1,0 +1,399 @@
+[
+  {
+    "version": "0",
+    "id": "08108845-ef90-00b8-1ad6-2ee5570ac6c4",
+    "detail-type": "DevOps Guru New Insight Open",
+    "source": "aws.devops-guru",
+    "account": "123456789012",
+    "time": "2021-11-01T17:06:10Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "insightSeverity": "high",
+      "insightDescription": "ApiGateway 5XXError Anomalous In Stack ApigwLambdaDdbStack-0017",
+      "insightType": "REACTIVE",
+      "anomalies": [
+        {
+          "startTime": "1635786000000",
+          "id": "AL41JDFFQPYlZlXD8cpREkAAAAF83HGGgC9TmTr9lbfJ7sCiISlWMeFCbHY_XXXX",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "period": "60",
+                "stat": "Average",
+                "unit": "None",
+                "name": "5XXError",
+                "namespace": "AWS/ApiGateway",
+                "dimensions": [
+                  {
+                    "name": "ApiName",
+                    "value": "ApigwLambdaDdbStack-0017 Items Service"
+                  },
+                  {
+                    "name": "Stage",
+                    "value": "prod"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "accountId": "123456789012",
+      "messageType": "NEW_INSIGHT",
+      "insightUrl": "https://us-east-1.console.aws.amazon.com/devops-guru/#/insight/reactive/AIYH6JxdbgkcG0xJmypiL4MAAAAAAAAAL0SLEjkxiNProXWcsTJbLU07EZ7XXXX",
+      "startTime": "1635786120000",
+      "insightId": "AIYH6JxdbgkcG0xJmypiL4MAAAAAAAAAL0SLEjkxiNProXWcsTJbLU07EZ7XXXX",
+      "region": "us-east-1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8916ba7f-f963-9a97-9bc3-714a4cc5b572",
+    "detail-type": "DevOps Guru Insight Closed",
+    "source": "aws.devops-guru",
+    "account": "123456789012",
+    "time": "2021-11-01T16:49:20Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "insightSeverity": "high",
+      "insightDescription": "ApiGateway 5XXError Anomalous In Stack ApigwLambdaDdbStack-0016",
+      "insightType": "REACTIVE",
+      "anomalies": [
+        {
+          "startTime": "1635782400000",
+          "id": "AIcfRl-fC0Zr2Kbz4ouc7-4AAAF83DqYAMW-y00bXSq-Xzjdq-QohVkdrkBbXXXX",
+          "endTime": "1635783300000",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "period": "60",
+                "stat": "Average",
+                "unit": "None",
+                "name": "4XXError",
+                "namespace": "AWS/ApiGateway",
+                "dimensions": [
+                  {
+                    "name": "ApiName",
+                    "value": "ApigwLambdaDdbStack-0016 Items Service"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "startTime": "1635782400000",
+          "id": "AFcDq63y7FO2IqphLVn8AL8AAAF83DqYAA7tklz0HC1ZFFqBgMEMl9b-MF6_XXXX",
+          "endTime": "1635783300000",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "period": "60",
+                "stat": "Average",
+                "unit": "None",
+                "name": "4XXError",
+                "namespace": "AWS/ApiGateway",
+                "dimensions": [
+                  {
+                    "name": "ApiName",
+                    "value": "ApigwLambdaDdbStack-0016 Items Service"
+                  },
+                  {
+                    "name": "Stage",
+                    "value": "prod"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "startTime": "1635782400000",
+          "id": "AK5VX8sxqB9q9Qx80yjRd6UAAAF83DqYAOvfatrP7BhltIkQZhp-UXhhD1PHXXXX",
+          "endTime": "1635782760000",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "period": "60",
+                "stat": "Average",
+                "unit": "None",
+                "name": "5XXError",
+                "namespace": "AWS/ApiGateway",
+                "dimensions": [
+                  {
+                    "name": "ApiName",
+                    "value": "ApigwLambdaDdbStack-0016 Items Service"
+                  },
+                  {
+                    "name": "Stage",
+                    "value": "prod"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "startTime": "1635782400000",
+          "id": "ADq5bd0sy6RUan4PWlu2hx8AAAF83DqYAGF_M-boCszpQaJ9NdktlwhacEhQXXXX",
+          "endTime": "16357827600000",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "period": "60",
+                "stat": "Average",
+                "unit": "None",
+                "name": "5XXError",
+                "namespace": "AWS/ApiGateway",
+                "dimensions": [
+                  {
+                    "name": "ApiName",
+                    "value": "ApigwLambdaDdbStack-0016 Items Service"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "startTime": "1635782400000",
+          "id": "AE_BnLh9s6N6x3QVbUBiqZcAAAF83DqYAMvNtntq5sx4aQYs9wV8difa0wIOXXXX",
+          "endTime": "1635782700000",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "period": "60",
+                "stat": "p90",
+                "unit": "None",
+                "ResourceId": "ApigwLambdaDdbStack-0016-getOneItemFunctionE3257B2-13RT30ZOGMUDF",
+                "name": "Duration",
+                "namespace": "AWS/Lambda",
+                "ResourceType": "Lambda/Function",
+                "dimensions": [
+                  {
+                    "name": "FunctionName",
+                    "value": "ApigwLambdaDdbStack-0016-getOneItemFunctionE3257B2-13RT30ZOGMUDF"
+                  },
+                  {
+                    "name": "Resource",
+                    "value": "ApigwLambdaDdbStack-0016-getOneItemFunctionE3257B2-13RT30ZOGMUDF"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "startTime": "1635782400000",
+          "id": "AFqrBsWmPlTSssI5azNj83AAAAF83DqYAE6UzOuEL4e_fRKo9QLG35pfitOsXXXX",
+          "endTime": "1635782700000",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "period": "60",
+                "stat": "p90",
+                "unit": "None",
+                "ResourceId": "ApigwLambdaDdbStack-0016-getOneItemFunctionE3257B2-13RT30ZOGMUDF",
+                "name": "Duration",
+                "namespace": "AWS/Lambda",
+                "ResourceType": "Lambda/Function",
+                "dimensions": [
+                  {
+                    "name": "FunctionName",
+                    "value": "ApigwLambdaDdbStack-0016-getOneItemFunctionE3257B2-13RT30ZOGMUDF"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "accountId": "123456789012",
+      "messageType": "CLOSED_INSIGHT",
+      "insightUrl": "https://us-east-1.console.aws.amazon.com/devops-guru/#/insight/reactive/AHcMtAdJ-YgzdM4bu-VH5Z0AAAAAAAAAL-J-uXayO37aSnz_KrHp-zAkiv11XXXX",
+      "startTime": "1635782520000",
+      "insightId": "AHcMtAdJ-YgzdM4bu-VH5Z0AAAAAAAAAL-J-uXayO37aSnz_KrHp-zAkiv11XXXX",
+      "endTime": "1635785100000",
+      "region": "us-east-1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "bc1bb299-d125-c3a3-7714-ce62e689a6de",
+    "detail-type": "DevOps Guru New Anomaly Association",
+    "source": "aws.devops-guru",
+    "account": "123456789012",
+    "time": "2021-10-07T22:19:53Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "insightDescription": "Latency",
+      "anomalies": [
+        {
+          "id": "ACjzRLQFpuZEhpuMs-kFOUAAAAF8Cs1QAP-1zCAelZxwqynygpZs7dzdLFPMXXXX",
+          "startTime": "1632268800000",
+          "sourceDetails": [
+            {
+              "dataSource": "CW_METRICS",
+              "dataIdentifiers": {
+                "namespace": "AWS/ApiGateway",
+                "name": "Latency",
+                "stat": "p90",
+                "unit": "None",
+                "period": "60",
+                "dimensions": {
+                  "name": "ApiName",
+                  "value": "ApigwLambdaDdbStack-0000 Items Service"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "accountId": "123456789012",
+      "messageType": "NEW_ASSOCIATION",
+      "startTime": "1632268800000",
+      "insightId": "AEXHln5uFTrlQiiJFX5pt54AAAAAAAAACwUjlrV2vvWlVxADO7yqESLS3yqQXXXX",
+      "region": "us-east-1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "4aeb8d8c-64a8-425e-e4ce-d1196358be06",
+    "detail-type": "DevOps Guru New Recommendation Created",
+    "source": "aws.devops-guru",
+    "account": "123456789012",
+    "time": "2021-10-07T22:32:58Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "recommendations": [
+        {
+          "name": "Optimize Amazon API Gateway backend latency",
+          "description": "Your API Gateway latency is high because of increased backend latency. Optimize the backend latency to reduce the latency in API Gateway.",
+          "reason": "The Latency metric in AWS::ApiGateway::ApiName breached a high threshold. The IntegrationLatency metric in AWS::ApiGateway::ApiName breached a high threshold. ",
+          "link": "https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-optimize.html",
+          "relatedEvents": [],
+          "relatedAnomalies": [
+            {
+              "sourceDetails": {
+                "cloudWatchMetrics": [
+                  {
+                    "metricName": "Latency",
+                    "namespace": "AWS::ApiGateway::ApiName"
+                  }
+                ]
+              },
+              "resources": [
+                {
+                  "name": "ApigwLambdaDdbStack-0000 Items Service",
+                  "type": "AWS::ApiGateway::ApiName"
+                },
+                {
+                  "name": "/items/{id}",
+                  "type": "AWS::ApiGateway::Resource"
+                },
+                {
+                  "name": "prod",
+                  "type": "AWS::ApiGateway::Stage"
+                },
+                {
+                  "name": "GET",
+                  "type": "AWS::ApiGateway::Method"
+                }
+              ]
+            },
+            {
+              "sourceDetails": {
+                "cloudWatchMetrics": [
+                  {
+                    "metricName": "IntegrationLatency",
+                    "namespace": "AWS::ApiGateway::ApiName"
+                  }
+                ]
+              },
+              "resources": [
+                {
+                  "name": "ApigwLambdaDdbStack-0000 Items Service",
+                  "type": "AWS::ApiGateway::ApiName"
+                },
+                {
+                  "name": "/items/{id}",
+                  "type": "AWS::ApiGateway::Resource"
+                },
+                {
+                  "name": "prod",
+                  "type": "AWS::ApiGateway::Stage"
+                },
+                {
+                  "name": "GET",
+                  "type": "AWS::ApiGateway::Method"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Troubleshoot errors in Amazon API Gateway",
+          "description": "Your API Gateway is throwing a high number of errors. To learn about common API Gateway errors and how to handle them, see this link.",
+          "reason": "The 4XXError metric in ApiGateway breached a high threshold. ",
+          "link": "https://docs.aws.amazon.com/apigateway/api-reference/handling-errors/",
+          "relatedEvents": [],
+          "relatedAnomalies": [
+            {
+              "sourceDetails": {
+                "cloudWatchMetrics": [
+                  {
+                    "metricName": "4XXError",
+                    "namespace": "ApiGateway"
+                  }
+                ]
+              },
+              "resources": [
+                {
+                  "name": "ApigwLambdaDdbStack-0000 Items Service",
+                  "type": "AWS::ApiGateway::ApiName"
+                },
+                {
+                  "name": "prod",
+                  "type": "AWS::ApiGateway::Stage"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "accountId": "123456789012",
+      "messageType": "NEW_RECOMMENDATION",
+      "insightId": "AEXHln5uFTrlQiiJFX5pt54AAAAAAAAACwUjlrV2vvWlVxADO7yqESLS3yqQXXXX",
+      "region": "us-east-1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "08108845-ef91-00b8-1ac6-2ee5570ac6c4",
+    "detail-type": "DevOps Guru Insight Severity Upgraded",
+    "source": "aws.devops-guru",
+    "account": "123456789012",
+    "time": "2021-11-01T17:06:10Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "insightSeverity": "high",
+      "insightType": "REACTIVE",
+      "accountId": "123456789012",
+      "messageType": "SEVERITY_UPGRADED",
+      "insightId": "AIYH6JxdbgkcG0xJmypiL4MAAAAAAAAAL0SLEjkxiNProXWcsTJbLU07EZ7NXXXX",
+      "region": "us-east-1"
+    }
+  }
+]

@@ -1,0 +1,309 @@
+[
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Amazon EC2 Reserved Instances Optimization",
+      "check-item-detail": {
+        "Recommended Additional 1-Year RIs": "+1",
+        "Estimated Bill \n(Current RIs)": "$126.00",
+        "Current RIs \n(1-Year and 3-Year)": "0",
+        "Upfront Cost": "$750.00",
+        "Region / AZ": "us-west-2a",
+        "Instance Type": "m1.large",
+        "Estimated Bill \n(Optimized RIs)": "$46.13",
+        "Operating System": "Linux/Unix",
+        "Hourly Instance Usage Max/Average/Min": "1/0/0",
+        "Estimated Monthly Savings": "$79.87",
+        "Recommended Additional 3-Year RIs": "+1"
+      },
+      "status": "OK",
+      "resource_id": "",
+      "uuid": "7952e954-4408-4088-bdea-f9b17d9d1305"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Low Utilization Amazon EC2 Instances",
+      "check-item-detail": {
+        "Day 1": "0.0%  0.00MB",
+        "Day 2": "0.0%  0.00MB",
+        "Day 3": "0.0%  0.00MB",
+        "Region/AZ": "eu-central-1a",
+        "Estimated Monthly Savings": "$10.80",
+        "14-Day Average CPU Utilization": "0.0%",
+        "Day 14": "0.0%  0.00MB",
+        "Day 13": "0.0%  0.00MB",
+        "Day 12": "0.0%  0.00MB",
+        "Day 11": "0.0%  0.00MB",
+        "Day 10": "0.0%  0.00MB",
+        "14-Day Average Network I/O": "0.00MB",
+        "Number of Days Low Utilization": "14 days",
+        "Instance Type": "t2.micro",
+        "Instance ID": "i-917b1a5f",
+        "Day 8": "0.0%  0.00MB",
+        "Instance Name": null,
+        "Day 9": "0.0%  0.00MB",
+        "Day 4": "0.0%  0.00MB",
+        "Day 5": "0.0%  0.00MB",
+        "Day 6": "0.0%  0.00MB",
+        "Day 7": "0.0%  0.00MB"
+      },
+      "status": "WARN",
+      "resource_id": "arn:aws:ec2:eu-central-1:123456789012:instance/i-917b1a5f",
+      "uuid": "6ba6d96a-d3dd-4fca-8020-350bbee4719c"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Idle Load Balancers",
+      "check-item-detail": {
+        "Region": "ap-northeast-2",
+        "Load Balancer Name": "icn-elb-test",
+        "Estimated Monthly Savings": "$16.20",
+        "Reason": "No active back-end instances"
+      },
+      "status": "WARN",
+      "resource_id": "arn:aws:elasticloadbalancing:ap-northeast-2:123456789012:loadbalancer/icn-elb-test",
+      "uuid": "80bb14dc-a4be-42de-a3d1-212d2b0ca34b"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Underutilized Amazon EBS Volumes",
+      "check-item-detail": {
+        "Volume Type": "General purpose(SSD)",
+        "Volume ID": "vol-69a6546e",
+        "Volume Size": "1024",
+        "Snapshot Name": null,
+        "Region": "ap-southeast-2",
+        "Snapshot ID": null,
+        "Monthly Storage Cost": "$122.88",
+        "Volume Name": null,
+        "Snapshot Age": null
+      },
+      "status": "WARN",
+      "resource_id": "arn:aws:ec2:ap-southeast-2:123456789012:volume/vol-69a6546e",
+      "uuid": "28945e59-c856-440f-979c-1c12d6999615"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Unassociated Elastic IP Addresses",
+      "check-item-detail": {
+        "IP Address": "00.00.00.000",
+        "Region": "ap-northeast-2"
+      },
+      "status": "WARN",
+      "resource_id": "",
+      "uuid": "ca5f9dc6-030b-47d6-9edb-aaf8d15e20b3"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Amazon RDS Idle DB Instances",
+      "check-item-detail": {
+        "Instance Type": "db.r3.large",
+        "Region": "eu-west-1",
+        "Days Since Last Connection": "14+",
+        "Storage Provisioned (GB)": "1",
+        "DB Instance Name": "sam-eu-west-1a",
+        "Estimated Monthly Savings (On Demand)": "$230",
+        "Multi-AZ": "No"
+      },
+      "status": "WARN",
+      "resource_id": "arn:aws:rds:eu-west-1:123456789012:db:sam-eu-west-1a",
+      "uuid": "25437dc9-fb3e-4c88-af9e-030e39efeba5"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Underutilized Amazon Redshift Clusters",
+      "check-item-detail": {
+        "Status": "Yellow",
+        "Instance Type": "dc1.large",
+        "Region": "us-east-1",
+        "Cluster": "test-cluster",
+        "Estimated Monthly Savings": "180.0",
+        "Reason": "No database connections in past 7 days"
+      },
+      "status": "WARN",
+      "resource_id": "arn:aws:redshift:us-east-1:123456789012:cluster:test-cluster",
+      "uuid": "7db49d34-af0a-4c64-8578-e26e559b7cbe"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Amazon Route 53 Latency Resource Record Sets",
+      "check-item-detail": {
+        "Hosted Zone Name": "latency.blahblahblah.com.",
+        "Hosted Zone ID": "Z3NGWQ075IS9UX",
+        "Resource Record Set Type": "A",
+        "Resource Record Set Name": "latency.latency.blahblahblah.com."
+      },
+      "status": "WARN",
+      "resource_id": "arn:aws:route53:::hostedzone/Z3NGWQ075IS9UX",
+      "uuid": "c66e03e1-64e2-4eb4-b9b7-5081972afeb6"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Security Groups - Unrestricted Access",
+      "check-item-detail": {
+        "Status": "Red",
+        "IP Range": "0.0.0.0/0",
+        "Security Group ID": "sg-1cab2c78 (vpc-ed050c8f)",
+        "Security Group Name": "launch-wizard-1",
+        "Port": "22",
+        "Region": "eu-west-1",
+        "Protocol": "tcp"
+      },
+      "status": "ERROR",
+      "resource_id": "arn:aws:ec2:eu-west-1:123456789012:security-group/sg-1cab2c78",
+      "uuid": "7a36029d-8a01-4a95-9a95-286754aefc08"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Amazon S3 Bucket Permissions",
+      "check-item-detail": {
+        "Status": null,
+        "Global Upload/Delete Access": null,
+        "Region Name": null,
+        "Global List Access": null,
+        "Bucket Name": "check-s3-bucket-logging-settings-status-rule-inaccessible",
+        "Region API Parameter": null
+      },
+      "status": "INFO",
+      "resource_id": "arn:aws:s3:::check-s3-bucket-logging-settings-status-rule-inaccessible",
+      "uuid": "d1799a20-57fc-49df-aa5e-d06784275d93"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "IAM Password Policy",
+      "check-item-detail": {
+        "Status": "Red",
+        "Password Policy": "Disabled",
+        "Number": "Disabled",
+        "Uppercase": "Disabled",
+        "Lowercase": "Disabled",
+        "Non-alphanumeric": "Disabled",
+        "Reason": "Password policy not enabled"
+      },
+      "status": "ERROR",
+      "resource_id": "",
+      "uuid": "d99554e0-a8ea-48cf-b064-47a3868a1e4d"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8dee56b0-b19f-441a-a05c-aa26e583c6c4",
+    "detail-type": "Trusted Advisor Check Item Refresh Notification",
+    "source": "aws.trustedadvisor",
+    "account": "123456789012",
+    "time": "2016-11-13T13:31:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "check-name": "Amazon Aurora DB Instance Accessibility",
+      "check-item-detail": {
+        "Status": "Green",
+        "Private DB Instances": "0",
+        "Public DB Instances": "1",
+        "Region": "us-east-1",
+        "Cluster": "aurora-test-cluster",
+        "Reason": ""
+      },
+      "status": "OK",
+      "resource_id": "arn:aws:rds:us-east-1:123456789012:cluster:aurora-test-cluster",
+      "uuid": "5d0046cc-e670-41eb-91a4-59a7a4729387"
+    }
+  }
+]

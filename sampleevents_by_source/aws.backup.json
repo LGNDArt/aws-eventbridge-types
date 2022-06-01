@@ -1,0 +1,18 @@
+[
+  {
+    "version": "0",
+    "id": "12345678-5f35-d9a2-76d1-613683e4e024",
+    "detail-type": "Backup Vault State Change",
+    "source": "aws.backup",
+    "account": "123456789012",
+    "time": "2020-06-24T23:18:19Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:backup:us-west-2:123456789012:backup-vault:SampleVault"
+    ],
+    "detail": {
+      "backupVaultName": "SampleVault",
+      "state": "CREATED"
+    }
+  }
+]

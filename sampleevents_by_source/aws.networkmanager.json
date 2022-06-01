@@ -1,0 +1,66 @@
+[
+  {
+    "account": "123456789012",
+    "region": "us-west-2",
+    "detail-type": "Network Manager Status Update",
+    "source": "aws.networkmanager",
+    "version": "0",
+    "time": "2016-06-30T23:18:50Z",
+    "id": "fb1d3015-c091-4bf9-95e2-d98521ab2ecb",
+    "resources": [
+      "arn-of-global-network",
+      "arn-of-vpn"
+    ],
+    "detail": {
+      "change-type": "VPN-CONNECTION-IPSEC-DOWN",
+      "change-description": "IPsec for a VPN connection has gone down.",
+      "region": "us-east-1",
+      "transit-gateway-arn": "arn-of-tgw",
+      "transit-gateway-attachment-arn": "arn-of-attachment",
+      "vpn-connection-arn": "arn-of-vpn-connection",
+      "outside-ip-address": "ip of vpn headend"
+    }
+  },
+  {
+    "account": "123456789012",
+    "region": "us-west-2",
+    "detail-type": "Network Manager Routing Update",
+    "source": "aws.networkmanager",
+    "version": "0",
+    "time": "2016-06-30T23:18:50Z",
+    "id": "fb1d3015-c091-4bf9-95e2-d98521ab2ecb",
+    "resources": [
+      "arn-of-global-network",
+      "arn-of-tgw"
+    ],
+    "detail": {
+      "change-type": "TGW-ROUTE-TABLE-DISASSOCIATED",
+      "change-description": "A Transit Gateway attachment has been disassociated from a route table.",
+      "region": "us-east-1",
+      "transit-gateway-arn": "arn-of-tgw",
+      "transit-gateway-attachment-arn": "arn-of-tgw-attachment",
+      "transit-gateway-route-table-arn": "arn-of-tgw-route-table"
+    }
+  },
+  {
+    "account": "123456789012",
+    "region": "us-west-2",
+    "detail-type": "Network Manager Topology Change",
+    "source": "aws.networkmanager",
+    "version": "0",
+    "time": "2016-06-30T23:18:50Z",
+    "id": "fb1d3015-c091-4bf9-95e2-d98521ab2ecb",
+    "resources": [
+      "arn-of-global-network",
+      "arn-of-tgw"
+    ],
+    "detail": {
+      "change-type": "TGW-PEERING-CREATED",
+      "change-description": "A Transit Gateway peering attachment has been created.",
+      "region": "us-east-1",
+      "transit-gateway-arn": "arn-of-tgw",
+      "transit-gateway-attachment-arn": "arn-of-tgw-attachment",
+      "peer-transit-gateway-arn": "arn-of-peer-tgw"
+    }
+  }
+]

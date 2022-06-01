@@ -1,0 +1,853 @@
+[
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "START_SESSION",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "session": {
+        "authenticationAudioProgress": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": "2020-10-04T22:53:52.680Z"
+        },
+        "authenticationConfiguration": {
+          "acceptanceThreshold": 50
+        },
+        "enrollmentAudioProgress": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": "2021-10-04T22:53:52.680Z",
+          "audioAggregationStatus": "NOT_ENOUGH_SPEECH"
+        },
+        "fraudDetectionAudioProgress": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": "2020-10-04T22:53:52.680Z"
+        },
+        "fraudDetectionConfiguration": {
+          "riskThreshold": 15
+        },
+        "generatedSpeakerId": "id#Izo7iCsoE5KCq5INFMnwsH",
+        "sessionId": "id#1tj8EyMA3xmK6LJTgjNkoP",
+        "sessionName": "testSessionName",
+        "streamingConfiguration": {
+          "authenticationMinimumSpeechInSeconds": 10
+        }
+      },
+      "status": "STREAMING_STARTED",
+      "systemAttributes": {
+        "aws:connect:OriginalContactArn": "arn:aws:connect:us-west-2:000000000000:instance/aaaaaaaa-1111-2w2w-9eb8-bbbbbbbbbbbb/contact/aaaaaaaa-2222-2w2w-9eb8-bbbbbbbbbbbb"
+      },
+      "sourceId": "qbirkbGPFO47GdWFOwFNES"
+    },
+    "detail-type": "VoiceId Start Session Action",
+    "source": "aws.voiceid",
+    "id": "b75d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2020-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "START_SESSION",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "session": {
+        "authenticationAudioProgress": {
+          "audioAggregationEndedAt": "2021-10-04T22:58:17.409Z",
+          "audioAggregationStartedAt": "2021-10-04T22:58:00.247Z"
+        },
+        "authenticationConfiguration": {
+          "acceptanceThreshold": 80
+        },
+        "enrollmentAudioProgress": {
+          "audioAggregationEndedAt": "2021-10-04T22:56:44.549Z",
+          "audioAggregationStartedAt": "2021-10-04T22:55:57.699Z",
+          "audioAggregationStatus": "READY_FOR_ENROLLMENT"
+        },
+        "fraudDetectionAudioProgress": {
+          "audioAggregationEndedAt": "2021-10-04T22:58:16.840Z",
+          "audioAggregationStartedAt": "2021-10-04T22:58:00.247Z"
+        },
+        "fraudDetectionConfiguration": {
+          "riskThreshold": 20
+        },
+        "generatedSpeakerId": "id#Izo7iCsoE5KCq5INFMnwsH",
+        "sessionId": "id#X5UEVZer0amiApONZDLiP9",
+        "sessionName": "testSessionName2",
+        "streamingConfiguration": {
+          "authenticationMinimumSpeechInSeconds": 10
+        }
+      },
+      "status": "STREAMING_ENDED",
+      "systemAttributes": {
+        "aws:connect:OriginalContactArn": "arn:aws:connect:us-west-2:000000000000:instance/aaaaaaaa-1111-2w2w-9eb8-bbbbbbbbbbbb/contact/aaaaaaaa-2222-2w2w-9eb8-bbbbbbbbbbbb"
+      },
+      "sourceId": "9jqYNr5L5bIkvI8KuocplY"
+    },
+    "detail-type": "VoiceId Start Session Action",
+    "source": "aws.voiceid",
+    "id": "b75d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "START_SESSION",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 500,
+        "errorMessage": "Test Message",
+        "errorType": "INTERNAL_ERROR"
+      },
+      "session": {
+        "authenticationAudioProgress": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": "2021-10-04T22:53:52.680Z"
+        },
+        "authenticationConfiguration": {
+          "acceptanceThreshold": 50
+        },
+        "enrollmentAudioProgress": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": "2021-10-04T22:53:52.680Z",
+          "audioAggregationStatus": "NOT_ENOUGH_SPEECH"
+        },
+        "fraudDetectionAudioProgress": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": "2021-10-04T22:53:52.680Z"
+        },
+        "fraudDetectionConfiguration": {
+          "riskThreshold": 15
+        },
+        "generatedSpeakerId": "id#Izo7iCsoE5KCq5INFMnwsH",
+        "sessionId": "id#1tj8EyMA3xmK6LJTgjNkoP",
+        "sessionName": "testSessionName",
+        "streamingConfiguration": {
+          "authenticationMinimumSpeechInSeconds": 10
+        }
+      },
+      "status": "STREAMING_FAILED",
+      "systemAttributes": {
+        "aws:connect:OriginalContactArn": "arn:aws:connect:us-west-2:000000000000:instance/aaaaaaaa-1111-2w2w-9eb8-bbbbbbbbbbbb/contact/aaaaaaaa-2222-2w2w-9eb8-bbbbbbbbbbbb"
+      },
+      "sourceId": "tbirkbGPFO47GdWFOwFNES"
+    },
+    "detail-type": "VoiceId Start Session Action",
+    "source": "aws.voiceid",
+    "id": "ty5d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "DELETE_SPEAKER",
+      "data": null,
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "generatedSpeakerId": "id#12345isQLFGrsH87QXO3xo",
+      "status": "SUCCEEDED",
+      "systemAttributes": null,
+      "sourceId": "d37TQH3dw3jcjxi8Cj3jtQ"
+    },
+    "detail-type": "VoiceId Speaker Action",
+    "source": "aws.voiceid",
+    "id": "ty5d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "DELETE_SPEAKER",
+      "data": null,
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 404,
+        "errorMessage": "The requested speaker does not exist",
+        "errorType": "RESOURCE_NOT_FOUND"
+      },
+      "generatedSpeakerId": "id#12345isQLFGrsH87123456",
+      "status": "FAILED",
+      "systemAttributes": null,
+      "sourceId": "d37TQH3dw3jcjxi8Cj3jtQ"
+    },
+    "detail-type": "VoiceId Speaker Action",
+    "source": "aws.voiceid",
+    "id": "ty5d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "ENROLL_SPEAKER",
+      "data": {
+        "enrollmentSource": "BATCH_ENROLLMENT",
+        "enrollmentSourceId": "12345nrBqGtZKif8HIkMWr",
+        "enrollmentStatus": null
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 400,
+        "errorMessage": "The provided audio files do not have enough speech for enrollment.",
+        "errorType": "NOT_ENOUGH_SPEECH"
+      },
+      "generatedSpeakerId": null,
+      "status": "FAILED",
+      "systemAttributes": null,
+      "sourceId": "ch8JJE4N3w3BWEqD6qybPU"
+    },
+    "detail-type": "VoiceId Speaker Action",
+    "source": "aws.voiceid",
+    "id": "t55d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "ENROLL_SPEAKER",
+      "data": {
+        "enrollmentSource": "BATCH_ENROLLMENT",
+        "enrollmentSourceId": "12345nrBqGtZKif8HIkMWr",
+        "enrollmentStatus": "NEW_ENROLLMENT"
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "generatedSpeakerId": "id#4HB7hzunnBVeqR8YkrMc4U",
+      "status": "SUCCEEDED",
+      "systemAttributes": null,
+      "sourceId": "ch8JJE4N3w3BWEqD6qybPU"
+    },
+    "detail-type": "VoiceId Speaker Action",
+    "source": "aws.voiceid",
+    "id": "t55d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "DELETE_FRAUDSTER",
+      "data": null,
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "generatedFraudsterId": "id#12345dz8acyKjJt6o19qvX",
+      "status": "SUCCEEDED",
+      "sourceId": "25DUSvupCl4pPnTN2HMCRx"
+    },
+    "detail-type": "VoiceId Fraudster Action",
+    "source": "aws.voiceid",
+    "id": "t65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "DELETE_FRAUDSTER",
+      "data": null,
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 404,
+        "errorMessage": "The requested fraudster does not exist",
+        "errorType": "RESOURCE_NOT_FOUND"
+      },
+      "generatedFraudsterId": "id#12345dz8acyKjJt612345",
+      "status": "FAILED",
+      "sourceId": "25DUSvupCl4pPnTN2HMCRx"
+    },
+    "detail-type": "VoiceId Fraudster Action",
+    "source": "aws.voiceid",
+    "id": "t65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "REGISTER_FRAUDSTER",
+      "data": {
+        "registrationSource": "BATCH_REGISTRATION",
+        "registrationSourceId": "123452EwJWRTlduVCE2LaCM",
+        "registrationStatus": null
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 400,
+        "errorMessage": "The provided sample rate is invalid.",
+        "errorType": "BAD_REQUEST"
+      },
+      "generatedFraudsterId": null,
+      "status": "FAILED",
+      "sourceId": "2WzDRZ2j5rxG85QNr1TTgn"
+    },
+    "detail-type": "VoiceId Fraudster Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "REGISTER_FRAUDSTER",
+      "data": {
+        "registrationSource": "BATCH_REGISTRATION",
+        "registrationSourceId": "123452EwJWRTlduVCE2LaCM",
+        "registrationStatus": "NEW_REGISTRATION"
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "generatedFraudsterId": "id#o6Xxy0fWNv7CYRXkNvzQen",
+      "status": "SUCCEEDED",
+      "sourceId": "2WzDRZ2j5rxG85QNr1TTgn"
+    },
+    "detail-type": "VoiceId Fraudster Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "BATCH_FRAUDSTER_REGISTRATION_REQUEST",
+      "batchJobId": "12342EwJWRTlduVCE2LaCM",
+      "data": {
+        "dataAccessRoleArn": "arn:aws:iam::123456789012:role/role",
+        "inputDataConfig": {
+          "s3Uri": "s3://bucket/user/inputFile.json"
+        },
+        "outputDataConfig": {
+          "kmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/testkey",
+          "s3Uri": "s3://bucket/user/inputFile.json.out"
+        },
+        "registrationConfig": {
+          "duplicateRegistrationAction": "REGISTER_AS_NEW",
+          "fraudsterSimilarityThreshold": 90
+        }
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "status": "SUBMITTED",
+      "sourceId": "GolUOAAMFPBXlKgipUfqiw"
+    },
+    "detail-type": "VoiceId Batch Fraudster Registration Action",
+    "source": "aws.voiceid",
+    "id": "455d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "BATCH_FRAUDSTER_REGISTRATION_REQUEST",
+      "batchJobId": "12342EwJWRTlduVCE2LaCM",
+      "data": {
+        "dataAccessRoleArn": "arn:aws:iam::123456789012:role/role",
+        "inputDataConfig": {
+          "s3Uri": "s3://bucket/user/inputFile.json"
+        },
+        "outputDataConfig": {
+          "kmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/testkey",
+          "s3Uri": "s3://bucket/user/inputFile.json.out"
+        },
+        "registrationConfig": {
+          "duplicateRegistrationAction": "REGISTER_AS_NEW",
+          "fraudsterSimilarityThreshold": 90
+        }
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "status": "COMPLETED_WITH_ERRORS",
+      "sourceId": "GolUOAAMFPBXlKgipUfqiw"
+    },
+    "detail-type": "VoiceId Batch Fraudster Registration Action",
+    "source": "aws.voiceid",
+    "id": "455d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "BATCH_FRAUDSTER_REGISTRATION_REQUEST",
+      "batchJobId": "12342EwJWRTlduVCE2LaCM",
+      "data": {
+        "dataAccessRoleArn": "arn:aws:iam::123456789012:role/role",
+        "inputDataConfig": {
+          "s3Uri": "s3://bucket/user/inputFile.json"
+        },
+        "outputDataConfig": {
+          "kmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/testkey",
+          "s3Uri": "s3://bucket/user/inputFile.json.out"
+        },
+        "registrationConfig": {
+          "duplicateRegistrationAction": "REGISTER_AS_NEW",
+          "fraudsterSimilarityThreshold": 90
+        }
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "status": "COMPLETED",
+      "sourceId": "GolUOAAMFPBXlKgipUfqiw"
+    },
+    "detail-type": "VoiceId Batch Fraudster Registration Action",
+    "source": "aws.voiceid",
+    "id": "455d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "DELETE_FRAUDSTER",
+      "data": null,
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 404,
+        "errorMessage": "The requested fraudster does not exist",
+        "errorType": "RESOURCE_NOT_FOUND"
+      },
+      "generatedFraudsterId": "id#12345dz8acyKjJt612345",
+      "status": "FAILED",
+      "sourceId": "25DUSvupCl4pPnTN2HMCRx"
+    },
+    "detail-type": "VoiceId Fraudster Action",
+    "source": "aws.voiceid",
+    "id": "t65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "BATCH_SPEAKER_ENROLLMENT_REQUEST",
+      "batchJobId": "q2345juL8pRkzbWHx7E3ff",
+      "data": {
+        "dataAccessRoleArn": "arn:aws:iam::123456789012:role/role",
+        "enrollmentConfig": {
+          "existingEnrollmentAction": "SKIP",
+          "fraudDetectionConfig": {
+            "fraudDetectionAction": "FAIL",
+            "fraudDetectionThreshold": 20
+          }
+        },
+        "inputDataConfig": {
+          "s3Uri": "s3://bucket/user/inputFile.json"
+        },
+        "outputDataConfig": {
+          "kmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/testkey",
+          "s3Uri": "s3://bucket/user/inputFile.json.out"
+        }
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "status": "SUBMITTED",
+      "sourceId": "IGLTRtEaMEpiHHaXk4Jjqm"
+    },
+    "detail-type": "VoiceId Batch Speaker Enrollment Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "BATCH_SPEAKER_ENROLLMENT_REQUEST",
+      "batchJobId": "q2345juL8pRkzbWHx7E3ff",
+      "data": {
+        "dataAccessRoleArn": "arn:aws:iam::123456789012:role/role",
+        "enrollmentConfig": {
+          "existingEnrollmentAction": "SKIP",
+          "fraudDetectionConfig": {
+            "fraudDetectionAction": "FAIL",
+            "fraudDetectionThreshold": 20
+          }
+        },
+        "inputDataConfig": {
+          "s3Uri": "s3://bucket/user/inputFile.json"
+        },
+        "outputDataConfig": {
+          "kmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/testkey",
+          "s3Uri": "s3://bucket/user/inputFile.json.out"
+        }
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "status": "COMPLETED",
+      "sourceId": "IGLTRtEaMEpiHHaXk4Jjqm"
+    },
+    "detail-type": "VoiceId Batch Speaker Enrollment Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "BATCH_SPEAKER_ENROLLMENT_REQUEST",
+      "batchJobId": "q2345juL8pRkzbWHx7E3ff",
+      "data": {
+        "dataAccessRoleArn": "arn:aws:iam::123456789012:role/role",
+        "enrollmentConfig": {
+          "existingEnrollmentAction": "SKIP",
+          "fraudDetectionConfig": {
+            "fraudDetectionAction": "FAIL",
+            "fraudDetectionThreshold": 20
+          }
+        },
+        "inputDataConfig": {
+          "s3Uri": "s3://bucket/user/inputFile.json"
+        },
+        "outputDataConfig": {
+          "kmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/testkey",
+          "s3Uri": "s3://bucket/user/inputFile.json.out"
+        }
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "status": "COMPLETED_WITH_ERRORS",
+      "sourceId": "IGLTRtEaMEpiHHaXk4Jjqm"
+    },
+    "detail-type": "VoiceId Batch Speaker Enrollment Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "BATCH_SPEAKER_ENROLLMENT_REQUEST",
+      "batchJobId": "q2345juL8pRkzbWHx7E3ff",
+      "data": {
+        "dataAccessRoleArn": "arn:aws:iam::123456789012:role/role",
+        "enrollmentConfig": {
+          "existingEnrollmentAction": "SKIP",
+          "fraudDetectionConfig": {
+            "fraudDetectionAction": "FAIL",
+            "fraudDetectionThreshold": 20
+          }
+        },
+        "inputDataConfig": {
+          "s3Uri": "s3://bucket/user/inputFile.json"
+        },
+        "outputDataConfig": {
+          "kmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/testkey",
+          "s3Uri": "s3://bucket/user/inputFile.json.out"
+        }
+      },
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 400,
+        "errorMessage": "The given speaker enrollment job's input file version is invalid.",
+        "errorType": "BAD_REQUEST"
+      },
+      "status": "FAILED",
+      "sourceId": "IGLTRtEaMEpiHHaXk4Jjqm"
+    },
+    "detail-type": "VoiceId Batch Speaker Enrollment Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "EVALUATE_SESSION",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "session": {
+        "authenticationResult": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": null,
+          "authenticationResultId": "dsLMOu3G3fB73RzoP6UYZH",
+          "configuration": {
+            "acceptanceThreshold": 90
+          },
+          "decision": "NOT_ENOUGH_SPEECH",
+          "score": null
+        },
+        "fraudDetectionResult": {
+          "audioAggregationEndedAt": null,
+          "audioAggregationStartedAt": null,
+          "configuration": {
+            "riskThreshold": 20
+          },
+          "decision": "NOT_ENOUGH_SPEECH",
+          "fraudDetectionResultId": "xPMWAxFSWQ9CJrBXTaatds",
+          "reasons": null,
+          "riskDetails": null
+        },
+        "generatedSpeakerId": "id#Izo7iCsoE5KCq5INFMnwsH",
+        "sessionId": "id#CJA4lSzpzo5HFfP5L2h5lS",
+        "sessionName": "testSessionName",
+        "streamingStatus": "ONGOING"
+      },
+      "status": "SUCCEEDED",
+      "systemAttributes": {
+        "aws:connect:OriginalContactArn": "arn:aws:connect:us-west-2:000000000000:instance/aaaaaaaa-1111-2w2w-9eb8-bbbbbbbbbbbb/contact/aaaaaaaa-2222-2w2w-9eb8-bbbbbbbbbbbb"
+      },
+      "sourceId": "tbjvJmvIOy2f9GqZpHnVzy"
+    },
+    "detail-type": "VoiceId Evaluate Session Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "EVALUATE_SESSION",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 404,
+        "errorMessage": "The requested domain does not exist",
+        "errorType": "RESOURCE_NOT_FOUND"
+      },
+      "session": {
+        "authenticationResult": null,
+        "fraudDetectionResult": null,
+        "generatedSpeakerId": null,
+        "sessionId": "id#CJA4lSzpzo5HFfP5L2h5lS",
+        "sessionName": "testSessionName",
+        "streamingStatus": "ONGOING"
+      },
+      "status": "FAILED",
+      "systemAttributes": null,
+      "sourceId": "tbjvJmvIOy2f9GqZpHnVzy"
+    },
+    "detail-type": "VoiceId Evaluate Session Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "OPT_OUT_SPEAKER",
+      "data": null,
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "generatedSpeakerId": "id#B9GedRhqQsESXkhFZpB00t",
+      "status": "SUCCEEDED",
+      "systemAttributes": null,
+      "sourceId": "4U7lLdhLThyIGuQ0I80dNl"
+    },
+    "detail-type": "VoiceId Speaker Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "OPT_OUT_SPEAKER",
+      "data": null,
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 500,
+        "errorMessage": "Internal Server Error",
+        "errorType": "INTERNAL_ERROR"
+      },
+      "generatedSpeakerId": "id#B9GedRhqQsESXkhFZpB00t",
+      "status": "FAILED",
+      "systemAttributes": null,
+      "sourceId": "4U7lLdhLThyIGuQ0I80dNl"
+    },
+    "detail-type": "VoiceId Speaker Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "UPDATE_SESSION",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "session": {
+        "authenticationConfiguration": {
+          "acceptanceThreshold": 90
+        },
+        "fraudDetectionConfiguration": {
+          "riskThreshold": 20
+        },
+        "generatedSpeakerId": "id#1234oRbgAr4YSZomRBM701",
+        "sessionId": "id#F6TejIvy1234NpK6UksVMM",
+        "sessionName": "TestSessionName"
+      },
+      "status": "SUCCEEDED",
+      "systemAttributes": {
+        "aws:connect:OriginalContactArn": "arn:aws:connect:us-west-2:000000000000:instance/aaaaaaaa-1111-2w2w-9eb8-bbbbbbbbbbbb/contact/aaaaaaaa-2222-2w2w-9eb8-bbbbbbbbbbbb"
+      },
+      "sourceId": "4r4UBQ3JfwkZnjqLif7J3C"
+    },
+    "detail-type": "VoiceId Update Session Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "UPDATE_SESSION",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": {
+        "errorCode": 404,
+        "errorMessage": "The requested domain does not exist",
+        "errorType": "RESOURCE_NOT_FOUND"
+      },
+      "session": {
+        "authenticationConfiguration": null,
+        "fraudDetectionConfiguration": null,
+        "generatedSpeakerId": null,
+        "sessionId": "id#F6TejIvy1234NpK6UksVMM",
+        "sessionName": "TestSessionName"
+      },
+      "status": "FAILED",
+      "systemAttributes": null,
+      "sourceId": "4r4UBQ3JfwkZnjqLif7J3C"
+    },
+    "detail-type": "VoiceId Update Session Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail": {
+      "action": "SESSION_ENROLLMENT_REQUEST",
+      "domainId": "7777aaaaaaaa77777777aa",
+      "errorInfo": null,
+      "sessionId": "id#1234zkMdvdoMFW2KWFIowL",
+      "sessionName": "TestSessionName",
+      "status": "SUBMITTED",
+      "systemAttributes": {
+        "aws:connect:OriginalContactArn": "arn:aws:connect:us-west-2:000000000000:instance/aaaaaaaa-1111-2w2w-9eb8-bbbbbbbbbbbb/contact/aaaaaaaa-2222-2w2w-9eb8-bbbbbbbbbbbb"
+      },
+      "sourceId": "1VvaG7B64JzsrZlUPLO247"
+    },
+    "detail-type": "VoiceId Session Speaker Enrollment Action",
+    "source": "aws.voiceid",
+    "id": "q65d2fd3-6d89-3892-168a-9e1dab06268f",
+    "time": "2021-10-04T22:54:47.000Z",
+    "resources": [
+      "arn:aws:voiceid:us-east-1:123456789012:domain/7777aaaaaaaa77777777aa"
+    ]
+  }
+]

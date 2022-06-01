@@ -1,0 +1,160 @@
+[
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Service Template Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-east-1:123456789012:service-template/sample-service-template-name"
+    ],
+    "detail": {
+      "templateName": "sample-service-template-name",
+      "status": "PUBLISHED",
+      "previousStatus": "DRAFT"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-cjh4-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Environment Template Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-east-1:123456789012:environment-template/sample-environment-template-name"
+    ],
+    "detail": {
+      "name": "sample-service-template-name",
+      "status": "PUBLISHED",
+      "previousStatus": "DRAFT"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-sij7-4cf7-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Service Template Version Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-east-1:123456789012:service-template/sample-service-template-name:1.0"
+    ],
+    "detail": {
+      "templateName": "sample-service-template-name",
+      "majorVersion": "1",
+      "minorVersion": "0",
+      "status": "PUBLISHED",
+      "previousStatus": "DRAFT"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-plf9-bf3703467718",
+    "detail-type": "AWS Proton Environment Template Version Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-east-1:123456789012:environment-template/sample-environment-template-name:1.0"
+    ],
+    "detail": {
+      "templateName": "sample-environment-template-name",
+      "majorVersion": "1",
+      "minorVersion": "0",
+      "status": "PUBLISHED",
+      "previousStatus": "DRAFT"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-agbv-4cf7-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Environment Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-east-1:123456789012:environment/sample-environment-name"
+    ],
+    "detail": {
+      "name": "sample-environment-name",
+      "status": "SUCCEEDED",
+      "previousStatus": "IN_PROGRESS"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-unt4-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Service Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-east-1:123456789012:service/sample-service-name"
+    ],
+    "detail": {
+      "name": "sample-service-name",
+      "status": "CREATE_COMPLETE",
+      "previousStatus": "CREATE_STARTED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-ony8-4cf7-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Service Instance Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-west-2:615044489287:service/sample-service-name/service-instance/sample-service-instance-name"
+    ],
+    "detail": {
+      "name": "sample-service-name",
+      "serviceName": "sample-service-instance-name",
+      "status": "SUCCEEDED",
+      "previousStatus": "IN_PROGRESS"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-hbi2-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Service Pipeline Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-east-1:123456789012:service/sample-service-name/pipeline"
+    ],
+    "detail": {
+      "serviceName": "sample-service-name",
+      "status": "SUCCEEDED",
+      "previousStatus": "IN_PROGRESS"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-j2bt-a9f1-bf3703467718",
+    "detail-type": "AWS Proton Environment Account Connection Status Change",
+    "source": "aws.proton",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:proton:us-west-2:182582337387:environment-account-connection/sample-eac-name"
+    ],
+    "detail": {
+      "environmentName": "sample-environment-name",
+      "status": "CONNECTED",
+      "previousStatus": "PENDING"
+    }
+  }
+]

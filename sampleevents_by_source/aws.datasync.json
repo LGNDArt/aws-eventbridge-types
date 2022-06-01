@@ -1,0 +1,107 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "DataSync Agent State Change",
+    "source": "aws.datasync",
+    "account": "123456789012",
+    "time": "2018-08-11T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:datasync:us-east-1:123456789012:agent/agent-0b0addbeef44baca3"
+    ],
+    "detail": {
+      "State": "ONLINE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "DataSync Agent State Change",
+    "source": "aws.datasync",
+    "account": "123456789012",
+    "time": "2018-08-11T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:datasync:us-east-1:123456789012:agent/agent-0b0addbeef44baca3"
+    ],
+    "detail": {
+      "State": "OFFLINE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678902",
+    "detail-type": "DataSync Task State Change",
+    "source": "aws.datasync",
+    "account": "123456789012",
+    "time": "2018-08-11T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:datasync:us-east-1:123456789012:task/task-08de6e6697796f026"
+    ],
+    "detail": {
+      "State": "AVAILABLE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678903",
+    "detail-type": "DataSync Task Execution State Change",
+    "source": "aws.datasync",
+    "account": "123456789012",
+    "time": "2018-08-11T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:datasync:us-east-1:123456789012:task/task-06e9b764be4c5387c/execution/exec-00508985be7c70213"
+    ],
+    "detail": {
+      "State": "SUCCESS"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678903",
+    "detail-type": "DataSync Task Execution State Change",
+    "source": "aws.datasync",
+    "account": "123456789012",
+    "time": "2018-08-11T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:datasync:us-east-1:123456789012:task/task-06e9b764be4c5387c/execution/exec-00508985be7c70213"
+    ],
+    "detail": {
+      "State": "SYNCING"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678904",
+    "detail-type": "DataSync Location State Change",
+    "source": "aws.datasync",
+    "account": "123456789012",
+    "time": "2018-08-11T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:datasync:us-east-1:123456789012:location/loc-08de6e6697796f026"
+    ],
+    "detail": {
+      "State": "AVAILABLE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678904",
+    "detail-type": "DataSync Location State Change",
+    "source": "aws.datasync",
+    "account": "123456789012",
+    "time": "2018-08-11T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:datasync:us-east-1:123456789012:location/loc-08de6e6697796f026"
+    ],
+    "detail": {
+      "State": "ADDING"
+    }
+  }
+]

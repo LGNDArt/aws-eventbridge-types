@@ -1,0 +1,39 @@
+[
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "Savings Plans State Change",
+    "source": "aws.savingsplans",
+    "account": "123456789012",
+    "time": "2020-09-16T20:43:05Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:savingsplans::123456789012:savingsplan/07ec53ab-91c3-4ac5-bde6-79fd53192252"
+    ],
+    "detail": {
+      "severity": "INFO",
+      "previousState": "payment-pending",
+      "currentState": "active",
+      "message": "PaymentSuccessful"
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "Savings Plans State Change Alert",
+    "source": "aws.savingsplans",
+    "account": "123456789012",
+    "time": "2020-09-16T00:15:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:savingsplans::123456789012:savingsplan/07ec53ab-91c3-4ac5-bde6-79fd53192252"
+    ],
+    "detail": {
+      "currentState": "queued",
+      "nextState": "active",
+      "remainingDays": "1",
+      "nextStateChangeDate": "2020-09-17",
+      "message": "queued savings plans will go to active state on 2020-09-17"
+    }
+  }
+]

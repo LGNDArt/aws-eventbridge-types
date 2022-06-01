@@ -1,0 +1,417 @@
+[
+  {
+    "version": "0",
+    "id": "7bf73129-1428-4cd3-a780-95db273d1602",
+    "detail-type": "EC2 Instance State-change Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2015-11-11T21:29:54Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd1111"
+    ],
+    "detail": {
+      "instance-id": "i-abcd1111",
+      "state": "pending"
+    }
+  },
+  {
+    "version": "0",
+    "id": "ee376907-2647-4179-9203-343cfb3017a4",
+    "detail-type": "EC2 Instance State-change Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2015-11-11T21:30:34Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd1111"
+    ],
+    "detail": {
+      "instance-id": "i-abcd1111",
+      "state": "running"
+    }
+  },
+  {
+    "version": "0",
+    "id": "5d91e795-8bff-41dc-b757-54f252bc37bd",
+    "detail-type": "EC2 Instance State-change Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2015-11-11T21:32:26Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd2222"
+    ],
+    "detail": {
+      "instance-id": "i-abcd2222",
+      "state": "stopping"
+    }
+  },
+  {
+    "version": "0",
+    "id": "651d5f8b-947c-4c0f-acb7-5ac4e41a1b8a",
+    "detail-type": "EC2 Instance State-change Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2015-11-11T21:33:19Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd3333"
+    ],
+    "detail": {
+      "instance-id": "i-abcd3333",
+      "state": "stopped"
+    }
+  },
+  {
+    "version": "0",
+    "id": "36c9ac68-cd49-460b-a2fa-39754efbc425",
+    "detail-type": "EC2 Instance State-change Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2015-11-11T21:36:16Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd4444"
+    ],
+    "detail": {
+      "instance-id": "i-abcd4444",
+      "state": "shutting-down"
+    }
+  },
+  {
+    "version": "0",
+    "id": "f74e985d-c3ff-415d-b5fa-d3614c5e3434",
+    "detail-type": "EC2 Instance State-change Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2015-11-11T21:36:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd5555"
+    ],
+    "detail": {
+      "instance-id": "i-abcd5555",
+      "state": "terminated"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EBS Snapshot Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:12:22Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2::us-west-2:snapshot/snap-01234567"
+    ],
+    "detail": {
+      "event": "createSnapshot",
+      "result": "succeeded",
+      "cause": "",
+      "request-id": "",
+      "snapshot_id": "arn:aws:ec2::us-west-2:snapshot/snap-01234567",
+      "source": "arn:aws:ec2::us-west-2:volume/vol-01234567",
+      "StartTime": "2016-11-01T13:00:12Z",
+      "EndTime": "2016-11-01T13:12:22Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EBS Snapshot Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:12:22Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2::us-west-2:snapshot/snap-01234567"
+    ],
+    "detail": {
+      "event": "createSnapshot",
+      "result": "failed",
+      "cause": "",
+      "request-id": "",
+      "snapshot_id": "arn:aws:ec2::us-west-2:snapshot/snap-01234567",
+      "source": "arn:aws:ec2::us-west-2:volume/vol-01234567",
+      "StartTime": "2016-11-01T13:00:12Z",
+      "EndTime": "2016-11-01T13:12:22Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EBS Snapshot Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:00:12Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2::us-west-2:snapshot/snap-01234567"
+    ],
+    "detail": {
+      "event": "copySnapshot",
+      "result": "succeeded",
+      "cause": "Source snapshot ID is not valid",
+      "request-id": "",
+      "snapshot_id": "arn:aws:ec2::us-west-2:snapshot/snap-01234567",
+      "source": "arn:aws:ec2::eu-west-1:snapshot/snap-76543210",
+      "StartTime": "2016-11-01T13:00:12Z",
+      "EndTime": "2016-11-01T13:12:22Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EBS Snapshot Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:00:12Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2::us-west-2:snapshot/snap-01234567"
+    ],
+    "detail": {
+      "event": "copySnapshot",
+      "result": "failed",
+      "cause": "Source snapshot ID is not valid",
+      "request-id": "",
+      "snapshot_id": "arn:aws:ec2::us-west-2:snapshot/snap-01234567",
+      "source": "arn:aws:ec2::eu-west-1:snapshot/snap-76543210",
+      "StartTime": "2016-11-01T13:00:12Z",
+      "EndTime": "2016-11-01T13:12:22Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-01234-0123-0123-123456789012",
+    "detail-type": "EBS Snapshot Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:12:22Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2::us-west-2:snapshot/snap-01234567"
+    ],
+    "detail": {
+      "event": "shareSnapshot",
+      "result": "succeeded",
+      "cause": "",
+      "request-id": "",
+      "snapshot_id": "arn:aws:ec2::us-west-2:snapshot/snap-01234567",
+      "source": "123456789012",
+      "StartTime": "2016-11-01T13:00:12Z",
+      "EndTime": "2016-11-01T13:12:22Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-0123456789ab",
+    "detail-type": "EBS Volume Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:12:22Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:0123456789ab:volume/vol-01234567",
+      "arn:aws:kms:us-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab",
+      "arn:aws:ec2:ap-northeast-1:047260111018:instance/i-3661acb8"
+    ],
+    "detail": {
+      "event": "attachVolume",
+      "result": "failed",
+      "cause": "arn:aws:kms:us-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab is pending deletion.",
+      "request-id": ""
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-0123456789ab",
+    "detail-type": "EBS Volume Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:12:22Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:0123456789ab:volume/vol-01234567",
+      "arn:aws:kms:us-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab",
+      "arn:aws:ec2:ap-northeast-1:047260111018:instance/i-3661acb8"
+    ],
+    "detail": {
+      "event": "reattachVolume",
+      "result": "failed",
+      "cause": "arn:aws:kms:us-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab is pending deletion.",
+      "request-id": ""
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-0123456789ab",
+    "detail-type": "EBS Volume Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:12:22Z",
+    "region": "sa-east-1",
+    "resources": [
+      "arn:aws:ec2:sa-east-1:0123456789ab:volume/vol-01234567",
+      "arn:aws:kms:us-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab"
+    ],
+    "detail": {
+      "event": "createVolume",
+      "result": "failed",
+      "cause": "arn:aws:kms:sa-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab is disabled.",
+      "request-id": "01234567-0123-0123-0123-0123456789ab"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-0123456789ab",
+    "detail-type": "EBS Volume Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2016-11-01T13:12:22Z",
+    "region": "sa-east-1",
+    "resources": [
+      "arn:aws:ec2:sa-east-1:0123456789ab:volume/vol-01234567",
+      "arn:aws:kms:us-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab"
+    ],
+    "detail": {
+      "event": "createVolume",
+      "result": "failed",
+      "cause": "arn:aws:kms:sa-east-1:0123456789ab:key/01234567-0123-0123-0123-0123456789ab is pending import.",
+      "request-id": "01234567-0123-0123-0123-0123456789ab"
+    }
+  },
+  {
+    "version": "0",
+    "id": "2024ab2f-7547-09e5-dd09-6daf7a47dac9",
+    "detail-type": "EC2 Instance Rebalance Recommendation",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2015-11-11T21:29:54Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd1111"
+    ],
+    "detail": {
+      "instance-id": "i-abcd1111"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1e5527d7-bb36-4607-3370-4164db56a40e",
+    "detail-type": "EC2 Spot Instance Interruption Warning",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "1970-01-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1b:instance/i-0b662ef9931388ba0"
+    ],
+    "detail": {
+      "instance-id": "i-0b662ef9931388ba0",
+      "instance-action": "terminate"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EBS Multi-Volume Snapshots Completion Status",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2018-07-16T17:29:36Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2::us-east-1:snapshot/snap-01234567",
+      "arn:aws:ec2::us-east-1:snapshot/snap-012345678"
+    ],
+    "detail": {
+      "event": "createSnapshots",
+      "result": "succeeded",
+      "cause": "",
+      "request-id": "",
+      "startTime": "2018-07-16T14:31:10Z",
+      "endTime": "2018-07-16T17:28:16Z",
+      "snapshots": [
+        {
+          "snapshot_id": "arn:aws:ec2::us-east-1:snapshot/snap-01234567",
+          "source": "arn:aws:ec2::us-east-1:volume/vol-01234567",
+          "status": "completed"
+        },
+        {
+          "snapshot_id": "arn:aws:ec2::us-east-1:snapshot/snap-012345678",
+          "source": "arn:aws:ec2::us-east-1:volume/vol-012345678",
+          "status": "completed"
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EBS Multi-Volume Snapshots Completion Status",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2018-07-16T17:29:36Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2::us-east-1:snapshot/snap-01234567",
+      "arn:aws:ec2::us-east-1:snapshot/snap-012345678"
+    ],
+    "detail": {
+      "event": "createSnapshots",
+      "result": "failed",
+      "cause": "Snapshot snap-01234567 is in status deleted",
+      "request-id": "",
+      "startTime": "2018-07-16T14:31:10Z",
+      "endTime": "2018-07-16T17:28:16Z",
+      "snapshots": [
+        {
+          "snapshot_id": "arn:aws:ec2::us-east-1:snapshot/snap-01234567",
+          "source": "arn:aws:ec2::us-east-1:volume/vol-01234567",
+          "status": "error"
+        },
+        {
+          "snapshot_id": "arn:aws:ec2::us-east-1:snapshot/snap-012345678",
+          "source": "arn:aws:ec2::us-east-1:volume/vol-012345678",
+          "status": "deleted"
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EC2 Spot Instance Request Fulfillment",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2019-10-27T17:13:16Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-07f845448bb1280ea"
+    ],
+    "detail": {
+      "spot-instance-request-id": "sir-m82vykkk",
+      "instance-id": "i-07f845448bb1280ea"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "EBS Fast Snapshot Restore State-change Notification",
+    "source": "aws.ec2",
+    "account": "123456789012",
+    "time": "2019-05-31T21:49:54Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1::snapshot/snap-015bb844c6652fca7"
+    ],
+    "detail": {
+      "snapshot-id": "snap-015bb844c6652fca7",
+      "state": "enabling",
+      "zone": null,
+      "message": "Client.UserInitiated"
+    }
+  }
+]

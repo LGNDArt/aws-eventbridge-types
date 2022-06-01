@@ -1,0 +1,80 @@
+[
+  {
+    "version": "0",
+    "id": "8a99ca10-1e97-2302-2d64-316c5dedfd61",
+    "detail-type": "Synthetics Canary Status Change",
+    "source": "aws.synthetics",
+    "account": "123456789012",
+    "time": "2021-02-09T22:19:43Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "account-id": "123456789012",
+      "canary-id": "EXAMPLE-dc5a-4f5f-96d1-989b75a94226",
+      "canary-name": "canary-1",
+      "current-state": "STOPPED",
+      "previous-state": "UPDATING",
+      "source-location": "NULL",
+      "updated-on": 1612909161.767,
+      "changed-config": {
+        "executionArn": {
+          "previous-value": "arn:aws:lambda:us-east-1:123456789012:function:cwsyn-canary-1-*:1",
+          "current-value": "arn:aws:lambda:us-east-1:123456789012:function:cwsyn-canary-1-*:2"
+        },
+        "testCodeLayerVersionArn": {
+          "previous-value": "arn:aws:lambda:us-east-1:123456789012:layer:cwsyn-canary-1-*:1",
+          "current-value": "arn:aws:lambda:us-east-1:123456789012:layer:cwsyn-canary-1-*:2"
+        }
+      },
+      "message": "Canary status has changed"
+    }
+  },
+  {
+    "version": "0",
+    "id": "2644b18f-3e67-5ebf-cdfd-bf9f91392f41",
+    "detail-type": "Synthetics Canary TestRun Failure",
+    "source": "aws.synthetics",
+    "account": "123456789012",
+    "time": "2021-02-09T22:24:27Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "account-id": "123456789012",
+      "canary-id": "EXAMPLE-dc5a-4f5f-96d1-989b75a94226",
+      "canary-name": "events-bb-1",
+      "canary-run-id": "0df3823e-7e33-4da1-8194-b04e4d4a2bf6",
+      "artifact-location": "cw-syn-results-123456789012-us-east-1/canary/us-east-1/events-bb-1-ec3-28ddbe266797/2021/02/09/22/24-21-275",
+      "test-run-status": "FAILED",
+      "state-reason": "Error: net::ERR_NAME_NOT_RESOLVED",
+      "canary-run-timeline": {
+        "started": 1612909461,
+        "completed": 1612909467
+      },
+      "message": "Test run result is generated successfully"
+    }
+  },
+  {
+    "version": "0",
+    "id": "34e87908-f4a5-57a7-1a8f-d9cc768a1375",
+    "detail-type": "Synthetics Canary TestRun Successful",
+    "source": "aws.synthetics",
+    "account": "123456789012",
+    "time": "2021-02-09T22:24:01Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "account-id": "123456789012",
+      "canary-id": "EXAMPLE-dc5a-4f5f-96d1-989b75a94226",
+      "canary-name": "events-bb-1",
+      "canary-run-id": "c6c39152-8f4a-471c-9810-a10d56919bb9",
+      "artifact-location": "cw-syn-results-123456789012-us-east-1/canary/us-east-1/events-bb-1-ec3-28ddbe266797/2021/02/09/22/23-41-200",
+      "test-run-status": "PASSED",
+      "state-reason": "null",
+      "canary-run-timeline": {
+        "started": 1612909421,
+        "completed": 1612909441
+      },
+      "message": "Test run result is generated successfully"
+    }
+  }
+]

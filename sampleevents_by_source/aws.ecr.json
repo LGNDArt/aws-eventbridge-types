@@ -1,0 +1,39 @@
+[
+  {
+    "account": "123456789012",
+    "detail": {
+      "action-type": "PUSH",
+      "image-digest": "sha256:f98d67af8e53a536502bfc600de3266556b06ed635a32d60aa7a5fe6d7e609d7",
+      "image-tag": "latest",
+      "repository-name": "ubuntu",
+      "result": "SUCCESS"
+    },
+    "detail-type": "ECR Image Action",
+    "id": "4f5ec4d5-4de4-7aad-a046-56d5cfe1df0e",
+    "region": "us-east-1",
+    "resources": [],
+    "source": "aws.ecr",
+    "time": "2019-08-06T00:58:09Z",
+    "version": "0"
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ECR Image Scan",
+    "source": "aws.ecr",
+    "account": "123456789012",
+    "time": "2019-10-30T21:32:27Z",
+    "region": "eu-north-1",
+    "resources": [
+      "arn:aws:ecr:eu-north-1:123456789012:repository/tribble-image-scan-test"
+    ],
+    "detail": {
+      "scan-status": "COMPLETE",
+      "repository-name": "tribble-image-scan-test",
+      "image-digest": "sha256:d4a96ee9443e641fc100e763a0c10928720b50c6e3ea3342d05d7c3435fc5355",
+      "image-tags": [
+        "1572471135"
+      ]
+    }
+  }
+]

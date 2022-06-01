@@ -1,0 +1,38 @@
+[
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "detail-type": "MediaStore Object State Change",
+    "source": "aws.mediastore",
+    "account": "123456789012",
+    "time": "2017-02-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mediastore:us-east-1:123456789012:MondayMornings/Episode1/Introduction.avi"
+    ],
+    "detail": {
+      "ContainerName": "Movies",
+      "Operation": "UPDATE",
+      "Path": "TVShow/Episode1/Pilot.avi",
+      "ObjectSize": 123456,
+      "URL": "https://a832p1qeaznlp9.files.mediastore-us-west-2.com/Movies/MondayMornings/Episode1/Introduction.avi"
+    }
+  },
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "detail-type": "MediaStore Container State Change",
+    "source": "aws.mediastore",
+    "account": "123456789012",
+    "time": "2017-02-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mediastore:us-east-1:123456789012:container/Movies"
+    ],
+    "detail": {
+      "ContainerName": "Movies",
+      "Operation": "CREATE",
+      "Endpoint": "https://a832p1qeaznlp9.mediastore-us-west-2.amazonaws.com"
+    }
+  }
+]

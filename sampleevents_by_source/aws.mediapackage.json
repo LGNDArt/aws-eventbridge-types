@@ -1,0 +1,34 @@
+[
+  {
+    "version": "0",
+    "id": "729e7f4e-28c8-4759-f3b4-b18f0e89a756",
+    "detail-type": "MediaPackage Key Provider Notification",
+    "source": "aws.mediapackage",
+    "account": "123456789012",
+    "time": "2018-04-18T16:52:09Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:mediapackage:us-west-2:123456789012:origin_endpoints/b1f43204c0084fcda7c9220f6b6d832b"
+    ],
+    "detail": {
+      "event": "KeyProviderError",
+      "message": "KeyProviderEKE::RequestKeys: failed:-\ncouldn't connect to host\nResponse [NULL]"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8f9b8e72-0b31-e883-f19c-aec84742f3ce",
+    "detail-type": "MediaPackage Input Notification",
+    "source": "aws.mediapackage",
+    "account": "123456789012",
+    "time": "2018-07-16T17:29:36Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mediapackage:us-east-1:123456789012:origin_endpoints/82d6b9bc44cb4612c487963d6e8d0f1b"
+    ],
+    "detail": {
+      "event": "InputSwitchEvent",
+      "message": "Origin endpoint experienced an Input Switch Event"
+    }
+  }
+]

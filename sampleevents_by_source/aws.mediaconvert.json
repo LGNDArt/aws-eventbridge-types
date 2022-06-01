@@ -1,0 +1,138 @@
+[
+  {
+    "version": "0",
+    "id": "3fbdfd76-ff41-9ff8-d1ac-c3eecd53031b",
+    "detail-type": "MediaConvert Job State Change",
+    "source": "aws.mediaconvert",
+    "account": "123456789012",
+    "time": "2017-11-29T18:57:11Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mediaconvert:us-east-1:123456789012:jobs/123456789012-smb6o7"
+    ],
+    "detail": {
+      "timestamp": 1511981831811,
+      "accountId": "123456789012",
+      "queue": "arn:aws:mediaconvert:us-east-1:123456789012:queues/Default",
+      "jobId": "123456789012-smb6o7",
+      "status": "PROGRESSING",
+      "userMetadata": {}
+    }
+  },
+  {
+    "version": "0",
+    "id": "bf23100f-c468-013b-b8f9-a3cad4423001",
+    "detail-type": "MediaConvert Job State Change",
+    "source": "aws.mediaconvert",
+    "account": "123456789012",
+    "time": "2017-11-29T18:57:22Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mediaconvert:us-east-1:123456789012:jobs/123456789012-smb6o7"
+    ],
+    "detail": {
+      "timestamp": 1511981842882,
+      "accountId": "123456789012",
+      "queue": "arn:aws:mediaconvert:us-east-1:123456789012:queues/Default",
+      "jobId": "123456789012-smb6o7",
+      "status": "INPUT_INFORMATION",
+      "userMetadata": {},
+      "inputDetails": [
+        {
+          "id": 1,
+          "uri": "s3://test/clip01.mp4",
+          "video": [
+            {
+              "streamId": 2,
+              "width": 1280,
+              "height": 720,
+              "frameRate": 29.97,
+              "sar": "1:1",
+              "bitDepth": 8,
+              "interlaceMode": "PROGRESSIVE",
+              "colorFormat": "YUV_420",
+              "standard": "UNSPECIFIED",
+              "fourCC": "avc1"
+            }
+          ],
+          "audio": [
+            {
+              "streamId": 1,
+              "codec": "AAC",
+              "channels": 2,
+              "sampleRate": 44100,
+              "language": "UND"
+            }
+          ],
+          "data": null
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "ff855457-96e9-59f7-dfc9-f3688a3f5276",
+    "detail-type": "MediaConvert Job State Change",
+    "source": "aws.mediaconvert",
+    "account": "123456789012",
+    "time": "2017-11-29T18:57:23Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mediaconvert:us-east-1:123456789012:jobs/123456789012-smb6o7"
+    ],
+    "detail": {
+      "timestamp": 1511981843037,
+      "accountId": "123456789012",
+      "queue": "arn:aws:mediaconvert:us-east-1:123456789012:queues/Default",
+      "jobId": "123456789012-smb6o7",
+      "status": "COMPLETE",
+      "userMetadata": {},
+      "outputGroupDetails": [
+        {
+          "outputDetails": [
+            {
+              "durationInMs": 10010,
+              "videoDetails": {
+                "widthInPx": 1280,
+                "heightInPx": 720
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "ff855457-96e9-59f7-dfc9-f3688a3f5276",
+    "detail-type": "MediaConvert Job State Change",
+    "source": "aws.mediaconvert",
+    "account": "123456789012",
+    "time": "2017-11-29T18:57:23Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mediaconvert:us-east-1:123456789012:jobs/123456789012-smb6o7"
+    ],
+    "detail": {
+      "timestamp": 1511981843037,
+      "accountId": "123456789012",
+      "queue": "arn:aws:mediaconvert:us-east-1:123456789012:queues/Default",
+      "jobId": "123456789012-smb6o7",
+      "status": "ERROR",
+      "userMetadata": {},
+      "outputGroupDetails": [
+        {
+          "outputDetails": [
+            {
+              "durationInMs": 10010,
+              "videoDetails": {
+                "widthInPx": 1280,
+                "heightInPx": 720
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

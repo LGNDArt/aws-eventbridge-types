@@ -1,0 +1,36 @@
+[
+  {
+    "version": "0",
+    "id": "9ae89852-bb03-9019-dba8-447ef810ea16",
+    "detail-type": "Resource Sharing State Change",
+    "source": "aws.ram",
+    "account": "123456789012",
+    "time": "2018-12-07T18:02:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ram:us-east-1:123456789012:resource-share/46b3c4e8-b197-a917-25cc-3d851455ecd3"
+    ],
+    "detail": {
+      "resourceARN": "arn:aws:ec2:us-east-1:123456789012:subnet/subnet-09fa2cd53d9c12478",
+      "event": "Resource Share Disassociation",
+      "status": "disassociated"
+    }
+  },
+  {
+    "version": "0",
+    "id": "22047eb5-b989-bf36-ebbb-e71a78a15d8d",
+    "detail-type": "Resource Sharing State Change",
+    "source": "aws.ram",
+    "account": "123456789012",
+    "time": "2018-12-07T18:05:24Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ram:us-east-1:123456789012:resource-share/46b3c4e8-b197-a917-25cc-3d851455ecd3"
+    ],
+    "detail": {
+      "resourceARN": "arn:aws:ec2:us-east-1:123456789012:subnet/subnet-09fa2cd53d9c12478",
+      "event": "Resource Share Association",
+      "status": "associated"
+    }
+  }
+]

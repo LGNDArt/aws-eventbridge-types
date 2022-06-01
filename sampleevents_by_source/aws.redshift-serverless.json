@@ -1,0 +1,17 @@
+[
+  {
+    "version": "0",
+    "id": "12345678-5f35-d9a2-76d1-613683e4e035",
+    "detail-type": "Redshift Serverless Monitoring",
+    "source": "aws.redshift-serverless",
+    "account": "123456789012",
+    "time": "2020-12-22T17:00:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:redshift-serverless:us-east-1:123456789012:snapshot/snapshot-name"
+    ],
+    "detail": {
+      "message": "Snapshot test-serverless-snapshot completed successfully at Tue Dec 22 17:00:00 UTC 2020."
+    }
+  }
+]

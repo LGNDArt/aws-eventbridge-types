@@ -1,0 +1,194 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "CodeCommit Repository State Change",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2017-06-12T10:23:43Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+    ],
+    "detail": {
+      "event": "referenceCreated",
+      "repositoryName": "myRepo",
+      "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
+      "referenceType": "tag",
+      "referenceName": "myTag",
+      "referenceFullName": "refs/tags/myTag",
+      "commitId": "3e5983EXAMPLE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "CodeCommit Repository State Change",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2017-06-12T10:23:43Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+    ],
+    "detail": {
+      "event": "referenceUpdated",
+      "repositoryName": "myRepo",
+      "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
+      "referenceType": "branch",
+      "referenceName": "myBranch",
+      "referenceFullName": "refs/heads/myBranch",
+      "commitId": "26a8f2EXAMPLE",
+      "oldCommitId": "3e5983EXAMPLE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "CodeCommit Repository State Change",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2017-06-12T10:23:43Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codecommit:us-east-1:123456789012:myRepo"
+    ],
+    "detail": {
+      "event": "referenceDeleted",
+      "repositoryName": "myRepo",
+      "repositoryId": "12345678-1234-5678-abcd-12345678abcd",
+      "referenceType": "branch",
+      "referenceName": "myBranch",
+      "referenceFullName": "refs/heads/myBranch",
+      "oldCommitId": "26a8f2EXAMPLE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "e9dce2e9-5f82-f674-c9c7-6319dac92cc1",
+    "detail-type": "CodeCommit Comment on Commit",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2017-09-29T20:20:39Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+    ],
+    "detail": {
+      "beforeCommitId": "3c5dEXAMPLE00000000000000000000000000000",
+      "repositoryId": "7dd1EXAMPLE...",
+      "inReplyTo": "695bEXAMPLE...",
+      "notificationBody": "An event occurred in the following repository: my-new-repository. arn:aws:iam::0123EXAMPLE0:user/codecommituser made a comment. The comment was made on the following comment ID: 463bEXAMPLE.... For more information, go to the AWS CodeCommit console at https://us-east-1.console.aws.amazon.com/codecommit/home?region=us-east-1#/repository/my-new-repository/compare/3c5dEXAMPLE00000000000000000000000000000...f4d5EXAMPLE00000000000000000000000000000#463bEXAMPLE....",
+      "commentId": "463bEXAMPLE...",
+      "afterCommitId": "f4d5EXAMPLE00000000000000000000000000000",
+      "event": "commentOnCommitCreated",
+      "repositoryName": "my-new-repository",
+      "callerUserArn": "arn:aws:iam::0123EXAMPLE0:user/codecommituser"
+    }
+  },
+  {
+    "version": "0",
+    "id": "98377d67-b006-cdc3-1363-8a0aee2316f8",
+    "detail-type": "CodeCommit Comment on Pull Request",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2018-02-09T07:15:16Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+    ],
+    "detail": {
+      "beforeCommitId": "3c5dEXAMPLE00000000000000000000000000000",
+      "repositoryId": "7dd1EXAMPLE...",
+      "inReplyTo": "695bEXAMPLE...",
+      "notificationBody": "An event occurred in the following repository: my-new-repository. arn:aws:iam::0123EXAMPLE0:user/codecommituser made a comment. The comment was made on the following Pull Request: 201. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codecommit/home?region=us-east-1#/repository/my-new-repository/pull-request/201/activity#3276EXAMPLE...",
+      "commentId": "463bEXAMPLE...",
+      "afterCommitId": "f4d5EXAMPLE00000000000000000000000000000",
+      "event": "commentOnPullRequestCreated",
+      "repositoryName": "my-new-repository",
+      "callerUserArn": "arn:aws:iam::123456789012:user/codecommituser",
+      "pullRequestId": "201"
+    }
+  },
+  {
+    "version": "0",
+    "id": "b043cf43-2ea7-2d8d-e063-03b5b998bc95",
+    "detail-type": "CodeCommit Pull Request State Change",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2017-12-12T03:42:35Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codecommit:us-east-1:123456789012:my-new-repository"
+    ],
+    "detail": {
+      "sourceReference": "refs/heads/my-new-feature",
+      "lastModifiedDate": "Tue Dec 12 03:39:18 UTC 2017",
+      "author": "0123EXAMPLE0",
+      "pullRequestStatus": "Open",
+      "isMerged": "False",
+      "notificationBody": "A pull request event occurred in the following AWS CodeCommit repository: my-new-repository. arn:aws:iam::123456789012:user/admin updated the following PullRequest 201. The pull request was updated with one or more commits to the source branch: refs/heads/my-new-feature. For more information, go to the AWS CodeCommit console https://us-east-1.console.aws.amazon.com/codecommit/home?region=us-east-1#/repository/my-new-repository/pull-request/201",
+      "destinationReference": "refs/heads/master",
+      "pullRequestId": "201",
+      "callerUserArn": "arn:aws:iam::123456789012:user/admin",
+      "title": "My 201st Pull Request",
+      "creationDate": "Tue Dec 12 03:33:58 UTC 2017",
+      "repositoryNames": [
+        "my-new-repository"
+      ],
+      "destinationCommit": "9c57EXAMPLE...",
+      "event": "pullRequestSourceBranchUpdated",
+      "sourceCommit": "ed25EXAMPLE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "f7702227-6ae1-3609-0d18-31b15f8eec91",
+    "detail-type": "CodeCommit Approval Rule Template Change",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2019-11-06T19:02:27Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "approvalRuleTemplateContentSha256": "f742eebb91087b06615487266737112f62108f82f7757d0341554ed6a75c27ef",
+      "approvalRuleTemplateId": "d7385967-f5f6-43d4-a707-d5b9c1998d78",
+      "approvalRuleTemplateName": "approval-rule-template-1846c8fc-fe77-4df5-b0cf-0cdff5e5b362",
+      "callerUserArn": "arn:aws:iam::123456789012:user/automated-tests",
+      "creationDate": "Wed Nov 06 19:02:14 UTC 2019",
+      "event": "approvalRuleTemplateCreated",
+      "lastModifiedDate": "Wed Nov 06 19:02:14 UTC 2019",
+      "notificationBody": "A approval rule template event occurred in the following AWS CodeCommit account: 123456789012. arn:aws:iam::123456789012:user/automated-tests created the approval rule template with the following information: approval rule template name as approval-rule-template-1846c8fc-fe77-4df5-b0cf-0cdff5e5b362 and approval rule template id as d7385967-f5f6-43d4-a707-d5b9c1998d78. For more information, go to the AWS CodeCommit console.",
+      "repositories": {}
+    }
+  },
+  {
+    "version": "0",
+    "id": "f5e1d4d1-17eb-3978-663b-c6683b189b14",
+    "detail-type": "CodeCommit Comment Reaction Change",
+    "source": "aws.codecommit",
+    "account": "123456789012",
+    "time": "2020-04-22T23:19:42Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:codecommit:us-west-2:351565380742:FE_feature.6urlL.1587597538065"
+    ],
+    "detail": {
+      "callerUserArn": "arn:aws:iam::351565380742:user/automated-tests",
+      "commentId": "a061a44f-c4c4-4a1c-b575-40967d65268e:a99b9661-3b31-44e8-b98e-e66fd21c0623",
+      "event": "commentReactionCreated",
+      "notificationBody": "A comment reaction event occurred in the following AWS CodeCommit Repository: FE_feature.6urlL.1587597538065. The user: arn:aws:iam::351565380742:user/automated-tests made a reaction :thumbsdown: to the comment with comment ID: a061a44f-c4c4-4a1c-b575-40967d65268e:a99b9661-3b31-44e8-b98e-e66fd21c0623",
+      "reactionEmojis": [
+        "ÃÂ°ÃÂÃÂÃÂ"
+      ],
+      "reactionShortcodes": [
+        ":thumbsdown:"
+      ],
+      "reactionUnicodes": [
+        "U+1F44E"
+      ],
+      "repositoryId": "16e353cd-8017-483c-87e4-f86f139bfdd6",
+      "repositoryName": "FE_feature.6urlL.1587597538065"
+    }
+  }
+]

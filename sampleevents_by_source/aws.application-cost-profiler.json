@@ -1,0 +1,67 @@
+[
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-a9f1-bf3703467718",
+    "detail-type": "Application Cost Profiler Report Generation Failure",
+    "source": "aws.application-cost-profiler",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "message": "Sample report generation failure message"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-a9f1-bf3703467718",
+    "detail-type": "Application Cost Profiler Report Delivery Failure",
+    "source": "aws.application-cost-profiler",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "message": "Sample report delivery failure message"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-a9f1-bf3703467718",
+    "detail-type": "Application Cost Profiler Ingestion Data Access Failure",
+    "source": "aws.application-cost-profiler",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "message": "Sample access denied error message"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-a9f1-bf3703467718",
+    "detail-type": "Application Cost Profiler Ingestion Data Validation Failure",
+    "source": "aws.application-cost-profiler",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "message": "{\"importId\":\"2dd6d5fd-a0c3-4f24-81b7-ecbd97e4b53e\",\"errorMessage\":\"StartTime must belong to the current month or to the previous month if its the first day of the month. Validation failed for file: 123456789012/c141f9f4-2881-4815-94ae-32430430019b.csv\"}"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-a9f1-bf3703467718",
+    "detail-type": "Application Cost Profiler Report Generated",
+    "source": "aws.application-cost-profiler",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "message": "Application Cost Profiler report delivered in bucket: test-customer-stack, key: 123456789012/2021/03/30/part-6b93b49d-419c-4ab1-a33f-ec94211c6cb8-c000.csv.gz."
+    }
+  }
+]

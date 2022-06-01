@@ -1,0 +1,175 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA Creation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T19:14:56Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851"
+    ],
+    "detail": {
+      "result": "success"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA Creation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T19:14:56Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851"
+    ],
+    "detail": {
+      "result": "failure"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA Certificate Issuance",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T19:57:46Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851",
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851/certificate/b845c374b495cb67dac7ac4c81cc4043"
+    ],
+    "detail": {
+      "result": "success"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA Certificate Issuance",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T19:57:46Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851",
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851/certificate/b845c374b495cb67dac7ac4c81cc4043"
+    ],
+    "detail": {
+      "result": "failure"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA Audit Report Generation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T21:54:20Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851",
+      "5903194d-0df7-4733-a8a0-cef93ac2f8b9"
+    ],
+    "detail": {
+      "result": "success"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA Audit Report Generation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T21:54:20Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/d543408e-0f41-4a3f-a0e0-84df60551851",
+      "5903194d-0df7-4733-a8a0-cef93ac2f8b9"
+    ],
+    "detail": {
+      "result": "failure"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA Certificate Revocation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-05T20:25:19Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/d87e9a0a-75cb-44ba-bf83-44caced9fe92",
+      "arn:aws:acm-pca:us-east-1:123456789012:certificate-authority/d87e9a0a-75cb-44ba-bf83-44caced9fe92/certificate/d2196bfeef09b5b2088b205b867a7ed4"
+    ],
+    "detail": {
+      "result": "success"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA CRL Generation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T21:07:08Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:ap-southeast-1:123456789012:certificate-authority/b58e1229-f656-453e-bd11-10909eabbe1a"
+    ],
+    "detail": {
+      "result": "success"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA CRL Generation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T21:07:08Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:ap-southeast-1:123456789012:certificate-authority/b58e1229-f656-453e-bd11-10909eabbe1a"
+    ],
+    "detail": {
+      "result": "failure",
+      "reason": "Failed to generate CRL. Internal failure."
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA CRL Generation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T21:07:08Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:ap-southeast-1:123456789012:certificate-authority/b58e1229-f656-453e-bd11-10909eabbe1a"
+    ],
+    "detail": {
+      "result": "failure",
+      "reason": "Failed to write CRL to S3. Check your S3 bucket permissions."
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "ACM Private CA CRL Generation",
+    "source": "aws.acm-pca",
+    "account": "123456789012",
+    "time": "2019-11-04T21:07:08Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:acm-pca:ap-southeast-1:123456789012:certificate-authority/b58e1229-f656-453e-bd11-10909eabbe1a"
+    ],
+    "detail": {
+      "result": "failure",
+      "reason": "Failed to write CRL to S3. Internal failure."
+    }
+  }
+]

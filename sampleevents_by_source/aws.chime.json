@@ -1,0 +1,216 @@
+[
+  {
+    "version": "0",
+    "id": "12345678-1234-1234-1234-123456789012",
+    "detail-type": "Chime VoiceConnector Streaming Status",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "time": "2019-11-05T20:25:19Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "streamingStatus": "STARTED",
+      "voiceConnectorId": "abcdefghi",
+      "transactionId": "12345678-1234-1234",
+      "callId": "1112-2222-4333",
+      "direction": "Inbound",
+      "mediaType": "audio/L16",
+      "startFragmentNumber": "1234567899444",
+      "startTime": "yyyy-mm-ddThh:mm:ssZ",
+      "streamArn": "arn:aws:kinesisvideo:us-east-1:123456:stream/ChimeVoiceConnector-abcdefghi-111aaa-22bb-33cc-44dd-111222/123456789012",
+      "version": "0"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:MeetingEnded",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeAdded",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeRemoved",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeAuthorized",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeJoined",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeLeft",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeDropped",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeVideoStarted",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeVideoStopped",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeScreenShareStarted",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:AttendeeScreenShareStopped",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  },
+  {
+    "version": "0",
+    "source": "aws.chime",
+    "account": "123456789012",
+    "id": "12345678-1234-1234-1234-111122223333",
+    "region": "us-east-1",
+    "detail-type": "Chime Meeting State Change",
+    "time": "2019-11-05T20:25:19Z",
+    "resources": [],
+    "detail": {
+      "version": "0",
+      "eventType": "chime:MeetingStarted",
+      "timestamp": 12344566754,
+      "meetingId": "87654321-4321-4321-1234-111122223333"
+    }
+  }
+]

@@ -1,0 +1,130 @@
+[
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate TextTranslationJob State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobId": "01234567-0123-0123-0123-012345678901",
+      "jobStatus": "COMPLETED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate TextTranslationJob State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobId": "01234567-0123-0123-0123-012345678901",
+      "jobStatus": "COMPLETED_WITH_ERROR"
+    }
+  },
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate TextTranslationJob State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobId": "01234567-0123-0123-0123-012345678901",
+      "jobStatus": "STOPPED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate TextTranslationJob State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobId": "01234567-0123-0123-0123-012345678901",
+      "jobStatus": "FAILED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate Parallel Data State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:translate:us-east-1:111122223333:parallel-data/ExampleParallelData"
+    ],
+    "detail": {
+      "operation": "CreateParallelData",
+      "name": "ExampleParallelData",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate Parallel Data State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:translate:us-east-1:123456789012:parallel-data/ExampleParallelData"
+    ],
+    "detail": {
+      "operation": "CreateParallelData",
+      "name": "ExampleParallelData",
+      "status": "FAILED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate Parallel Data State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:translate:us-east-1:123456789012:parallel-data/ExampleParallelData"
+    ],
+    "detail": {
+      "operation": "UpdateParallelData",
+      "name": "ExampleParallelData",
+      "status": "FAILED",
+      "latestUpdateAttemptStatus": "FAILED",
+      "latestUpdateAttemptAt": "2017-04-22T03:31:47Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "CWE-event-id",
+    "detail-type": "Translate Parallel Data State Change",
+    "source": "aws.translate",
+    "account": "123456789012",
+    "time": "2017-04-22T03:31:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:translate:us-east-1:123456789012:parallel-data/ExampleParallelData"
+    ],
+    "detail": {
+      "operation": "UpdateParallelData",
+      "name": "ExampleParallelData",
+      "status": "ACTIVE",
+      "latestUpdateAttemptStatus": "ACTIVE",
+      "latestUpdateAttemptAt": "2017-04-22T03:31:47Z"
+    }
+  }
+]

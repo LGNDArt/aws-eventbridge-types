@@ -1,0 +1,53 @@
+[
+  {
+    "version": "0",
+    "id": "93274b19-a740-0c83-d087-f96dc185f9d3",
+    "region": "us-east-1",
+    "time": "2020-12-22T18:43:48Z",
+    "source": "aws.support",
+    "detail-type": "Support Case Update",
+    "resources": [],
+    "detail": {
+      "case-id": "case-986719740728-muen-2022-7c9986eac47e55f4",
+      "display-id": "9592853861",
+      "communication-id": "",
+      "event-name": "CreateCase",
+      "origin": ""
+    },
+    "account": "123456789012"
+  },
+  {
+    "version": "0",
+    "id": "93274b19-a740-0c83-d087-f96dc185f9d5",
+    "region": "us-east-1",
+    "time": "2020-12-22T18:43:48Z",
+    "source": "aws.support",
+    "detail-type": "Support Case Update",
+    "resources": [],
+    "detail": {
+      "case-id": "case-986719740728-muen-2022-c5a3adcdde2ee229",
+      "display-id": "9593565451",
+      "communication-id": "",
+      "event-name": "ResolveCase",
+      "origin": ""
+    },
+    "account": "123456789012"
+  },
+  {
+    "version": "0",
+    "id": "93274b19-a740-0c83-d087-f96dc185f9d4",
+    "region": "us-east-1",
+    "time": "2020-12-22T18:43:48Z",
+    "source": "aws.support",
+    "detail-type": "Support Case Update",
+    "resources": [],
+    "detail": {
+      "case-id": "case-137456529413-muen-2022-d89e7948ddcdbf77",
+      "display-id": "9545143031",
+      "communication-id": "ekko:us-east-1:7cb86b4d-ef43-4b38-9360-da8429ffd50f",
+      "event-name": "AddCommunicationToCase",
+      "origin": "AWS"
+    },
+    "account": "123456789012"
+  }
+]

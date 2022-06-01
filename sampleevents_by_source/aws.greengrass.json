@@ -1,0 +1,67 @@
+[
+  {
+    "version": "0",
+    "id": "7bf73129-1428-4cd3-a780-95db273d1602",
+    "detail-type": "Greengrass Deployment Status Change",
+    "source": "aws.greengrass",
+    "account": "123456789012",
+    "time": "2015-11-11T21:29:54Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "group-id": "01234567-89ab-cdef-1234-0123456789ab",
+      "deployment-id": "12345678-ffff-aaaa-0000-111122223333",
+      "deployment-type": "NewDeployment",
+      "status": "Building"
+    }
+  },
+  {
+    "version": "0",
+    "id": "f70f943b-9ae2-e7a5-fec4-4c22178a3e6a",
+    "detail-type": "Greengrass Telemetry Data",
+    "source": "aws.greengrass",
+    "account": "123456789012",
+    "time": "2020-07-28T20:45:53Z",
+    "region": "us-west-1",
+    "resources": [],
+    "detail": {
+      "ThingName": "CoolThing",
+      "Schema": "2020-06-30",
+      "ADP": [
+        {
+          "TS": 1595969080,
+          "NS": "StreamManager",
+          "M": [
+            {
+              "N": "BytesAppended",
+              "Sum": 10,
+              "U": "Bytes"
+            }
+          ]
+        },
+        {
+          "TS": 1595969070,
+          "NS": "CloudSpooler",
+          "M": [
+            {
+              "N": "DroppedMessageCount",
+              "Sum": 11,
+              "U": "Count"
+            }
+          ]
+        },
+        {
+          "TS": 1595969060,
+          "NS": "SystemMetrics",
+          "M": [
+            {
+              "N": "SystemMemUsage",
+              "Sum": 12,
+              "U": "MegaBytes"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

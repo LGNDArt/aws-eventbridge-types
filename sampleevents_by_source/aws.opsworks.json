@@ -1,0 +1,81 @@
+[
+  {
+    "version": "0",
+    "id": "dc5fa8df-48f1-2108-b1b9-1fe5ebcf2296",
+    "detail-type": "OpsWorks Instance State Change",
+    "source": "aws.opsworks",
+    "account": "123456789012",
+    "time": "2018-01-25T11:12:23Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:opsworks:us-east-1:123456789012:instance/a648d98f-fdd8-4323-952a-a50a3e4e500f"
+    ],
+    "detail": {
+      "initiated_by": "user",
+      "hostname": "testing1",
+      "stack-id": "acd3df16-e859-4598-8414-377b12a902da",
+      "layer-ids": [
+        "d1a0cb7f-c7e9-4a63-811c-976f0267b2c8"
+      ],
+      "instance-id": "a648d98f-fdd8-4323-952a-a50a3e4e500f",
+      "ec2-instance-id": "i-08b1c2b67aa291176",
+      "status": "requested"
+    }
+  },
+  {
+    "version": "0",
+    "id": "96c778b6-a40e-c8c1-aafc-c9852a3a7b52",
+    "detail-type": "OpsWorks Command State Change",
+    "source": "aws.opsworks",
+    "account": "123456789012",
+    "time": "2018-01-26T08:54:40Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:opsworks:us-east-1:123456789012:instance/a648d98f-fdd8-4323-952a-a50a3e4e500f"
+    ],
+    "detail": {
+      "command-id": "acc9f4f3-a3ec-4fab-b70f-c7d04e71e3ec",
+      "instance-id": "a648d98f-fdd8-4323-952a-a50a3e4e500f",
+      "type": "setup",
+      "status": "successful"
+    }
+  },
+  {
+    "version": "0",
+    "id": "b8230afa-60c7-f43f-b632-841c1cfb22ff",
+    "detail-type": "OpsWorks Deployment State Change",
+    "source": "aws.opsworks",
+    "account": "123456789012",
+    "time": "2018-01-25T11:15:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:opsworks:us-east-1:123456789012:instance/a648d98f-fdd8-4323-952a-a50a3e4e500f"
+    ],
+    "detail": {
+      "duration": 16,
+      "stack-id": "acd3df16-e859-4598-8414-377b12a902da",
+      "instance-ids": [
+        "a648d98f-fdd8-4323-952a-a50a3e4e500f"
+      ],
+      "deployment-id": "606419dc-418e-489c-8531-bff9770fc346",
+      "command": "configure",
+      "status": "successful"
+    }
+  },
+  {
+    "version": "0",
+    "id": "f99faa6f-0e27-e398-95bb-8f190806d275",
+    "detail-type": "OpsWorks Alert",
+    "source": "aws.opsworks",
+    "account": "123456789012",
+    "time": "2018-01-20T16:51:29Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "stack-id": "2f48f2be-ac7d-4dd5-80bb-88375f94db7b",
+      "instance-id": "986efb74-69e8-4c6d-878e-5b77c054cbb0",
+      "type": "InstanceStop",
+      "message": "The shutdown of the instance timed out. Please try stopping it again."
+    }
+  }
+]

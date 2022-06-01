@@ -1,0 +1,57 @@
+[
+  {
+    "version": "0",
+    "id": "93274b19-a740-0c83-d087-f96dc185f9d3",
+    "detail-type": "Simple Workflow Execution State Change",
+    "source": "aws.swf",
+    "account": "123456789012",
+    "time": "2020-05-08T15:57:38Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:swf:us-east-1:949134341785:/domain/SimpleWorkflowUserSimulator"
+    ],
+    "detail": {
+      "eventId": 1,
+      "eventType": "WorkflowExecutionStarted",
+      "workflowExecutionDetail": {
+        "executionInfo": {
+          "execution": {
+            "workflowId": "a1658e37-f8b8-45b3-bb91-35c5e5a1f6e9",
+            "runId": "22+RgxqpCUThw0U6CTJT7gmJV37Buwg8cgUKYWr4jpvwA="
+          },
+          "workflowType": {
+            "name": "SimpleWorkflowUserSimulator",
+            "version": "myWorkflow"
+          },
+          "startTimestamp": 1588953458484,
+          "closeTimestamp": null,
+          "executionStatus": "OPEN",
+          "closeStatus": null,
+          "parent": null,
+          "parentExecutionArn": null,
+          "tagList": null,
+          "cancelRequested": false
+        },
+        "executionConfiguration": {
+          "taskStartToCloseTimeout": "60",
+          "executionStartToCloseTimeout": "1000",
+          "taskList": {
+            "name": "9fa5e8ed-ebce-4240-b005-16c79bf7cdd8"
+          },
+          "taskPriority": null,
+          "childPolicy": "ABANDON",
+          "lambdaRole": "arn:aws:iam::949134341785:role/BasicSWFLambdaExecution"
+        },
+        "openCounts": {
+          "openActivityTasks": 0,
+          "openDecisionTasks": 1,
+          "openTimers": 0,
+          "openChildWorkflowExecutions": 0,
+          "openLambdaFunctions": 0
+        },
+        "latestActivityTaskTimestamp": null,
+        "latestExecutionContext": null
+      }
+    }
+  }
+]

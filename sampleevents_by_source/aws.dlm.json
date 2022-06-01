@@ -1,0 +1,36 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "DLM Policy State Change",
+    "source": "aws.dlm",
+    "account": "123456789012",
+    "time": "2018-05-25T13:12:22Z",
+    "region": "us-east-1",
+    "resources": [
+      " arn:aws:dlm:us-east-1:123456789012:policy/policy-98e3sdf1235545da"
+    ],
+    "detail": {
+      "state": "ERROR",
+      "cause": "Maximum allowed active snapshot limit exceeded",
+      "policy_id": " arn:aws:dlm:us-east-1:123456789012:policy/policy-98e3sdf1235545da"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "DLM Policy State Change",
+    "source": "aws.dlm",
+    "account": "123456789012",
+    "time": "2018-05-25T13:12:22Z",
+    "region": "us-east-1",
+    "resources": [
+      " arn:aws:dlm:us-east-1:123456789012:policy/policy-98e3sdf1235545da"
+    ],
+    "detail": {
+      "state": "ERROR",
+      "cause": "Role provided does not have sufficient permissions",
+      "policy_id": "arn:aws:dlm:us-east-1:123456789012:policy/policy-98e3sdf1235545da"
+    }
+  }
+]

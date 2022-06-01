@@ -1,0 +1,289 @@
+[
+  {
+    "version": "0",
+    "id": "98a0df14-0aa3-41e1-b603-5b27ce3c1431",
+    "detail-type": "CodeBuild Build State Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-12T00:42:28Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:6bdced96-e528-485b-a64c-10df867f5f33"
+    ],
+    "detail": {
+      "build-status": "IN_PROGRESS",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:6bdced96-e528-485b-a64c-10df867f5f33",
+      "current-phase": "SUBMITTED",
+      "current-phase-context": "[]",
+      "version": "1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "bfdc1220-60ff-44ad-bfa7-3b6e6ba3b2d0",
+    "detail-type": "CodeBuild Build State Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-12T00:42:28Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:ed6aa685-0d76-41da-a7f5-6d8760f41f55"
+    ],
+    "detail": {
+      "build-status": "SUCCEEDED",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:ed6aa685-0d76-41da-a7f5-6d8760f41f55",
+      "current-phase": "COMPLETED",
+      "current-phase-context": "[]",
+      "version": "1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1cb6e284-2c0a-4b4d-95f2-7dc042733d11",
+    "detail-type": "CodeBuild Build State Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-12T00:42:28Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:a68ca311-846f-4ca4-b606-ae36de59542b"
+    ],
+    "detail": {
+      "build-status": "FAILED",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:a68ca311-846f-4ca4-b606-ae36de59542b",
+      "current-phase": "COMPLETED",
+      "current-phase-context": "[]",
+      "version": "1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "a0d9e327-da71-40f2-ac80-6c53f779f16f",
+    "detail-type": "CodeBuild Build State Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-12T00:42:28Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:be34f238-6087-4669-93be-f5ba99b66ab0"
+    ],
+    "detail": {
+      "build-status": "STOPPED",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:be34f238-6087-4669-93be-f5ba99b66ab0",
+      "current-phase": "COMPLETED",
+      "current-phase-context": "[]",
+      "version": "1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "54454ec6-dd42-4e84-a3bd-bc9a7eb29275",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:23Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "SUBMITTED",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "SUCCEEDED",
+      "completed-phase-duration-seconds": "0.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:23 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:23 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "034ae3b3-9bd6-4a2b-93cd-69e9ca6ca934",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:23Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "PROVISIONING",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "CLIENT_ERROR",
+      "completed-phase-duration-seconds": "8.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:23 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:32 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "96f4d899-f839-4ed2-bad8-f6dd40d55969",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:32Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "DOWNLOAD_SOURCE",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "SUCCEEDED",
+      "completed-phase-duration-seconds": "4.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:32 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:36 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "52556739-c84e-43aa-8588-4ffd28e43d73",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:36Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "INSTALL",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "SUCCEEDED",
+      "completed-phase-duration-seconds": "0.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:36 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:36 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "e85ad887-e055-49e4-9be7-2b9e20d45a4c",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:36Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "PRE_BUILD",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "TIMED_OUT",
+      "completed-phase-duration-seconds": "0.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:36 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:37 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "3fa5bb2f-6a20-4f2f-8d6a-7ca20fd4b3b1",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:37Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "BUILD",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "STOPPED",
+      "completed-phase-duration-seconds": "7.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:37 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:44 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "00c59c6c-087b-44af-a56c-6ccd8ae2b3c0",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:50Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "UPLOAD_ARTIFACTS",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "SUCCEEDED",
+      "completed-phase-duration-seconds": "0.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:50 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:50 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9bdcea62-84d8-44ac-9dd0-992885799589",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:44Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "POST_BUILD",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "SUCCEEDED",
+      "completed-phase-duration-seconds": "5.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:44 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:50 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "5e4be48b-86c8-42d7-8fb1-31152598fec0",
+    "detail-type": "CodeBuild Build Phase Change",
+    "source": "aws.codebuild",
+    "account": "123456789012",
+    "time": "2017-07-13T20:48:50Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d"
+    ],
+    "detail": {
+      "completed-phase": "FINALIZING",
+      "project-name": "SampleProjectName",
+      "build-id": "arn:aws:codebuild:us-east-1:123456789012:build/SampleProjectName:dc447f73-8915-4021-889c-f5a5ac23423d",
+      "completed-phase-context": "[]",
+      "completed-phase-status": "SUCCEEDED",
+      "completed-phase-duration-seconds": "4.0",
+      "version": "1",
+      "completed-phase-start": "Jul 13, 2017 8:48:50 PM",
+      "completed-phase-end": "Jul 13, 2017 8:48:55 PM"
+    }
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "detail-type": "APIGateway CRL ingestion",
+    "source": "aws.apigateway",
+    "account": "123456789012",
+    "time": "2017-12-22T18:43:48Z",
+    "region": "us-west-1",
+    "resources": [
+      "arn:aws:apigateway:us-west-2::/domainnames/my.domain.com"
+    ],
+    "detail": {
+      "crl-key": "myCRL",
+      "state": "failed",
+      "reason": "Invalid format"
+    }
+  }
+]

@@ -1,0 +1,132 @@
+[
+  {
+    "version": "0",
+    "id": "a1aa69ff-66e8-c3eb-2e47-3776ac5935dd",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.resource-groups",
+    "account": "123456789012",
+    "time": "2022-02-17T09:42:52Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "XYZZYOR:root",
+        "arn": "arn:aws:sts::123456789012:assumed-role/Admin/akabirov-Isengard",
+        "accountId": "123456789012",
+        "accessKeyId": "XYZZY",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "XYZZYOR",
+            "arn": "arn:aws:iam::123456789012:role/Admin",
+            "accountId": "123456789012",
+            "userName": "Admin"
+          },
+          "webIdFederationData": {},
+          "attributes": {
+            "creationDate": "2022-02-17T09:41:02Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2022-02-17T09:42:52Z",
+      "eventSource": "resource-groups.amazonaws.com",
+      "eventName": "CreateGroup",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "52.94.133.138",
+      "userAgent": "aws-cli/2.2.31 Python/3.8.8 Darwin/20.6.0 exe/x86_64 prompt/off command/resource-groups.create-group",
+      "requestParameters": {
+        "Description": "test6",
+        "Name": "test301",
+        "ResourceQuery": {
+          "Type": "CLOUDFORMATION_STACK_1_0",
+          "Query": "{ \"ResourceTypeFilters\": [ \"AWS::AllSupported\" ], \"StackIdentifier\": \"arn:aws:cloudformation:us-east-1:123456789012:stack/sam-dev-akabirov-ArdiInfrastructure/aa434df0-fe92-11eb-bde9-0a03f460991d\"}"
+        }
+      },
+      "responseElements": {
+        "Group": {
+          "GroupArn": "arn:aws:resource-groups:us-east-1:123456789012:group/test301",
+          "Name": "test301",
+          "Description": "test6",
+          "OwnerId": "123456789012"
+        },
+        "ResourceQuery": {
+          "Type": "CLOUDFORMATION_STACK_1_0",
+          "Query": "{ \"ResourceTypeFilters\": [ \"AWS::AllSupported\" ], \"StackIdentifier\": \"arn:aws:cloudformation:us-east-1:123456789012:stack/sam-dev-akabirov-ArdiInfrastructure/aa434df0-fe92-11eb-bde9-0a03f460991d\"}"
+        }
+      },
+      "requestID": "31cabb57-0931-4cdb-b66b-137267531dd1",
+      "eventID": "4d51d885-3d1f-4579-bf42-96924aadbc3f",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  },
+  {
+    "version": "0",
+    "id": "962762ad-c8df-6c32-2ecb-eb7a4eb9c9a3",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.resource-groups",
+    "account": "123456789012",
+    "time": "2022-02-17T09:50:12Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "XYZZYOR:akabirov-Isengard",
+        "arn": "arn:aws:sts::123456789012:assumed-role/Admin/akabirov-Isengard",
+        "accountId": "123456789012",
+        "accessKeyId": "XYZZY",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "XYZZYOR",
+            "arn": "arn:aws:iam::123456789012:role/Admin",
+            "accountId": "123456789012",
+            "userName": "Admin"
+          },
+          "webIdFederationData": {},
+          "attributes": {
+            "creationDate": "2022-02-17T09:41:02Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2022-02-17T09:50:12Z",
+      "eventSource": "resource-groups.amazonaws.com",
+      "eventName": "UpdateGroupQuery",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "52.94.133.138",
+      "userAgent": "aws-cli/2.2.31 Python/3.8.8 Darwin/20.6.0 exe/x86_64 prompt/off command/resource-groups.update-group-query",
+      "requestParameters": {
+        "Group": "test301",
+        "ResourceQuery": {
+          "Type": "CLOUDFORMATION_STACK_1_0",
+          "Query": "{ \"ResourceTypeFilters\": [ \"AWS::AllSupported\" ], \"StackIdentifier\": \"arn:aws:cloudformation:us-east-1:123456789012:stack/sam-dev-akabirov-ArdiTagGroupAsyncProcessor/7e2eafc0-7d4f-11ec-8f2f-12239cd144c1\"}"
+        }
+      },
+      "responseElements": {
+        "GroupQuery": {
+          "GroupName": "test301",
+          "ResourceQuery": {
+            "Type": "CLOUDFORMATION_STACK_1_0",
+            "Query": "{ \"ResourceTypeFilters\": [ \"AWS::AllSupported\" ], \"StackIdentifier\": \"arn:aws:cloudformation:us-east-1:123456789012:stack/sam-dev-akabirov-ArdiTagGroupAsyncProcessor/7e2eafc0-7d4f-11ec-8f2f-12239cd144c1\"}"
+          }
+        }
+      },
+      "requestID": "f19688d0-2bf3-4717-a961-0b386508f085",
+      "eventID": "68f0dc27-1c00-4d7c-9fcb-76e49d239ddc",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  }
+]

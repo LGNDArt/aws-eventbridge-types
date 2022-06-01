@@ -1,0 +1,23 @@
+[
+  {
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "Braket Task State Change",
+    "source": "aws.braket",
+    "account": "123456789012",
+    "time": "2020-05-30T12:26:13Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:aqx:us-west-2:821762770126:quantum-task:03b562fc-5fd4-4426-9c89-d1a75296cb3b"
+    ],
+    "detail": {
+      "quantumTaskArn": "arn:aws:braket:us-west-2:123456789012:quantum-task/4cf7bd26-0eb7-44bf-bc3b-3d0d0bbdc6a2",
+      "status": "CREATED",
+      "deviceArn": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+      "shots": "100",
+      "outputS3Bucket": "amazon-braket-bucket-for-results",
+      "outputS3KeyPrefix": "some_prefix",
+      "createdAt": "2020-08-12T00:00:00Z"
+    }
+  }
+]

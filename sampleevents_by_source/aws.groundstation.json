@@ -1,0 +1,41 @@
+[
+  {
+    "version": "0",
+    "region": "us-east-1",
+    "id": "b5ef07b7-fa20-46ce-bfae-8b7691144eb1",
+    "source": "aws.groundstation",
+    "resources": [
+      "arn:aws:groundstation:us-west-2:123456789012:dataflow-endpoint-group/bad957a8-1d60-4c45-a92a-39febd98921d, arn:aws:groundstation:us-west-2:123456789012:contact/98ddd10f-f2bc-479c-bf7d-55644737fb09, arn:aws:groundstation:us-west-2:123456789012:mission-profile/c513c84c-eb40-4473-88a2-d482648c9234"
+    ],
+    "detail-type": "Ground Station Dataflow Endpoint Group State Change",
+    "detail": {
+      "dataflowEndpointGroupId": "bad957a8-1d60-4c45-a92a-39febd98921d",
+      "groundstationId": "Ground Station 1",
+      "contactId": "98ddd10f-f2bc-479c-bf7d-55644737fb09",
+      "dataflowEndpointGroupArn": "arn:aws:groundstation:us-west-2:680367718957:dataflow-endpoint-group/bad957a8-1d60-4c45-a92a-39febd98921d",
+      "missionProfileArn": "arn:aws:groundstation:us-west-2:123456789012:mission-profile/c513c84c-eb40-4473-88a2-d482648c9234",
+      "dataflowEndpointGroupState": "PREPASS"
+    },
+    "account": "123456789012",
+    "time": "yyyy-mm-ddThh:mm:ssZ"
+  },
+  {
+    "version": "0",
+    "region": "us-east-1",
+    "id": "c8f75fbd-3aa4-42b8-81c4-8d14dea7be2b",
+    "source": "aws.groundstation",
+    "resources": [
+      "arn:aws:groundstation:us-west-2:123456789012:contact/11111111-1111-1111-1111-111111111111"
+    ],
+    "detail-type": "Ground Station Contact State Change",
+    "detail": {
+      "contactId": "11111111-1111-1111-1111-111111111111",
+      "groundstationId": "Ground Station 1",
+      "missionProfileArn": "arn:aws:groundstation:us-west-2:123456789012:mission-profile/11111111-1111-1111-1111-111111111111",
+      "satelliteArn": "arn:aws:groundstation::123456789012:satellite/11111111-1111-1111-1111-111111111111",
+      "contactStatus": "PASS"
+    },
+    "account": "123456789012",
+    "time": "yyyy-mm-ddThh:mm:ssZ"
+  }
+]

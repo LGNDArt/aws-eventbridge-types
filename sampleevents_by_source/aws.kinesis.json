@@ -1,0 +1,57 @@
+[
+  {
+    "version": "0",
+    "id": "b03f6e6c-1a74-4f69-e219-84e2498d7f20",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.kinesis",
+    "account": "123456789012",
+    "time": "2022-04-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AAAAQQQ52GCI6AEPRDE5Z:root",
+        "arn": "arn:aws:sts::123456789012:role/Test",
+        "accountId": "123456789012",
+        "accessKeyId": "AAAAQAA55GCIY5NZAQKE",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AAAAQAA55GCIY5NZAQKE",
+            "arn": "arn:aws:iam::123456789012:role/Test",
+            "accountId": "123456789012",
+            "userName": "Admin"
+          },
+          "webIdFederationData": {},
+          "attributes": {
+            "creationDate": "2022-04-01T00:00:00Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2022-04-10T00:00:00Z",
+      "eventSource": "kinesis.amazonaws.com",
+      "eventName": "UpdateStreamMode",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": {
+        "streamARN": "arn:aws:kinesis:us-east-1:123456789012:stream/test-stream",
+        "streamModeDetails": {
+          "streamMode": "PROVISIONED"
+        }
+      },
+      "responseElements": null,
+      "requestID": "ffff5555-32fb-7a89-9100-78ed0ef23645",
+      "eventID": "87b116ec-f3a1-4693-93d0-79dd0c7e9e42",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management",
+      "sessionCredentialFromConsole": "true"
+    }
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "version": "0",
+    "id": "2649b160-d59d-c97f-3f64-8aaa9ea6aed3",
+    "detail-type": "Storage Gateway Object Upload Event",
+    "source": "aws.storagegateway",
+    "account": "123456789012",
+    "time": "2020-11-05T12:34:56Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:storagegateway:us-east-1:123456789011:share/share-F123D451",
+      "arn:aws:storagegateway:us-east-1:123456789011:gateway/sgw-712345DA",
+      "arn:aws:s3:::do-not-delete-bucket"
+    ],
+    "detail": {
+      "object-size": 1024,
+      "modification-time": "2020-01-05T12:30:00Z",
+      "object-key": "my-file.txt",
+      "event-type": "object-upload-complete",
+      "prefix": "prefix/",
+      "bucket-name": "my-bucket"
+    }
+  }
+]

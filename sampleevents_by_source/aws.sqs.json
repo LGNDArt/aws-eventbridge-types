@@ -1,0 +1,67 @@
+[
+  {
+    "version": "0",
+    "id": "6ff7a25d-0356-3c4e-e7cb-ebcdbcfe033f",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.sqs",
+    "account": "123456789012",
+    "time": "2022-04-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "AssumedRole",
+        "principalId": "AAOAAA555CCC6AAAADD55:test",
+        "arn": "arn:aws:sts::123456789012:root/test",
+        "accountId": "123456789012",
+        "accessKeyId": "AAOAAA555CCC6AAAADD55",
+        "sessionContext": {
+          "sessionIssuer": {
+            "type": "Role",
+            "principalId": "AAOAAA555CCC6AAAADD55",
+            "arn": "arn:aws:iam::123456789012:role/Test",
+            "accountId": "123456789012",
+            "userName": "Test"
+          },
+          "webIdFederationData": {},
+          "attributes": {
+            "creationDate": "2022-04-01T00:00:00Z",
+            "mfaAuthenticated": "false"
+          }
+        }
+      },
+      "eventTime": "2022-04-01T00:00:00Z",
+      "eventSource": "sqs.amazonaws.com",
+      "eventName": "CreateQueue",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "205.251.233.50",
+      "userAgent": "aws-internal/3 aws-sdk-java/1.12.215 Linux/5.4.176-103.347.amzn2int.x86_64 OpenJDK_64-Bit_Server_VM/25.332-b08 java/1.8.0_332 vendor/Oracle_Corporation cfg/retry-mode/standard",
+      "requestParameters": {
+        "queueName": "sample-test",
+        "attribute": {
+          "Policy": "{\"Version\":\"2008-10-17\",\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Sid\":\"__owner_statement\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"123456789012\"},\"Action\":[\"SQS:*\"],\"Resource\":\"arn:aws:sqs:us-east-1:123456789012:sample-test\"}]}",
+          "ReceiveMessageWaitTimeSeconds": "0",
+          "SqsManagedSseEnabled": "false",
+          "DelaySeconds": "0",
+          "KmsMasterKeyId": "",
+          "RedrivePolicy": "",
+          "MessageRetentionPeriod": "345600",
+          "MaximumMessageSize": "262144",
+          "VisibilityTimeout": "30",
+          "RedriveAllowPolicy": ""
+        }
+      },
+      "responseElements": {
+        "queueUrl": "https://sqs.us-east-1.amazonaws.com/123456789012/sample-test"
+      },
+      "requestID": "58fe29ac-fd8a-58e6-9177-73539d28bdc3",
+      "eventID": "3a123eaa-66a1-4da5-b89a-1df48d77f67f",
+      "readOnly": false,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "123456789012",
+      "eventCategory": "Management"
+    }
+  }
+]

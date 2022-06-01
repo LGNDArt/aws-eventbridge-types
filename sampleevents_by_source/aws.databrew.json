@@ -1,0 +1,127 @@
+[
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "DataBrew Job State Change",
+    "source": "aws.databrew",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "INFO",
+      "state": "SUCCEEDED",
+      "jobRunId": "jr_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "message": "Job run succeeded"
+    }
+  },
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "DataBrew Job State Change",
+    "source": "aws.databrew",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "ERROR",
+      "state": "FAILED",
+      "jobRunId": "jr_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "message": "SourceColumnNotFoundError: Failed at step 1. Operation 'REMOVE_DUPLICATES' specified a source column 'col_1' that does not exist. Column names are [row_1, row_2, row_3]"
+    }
+  },
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "DataBrew Job State Change",
+    "source": "aws.databrew",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "WARN",
+      "state": "TIMEOUT",
+      "jobRunId": "jr_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "message": "Job run timed out"
+    }
+  },
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "DataBrew Job State Change",
+    "source": "aws.databrew",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "INFO",
+      "state": "STOPPED",
+      "jobRunId": "jr_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "message": "Job run stopped"
+    }
+  },
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "DataBrew Ruleset Validation Result",
+    "source": "aws.databrew",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "rulesetArn": "arn:aws:databrew:us-west-2:123456789012:ruleset/MyRuleset",
+      "datasetName": "MyDataset",
+      "validationReportS3Location": "s3://myBucket/profile-job-output/MyDataset_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789_dq-validation-report.json",
+      "rulesetName": "MyRuleset",
+      "jobRunId": "db_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "validationState": "ERROR"
+    }
+  },
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "DataBrew Ruleset Validation Result",
+    "source": "aws.databrew",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "rulesetArn": "arn:aws:databrew:us-west-2:123456789012:ruleset/MyRuleset",
+      "datasetName": "MyDataset",
+      "validationReportS3Location": "s3://myBucket/profile-job-output/MyDataset_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789_dq-validation-report.json",
+      "rulesetName": "MyRuleset",
+      "jobRunId": "db_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "validationState": "SUCCEEDED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "DataBrew Ruleset Validation Result",
+    "source": "aws.databrew",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "rulesetArn": "arn:aws:databrew:us-west-2:123456789012:ruleset/MyRuleset",
+      "datasetName": "MyDataset",
+      "validationReportS3Location": "s3://myBucket/profile-job-output/MyDataset_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789_dq-validation-report.json",
+      "rulesetName": "MyRuleset",
+      "jobRunId": "db_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "validationState": "FAILED"
+    }
+  }
+]

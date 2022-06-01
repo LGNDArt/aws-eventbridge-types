@@ -1,0 +1,61 @@
+[
+  {
+    "version": "0",
+    "id": "22222222-dcba-4444-dcba-333333333333",
+    "detail-type": "Access Analyzer Finding",
+    "source": "aws.access-analyzer",
+    "account": "123456789012",
+    "time": "2019-11-21T01:22:33Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:access-analyzer:us-west-2:123456789012:analyzer/MyAnalyzer"
+    ],
+    "detail": {
+      "version": "1.0",
+      "accountId": "123456789012",
+      "region": "us-west-2",
+      "isDeleted": false,
+      "id": "bbbbaaaa-abcd-1111-abcd-666666666666",
+      "status": "ACTIVE",
+      "resourceType": "AWS::S3::Bucket",
+      "resource": "arn:aws:s3:::my-bucket",
+      "createdAt": "2019-11-20T04:58:50Z",
+      "analyzedAt": "2019-11-21T01:22:22Z",
+      "updatedAt": "2019-11-21T01:14:07Z",
+      "principal": {
+        "AWS": "999988887777"
+      },
+      "action": [
+        "s3:GetObject"
+      ],
+      "condition": {},
+      "isPublic": false
+    }
+  },
+  {
+    "version": "0",
+    "id": "22222222-dcba-4444-dcba-333333333333",
+    "detail-type": "Access Analyzer Finding",
+    "source": "aws.access-analyzer",
+    "account": "123456789012",
+    "time": "2019-11-21T01:22:33Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:access-analyzer:us-west-2:123456789012:analyzer/MyAnalyzer"
+    ],
+    "detail": {
+      "version": "1.0",
+      "accountId": "123456789012",
+      "region": "us-west-2",
+      "isDeleted": false,
+      "id": "bbbbaaaa-abcd-1111-abcd-666666666666",
+      "status": "ACTIVE",
+      "resourceType": "AWS::S3::Bucket",
+      "resource": "arn:aws:s3:::my-bucket",
+      "error": "ACCESS_DENIED",
+      "createdAt": "2019-10-16T19:21:44.244Z",
+      "analyzedAt": "2019-10-16T19:21:44.244Z",
+      "updatedAt": "2019-10-16T19:21:44.244Z"
+    }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "source": "aws.managedservices",
+    "detail-type": "AMS RFC State Change",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "ActionState": "CustomerActionPending",
+      "ActualExecutionTimeRange": {
+        "StartTime": 1573554842254,
+        "EndTime": 1573554842254
+      },
+      "AutomationStatus": "Automated",
+      "AwsAccountId": "012345678912",
+      "AwsApprovalStatus": "Approved",
+      "ChangeTypeId": "<Change Type ID>",
+      "ChangeTypeVersion": "<Change Type Version>",
+      "CreatedTime": 1573554842254,
+      "CustomerApprovalStatus": "NotRequired",
+      "EventType": "RfcCompleted",
+      "LastModifiedTime": 1573554842254,
+      "LastSubmittedTime": 1573554842254,
+      "RequestedExecutionTimeRange": {
+        "StartTime": 1573554842254,
+        "EndTime": 1573554842254
+      },
+      "RfcId": "<RFC ID>",
+      "Status": "Success",
+      "Title": "Sample RFC"
+    }
+  }
+]

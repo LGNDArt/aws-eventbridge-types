@@ -1,0 +1,21 @@
+[
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "WorkSpaces Access",
+    "source": "aws.workspaces",
+    "account": "123456789012",
+    "time": "2018-08-30T00:45:28Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "clientIpAddress": "0.0.0.0",
+      "actionType": "successfulLogin",
+      "workspacesClientProductName": "WorkSpaces Desktop client",
+      "loginTime": "2018-08-30T00:45:22.377Z",
+      "clientPlatform": "Windows",
+      "directoryId": "domain/d-000000000",
+      "workspaceId": "ws-000000000"
+    }
+  }
+]

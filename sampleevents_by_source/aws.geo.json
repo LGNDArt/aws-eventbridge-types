@@ -1,0 +1,64 @@
+[
+  {
+    "version": "0",
+    "id": "7cb6afa8-cbf0-e1d9-e585-fd5169025ee0",
+    "detail-type": "Location Geofence Event",
+    "source": "aws.geo",
+    "account": "123456789012",
+    "time": "2020-11-02T17:20:35.339Z",
+    "region": "us-west-1",
+    "resources": [
+      "arn:aws:geo:us-west-1: 123456789012:geofence-collection/GeofenceCollection_0",
+      "arn:aws:geo:us-west-1: 123456789012:tracker/Tracker_0"
+    ],
+    "detail": {
+      "EventType": "ENTER",
+      "GeofenceId": "Polygon_0",
+      "DeviceId": "Device-d4d3430e-2fff-4c84-b139-945a358984a1",
+      "SampleTime": "2020-11-02T17:20:34.119Z",
+      "Position": [
+        -123.13713993681803,
+        49.249825311494355
+      ],
+      "Accuracy": {
+        "Horizontal": 3.14
+      },
+      "PositionProperties": {
+        "field1": "value1",
+        "field2": "value2",
+        "field3": "value3"
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "7cb6afa8-cbf0-e1d9-e585-fd5169025ee0",
+    "detail-type": "Location Geofence Event",
+    "source": "aws.geo",
+    "account": "123456789012",
+    "time": "2020-11-02T17:20:35.339Z",
+    "region": "us-west-1",
+    "resources": [
+      "arn:aws:geo:us-west-1: 123456789012:geofence-collection/GeofenceCollection_0",
+      "arn:aws:geo:us-west-1: 123456789012:tracker/Tracker_0"
+    ],
+    "detail": {
+      "EventType": "EXIT",
+      "GeofenceId": "Polygon_0",
+      "DeviceId": "Device-d4d3430e-2fff-4c84-b139-945a358984a1",
+      "SampleTime": "2020-11-02T17:20:34.119Z",
+      "Position": [
+        -123.13713993681803,
+        49.249825311494355
+      ],
+      "Accuracy": {
+        "Horizontal": 3.14
+      },
+      "PositionProperties": {
+        "field1": "value1",
+        "field2": "value2",
+        "field3": "value3"
+      }
+    }
+  }
+]

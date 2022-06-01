@@ -1,0 +1,40 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "Schema Created",
+    "source": "aws.schemas",
+    "account": "123456789012",
+    "time": "2019-05-31T21:49:54Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:schemas:us-east-1::schema/myRegistry/mySchema"
+    ],
+    "detail": {
+      "SchemaName": "mySchema",
+      "SchemaType": "OpenApi3",
+      "RegistryName": "myRegistry",
+      "CreationDate": "2019-11-29T20:08:55Z",
+      "Version": "1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "Schema Version Created",
+    "source": "aws.schemas",
+    "account": "123456789012",
+    "time": "2019-05-31T21:49:54Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:schemas:us-east-1::schema/myRegistry/mySchema"
+    ],
+    "detail": {
+      "SchemaName": "mySchema",
+      "SchemaType": "OpenApi3",
+      "RegistryName": "myRegistry",
+      "CreationDate": "2019-11-29T20:08:55Z",
+      "Version": "5"
+    }
+  }
+]

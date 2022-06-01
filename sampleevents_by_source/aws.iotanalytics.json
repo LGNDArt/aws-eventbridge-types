@@ -1,0 +1,86 @@
+[
+  {
+    "version": "0",
+    "id": "f71c5bdf-74ba-cb7b-c7df-8b8acbd7c49a",
+    "detail-type": "IoT Analytics Dataset Lifecycle Notification",
+    "source": "aws.iotanalytics",
+    "account": "123456789012",
+    "time": "2019-01-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:iotanalytics:us-east-1:123456789012:dataset/dataset"
+    ],
+    "detail": {
+      "dataset-name": "dataset",
+      "version-id": "032e6221-ae7b-79e3-2353-9e32ae509f04",
+      "content-delivery-rule-index": 0,
+      "state": "CONTENT_DELIVERY_STARTED",
+      "message": null,
+      "event-detail-version": "1.0"
+    }
+  },
+  {
+    "version": "0",
+    "id": "f71c5bdf-74ba-cb7b-c7df-8b8acbd7c49a",
+    "detail-type": "IoT Analytics Dataset Lifecycle Notification",
+    "source": "aws.iotanalytics",
+    "account": "123456789012",
+    "time": "2019-01-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:iotanalytics:us-east-1:123456789012:dataset/dataset"
+    ],
+    "detail": {
+      "dataset-name": "dataset",
+      "version-id": "032e6221-ae7b-79e3-2353-9e32ae509f04",
+      "content-delivery-rule-index": 0,
+      "state": "CONTENT_DELIVERY_SUCCEEDED",
+      "message": null,
+      "event-detail-version": "1.0"
+    }
+  },
+  {
+    "version": "0",
+    "id": "f71c5bdf-74ba-cb7b-c7df-8b8acbd7c49a",
+    "detail-type": "IoT Analytics Dataset Lifecycle Notification",
+    "source": "aws.iotanalytics",
+    "account": "123456789012",
+    "time": "2019-01-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:iotanalytics:us-east-1:123456789012:dataset/dataset"
+    ],
+    "detail": {
+      "dataset-name": "dataset",
+      "version-id": "032e6221-ae7b-79e3-2353-9e32ae509f04",
+      "content-delivery-rule-index": 0,
+      "state": "CONTENT_DELIVERY_FAILED",
+      "message": "Sample failure message",
+      "event-detail-version": "1.0"
+    }
+  },
+  {
+    "version": "0",
+    "id": "47c62ab4-9c99-a447-68b4-d973859ab160",
+    "detail-type": "IoT Analytics Pipeline Failure Notification",
+    "source": "aws.iotanalytics",
+    "account": "123456789012",
+    "time": "2020-05-22T18:22:56Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:iotanalytics:us-east-1:123456789012:pipeline/motor_pipeline"
+    ],
+    "detail": {
+      "event-detail-version": "1.0",
+      "pipeline-name": "motor_pipeline",
+      "error-code": "LAMBDA_FAILURE",
+      "channel-messages": {
+        "s3Paths": [
+          "__dt=2020-06-20 00:00:00/1592611320000_1592611350000_123456789012_motor_channel_0_4097.0.json.gz"
+        ]
+      },
+      "lambda-function-arn": "arn:aws:lambda:us-east-1:123456789012:function:LambdaCode",
+      "message": "Lambda execution Failed"
+    }
+  }
+]

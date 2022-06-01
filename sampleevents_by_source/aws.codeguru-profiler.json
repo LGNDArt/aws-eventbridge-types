@@ -1,0 +1,44 @@
+[
+  {
+    "version": "0",
+    "id": "315c1398-40ff-a850-213b-158f73e60175",
+    "detail-type": "CodeGuru Profiler Recommendations State Change",
+    "source": "aws.codeguru-profiler",
+    "account": "123456789012",
+    "time": "2019-02-26T19:42:21Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:codeguru-profiler:us-east-1:123456789012:profilingGroup:profiling-group-name"
+    ],
+    "detail": {
+      "schema": "2021-08-30",
+      "expiresOn": "2019-02-27T19:42:21Z",
+      "sourceUrl": "/codeguru/profiler/recommendations-report?endTime=2019-02-27T00%3A00%3A00.000Z&profilingGroupName=profiling-group-name&region=us-east-1&startTime=2019-02-26T00%3A00%3A00.000Z",
+      "deduplicationId": "ada4cvf74uyrponkgk7tpxeo5idgqcrt",
+      "title": {
+        "value": "Issue name"
+      },
+      "eventStartTime": "2019-02-26T19:42:21Z",
+      "eventEndTime": "2019-02-29T19:50:34Z",
+      "severity": "MEDIUM",
+      "status": "ONGOING",
+      "computeInstanceArns": [
+        "arn:aws:lambda:us-east-1:123456789012:function:lambda-function"
+      ],
+      "recommendation": {
+        "name": {
+          "value": "Fix issue"
+        },
+        "description": {
+          "value": "Description of the issue"
+        },
+        "resolutionSteps": {
+          "value": "Fix the issue by following step 1, step 2 and step 3"
+        },
+        "reason": {
+          "value": "Observed the issue because it used more CPU than ideal"
+        }
+      }
+    }
+  }
+]

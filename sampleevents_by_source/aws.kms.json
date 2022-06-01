@@ -1,0 +1,47 @@
+[
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "detail-type": "KMS Imported Key Material Expiration",
+    "source": "aws.kms",
+    "account": "123456789012",
+    "time": "2016-09-15T18:12:33Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:kms:us-east-1:123456789012:key/ea85dbdd-74b1-4adb-b2db-7cf8d002985f"
+    ],
+    "detail": {
+      "key-id": "ea85dbdd-74b1-4adb-b2db-7cf8d002985f"
+    }
+  },
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "detail-type": "KMS CMK Rotation",
+    "source": "aws.kms",
+    "account": "123456789012",
+    "time": "2015-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:kms:us-east-1:123456789012:key/ea85dbdd-74b1-4adb-b2db-7cf8d002985f"
+    ],
+    "detail": {
+      "key-id": "ea85dbdd-74b1-4adb-b2db-7cf8d002985f"
+    }
+  },
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "detail-type": "KMS CMK Deletion",
+    "source": "aws.kms",
+    "account": "123456789012",
+    "time": "2016-08-08T01:23:45Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:kms:us-east-1:123456789012:key/2812ba3e-1a61-4575-956c-80fe03ed4e56"
+    ],
+    "detail": {
+      "key-id": "2812ba3e-1a61-4575-956c-80fe03ed4e56"
+    }
+  }
+]

@@ -1,0 +1,136 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-012345678901",
+    "detail-type": "GameLift Matchmaking Event",
+    "source": "aws.gamelift",
+    "account": "123456789012",
+    "time": "2017-08-08T20:43:14.621Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:gamelift:us-west-2:123456789012:testmatchmakingconfiguration/Test-Validation"
+    ],
+    "detail": {
+      "tickets": [
+        {
+          "ticketId": "AAAAA123",
+          "startTime": "2017-08-08T20:30:40.972Z",
+          "players": [
+            {
+              "playerId": "AAAAA100",
+              "team": "red"
+            }
+          ]
+        },
+        {
+          "ticketId": "AAAAA456",
+          "startTime": "2017-08-08T20:33:14.111Z",
+          "players": [
+            {
+              "playerId": "AAAAA101",
+              "team": "blue"
+            }
+          ]
+        }
+      ],
+      "acceptance": "TimedOut",
+      "type": "AcceptMatchCompleted",
+      "gameSessionInfo": {
+        "players": [
+          {
+            "playerId": "AAAAA100",
+            "team": "red"
+          },
+          {
+            "playerId": "AAAAA101",
+            "team": "blue"
+          }
+        ]
+      },
+      "matchId": "abcdef12-0123-0123-0123-012345678901"
+    }
+  },
+  {
+    "version": "0",
+    "id": "39c978f3-ba46-3f7c-e787-55bfcca1bd31",
+    "detail-type": "GameLift Queue Placement Event",
+    "source": "aws.gamelift",
+    "account": "123456789012",
+    "time": "2021-03-01T15:50:52Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:gamelift:us-west-2:123456789012:gamesessionqueue/MegaFrogRace-NA"
+    ],
+    "detail": {
+      "type": "PlacementFulfilled",
+      "placementId": "e4a1119a-39af-45cf-a990-ef150fe0d453",
+      "port": "6262",
+      "gameSessionArn": "arn:aws:gamelift:us-west-2::gamesession/fleet-d0c4cacf-a846-4783-891f-7f79c6c4e811/e4a1119a-39af-45cf-a990-ef150fe0d453",
+      "ipAddress": "34.211.83.249",
+      "dnsName": "ec2-34-211-83-249.us-west-2.compute.amazonaws.com",
+      "startTime": "2021-03-01T15:50:49.741Z",
+      "endTime": "2021-03-01T15:50:52.084Z",
+      "gameSessionRegion": "us-west-2",
+      "placedPlayerSessions": [
+        {
+          "playerId": "player-1",
+          "playerSessionId": "psess-1232131232324124123123"
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "39c978f3-ba46-3f7c-e787-55bfcca1bd31",
+    "detail-type": "GameLift Queue Placement Event",
+    "source": "aws.gamelift",
+    "account": "123456789012",
+    "time": "2021-03-01T15:50:52Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:gamelift:us-west-2:123456789012:gamesessionqueue/MegaFrogRace-NA"
+    ],
+    "detail": {
+      "type": "PlacementCancelled",
+      "placementId": "e4a1119a-39af-45cf-a990-ef150fe0d453",
+      "startTime": "2021-03-01T15:50:49.741Z",
+      "endTime": "2021-03-01T15:50:52.084Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "39c978f3-ba46-3f7c-e787-55bfcca1bd31",
+    "detail-type": "GameLift Queue Placement Event",
+    "source": "aws.gamelift",
+    "account": "123456789012",
+    "time": "2021-03-01T15:50:52Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:gamelift:us-west-2:123456789012:gamesessionqueue/MegaFrogRace-NA"
+    ],
+    "detail": {
+      "type": "PlacementTimedOut",
+      "placementId": "e4a1119a-39af-45cf-a990-ef150fe0d453",
+      "startTime": "2021-03-01T15:50:49.741Z",
+      "endTime": "2021-03-01T15:50:52.084Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "39c978f3-ba46-3f7c-e787-55bfcca1bd31",
+    "detail-type": "GameLift Queue Placement Event",
+    "source": "aws.gamelift",
+    "account": "123456789012",
+    "time": "2021-03-01T15:50:52Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:gamelift:us-west-2:123456789012:gamesessionqueue/MegaFrogRace-NA"
+    ],
+    "detail": {
+      "type": "PlacementFailed",
+      "placementId": "e4a1119a-39af-45cf-a990-ef150fe0d453",
+      "startTime": "2021-03-01T15:50:49.741Z",
+      "endTime": "2021-03-01T15:50:52.084Z"
+    }
+  }
+]

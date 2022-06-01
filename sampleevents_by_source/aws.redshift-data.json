@@ -1,0 +1,23 @@
+[
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "detail-type": "Redshift Data Statement Status Change",
+    "source": "aws.redshift-data",
+    "account": "123456789012",
+    "time": "2020-12-22T17:00:00Z",
+    "region": "us-west-1",
+    "resources": [
+      "arn:aws:redshift:region:123456789123:cluster:cluster-name"
+    ],
+    "detail": {
+      "statementId": "01bdaca2-8967-4e34-ae3f-41d9728d5644",
+      "state": "COMPLETE",
+      "rows": 10000,
+      "pages": 5,
+      "expireAt": "2020-12-22T18:43:48Z",
+      "principal": "arn:aws:sts::837661609862:assumed-role/any",
+      "statementName": "awesome"
+    }
+  }
+]

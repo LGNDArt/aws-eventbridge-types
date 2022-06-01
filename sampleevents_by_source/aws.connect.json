@@ -1,0 +1,116 @@
+[
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "source": "aws.connect",
+    "detail-type": "Contact Lens Analysis State Change",
+    "account": "123456789012",
+    "time": "2020-04-27T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e",
+      "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/contact/f533d9c4-e712-4cc2-8548-20ef905b0247"
+    ],
+    "detail": {
+      "instance": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e",
+      "contact": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/contact/f533d9c4-e712-4cc2-8548-20ef905b0247",
+      "channel": "VOICE",
+      "state": "FAILED",
+      "reasonCode": "SOME_REASON"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1b5d8feb-c973-4cf7-a9f1-bf3703467718",
+    "detail-type": "Amazon Connect Contact Event",
+    "source": "aws.connect",
+    "account": "123456789012",
+    "time": "2020-12-22T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e",
+      "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/contact/f533d9c4-e712-4cc2-8548-20ef905b0247"
+    ],
+    "detail": {
+      "eventType": "CONNECTED_TO_AGENT",
+      "contactId": "f533d9c4-e712-4cc2-8548-20ef905b0247",
+      "initialContactId": "51f2639f-7b0a-47ee-9e79-c8776a34035f",
+      "previousContactId": "07cbf052-e977-41d1-acff-af2c2880ee79",
+      "channel": "VOICE",
+      "instanceArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e",
+      "initiationMethod": "TRANSFER",
+      "queueInfo": {
+        "queueArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/queue/8fac3066-6b37-4d9f-819c-2f18c478db72",
+        "queueType": "STANDARD"
+      },
+      "agentInfo": {
+        "agentArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/agent/957183ad-ce68-48df-a8bf-7063146a7c0c"
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "source": "aws.connect",
+    "detail-type": "Contact Lens Post Call Rules Matched",
+    "account": "123456789012",
+    "time": "2020-04-27T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e"
+    ],
+    "detail": {
+      "version": "1.0",
+      "ruleName": "ACCOUNT_CANCELLATION",
+      "actionName": "NOTIFY_CUSTOMER_RETENTION",
+      "instanceArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e",
+      "contactArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/contact/8sfs8sd8-b491-4cf7-a9f1-bf3703478654",
+      "agentArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/agent/hg78i9u7-8976-6ty7-ac7j-8u7abg786yju",
+      "queueArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/queue/59135e43-46c5-4863-9611-8481a1d08ade"
+    }
+  },
+  {
+    "version": "0",
+    "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+    "source": "aws.connect",
+    "detail-type": "Contact Lens Realtime Rules Matched",
+    "account": "123456789012",
+    "time": "2020-04-27T18:43:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e"
+    ],
+    "detail": {
+      "version": "1.0",
+      "ruleName": "ACCOUNT_CANCELLATION",
+      "actionName": "NOTIFY_CUSTOMER_RETENTION",
+      "instanceArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e",
+      "contactArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/contact/8sfs8sd8-b491-4cf7-a9f1-bf3703478654",
+      "agentArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/agent/hg78i9u7-8976-6ty7-ac7j-8u7abg786yju",
+      "queueArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e/queue/59135e43-46c5-4863-9611-8481a1d08ade"
+    }
+  },
+  {
+    "version": "0",
+    "id": "8d122163-6c07-f8cb-06e7-373a1bcf8fc6",
+    "source": "aws.connect",
+    "detail-type": "Amazon Connect Rules Action Execution Failed",
+    "account": "123456789012",
+    "time": "2022-01-05T01:30:42Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e"
+    ],
+    "detail": {
+      "ruleId": "7410c94b-21c2-4db0-a707-c6d751edbe8f",
+      "actionType": "CREATE_TASK",
+      "triggerEvent": "THIRD_PARTY",
+      "instanceArn": "arn:aws:connect:us-east-1:123456789012:instance/cb54730f-5aac-4376-b2f4-7c822889931e",
+      "reasonCode": "ServiceQuotaExceededException",
+      "error": "Limit exceeded for active tasks for instanceId: cb54730f-5aac-4376-b2f4-7c822889931e",
+      "additionalInfo": {
+        "contactFlowId": "2ff1eef3-72c3-443c-ac9b-d63cf37210"
+      }
+    }
+  }
+]

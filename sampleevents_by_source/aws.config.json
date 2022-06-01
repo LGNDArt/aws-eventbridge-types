@@ -1,0 +1,175 @@
+[
+  {
+    "version": "0",
+    "id": "00bdf13e-1111-b2f5-cef0-e9cbbe7cd533",
+    "detail-type": "Config Configuration Item Change",
+    "source": "aws.config",
+    "account": "123456789012",
+    "time": "2022-03-16T01:10:51Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:elasticfilesystem:us-east-1:123456789012:file-system/fs-01f0d526165b57f95"
+    ],
+    "detail": {
+      "recordVersion": "1.3",
+      "messageType": "ConfigurationItemChangeNotification",
+      "configurationItemDiff": {
+        "changedProperties": {
+          "Configuration.FileSystemTags.0": {
+            "updatedValue": {
+              "Key": "test",
+              "Value": "me"
+            },
+            "changeType": "CREATE"
+          },
+          "Tags.2": {
+            "updatedValue": "me",
+            "changeType": "CREATE"
+          }
+        },
+        "changeType": "UPDATE"
+      },
+      "notificationCreationTime": "2022-03-16T01:10:51.976Z",
+      "configurationItem": {
+        "relatedEvents": [],
+        "relationships": [],
+        "configuration": {
+          "FileSystemId": "fs-01f0d526165b57f95",
+          "Arn": "arn:aws:elasticfilesystem:us-east-1:123456789012:file-system/fs-01f0d526165b57f95",
+          "Encrypted": true,
+          "FileSystemTags": [
+            {
+              "Key": "Name",
+              "Value": "myname"
+            },
+            {
+              "Key": "test",
+              "Value": "me"
+            }
+          ],
+          "PerformanceMode": "generalPurpose",
+          "ThroughputMode": "bursting",
+          "LifecyclePolicies": [
+            {
+              "TransitionToIA": "AFTER_30_DAYS"
+            },
+            {
+              "TransitionToPrimaryStorageClass": "AFTER_1_ACCESS"
+            }
+          ],
+          "BackupPolicy": {
+            "Status": "ENABLED"
+          },
+          "FileSystemPolicy": {},
+          "KmsKeyId": "arn:aws:kms:us-east-1:123456789012:key/0e6c91d5-e23b-4ed3-bd36-1561fbbc0a2d"
+        },
+        "supplementaryConfiguration": {},
+        "tags": {
+          "aws:elasticfilesystem:default-backup": "enabled",
+          "test": "me",
+          "Name": "cloudcontroltest1"
+        },
+        "configurationItemVersion": "1.3",
+        "configurationItemCaptureTime": "2022-03-16T01:10:50.837Z",
+        "configurationStateId": 1647393050837,
+        "awsAccountId": "123456789012",
+        "configurationItemStatus": "OK",
+        "resourceType": "AWS::EFS::FileSystem",
+        "resourceId": "fs-01f0d526165b57f95",
+        "resourceName": "fs-01f0d526165b57f95",
+        "ARN": "arn:aws:elasticfilesystem:us-east-1:123456789012:file-system/fs-01f0d526165b57f95",
+        "awsRegion": "us-east-1",
+        "availabilityZone": "Regional",
+        "configurationStateMd5Hash": ""
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "6bc3ac72-1063-de96-ca00-61de2a277b5c",
+    "detail-type": "Config Configuration History Delivery Status",
+    "source": "aws.config",
+    "account": "123456789012",
+    "time": "2022-03-15T18:34:57Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "recordVersion": "1.1",
+      "messageType": "ConfigurationHistoryDeliveryCompleted",
+      "s3ObjectKey": "AWSLogs/123456789012/Config/us-east-1/2022/3/15/ConfigHistory/123456789012_Config_us-east-1_ConfigHistory_AWS::EFS::FileSystem_20220315T165259Z_20220315T165259Z_1.json.gz",
+      "s3Bucket": "my-bucket",
+      "notificationCreationTime": "2022-03-15T18:34:57.487Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "4b8b60c5-8bd4-e8ea-8ff5-0319f48ebe49",
+    "detail-type": "Config Configuration Snapshot Delivery Status",
+    "source": "aws.config",
+    "account": "123456789012",
+    "time": "2022-03-16T16:09:22Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "recordVersion": "1.1",
+      "messageType": "ConfigurationSnapshotDeliveryStarted",
+      "configSnapshotId": "cc0a687a-5da3-4510-b14b-d7a20d72e88c",
+      "notificationCreationTime": "2022-03-16T16:09:22.749Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "74a450e0-9050-bf0d-1160-e7dbb3e3e763",
+    "detail-type": "Config Rules Compliance Change",
+    "source": "aws.config",
+    "account": "123456789012",
+    "time": "2022-03-15T17:33:28Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "resourceId": "fs-0dcc4daeb657adbd5",
+      "awsRegion": "us-east-1",
+      "awsAccountId": "123456789012",
+      "configRuleName": "efs-resources-protected-by-backup-plan",
+      "recordVersion": "1.0",
+      "configRuleARN": "arn:aws:config:us-east-1:123456789012:config-rule/config-rule-touwmd",
+      "messageType": "ComplianceChangeNotification",
+      "newEvaluationResult": {
+        "evaluationResultIdentifier": {
+          "evaluationResultQualifier": {
+            "configRuleName": "efs-resources-protected-by-backup-plan",
+            "resourceType": "AWS::EFS::FileSystem",
+            "resourceId": "fs-0dcc4daeb657adbd5"
+          },
+          "orderingTimestamp": "2022-03-15T17:32:48.988Z"
+        },
+        "complianceType": "NON_COMPLIANT",
+        "resultRecordedTime": "2022-03-15T17:33:27.770Z",
+        "configRuleInvokedTime": "2022-03-15T17:33:25.449Z",
+        "annotation": "Resource is not protected by any Backup Plan."
+      },
+      "notificationCreationTime": "2022-03-15T17:33:28.758Z",
+      "resourceType": "AWS::EFS::FileSystem"
+    }
+  },
+  {
+    "version": "0",
+    "id": "a72be352-e6c3-2d8b-94b9-8fa15fcfa23b",
+    "detail-type": "Config Rules Re-evaluation Status",
+    "source": "aws.config",
+    "account": "123456789012",
+    "time": "2022-03-16T16:31:57Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "configRuleNames": [
+        "efs-resources-protected-by-backup-plan"
+      ],
+      "awsRegion": "us-east-1",
+      "awsAccountId": "123456789012",
+      "recordVersion": "1.0",
+      "messageType": "ConfigRulesEvaluationStarted",
+      "notificationCreationTime": "2022-03-16T16:31:57.459Z"
+    }
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "version": "0",
+    "id": "715ed6b3-b8fc-27fe-fad6-528c7b8bf8a2",
+    "detail-type": "EC2 Fleet State Change",
+    "source": "aws.ec2fleet",
+    "account": "123456789012",
+    "time": "2020-11-09T09:00:20Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:fleet/fleet-598fb973-87b7-422d-be4d-6b0809bfff0a"
+    ],
+    "detail": {
+      "sub-type": "active"
+    }
+  },
+  {
+    "version": "0",
+    "id": "542ce428-c8f1-0608-c015-e8ed6522c5bc",
+    "detail-type": "EC2 Fleet Instance Change",
+    "source": "aws.ec2fleet",
+    "account": "123456789012",
+    "time": "2020-11-09T09:00:23Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:fleet/fleet-598fb973-87b7-422d-be4d-6b0809bfff0a"
+    ],
+    "detail": {
+      "instance-id": "i-0c594155dd5ff1829",
+      "description": "{\"instanceType\":\"c5.large\",\"image\":\"ami-6057e21a\",\"productDescription\":\"Linux/UNIX\",\"availabilityZone\":\"us-east-1d\"}",
+      "sub-type": "launched"
+    }
+  },
+  {
+    "version": "0",
+    "id": "19331f74-bf4b-a3dd-0f1b-ddb1422032b9",
+    "detail-type": "EC2 Fleet Spot Instance Request Change",
+    "source": "aws.ec2fleet",
+    "account": "123456789012",
+    "time": "2020-11-09T09:00:05Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:fleet/fleet-83fd4e48-552a-40ef-9532-82a3acca5f10"
+    ],
+    "detail": {
+      "spot-instance-request-id": "sir-rmqske6h",
+      "description": "SpotInstanceRequestId sir-rmqske6h, PreviousState: cancelled_running",
+      "sub-type": "cancelled"
+    }
+  },
+  {
+    "version": "0",
+    "id": "76529817-d605-4571-7224-d36cc1b2c0c4",
+    "detail-type": "EC2 Fleet Information",
+    "source": "aws.ec2fleet",
+    "account": "123456789012",
+    "time": "2020-11-09T08:17:07Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:fleet/fleet-8becf5fe-bb9e-415d-8f54-3fa5a8628b91"
+    ],
+    "detail": {
+      "description": "r3.8xlarge, ami-032930428bf1abbff, Linux/UNIX, us-east-1a, Spot bid price is less than Spot market price $0.5291",
+      "sub-type": "launchSpecUnusable"
+    }
+  },
+  {
+    "version": "0",
+    "id": "69849a22-6d0f-d4ce-602b-b47c1c98240e",
+    "detail-type": "EC2 Fleet Error",
+    "source": "aws.ec2fleet",
+    "account": "123456789012",
+    "time": "2020-10-07T01:44:24Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:fleet/fleet-9bb19bc6-60d3-4fd2-ae47-d33e68eafa08"
+    ],
+    "detail": {
+      "description": "m3.large, ami-00068cd7555f543d5, Linux/UNIX: IPv6 is not supported for the instance type 'm3.large'. ",
+      "sub-type": "spotFleetRequestConfigurationInvalid"
+    }
+  }
+]

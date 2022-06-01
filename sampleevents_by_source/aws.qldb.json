@@ -1,0 +1,18 @@
+[
+  {
+    "version": "1",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "QLDB Ledger State Change",
+    "source": "aws.qldb",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:qldb:us-east-1:123456789012:ledger/name"
+    ],
+    "detail": {
+      "ledgerName": "name",
+      "state": "ACTIVE"
+    }
+  }
+]

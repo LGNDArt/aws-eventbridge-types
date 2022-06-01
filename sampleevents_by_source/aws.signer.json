@@ -1,0 +1,29 @@
+[
+  {
+    "version": "0",
+    "id": "4de85a57-5f77-ef85-b879-6f0408d7583c",
+    "detail-type": "Signer Job Status Change",
+    "source": "aws.signer",
+    "account": "123456789012",
+    "time": "2018-04-26T20:01:47Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:signer:us-east-1:123456789012:/signing-jobs/f5f017c4-e216-4494-929d-001b0d3857a0"
+    ],
+    "detail": {
+      "certificate_arn": "arn:aws:acm:us-east-1:123456789012:certificate/e2199167-31d2-4e35-afbf-0644bda1f81c",
+      "job_id": "f5f017c4-e216-4494-929d-001b0d3857a0",
+      "destination": {
+        "bucketName": "integration-test-destination",
+        "key": "f5f017c4-e216-4494-929d-001b0d3857a0"
+      },
+      "source": {
+        "bucketName": "integration-test-source",
+        "key": "code",
+        "version": "q2oWelxOGJOUUoQm8NgjCLN7IQonW8U2"
+      },
+      "platform": "Platform",
+      "status": "Succeeded"
+    }
+  }
+]

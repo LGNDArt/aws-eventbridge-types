@@ -1,0 +1,55 @@
+[
+  {
+    "version": "0",
+    "id": "fdd3b0e4-8648-2b44-3786-0a9dd78c3374",
+    "detail-type": "MediaLive Channel State Change",
+    "source": "aws.medialive",
+    "account": "123456789012",
+    "time": "1970-01-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:medialive:us-east-1:123456789012:channel:123456"
+    ],
+    "detail": {
+      "pipeline": "1",
+      "message": "Pipeline started for channel"
+    }
+  },
+  {
+    "version": "0",
+    "id": "faff4b2f-4ec9-53b6-ecd0-a53370b1c088",
+    "detail-type": "MediaLive Channel Alert",
+    "source": "aws.medialive",
+    "account": "123456789012",
+    "time": "1970-01-01T00:00:00Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:medialive:us-east-1:123456789012:channel:123456"
+    ],
+    "detail": {
+      "alert_type": "Stopped Receiving UDP Input",
+      "alarm_state": "set",
+      "message": "Stopped receiving network data on [rtp://:5000]",
+      "pipeline": "1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "01856486-db63-42f8-7dc0-e0bb1981f675",
+    "detail-type": "MediaLive Channel Input Change",
+    "source": "aws.medialive",
+    "account": "123456789012",
+    "time": "2020-10-22T18:06:49Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:medialive:us-west-2:521921469704:channel:2808370"
+    ],
+    "detail": {
+      "active_input_attachment_name": "TestSynthNoRobot",
+      "active_input_switch_action_name": "switch_to_input_1",
+      "channel_arn": "arn:aws:medialive:us-west-2:521921469704:channel:2808370",
+      "message": "Input switch event on pipeline",
+      "pipeline": "0"
+    }
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "version": "0",
+    "id": "01234567-0123-0123-0123-0123456789ab",
+    "detail-type": "MediaConnect Flow Status Change",
+    "source": "aws.mediaconnect",
+    "account": "123456789012",
+    "time": "2006-01-02T15:04:05Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:mantaray:us-east-1:012345678901:flow:1:AbCdEfGhIjKlMnOp:abcdef123455:ExampleFlow"
+    ],
+    "detail": {
+      "currentStatus": "STARTING",
+      "previousStatus": "STANDBY"
+    }
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "version": "0",
+    "id": "77579212-a04a-94b7-97a9-58abdce09593",
+    "detail-type": "FIS Experiment State Change",
+    "source": "aws.fis",
+    "account": "123456789012",
+    "time": "2021-12-09T19:20:19Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:fis:us-east-1:123456789012:experiment/EXP123abc123abc123"
+    ],
+    "detail": {
+      "experiment-id": "EXP123abc123abc123",
+      "new-state": {
+        "status": "completed",
+        "reason": "Experiment completed."
+      },
+      "old-state": {
+        "status": "running",
+        "reason": "Experiment is running."
+      }
+    }
+  }
+]

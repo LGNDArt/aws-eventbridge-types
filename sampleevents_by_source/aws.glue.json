@@ -1,0 +1,156 @@
+[
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "Glue Job State Change",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2017-09-07T18:57:21Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "INFO",
+      "state": "SUCCEEDED",
+      "jobRunId": "jr_abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+      "message": "Job run succeeded"
+    }
+  },
+  {
+    "version": "0",
+    "id": "abcdef01-1234-5678-9abc-def012345678",
+    "detail-type": "Glue Job State Change",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2017-09-07T06:02:03Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "ERROR",
+      "state": "FAILED",
+      "jobRunId": "jr_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "message": "JobName:MyJob and JobRunId:jr_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef failed to execute with exception Role arn:aws:iam::123456789012:role/Glue_Role should be given assume role permissions for Glue Service."
+    }
+  },
+  {
+    "version": "0",
+    "id": "66fbc5e1-aac3-5e85-63d0-856ec669a050",
+    "detail-type": "Glue Job Run Status",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2018-04-24T20:57:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "INFO",
+      "notificationCondition": {
+        "NotifyDelayAfter": 1
+      },
+      "state": "STARTING",
+      "jobRunId": "jr_6aa58e7a3aa44e2e4c7db2c50e2f7396cb57901729e4b702dcb2cfbbeb3f7a86",
+      "message": "Job is in STARTING state",
+      "startedOn": "2018-04-24T20:55:47.941Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "66fbc5e1-aac3-5e85-63d0-856ec669a050",
+    "detail-type": "Glue Job Run Status",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2018-04-24T20:57:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "INFO",
+      "notificationCondition": {
+        "NotifyDelayAfter": 1
+      },
+      "state": "RUNNING",
+      "jobRunId": "jr_6aa58e7a3aa44e2e4c7db2c50e2f7396cb57901729e4b702dcb2cfbbeb3f7a86",
+      "message": "Job is in RUNNING state",
+      "startedOn": "2018-04-24T20:55:47.941Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "66fbc5e1-aac3-5e85-63d0-856ec669a050",
+    "detail-type": "Glue Job Run Status",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2018-04-24T20:57:34Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "jobName": "MyJob",
+      "severity": "INFO",
+      "notificationCondition": {
+        "NotifyDelayAfter": 1
+      },
+      "state": "STOPPING",
+      "jobRunId": "jr_6aa58e7a3aa44e2e4c7db2c50e2f7396cb57901729e4b702dcb2cfbbeb3f7a86",
+      "message": "Job is in STOPPING state",
+      "startedOn": "2018-04-24T20:55:47.941Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "00000000-715f-0000-70b8-d210da0317a0",
+    "detail-type": "Glue Data Catalog Table State Change",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2019-01-16T18:16:01Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:glue:us-east-1:123456789012:table/d1/t1"
+    ],
+    "detail": {
+      "databaseName": "d1",
+      "changedPartitions": [
+        "[C.pdf, dir3]",
+        "[D.doc, dir4]"
+      ],
+      "typeOfChange": "BatchCreatePartition",
+      "tableName": "t1"
+    }
+  },
+  {
+    "version": "0",
+    "id": "05efe8a2-c309-6884-a41b-3508bcdc9695",
+    "detail-type": "Glue Crawler State Change",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2017-11-11T01:09:46Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "accountId": "123456789012",
+      "crawlerName": "S3toS3AcceptanceTestCrawlera470bd94-9e00-4518-8942-e80c8431c322",
+      "startTime": "2017-11-11T01:09:46Z",
+      "state": "Started",
+      "message": "Crawler Started"
+    }
+  },
+  {
+    "version": "0",
+    "id": "0000000-0000-5328-220a-21c060f6c3f4",
+    "detail-type": "Glue Data Catalog Database State Change",
+    "source": "aws.glue",
+    "account": "123456789012",
+    "time": "2019-01-16T18:08:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:glue:us-east-1:123456789012:table/d1/t1"
+    ],
+    "detail": {
+      "databaseName": "d1",
+      "typeOfChange": "CreateTable",
+      "changedTables": [
+        "t1"
+      ]
+    }
+  }
+]

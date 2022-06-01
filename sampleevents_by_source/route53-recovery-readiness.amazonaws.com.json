@@ -1,0 +1,65 @@
+[
+  {
+    "version": 0,
+    "account": "123456789012",
+    "region": "us-west-2",
+    "detail-type": "Route 53 Application Recovery Controller recovery group readiness status change",
+    "source": "route53-recovery-readiness.amazonaws.com",
+    "time": "2016-06-30T22:06:31Z",
+    "id": "c071bfbf-83c4-49ca-a6ff-3df053957145",
+    "resources": [
+      "arn:aws:route53-recovery-readiness::123456789012:recovery-group/BillingApp"
+    ],
+    "detail": {
+      "recovery-group-name": "BillingApp",
+      "previous-state": {
+        "readiness-status": "READY|NOT_READY|UNKNOWN|NOT_AUTHORIZED"
+      },
+      "new-state": {
+        "readiness-status": "READY|NOT_READY|UNKNOWN|NOT_AUTHORIZED"
+      }
+    }
+  },
+  {
+    "version": 0,
+    "account": "123456789012",
+    "region": "us-west-2",
+    "detail-type": "Route 53 Application Recovery Controller cell readiness status change",
+    "source": "route53-recovery-readiness.amazonaws.com",
+    "time": "2016-06-30T22:06:31Z",
+    "id": "c071bfbf-83c4-49ca-a6ff-3df053957145",
+    "resources": [
+      "arn:aws:route53-recovery-readiness::123456789012:cell/PDXCell"
+    ],
+    "detail": {
+      "cell-name": "PDXCell",
+      "previous-state": {
+        "readiness-status": "READY|NOT_READY|UNKNOWN|NOT_AUTHORIZED"
+      },
+      "new-state": {
+        "readiness-status": "READY|NOT_READY|UNKNOWN|NOT_AUTHORIZED"
+      }
+    }
+  },
+  {
+    "version": 0,
+    "account": "123456789012",
+    "region": "us-west-2",
+    "detail-type": "Route 53 Application Recovery Controller readiness check status change",
+    "source": "route53-recovery-readiness.amazonaws.com",
+    "time": "2016-06-30T22:06:31Z",
+    "id": "c071bfbf-83c4-49ca-a6ff-3df053957145",
+    "resources": [
+      "arn:aws:route53-recovery-readiness::123456789012:readiness-check/UserTableReadinessCheck"
+    ],
+    "detail": {
+      "readiness-check-name": "UserTableReadinessCheck",
+      "previous-state": {
+        "readiness-status": "READY|NOT_READY|UNKNOWN|NOT_AUTHORIZED"
+      },
+      "new-state": {
+        "readiness-status": "READY|NOT_READY|UNKNOWN|NOT_AUTHORIZED"
+      }
+    }
+  }
+]

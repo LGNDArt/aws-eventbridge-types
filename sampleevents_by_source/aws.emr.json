@@ -1,0 +1,133 @@
+[
+  {
+    "version": "0",
+    "id": "8535abb0-f87e-4640-b7b6-8de000dfc30a",
+    "detail-type": "EMR Cluster State Change",
+    "source": "aws.emr",
+    "account": "123456789012",
+    "time": "2016-12-16T21:00:23Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "severity": "INFO",
+      "stateChangeReason": "{\"code\":\"USER_REQUEST\",\"message\":\"Terminated by user request\"}",
+      "name": "Development Cluster",
+      "clusterId": "j-1YONHTCP3YZKC",
+      "state": "TERMINATED",
+      "message": "Amazon EMR Cluster j-1YONHTCP3YZKC (Development Cluster) has terminated at 2016-12-16 21:00 UTC with a reason of USER_REQUEST."
+    }
+  },
+  {
+    "version": "0",
+    "id": "6b9cccaa-eaaa-4fa0-bc40-d6ecef158a5f",
+    "detail-type": "EMR Instance Group State Change",
+    "source": "aws.emr",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "market": "ON_DEMAND",
+      "severity": "INFO",
+      "requestedInstanceCount": "2",
+      "instanceType": "m3.xlarge",
+      "instanceGroupType": "CORE",
+      "instanceGroupId": "ig-X2LBMHTGPCBU",
+      "clusterId": "j-1YONHTCP3YZKC",
+      "runningInstanceCount": "2",
+      "state": "RUNNING",
+      "message": "The resizing operation for instance group ig-X2LBMHTGPCBU in Amazon EMR cluster j-1YONHTCP3YZKC (Development Cluster) is complete. It now has an instance count of 2. The resize started at 2016-12-16 20:57 UTC and took 0 minutes to complete."
+    }
+  },
+  {
+    "version": "0",
+    "id": "6965277f-1f52-4564-9f7b-ae90b0ce2294",
+    "detail-type": "EMR Step Status Change",
+    "source": "aws.emr",
+    "account": "123456789012",
+    "time": "2016-12-16T20:53:09Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "severity": "ERROR",
+      "actionOnFailure": "CONTINUE",
+      "stepId": "s-36ZWOFMZ19IUZ",
+      "name": "CustomJAR",
+      "clusterId": "j-1YONHTCP3YZKC",
+      "state": "FAILED",
+      "message": "Step s-36ZWOFMZ19IUZ (CustomJAR) in Amazon EMR cluster j-1YONHTCP3YZKC (Development Cluster) failed at 2016-12-16 20:53 UTC."
+    }
+  },
+  {
+    "version": "0",
+    "id": "98079ff3-a968-437d-9238-c453da14350e",
+    "detail-type": "EMR Cluster State Change",
+    "source": "aws.emr",
+    "account": "123456789012",
+    "time": "2016-12-16T20:43:05Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "severity": "INFO",
+      "stateChangeReason": "{\"code\":\"\"}",
+      "name": "Development Cluster",
+      "clusterId": "j-1YONHTCP3YZKC",
+      "state": "STARTING",
+      "message": "Amazon EMR cluster j-1YONHTCP3YZKC (Development Cluster) was requested at 2016-12-16 20:42 UTC and  is being created."
+    }
+  },
+  {
+    "version": "0",
+    "id": "2f8147ab-8c48-47c6-b0b6-3ee23ec8d300",
+    "detail-type": "EMR Auto Scaling Policy State Change",
+    "source": "aws.emr",
+    "account": "123456789012",
+    "time": "2016-12-16T20:42:44Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "resourceId": "ig-X2LBMHTGPCBU",
+      "clusterId": "j-1YONHTCP3YZKC",
+      "state": "PENDING",
+      "message": "AutoScaling policy modified by user request",
+      "scalingResourceType": "INSTANCE_GROUP"
+    }
+  },
+  {
+    "version": "0",
+    "id": "6b9cccaa-eaaa-4fa0-bc40-d6ecef158a5f",
+    "detail-type": "EMR Instance Fleet State Change",
+    "source": "aws.emr",
+    "account": "123456789012",
+    "time": "2017-02-16T19:05:21Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "severity": "INFO",
+      "provisionedSpotCapacity": 32,
+      "targetSpotCapacity": 32,
+      "clusterId": "j-1OLBK5ZN7P72C",
+      "targetOnDemandCapacity": 20,
+      "state": "RUNNING",
+      "instanceFleetId": "if-40NM7EAD3JP0",
+      "provisionedOnDemandCapacity": 20,
+      "message": "The resizing operation for instance fleet if-40NM7EAD3JP0 in Amazon EMR cluster j-1OLBK5ZN7P72C (Development Cluster) is complete. The resize started at 2017-02-16 19:00 UTC and took 5 minutes. The instance fleet now has ProvisionedOnDemandCapacity of 20 and ProvisionedSpotCapacity of 32. TargetOnDemandCapacity was 20 and TargetSpotCapacity was 32.",
+      "instanceFleetType": "CORE"
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "EMR Configuration Error",
+    "source": "aws.emr",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "description": "The master node with EC2 instance ID i-1234567 is not associated with the EMR-managed security group sg-1234567 for the master instance.",
+      "clusterId": "j-123456789ABCD",
+      "severity": "ERROR"
+    }
+  }
+]

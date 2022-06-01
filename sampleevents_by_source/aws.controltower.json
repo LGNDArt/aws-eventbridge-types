@@ -1,0 +1,440 @@
+[
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "123456789012",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2019-11-16T00:09:32Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "UpdateManagedAccount",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "a3cb9a8e-4f7e-4c08-ba4d-7614ba443944",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "updateManagedAccountStatus": {
+          "organizationalUnit": {
+            "organizationalUnitName": "Custom",
+            "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+          },
+          "account": {
+            "accountName": "LifeCycle1",
+            "accountId": "123456789012"
+          },
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully created a managed account.",
+          "requestedTimestamp": "2019-11-15T11:45:18+0000",
+          "completedTimestamp": "2019-11-16T12:09:32+0000"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "123456789012",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2018-08-30T21:42:18Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "RegisterOrganizationalUnit",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "0000000-0000-0000-1111-123456789012",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "registerOrganizationalUnitStatus": {
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully created an organizational unit, and enabled mandatory guardrails on the new organizational unit.",
+          "organizationalUnit": {
+            "organizationalUnitName": "Test",
+            "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+          },
+          "requestedTimestamp": "2018-08-30T21:42:18Z",
+          "completedTimestamp": "2018-08-30T21:42:18Z"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "123456789012",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2018-08-30T21:42:18Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "DisableGuardrail",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "0000000-0000-0000-1111-123456789012",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "disableGuardrailStatus": {
+          "organizationalUnits": [
+            {
+              "organizationalUnitName": "Custom",
+              "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+            }
+          ],
+          "guardrails": [
+            {
+              "guardrailId": "AWS-GR_RDS_INSTANCE_PUBLIC_ACCESS_CHECK",
+              "guardrailBehavior": "DETECTIVE"
+            }
+          ],
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully enabled a guardrail on an organizational unit.",
+          "requestTimestamp": "2019-11-12T09:01:07+0000",
+          "completedTimestamp": "2019-11-12T09:01:54+0000"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "123456789012",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2018-08-30T21:42:18Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "DeregisterOrganizationalUnit",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "0000000-0000-0000-1111-123456789012",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "deregisterOrganizationalUnitStatus": {
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully deregistered an organizational unit, and enabled mandatory guardrails on the new organizational unit.",
+          "organizationalUnit": {
+            "organizationalUnitName": "Test",
+            "organizationalUnitId": "ou-*"
+          },
+          "requestedTimestamp": "2018-08-30T21:42:18Z",
+          "completedTimestamp": "2018-08-30T21:42:18Z"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "111122223333",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2019-11-22T06:56:57Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "EnableGuardrail",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "a0200dea-8bc3-4807-91c7-90754854512b",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "enableGuardrailStatus": {
+          "organizationalUnits": [
+            {
+              "organizationalUnitName": "Custom",
+              "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+            }
+          ],
+          "guardrails": [
+            {
+              "guardrailId": "AWS-GR_IAM_USER_MFA_ENABLED",
+              "guardrailBehavior": "DETECTIVE"
+            }
+          ],
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully enabled a guardrail on an organizational unit.",
+          "completedTimestamp": "2019-11-22T06:56:57+0000"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "123456789012",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2019-11-16T00:09:32Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "CreateManagedAccount",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "a3cb9a8e-4f7e-4c08-ba4d-7614ba443944",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "createManagedAccountStatus": {
+          "organizationalUnit": {
+            "organizationalUnitName": "Custom",
+            "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+          },
+          "account": {
+            "accountName": "LifeCycle1",
+            "accountId": "123456789012"
+          },
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully created a managed account.",
+          "requestedTimestamp": "2019-11-15T11:45:18+0000",
+          "completedTimestamp": "2019-11-16T12:09:32+0000"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "111122223333",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2019-11-21T20:03:04Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "SetupLandingZone",
+      "awsRegion": "us-west-2",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "ee0c80db-58d7-42c4-a832-7d587fa6ced0",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "setupLandingZoneStatus": {
+          "rootOrganizationalUnitId": "r-abcd",
+          "organizationalUnits": [
+            {
+              "organizationalUnitName": "Core",
+              "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+            },
+            {
+              "organizationalUnitName": "Custom",
+              "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+            }
+          ],
+          "accounts": [
+            {
+              "accountName": "Log archive",
+              "accountId": "123456789012"
+            },
+            {
+              "accountName": "Audit",
+              "accountId": "298704645831"
+            },
+            {
+              "accountName": "Master",
+              "accountId": "111122223333"
+            }
+          ],
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully set up a new landing zone.",
+          "requestedTimestamp": "2019-11-21T07:26:32+0000",
+          "completedTimestamp": "2019-11-21T08:03:04+0000"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "123456789012",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2019-11-16T00:09:32Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "UpdateManagedAccount",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "a3cb9a8e-4f7e-4c08-ba4d-7614ba443944",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "111122223333",
+      "serviceEventDetails": {
+        "updateManagedAccountStatus": {
+          "organizationalUnit": {
+            "organizationalUnitName": "Custom",
+            "organizationalUnitId": "ou-0a1b-2c3d4e5f"
+          },
+          "account": {
+            "accountName": "LifeCycle1",
+            "accountId": "123456789012"
+          },
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully updated a managed account.",
+          "requestedTimestamp": "2019-11-15T11:45:18+0000",
+          "completedTimestamp": "2019-11-16T12:09:32+0000"
+        }
+      }
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "AWS Service Event via CloudTrail",
+    "source": "aws.controltower",
+    "account": "123456789012",
+    "time": "2018-08-30T21:42:18Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "eventVersion": "1.05",
+      "userIdentity": {
+        "accountId": "123456789012",
+        "invokedBy": "AWS Internal"
+      },
+      "eventTime": "2019-11-21T20:03:04Z",
+      "eventSource": "controltower.amazonaws.com",
+      "eventName": "UpdateLandingZone",
+      "awsRegion": "us-west-2",
+      "sourceIPAddress": "AWS Internal",
+      "userAgent": "AWS Internal",
+      "requestParameters": null,
+      "responseElements": null,
+      "eventID": "ee0c80db-58d7-42c4-a832-7d587fa6ced0",
+      "readOnly": false,
+      "eventType": "AwsServiceEvent",
+      "recipientAccountId": "123456789012",
+      "serviceEventDetails": {
+        "updateLandingZoneStatus": {
+          "rootOrganizationalUnitId": "r-vwxy",
+          "organizationalUnits": [
+            {
+              "organizationalUnitName": "Core",
+              "organizationalUnitId": "ou-vwxy-rlcb98lu"
+            },
+            {
+              "organizationalUnitName": "Custom",
+              "organizationalUnitId": "ou-vwxy-18vy4yro"
+            }
+          ],
+          "accounts": [
+            {
+              "accountName": "Log archive",
+              "accountId": "111122223333"
+            },
+            {
+              "accountName": "Audit",
+              "accountId": "111122223333"
+            },
+            {
+              "accountName": "Master",
+              "accountId": "123456789012"
+            }
+          ],
+          "state": "SUCCEEDED",
+          "message": "AWS Control Tower successfully updated your landing zone.",
+          "requestedTimestamp": "2019-11-21T07:26:32+0000",
+          "completedTimestamp": "2019-11-21T08:03:04+0000"
+        }
+      }
+    }
+  }
+]

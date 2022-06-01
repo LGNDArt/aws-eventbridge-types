@@ -1,0 +1,144 @@
+[
+  {
+    "version": "0",
+    "id": "efb7474e-473e-dfb6-c5fb-6476e2a875f3",
+    "detail-type": "Inspector2 Finding",
+    "source": "aws.inspector2",
+    "account": "123456789012",
+    "time": "2022-04-01T16:38:07Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ecr:us-east-1:123456789012:repository/my-repo",
+      "i-12345678"
+    ],
+    "detail": {
+      "awsAccountId": "123456789012",
+      "description": "Multiple integer overflows in libwebp allows attackers to have unspecified impact via unknown vectors.",
+      "findingArn": "arn:aws:inspector2:us-east-1:123456789012:finding/FINDING_ID",
+      "firstObservedAt": "Apr 1, 2022, 4:38:07 PM",
+      "inspectorScore": 7.8,
+      "inspectorScoreDetails": {
+        "adjustedCvss": {
+          "adjustments": [],
+          "cvssSource": "REDHAT_CVE",
+          "score": 7.8,
+          "scoreSource": "REDHAT_CVE",
+          "scoringVector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "version": "3.1"
+        }
+      },
+      "lastObservedAt": "Apr 1, 2022, 4:38:07 PM",
+      "packageVulnerabilityDetails": {
+        "cvss": [
+          {
+            "baseScore": 7.8,
+            "scoringVector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+            "source": "REDHAT_CVE",
+            "version": "3.1"
+          },
+          {
+            "baseScore": 4.6,
+            "scoringVector": "AV:L/AC:L/Au:N/C:P/I:P/A:P",
+            "source": "NVD",
+            "version": "2.0"
+          }
+        ],
+        "referenceUrls": [],
+        "source": "REDHAT_CVE",
+        "sourceUrl": "https://access.redhat.com/security/cve/CVE-2018-25020",
+        "vendorCreatedAt": "May 17, 2018, 12:00:00 AM",
+        "vendorSeverity": "Moderate",
+        "vulnerabilityId": "CVE-2018-25020",
+        "vulnerablePackages": [
+          {
+            "arch": "X86_64",
+            "epoch": 0,
+            "name": "kernel",
+            "packageManager": "OS",
+            "release": "200.489.amzn2",
+            "version": "4.14.262"
+          }
+        ]
+      },
+      "remediation": {
+        "recommendation": {
+          "text": "The default Red Hat Enterprise Linux kernel prevents unprivileged users from being able to use eBPF by the kernel.unprivileged_bpf_disabled sysctl. This would require a privileged user with CAP_SYS_ADMIN or root to be able to abuse this flaw reducing its attack space.\n\nFor the Red Hat Enterprise Linux 7 the eBPF for unprivileged users is always disabled.\nFor the Red Hat Enterprise Linux 8 to confirm the current state, inspect the sysctl with the command:\n\n# cat /proc/sys/kernel/unprivileged_bpf_disabled\n\nThe setting of 1 would mean that unprivileged users can not use eBPF, mitigating the flaw."
+        }
+      },
+      "resources": [
+        {
+          "details": {
+            "awsEc2Instance": {
+              "iamInstanceProfileArn": "arn:aws:iam::123456789012:my-profile/my-role",
+              "imageId": "ami-033eb06b56512a90f",
+              "ipV4Addresses": [
+                "3.84.189.204",
+                "172.31.89.59"
+              ],
+              "ipV6Addresses": [],
+              "launchedAt": "Apr 1, 2022, 4:36:48 PM",
+              "platform": "AMAZON_LINUX_2",
+              "subnetId": "subnet-7aceba5b",
+              "type": "c4.large",
+              "vpcId": "vpc-56eb6e2b"
+            }
+          },
+          "id": "i-07543563af836b6a8",
+          "partition": "aws",
+          "region": "us-east-1",
+          "type": "AWS_EC2_INSTANCE"
+        }
+      ],
+      "severity": "HIGH",
+      "status": "ACTIVE",
+      "title": "CVE-2018-25020 - kernel",
+      "type": "PACKAGE_VULNERABILITY",
+      "updatedAt": "Apr 1, 2022, 4:38:07 PM"
+    }
+  },
+  {
+    "version": "0",
+    "id": "9be9ee09-a3b4-5cf0-8011-fe09380beff1",
+    "detail-type": "Inspector2 Coverage",
+    "source": "aws.inspector2",
+    "account": "123456789012",
+    "time": "2022-03-31T22:05:32Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ecr:us-east-1:123456789012:repository/my-repo"
+    ],
+    "detail": {
+      "scanStatus": {
+        "reason": "SUCCESSFUL",
+        "statusCodeValue": "ACTIVE"
+      },
+      "eventTimestamp": "2022-03-31T22:05:17.218735Z"
+    }
+  },
+  {
+    "version": "0",
+    "id": "c78c64fb-7c0c-0e1a-002a-51c903b467b3",
+    "detail-type": "Inspector2 Scan",
+    "source": "aws.inspector2",
+    "account": "123456789012",
+    "time": "2022-03-31T22:05:52Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ecr:us-east-1:123456789012:repository/my-repo"
+    ],
+    "detail": {
+      "scan-status": "INITIAL_SCAN_COMPLETE",
+      "repository-name": "arn:aws:ecr:us-east-1:123456789012:repository/my-repo",
+      "finding-severity-counts": {
+        "CRITICAL": 15,
+        "HIGH": 145,
+        "MEDIUM": 209,
+        "TOTAL": 395
+      },
+      "image-digest": "sha256:85f3d45bdeb11ea8766cedafeecc0c0df17916019ce89fd43538cce88b9445a1",
+      "image-tags": [
+        "my-image"
+      ]
+    }
+  }
+]

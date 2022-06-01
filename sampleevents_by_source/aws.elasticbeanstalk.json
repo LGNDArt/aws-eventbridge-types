@@ -1,0 +1,42 @@
+[
+  {
+    "version": "0",
+    "id": "4b8d8076-405b-d9cc-c3f6-60fd7f715e56",
+    "detail-type": "Elastic Beanstalk resource status change",
+    "source": "aws.elasticbeanstalk",
+    "account": "123456789012",
+    "time": "2020-11-03T00:31:54Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:elasticbeanstalk:us-east-1:123456789012:environment/myApplication/myEnvironment"
+    ],
+    "detail": {
+      "Status": "Environment creation started",
+      "EventDate": 1604363513951,
+      "ApplicationName": "myApplication",
+      "Message": "createEnvironment is starting.",
+      "EnvironmentName": "myEnvironment",
+      "Severity": "INFO"
+    }
+  },
+  {
+    "version": "0",
+    "id": "1234a678-1b23-c123-12fd3f456e78",
+    "detail-type": "Health status change",
+    "source": "aws.elasticbeanstalk",
+    "account": "123456789012",
+    "time": "2020-11-03T00:34:48Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:was:elasticbeanstalk:us-east-1:123456789012:environment/myApplication/myEnvironment"
+    ],
+    "detail": {
+      "Status": "Environment health changed",
+      "EventDate": 1604363687870,
+      "ApplicationName": "myApplication",
+      "Message": "Environment health has transitioned from Pending to Ok. Initialization completed 1 second ago and took 2 minutes.",
+      "EnvironmentName": "myEnvironment",
+      "Severity": "INFO"
+    }
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "version": "0",
+    "id": "abcdef00-1234-5678-9abc-def012345678",
+    "detail-type": "Athena Query State Change",
+    "source": "aws.athena",
+    "account": "123456789012",
+    "time": "2019-10-06T09:30:10Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "versionId": "0",
+      "currentState": "SUCCEEDED",
+      "previousState": "RUNNING",
+      "statementType": "DDL",
+      "queryExecutionId": "01234567-0123-0123-0123-012345678901",
+      "workgroupName": "primary",
+      "sequenceNumber": "3"
+    }
+  }
+]

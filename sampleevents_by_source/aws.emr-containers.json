@@ -1,0 +1,25 @@
+[
+  {
+    "version": "0",
+    "id": "8535abb0-f87e-4640-b7b6-8de000dfc30a",
+    "detail-type": "EMR Job Run State Change",
+    "source": "aws.emr-containers",
+    "account": "123456789012",
+    "time": "2021-02-01T00:05:00Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "severity": "INFO",
+      "jobRunName": "myJobRunName",
+      "jobRunId": "myJobRunId",
+      "virtualClusterId": "myVirtualClusterId",
+      "state": "COMPLETED",
+      "createdBy": "username",
+      "releaseLabel": "emr-5.30.0",
+      "executionRoleArn": "exeRoleArn",
+      "failureReason": "CLUSTER_UNAVAILABLE",
+      "stateDetails": "My details",
+      "message": "Job Run myJobRunId (myJobRunName) in virtual cluster myVirtualClusterId completed at 2021-02-01 00:05 UTC. The Job Run started running at 2021-02-01 00:00 UTC and took 5 minutes to complete."
+    }
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "version": "0",
+    "id": "73f03fec-a137-971e-6ac6-07c8ffffffff",
+    "detail-type": "CodeArtifact Package Version State Change",
+    "source": "aws.codeartifact",
+    "account": "123456789012",
+    "time": "2019-11-21T23:19:54Z",
+    "region": "us-west-2",
+    "resources": [
+      "arn:aws:codeartifact:us-west-2:123456789012:package/my-domain/myrepo/npm//mypackage"
+    ],
+    "detail": {
+      "domainName": "my-domain",
+      "domainOwner": "123456789012",
+      "repositoryName": "myrepo",
+      "packageFormat": "npm",
+      "packageNamespace": null,
+      "packageName": "mypackage",
+      "packageVersion": "1.0.0",
+      "packageVersionState": "Published",
+      "packageVersionRevision": "0E5DE26A4CD79FDF3EBC4924FFFFFFFF",
+      "changes": {
+        "assetsAdded": 1,
+        "assetsRemoved": 0,
+        "metadataUpdated": true,
+        "assetsUpdated": 0,
+        "statusChanged": true
+      },
+      "operationType": "Created",
+      "sequenceNumber": 1,
+      "eventDeduplicationId": "2mEO0A2Ke07rWUTBXk3CAiQhdTXF4N94LNaT/ffffff="
+    }
+  }
+]

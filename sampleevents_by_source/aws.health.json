@@ -1,0 +1,128 @@
+[
+  {
+    "version": "0",
+    "id": "7bf73129-1428-4cd3-a780-95db273d1602",
+    "detail-type": "AWS Health Event",
+    "source": "aws.health",
+    "account": "123456789012",
+    "time": "2016-06-05T06:27:57Z",
+    "region": "ap-southeast-2",
+    "resources": [],
+    "detail": {
+      "eventArn": "arn:aws:health:ap-southeast-2::event/AWS_ELASTICLOADBALANCING_API_ISSUE_90353408594353980",
+      "service": "ELASTICLOADBALANCING",
+      "eventTypeCode": "AWS_ELASTICLOADBALANCING_API_ISSUE",
+      "eventTypeCategory": "issue",
+      "startTime": "Sat, 04 Jun 2016 05:01:10 GMT",
+      "endTime": "Sat, 04 Jun 2016 05:30:57 GMT",
+      "eventDescription": [
+        {
+          "language": "en_US",
+          "latestDescription": "A description of the event will be provided here"
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "7bf73129-1428-4cd3-a780-95db273d1602",
+    "detail-type": "AWS Health Event",
+    "source": "aws.health",
+    "account": "123456789012",
+    "time": "2016-06-05T06:27:57Z",
+    "region": "us-west-2",
+    "resources": [
+      "i-abcd1111"
+    ],
+    "detail": {
+      "eventArn": "arn:aws:health:us-west-2::event/AWS_EC2_INSTANCE_STORE_DRIVE_PERFORMANCE_DEGRADED_90353408594353980",
+      "service": "EC2",
+      "eventTypeCode": "AWS_EC2_INSTANCE_STORE_DRIVE_PERFORMANCE_DEGRADED",
+      "eventTypeCategory": "issue",
+      "startTime": "Sat, 05 Jun 2016 15:10:09 GMT",
+      "eventDescription": [
+        {
+          "language": "en_US",
+          "latestDescription": "A description of the event will be provided here"
+        }
+      ],
+      "affectedEntities": [
+        {
+          "entityValue": "i-abcd1111",
+          "tags": {
+            "stage": "prod",
+            "app": "my-app"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "7bf73129-1428-4cd3-a780-95db273d1602",
+    "detail-type": "AWS Health Abuse Event",
+    "source": "aws.health",
+    "account": "123456789012",
+    "time": "2018-08-01T06:27:57Z",
+    "region": "global",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd1111",
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd2222"
+    ],
+    "detail": {
+      "eventArn": "arn:aws:health:global::event/AWS_ABUSE_DOS_REPORT_92387492375_4498_2018_08_01_02_33_00",
+      "service": "ABUSE",
+      "eventTypeCode": "AWS_ABUSE_DOS_REPORT",
+      "eventTypeCategory": "issue",
+      "startTime": "Wed, 01 Aug 2018 06:27:57 GMT",
+      "eventDescription": [
+        {
+          "language": "en_US",
+          "latestDescription": "A description of the event will be provided here"
+        }
+      ],
+      "affectedEntities": [
+        {
+          "entityValue": "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd1111"
+        },
+        {
+          "entityValue": "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd2222"
+        }
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "7bf73129-1428-4cd3-a780-95db273d1602",
+    "detail-type": "AWS Health Abuse Event",
+    "source": "aws.health",
+    "account": "123456789012",
+    "time": "2018-08-02T05:30:00Z",
+    "region": "global",
+    "resources": [
+      "arn:aws:cloudfront::123456789012:distribution/DSF867DUMMY87SDF",
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd2222"
+    ],
+    "detail": {
+      "eventArn": "arn:aws:health:global::event/AWS_ABUSE_COPYRIGHT_DMCA_REPORT_2345235545_5323_2018_08_02_02_12_98",
+      "service": "ABUSE",
+      "eventTypeCode": "AWS_ABUSE_COPYRIGHT_DMCA_REPORT",
+      "eventTypeCategory": "issue",
+      "startTime": "Thu, 02 Aug 2018 05:30:00 GMT",
+      "eventDescription": [
+        {
+          "language": "en_US",
+          "latestDescription": "A description of the event will be provided here"
+        }
+      ],
+      "affectedEntities": [
+        {
+          "entityValue": "arn:aws:cloudfront::123456789012:distribution/DSF867DUMMY87SDF"
+        },
+        {
+          "entityValue": "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd2222"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,94 @@
+[
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail-type": "Application Insights Problem Detected",
+    "source": "aws.applicationinsights",
+    "time": "2016-06-30T22:06:31Z",
+    "id": "c071bfbf-83c4-49ca-a6ff-3df053957145",
+    "resources": [
+      "arn:aws:resource-groups:us-west-2:123456789012:group/MyExampleGroup",
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd1111"
+    ],
+    "detail": {
+      "problemId": "fndId",
+      "region": "us-east-1",
+      "resourceGroupName": "RG1",
+      "severity": "Low",
+      "status": "PENDING",
+      "problemUrl": "https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#home:AppInsights/fndId",
+      "opsItemArn": "arn:aws:sns:us-east-1:123456789012:mytopic",
+      "startTime": 1646282033864,
+      "updatedObservations": [
+        {
+          "id": "eve-1",
+          "startTime": 1646282033864,
+          "endTime": 1646302033864,
+          "observationType": "CLOUD_WATCH_EVENT"
+        },
+        {
+          "id": "eve-2",
+          "startTime": 1646282033864,
+          "endTime": 1646302033864,
+          "observationType": "CLOUD_WATCH_EVENT"
+        }
+      ],
+      "lastUpdatedTime": 1646292033864,
+      "recurringCount": 1,
+      "lastRecurrenceTime": 1646292033864,
+      "affectedResource": "resource1",
+      "insights": [
+        "insights"
+      ],
+      "ruleName": "ruleName1",
+      "endTime": 1646302033864
+    }
+  },
+  {
+    "version": "0",
+    "account": "123456789012",
+    "region": "us-east-1",
+    "detail-type": "Application Insights Problem Update",
+    "source": "aws.applicationinsights",
+    "time": "2016-06-30T22:06:31Z",
+    "id": "c071bfbf-83c4-49ca-a6ff-3df053957145",
+    "resources": [
+      "arn:aws:resource-groups:us-west-2:123456789012:group/MyExampleGroup",
+      "arn:aws:ec2:us-east-1:123456789012:instance/i-abcd1111"
+    ],
+    "detail": {
+      "problemId": "fndId",
+      "region": "us-east-1",
+      "resourceGroupName": "RG1",
+      "severity": "Low",
+      "status": "PENDING",
+      "problemUrl": "https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#home:AppInsights/fndId",
+      "opsItemArn": "arn:aws:sns:us-east-1:123456789012:mytopic",
+      "startTime": 1646282033864,
+      "updatedObservations": [
+        {
+          "id": "eve-1",
+          "startTime": 1646282033864,
+          "endTime": 1646302033864,
+          "observationType": "CLOUD_WATCH_EVENT"
+        },
+        {
+          "id": "eve-2",
+          "startTime": 1646282033864,
+          "endTime": 1646302033864,
+          "observationType": "CLOUD_WATCH_EVENT"
+        }
+      ],
+      "lastUpdatedTime": 1646292033864,
+      "recurringCount": 1,
+      "lastRecurrenceTime": 1646292033864,
+      "affectedResource": "resource1",
+      "insights": [
+        "insights"
+      ],
+      "ruleName": "ruleName1",
+      "endTime": 1646302033864
+    }
+  }
+]

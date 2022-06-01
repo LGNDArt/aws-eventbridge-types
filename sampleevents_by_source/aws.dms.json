@@ -1,0 +1,42 @@
+[
+  {
+    "version": "0",
+    "id": "2a139ac1-3ee4-d778-fc1f-3a4e75050d1d",
+    "detail-type": "DMS Replication Instance State Change",
+    "source": "aws.dms",
+    "account": "123456789012",
+    "time": "2021-10-13T15:51:00Z",
+    "region": "ca-central-1",
+    "resources": [
+      "arn:aws:dms:ca-central-1:123456789012:rep:ASU5AA6GXQMIZKUSVO3CJP6UW5IHRKHWGROC2EY"
+    ],
+    "detail": {
+      "eventId": "DMS-EVENT-0067",
+      "eventType": "CREATING_REPLICATION_INSTANCE",
+      "resourceLink": "https://console.aws.amazon.com/dms/v2/home?region=ca-central-1#replicationInstanceDetails/dms-canary-test-ywsssoepbxnclhweblarfnrwudizd",
+      "detailMessage": "A replication instance is being created.",
+      "type": "REPLICATION_INSTANCE",
+      "category": "Creation"
+    }
+  },
+  {
+    "version": "0",
+    "id": "21f7a222-fd25-8b10-c0c4-56cf6e515327",
+    "detail-type": "DMS Replication Instance State Change",
+    "source": "aws.dms",
+    "account": "123456789012",
+    "time": "2021-10-14T06:56:26Z",
+    "region": "ca-central-1",
+    "resources": [
+      "arn:aws:dms:ca-central-1:123456789012:rep:CHDPPMD65RYGDEWN7DZB4DUNMEYGSVEAPW6VPFY"
+    ],
+    "detail": {
+      "eventId": "DMS-EVENT-0066",
+      "eventType": "DELETING_REPLICATION_INSTANCE",
+      "resourceLink": "https://console.aws.amazon.com/dms/v2/home?region=ca-central-1#replicationInstanceDetails/dms-canary-test-qniclidxtnxxhlqk",
+      "detailMessage": "The replication instance is being deleted.",
+      "type": "REPLICATION_INSTANCE",
+      "category": "Deletion"
+    }
+  }
+]

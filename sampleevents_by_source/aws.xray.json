@@ -1,0 +1,73 @@
+[
+  {
+    "version": "0",
+    "account": "123456789012",
+    "resources": [],
+    "region": "us-east-1",
+    "time": "2016-06-30T22:06:31Z",
+    "id": "c071bfbf-83c4-49ca-a6ff-3df053957145",
+    "source": "aws.xray",
+    "detail-type": "AWS X-Ray Insight Update",
+    "detail": {
+      "InsightId": "54e9c483-c7cb-4fdf-b33c-f8e7362da364",
+      "Summary": "summary",
+      "GroupName": "test-group",
+      "RootCauseServiceId": {
+        "Type": "AWS::DynamoDB::Table",
+        "Name": "orders",
+        "Names": [],
+        "AccountId": ""
+      },
+      "Categories": [
+        "FAULT"
+      ],
+      "State": "ACTIVE",
+      "StartTime": 1568821950,
+      "EndTime": null,
+      "ClientRequestImpactStatistics": {
+        "FaultCount": 1,
+        "OkCount": 4,
+        "TotalCount": 10
+      },
+      "RootCauseServiceRequestImpactStatistics": {
+        "FaultCount": 2,
+        "OkCount": 4,
+        "TotalCount": 10
+      },
+      "TopAnomalousServices": [
+        {
+          "ServiceId": {
+            "Type": "AWS::EC2::Instance",
+            "Name": "control-plane",
+            "Names": [],
+            "AccountId": ""
+          }
+        }
+      ],
+      "Event": {
+        "Summary": "insight-event summary",
+        "EventTime": "",
+        "ClientRequestImpactStatistics": {
+          "FaultCount": 1,
+          "OkCount": 4,
+          "TotalCount": 10
+        },
+        "RootCauseServiceRequestImpactStatistics": {
+          "FaultCount": 1,
+          "OkCount": 4,
+          "TotalCount": 10
+        },
+        "TopAnomalousServices": [
+          {
+            "ServiceId": {
+              "Type": "AWS::EC2::Instance",
+              "Name": "control-plane",
+              "Names": [],
+              "AccountId": ""
+            }
+          }
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,148 @@
+[
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "Transcribe Job State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "TranscriptionJobStatus": [
+        "COMPLETED"
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "Transcribe Job State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "TranscriptionJobStatus": [
+        "FAILED"
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "999cccaa-eaaa-0000-1111-123456789012",
+    "detail-type": "Transcribe Job State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "TranscriptionJobStatus": [
+        "IN_PROGRESS"
+      ]
+    }
+  },
+  {
+    "version": "0",
+    "id": "event ID",
+    "detail-type": "Language Identification State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2020-07-23T21:29:54Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "JobType": "TranscriptionJob",
+      "JobName": "Job 1593193754",
+      "LanguageIdentificationStatus": "COMPLETED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "event ID",
+    "detail-type": "Language Identification State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2020-07-23T21:29:54Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "JobType": "TranscriptionJob",
+      "JobName": "Job 1593193754",
+      "LanguageIdentificationStatus": "FAILED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "event ID",
+    "detail-type": "Call Analytics Job State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "JobName": "Job 1593193754",
+      "JobStatus": "COMPLETED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "event ID",
+    "detail-type": "Call Analytics Job State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "JobName": "Job 1593193754",
+      "JobStatus": "FAILED"
+    }
+  },
+  {
+    "version": "0",
+    "id": "event ID",
+    "detail-type": "Call Analytics Job State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "JobName": "Job 1593193754",
+      "JobStatus": "IN_PROGRESS"
+    }
+  },
+  {
+    "version": "0",
+    "id": "event ID",
+    "detail-type": "Vocabulary State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "VocabularyName": "Vocabulary 1593193754",
+      "VocabularyState": "READY"
+    }
+  },
+  {
+    "version": "0",
+    "id": "event ID",
+    "detail-type": "Vocabulary State Change",
+    "source": "aws.transcribe",
+    "account": "123456789012",
+    "time": "2016-12-16T20:57:47Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+      "VocabularyName": "Vocabulary 1593193754",
+      "VocabularyState": "FAILED",
+      "FailureReason": "failed reason"
+    }
+  }
+]

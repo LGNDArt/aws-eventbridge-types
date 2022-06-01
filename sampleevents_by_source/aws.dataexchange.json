@@ -1,0 +1,19 @@
+[
+  {
+    "version": "0",
+    "id": "2faa74d4-2ff0-aec5-972e-d2a5be7f6c99",
+    "detail-type": "Revision Published To Data Set",
+    "source": "aws.dataexchange",
+    "account": "123456789012",
+    "time": "2020-01-27T18:47:06Z",
+    "region": "us-east-1",
+    "resources": [
+      "aae4c2cd145a48454f9369d4a4db5c66"
+    ],
+    "detail": {
+      "RevisionIds": [
+        "532d2f8a1248c61baf3784c2740cc338"
+      ]
+    }
+  }
+]

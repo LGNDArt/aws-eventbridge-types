@@ -1,0 +1,136 @@
+[
+  {
+    "version": "0",
+    "id": "844e2571-85d1-695f-b930-0153b71dcb42",
+    "detail-type": "AppFlow Start Flow Run Report",
+    "source": "aws.appflow",
+    "account": "123456789012",
+    "time": "2020-08-30T12:26:13Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "flow-name": "<Name of the Flow>",
+      "created-by": "<User who created the flow >",
+      "flow-arn": "<ARN of the flow>",
+      "source": "<Source Connector>/<Connector-Profile>",
+      "destination": "<Destination Connector>/<Connector-Profile>",
+      "source-object": "<Name of the source object>",
+      "destination-object": "<Name of the destination object>",
+      "trigger-type": "<OnDemand | Event | Scheduled>",
+      "incremental-transfer-time-range": {
+        "schedule-start-time": "<start time stamps for incremental scheduled pull>",
+        "schedule-end-time": "<end time stamps for incremental scheduled pull>"
+      },
+      "start-time": "<Start time stamp of the flow run >"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d1-695f-b930-0153b71dcb42",
+    "detail-type": "AppFlow End Flow Run Report",
+    "source": "aws.appflow",
+    "account": "123456789012",
+    "time": "2020-08-30T12:26:13Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "flow-name": "<Name of the Flow>",
+      "created-by": "<User who created the flow >",
+      "flow-arn": "<ARN of the flow>",
+      "start-time": "<Start time stamp of the flow run >",
+      "end-time": "<Time stamp of the completion of the flow run>",
+      "source": "<Source Connector>/<Connector-Profile>",
+      "destination": "<Destination Connector>/<Connector-Profile>",
+      "source-object": "<Name of the source object>",
+      "destination-object": "<Name of the destination object>",
+      "trigger-type": "<OnDemand | Event | Scheduled>",
+      "incremental-transfer-time-range": {
+        "schedule-start-time": "<start time stamps for incremental scheduled pull>",
+        "schedule-end-time": "<end time stamps for incremental scheduled pull>"
+      },
+      "status": "<Status of the flow run: Success or failure>",
+      "error": "<Error message if the flow run failed.>",
+      "num-of-records-processed": "<Count of records processed>",
+      "num-of-records-filtered": " <Count of records filtered>",
+      "num-of-record-failures": "<Count of records failed during processing>",
+      "data-processed": "<Total volume in KB of data processed in the flow run>"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d1-695f-b930-0153b71dcb42",
+    "detail-type": "AppFlow Scheduled Flow Deactivated",
+    "source": "aws.appflow",
+    "account": "123456789012",
+    "time": "2020-08-30T12:26:13Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "flow-name": "<Name of the Flow>",
+      "created-by": "<User who created the flow >",
+      "flow-arn": "<ARN of the flow>",
+      "source": "<Source Connector>/<Connector-Profile>",
+      "destination": "<Destination Connector>/<Connector-Profile>",
+      "source-object": "<Name of the source object>",
+      "destination-object": "<Name of the destination object>",
+      "trigger-type": "<OnDemand | Event | Scheduled>",
+      "incremental-transfer-time-range": {
+        "schedule-start-time": "<start time stamps for incremental scheduled pull>",
+        "schedule-end-time": "<end time stamps for incremental scheduled pull>"
+      },
+      "deactivated-time": "<Start time stamp of the flow run >",
+      "reason": "<Reason for deactivation>"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d1-695f-b930-0153b71dcb42",
+    "detail-type": "AppFlow Event Flow Deactivated",
+    "source": "aws.appflow",
+    "account": "123456789012",
+    "time": "2020-08-30T12:26:13Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "flow-name": "<Name of the Flow>",
+      "created-by": "<User who created the flow >",
+      "flow-arn": "<ARN of the flow>",
+      "source": "<Source Connector>/<Connector-Profile>",
+      "destination": "<Destination Connector>/<Connector-Profile>",
+      "source-object": "<Name of the source object>",
+      "destination-object": "<Name of the destination object>",
+      "trigger-type": "<OnDemand | Event | Scheduled>",
+      "incremental-transfer-time-range": {
+        "schedule-start-time": "<start time stamps for incremental scheduled pull>",
+        "schedule-end-time": "<end time stamps for incremental scheduled pull>"
+      },
+      "deactivated-time": "<Start time stamp of the flow run >",
+      "reason": "<Reason for deactivation>"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d1-695f-b930-0153b71dcb42",
+    "detail-type": "AppFlow Event Flow Report",
+    "source": "aws.appflow",
+    "account": "123456789012",
+    "time": "2020-08-30T12:26:13Z",
+    "region": "us-west-2",
+    "resources": [],
+    "detail": {
+      "flow-name": "<Name of the Flow>",
+      "created-by": "<User who created the flow >",
+      "flow-arn": "<ARN of the flow>",
+      "source": "<Source Connector>/<Connector-Profile>",
+      "destination": "<Destination Connector>/<Connector-Profile>",
+      "source-object": "<Name of the source object>",
+      "destination-object": "<Name of the destination object>",
+      "trigger-type": "<OnDemand | Event | Scheduled>",
+      "incremental-transfer-time-range": {
+        "schedule-start-time": "<start time stamps for incremental scheduled pull>",
+        "schedule-end-time": "<end time stamps for incremental scheduled pull>"
+      },
+      "status-report": "<Count of events processed> from <Batch start time> to <Batch end time>"
+    }
+  }
+]

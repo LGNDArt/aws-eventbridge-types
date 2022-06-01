@@ -1,0 +1,83 @@
+[
+  {
+    "version": "0",
+    "id": "d1af1091-6cc3-2e24-203a-3b870e455d5b",
+    "detail-type": "EC2 Spot Fleet State Change",
+    "source": "aws.ec2spotfleet",
+    "account": "123456789012",
+    "time": "2020-11-09T08:57:06Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:spot-fleet-request/sfr-4b6d274d-0cea-4b2c-b3be-9dc627ad1f55"
+    ],
+    "detail": {
+      "sub-type": "submitted"
+    }
+  },
+  {
+    "version": "0",
+    "id": "11591686-5bd7-bbaa-eb40-d46529c2710f",
+    "detail-type": "EC2 Spot Fleet Instance Change",
+    "source": "aws.ec2spotfleet",
+    "account": "123456789012",
+    "time": "2020-11-09T07:25:02Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:spot-fleet-request/sfr-c8a764a4-bedc-4b62-af9c-0095e6e3ba61"
+    ],
+    "detail": {
+      "instance-id": "i-08b90df1e09c30c9b",
+      "description": "{\"instanceType\":\"r4.2xlarge\",\"image\":\"ami-032930428bf1abbff\",\"productDescription\":\"Linux/UNIX\",\"availabilityZone\":\"us-east-1a\"}",
+      "sub-type": "launched"
+    }
+  },
+  {
+    "version": "0",
+    "id": "cd141ef0-14af-d670-a71d-fe46e9971bd2",
+    "detail-type": "EC2 Spot Fleet Spot Instance Request Change",
+    "source": "aws.ec2spotfleet",
+    "account": "123456789012",
+    "time": "2020-11-09T08:53:21Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:spot-fleet-request/sfr-a98d2133-941a-47dc-8b03-0f94c6852ad1"
+    ],
+    "detail": {
+      "spot-instance-request-id": "sir-a2w9gc5h",
+      "description": "SpotInstanceRequestId sir-a2w9gc5h, PreviousState: cancelled_running",
+      "sub-type": "cancelled"
+    }
+  },
+  {
+    "version": "0",
+    "id": "73a60f70-3409-a66c-635c-7f66c5f5b669",
+    "detail-type": "EC2 Spot Fleet Information",
+    "source": "aws.ec2spotfleet",
+    "account": "123456789012",
+    "time": "2020-11-08T20:56:12Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:spot-fleet-request/sfr-2531ea06-af18-4647-8757-7d69c94971b1"
+    ],
+    "detail": {
+      "description": "r3.8xlarge, ami-032930428bf1abbff, Linux/UNIX, us-east-1a, Spot bid price is less than Spot market price $0.5291",
+      "sub-type": "launchSpecUnusable"
+    }
+  },
+  {
+    "version": "0",
+    "id": "10adc4e7-675c-643e-125c-5bfa1b1ba5d2",
+    "detail-type": "EC2 Spot Fleet Error",
+    "source": "aws.ec2spotfleet",
+    "account": "123456789012",
+    "time": "2020-11-09T06:56:07Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:ec2:us-east-1:123456789012:spot-fleet-request/sfr-38725d30-25f1-4f30-83ce-2907c56dba17"
+    ],
+    "detail": {
+      "description": "r4.2xlarge, ami-032930428bf1abbff, Linux/UNIX: The associatePublicIPAddress parameter can only be specified for the network interface with DeviceIndex 0. ",
+      "sub-type": "spotFleetRequestConfigurationInvalid"
+    }
+  }
+]

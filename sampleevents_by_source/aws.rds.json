@@ -1,0 +1,156 @@
+[
+  {
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "RDS DB Snapshot Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24"
+    ],
+    "detail": {
+      "EventCategories": [
+        "creation"
+      ],
+      "SourceType": "SNAPSHOT",
+      "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24",
+      "Date": "2018-10-06T12:26:13.882Z",
+      "SourceIdentifier": "rds:mysql-instance-2018-10-06-12-24",
+      "Message": "Automated snapshot created"
+    }
+  },
+  {
+    "version": "0",
+    "id": "68f6e973-1a0c-d37b-f2f2-94a7f62ffd4e",
+    "detail-type": "RDS DB Instance Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2018-09-27T22:36:43Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24"
+    ],
+    "detail": {
+      "EventCategories": [
+        "failover"
+      ],
+      "SourceType": "DB_INSTANCE",
+      "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24e",
+      "Date": "2018-09-27T22:36:43.292Z",
+      "SourceIdentifier": "rds:mysql-instance-2018-10-06-12-24",
+      "Message": "A Multi-AZ failover has completed."
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "RDS DB Security Group Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24"
+    ],
+    "detail": {
+      "EventCategories": [
+        "configuration change"
+      ],
+      "SourceType": "SECURITY_GROUP",
+      "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24",
+      "Date": "2018-10-06T12:26:13.882Z",
+      "SourceIdentifier": "rds:mysql-instance-2018-10-06-12-24",
+      "Message": "Applied change to security group"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "RDS DB Parameter Group Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24"
+    ],
+    "detail": {
+      "EventCategories": [
+        "configuration change"
+      ],
+      "SourceType": "DB_PARAM",
+      "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24",
+      "Date": "2018-10-06T12:26:13.882Z",
+      "SourceIdentifier": "rds:mysql-instance-2018-10-06-12-24",
+      "Message": "Updated parameter time_zone to UTC with apply method immediate"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "RDS DB Snapshot Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24"
+    ],
+    "detail": {
+      "EventCategories": [
+        "deletion"
+      ],
+      "SourceType": "SNAPSHOT",
+      "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24",
+      "Date": "2018-10-06T12:26:13.882Z",
+      "SourceIdentifier": "rds:mysql-instance-2018-10-06-12-24",
+      "Message": "Deleted manual snapshot"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "RDS DB Cluster Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24"
+    ],
+    "detail": {
+      "EventCategories": [
+        "notification"
+      ],
+      "SourceType": "CLUSTER",
+      "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24",
+      "Date": "2018-10-06T12:26:13.882Z",
+      "SourceIdentifier": "rds:mysql-instance-2018-10-06-12-24",
+      "Message": "Database cluster has been patched"
+    }
+  },
+  {
+    "version": "0",
+    "id": "844e2571-85d4-695f-b930-0153b71dcb42",
+    "detail-type": "RDS DB Cluster Snapshot Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2018-10-06T12:26:13Z",
+    "region": "us-east-1",
+    "resources": [
+      "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24"
+    ],
+    "detail": {
+      "EventCategories": [
+        "backup"
+      ],
+      "SourceType": "CLUSTER_SNAPSHOT",
+      "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:mysql-instance-2018-10-06-12-24",
+      "Date": "2018-10-06T12:26:13.882Z",
+      "SourceIdentifier": "rds:mysql-instance-2018-10-06-12-24",
+      "Message": "Creating manual cluster snapshot"
+    }
+  }
+]
