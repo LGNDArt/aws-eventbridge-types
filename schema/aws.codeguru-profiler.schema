@@ -1,0 +1,158 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsCodeguruProfilerElement"
+    },
+    "definitions": {
+        "AwsCodeguruProfilerElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsCodeguruProfilerElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "schema": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "expiresOn": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "sourceUrl": {
+                    "type": "string"
+                },
+                "deduplicationId": {
+                    "type": "string"
+                },
+                "title": {
+                    "$ref": "#/definitions/Title"
+                },
+                "eventStartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "eventEndTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "severity": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "computeInstanceArns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "recommendation": {
+                    "$ref": "#/definitions/Recommendation"
+                }
+            },
+            "required": [
+                "computeInstanceArns",
+                "deduplicationId",
+                "eventEndTime",
+                "eventStartTime",
+                "expiresOn",
+                "recommendation",
+                "schema",
+                "severity",
+                "sourceUrl",
+                "status",
+                "title"
+            ],
+            "title": "Detail"
+        },
+        "Recommendation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "$ref": "#/definitions/Title"
+                },
+                "description": {
+                    "$ref": "#/definitions/Title"
+                },
+                "resolutionSteps": {
+                    "$ref": "#/definitions/Title"
+                },
+                "reason": {
+                    "$ref": "#/definitions/Title"
+                }
+            },
+            "required": [
+                "description",
+                "name",
+                "reason",
+                "resolutionSteps"
+            ],
+            "title": "Recommendation"
+        },
+        "Title": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "title": "Title"
+        }
+    }
+}

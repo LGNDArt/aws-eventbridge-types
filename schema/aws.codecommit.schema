@@ -1,0 +1,188 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsCodecommitElement"
+    },
+    "definitions": {
+        "AwsCodecommitElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsCodecommitElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "event": {
+                    "type": "string"
+                },
+                "repositoryName": {
+                    "type": "string"
+                },
+                "repositoryId": {
+                    "type": "string"
+                },
+                "referenceType": {
+                    "type": "string"
+                },
+                "referenceName": {
+                    "type": "string"
+                },
+                "referenceFullName": {
+                    "type": "string"
+                },
+                "commitId": {
+                    "type": "string"
+                },
+                "oldCommitId": {
+                    "type": "string"
+                },
+                "beforeCommitId": {
+                    "type": "string"
+                },
+                "inReplyTo": {
+                    "type": "string"
+                },
+                "notificationBody": {
+                    "type": "string"
+                },
+                "commentId": {
+                    "type": "string"
+                },
+                "afterCommitId": {
+                    "type": "string"
+                },
+                "callerUserArn": {
+                    "type": "string"
+                },
+                "pullRequestId": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "sourceReference": {
+                    "type": "string"
+                },
+                "lastModifiedDate": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "pullRequestStatus": {
+                    "type": "string"
+                },
+                "isMerged": {
+                    "type": "string"
+                },
+                "destinationReference": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "creationDate": {
+                    "type": "string"
+                },
+                "repositoryNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "destinationCommit": {
+                    "type": "string"
+                },
+                "sourceCommit": {
+                    "type": "string"
+                },
+                "approvalRuleTemplateContentSha256": {
+                    "type": "string"
+                },
+                "approvalRuleTemplateId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "approvalRuleTemplateName": {
+                    "type": "string"
+                },
+                "repositories": {
+                    "$ref": "#/definitions/Repositories"
+                },
+                "reactionEmojis": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reactionShortcodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reactionUnicodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "event"
+            ],
+            "title": "Detail"
+        },
+        "Repositories": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "Repositories"
+        }
+    }
+}

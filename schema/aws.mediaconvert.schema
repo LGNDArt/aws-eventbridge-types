@@ -1,0 +1,273 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsMediaconvertElement"
+    },
+    "definitions": {
+        "AwsMediaconvertElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsMediaconvertElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "timestamp": {
+                    "type": "integer"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "queue": {
+                    "type": "string"
+                },
+                "jobId": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "userMetadata": {
+                    "$ref": "#/definitions/UserMetadata"
+                },
+                "inputDetails": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InputDetail"
+                    }
+                },
+                "outputGroupDetails": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OutputGroupDetail"
+                    }
+                }
+            },
+            "required": [
+                "accountId",
+                "jobId",
+                "queue",
+                "status",
+                "timestamp",
+                "userMetadata"
+            ],
+            "title": "Detail"
+        },
+        "InputDetail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "uri": {
+                    "type": "string"
+                },
+                "video": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Video"
+                    }
+                },
+                "audio": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Audio"
+                    }
+                },
+                "data": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "audio",
+                "data",
+                "id",
+                "uri",
+                "video"
+            ],
+            "title": "InputDetail"
+        },
+        "Audio": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "streamId": {
+                    "type": "integer"
+                },
+                "codec": {
+                    "type": "string"
+                },
+                "channels": {
+                    "type": "integer"
+                },
+                "sampleRate": {
+                    "type": "integer"
+                },
+                "language": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "channels",
+                "codec",
+                "language",
+                "sampleRate",
+                "streamId"
+            ],
+            "title": "Audio"
+        },
+        "Video": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "streamId": {
+                    "type": "integer"
+                },
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "frameRate": {
+                    "type": "number"
+                },
+                "sar": {
+                    "type": "string"
+                },
+                "bitDepth": {
+                    "type": "integer"
+                },
+                "interlaceMode": {
+                    "type": "string"
+                },
+                "colorFormat": {
+                    "type": "string"
+                },
+                "standard": {
+                    "type": "string"
+                },
+                "fourCC": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bitDepth",
+                "colorFormat",
+                "fourCC",
+                "frameRate",
+                "height",
+                "interlaceMode",
+                "sar",
+                "standard",
+                "streamId",
+                "width"
+            ],
+            "title": "Video"
+        },
+        "OutputGroupDetail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "outputDetails": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OutputDetail"
+                    }
+                }
+            },
+            "required": [
+                "outputDetails"
+            ],
+            "title": "OutputGroupDetail"
+        },
+        "OutputDetail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "durationInMs": {
+                    "type": "integer"
+                },
+                "videoDetails": {
+                    "$ref": "#/definitions/VideoDetails"
+                }
+            },
+            "required": [
+                "durationInMs",
+                "videoDetails"
+            ],
+            "title": "OutputDetail"
+        },
+        "VideoDetails": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "widthInPx": {
+                    "type": "integer"
+                },
+                "heightInPx": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "heightInPx",
+                "widthInPx"
+            ],
+            "title": "VideoDetails"
+        },
+        "UserMetadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "UserMetadata"
+        }
+    }
+}

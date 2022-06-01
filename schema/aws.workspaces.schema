@@ -1,0 +1,96 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsWorkspace"
+    },
+    "definitions": {
+        "AwsWorkspace": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsWorkspace"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "clientIpAddress": {
+                    "type": "string"
+                },
+                "actionType": {
+                    "type": "string"
+                },
+                "workspacesClientProductName": {
+                    "type": "string"
+                },
+                "loginTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "clientPlatform": {
+                    "type": "string"
+                },
+                "directoryId": {
+                    "type": "string"
+                },
+                "workspaceId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "actionType",
+                "clientIpAddress",
+                "clientPlatform",
+                "directoryId",
+                "loginTime",
+                "workspaceId",
+                "workspacesClientProductName"
+            ],
+            "title": "Detail"
+        }
+    }
+}

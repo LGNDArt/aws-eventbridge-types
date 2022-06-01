@@ -1,0 +1,119 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsTrustedadvisorElement"
+    },
+    "definitions": {
+        "AwsTrustedadvisorElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "$ref": "#/definitions/DetailType"
+                },
+                "source": {
+                    "$ref": "#/definitions/Source"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsTrustedadvisorElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "check-name": {
+                    "type": "string"
+                },
+                "check-item-detail": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                "status": {
+                    "type": "string"
+                },
+                "resource_id": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "check-item-detail",
+                "check-name",
+                "resource_id",
+                "status",
+                "uuid"
+            ],
+            "title": "Detail"
+        },
+        "DetailType": {
+            "type": "string",
+            "enum": [
+                "Trusted Advisor Check Item Refresh Notification"
+            ],
+            "title": "DetailType"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "us-east-1"
+            ],
+            "title": "Region"
+        },
+        "Source": {
+            "type": "string",
+            "enum": [
+                "aws.trustedadvisor"
+            ],
+            "title": "Source"
+        }
+    }
+}

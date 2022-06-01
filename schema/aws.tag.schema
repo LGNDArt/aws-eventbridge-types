@@ -1,0 +1,105 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsTagElement"
+    },
+    "definitions": {
+        "AwsTagElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsTagElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "changed-tag-keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "service": {
+                    "type": "string"
+                },
+                "resource-type": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "integer"
+                },
+                "tags": {
+                    "$ref": "#/definitions/Tags"
+                }
+            },
+            "required": [
+                "changed-tag-keys",
+                "resource-type",
+                "service",
+                "tags",
+                "version"
+            ],
+            "title": "Detail"
+        },
+        "Tags": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "cwe-test-tag": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cwe-test-tag"
+            ],
+            "title": "Tags"
+        }
+    }
+}

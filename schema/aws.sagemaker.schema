@@ -1,0 +1,1042 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsSagemakerElement"
+    },
+    "definitions": {
+        "AwsSagemakerElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/Source"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsSagemakerElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "TrainingJobName": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "TrainingJobArn": {
+                    "type": "string"
+                },
+                "TrainingJobStatus": {
+                    "type": "string"
+                },
+                "SecondaryStatus": {
+                    "type": "string"
+                },
+                "FailureReason": {
+                    "type": "string"
+                },
+                "HyperParameters": {
+                    "$ref": "#/definitions/HyperParameters"
+                },
+                "AlgorithmSpecification": {
+                    "$ref": "#/definitions/DetailAlgorithmSpecification"
+                },
+                "RoleArn": {
+                    "type": "string"
+                },
+                "InputDataConfig": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InputDataConfig"
+                    }
+                },
+                "OutputDataConfig": {
+                    "$ref": "#/definitions/OutputDataConfig"
+                },
+                "ResourceConfig": {
+                    "$ref": "#/definitions/Config"
+                },
+                "VpcConfig": {
+                    "$ref": "#/definitions/ExperimentConfig"
+                },
+                "StoppingCondition": {
+                    "$ref": "#/definitions/StoppingCondition"
+                },
+                "CreationTime": {
+                    "$ref": "#/definitions/Time"
+                },
+                "TrainingStartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "TrainingEndTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "LastModifiedTime": {
+                    "$ref": "#/definitions/Time"
+                },
+                "SecondaryStatusTransitions": {
+                    "type": "array",
+                    "items": {}
+                },
+                "Tags": {
+                    "$ref": "#/definitions/ExperimentConfig"
+                },
+                "TransformJobName": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "TransformJobArn": {
+                    "type": "string"
+                },
+                "TransformJobStatus": {
+                    "type": "string"
+                },
+                "ModelName": {
+                    "type": "string"
+                },
+                "MaxConcurrentTransforms": {
+                    "type": "integer"
+                },
+                "MaxPayloadInMB": {
+                    "type": "integer"
+                },
+                "BatchStrategy": {
+                    "type": "string"
+                },
+                "Environment": {
+                    "$ref": "#/definitions/Environment"
+                },
+                "TransformInput": {
+                    "$ref": "#/definitions/TransformInput"
+                },
+                "TransformOutput": {
+                    "$ref": "#/definitions/TransformOutput"
+                },
+                "TransformResources": {
+                    "$ref": "#/definitions/TransformResources"
+                },
+                "TransformStartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "TransformEndTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "HyperParameterTuningJobName": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "HyperParameterTuningJobArn": {
+                    "type": "string"
+                },
+                "TrainingJobDefinition": {
+                    "$ref": "#/definitions/TrainingJobDefinition"
+                },
+                "HyperParameterTuningJobStatus": {
+                    "type": "string"
+                },
+                "TrainingJobStatusCounters": {
+                    "$ref": "#/definitions/TrainingJobStatusCounters"
+                },
+                "ObjectiveStatusCounters": {
+                    "$ref": "#/definitions/ObjectiveStatusCounters"
+                },
+                "trainingJobName": {
+                    "type": "string"
+                },
+                "severity": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "LabelingJobStatus": {
+                    "type": "string"
+                },
+                "FeatureGroupArn": {
+                    "type": "string"
+                },
+                "FeatureGroupName": {
+                    "type": "string"
+                },
+                "RecordIdentifierFeatureName": {
+                    "type": "string"
+                },
+                "EventTimeFeatureName": {
+                    "type": "string"
+                },
+                "FeatureDefinitions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FeatureDefinition"
+                    }
+                },
+                "OnlineStoreConfig": {
+                    "$ref": "#/definitions/OnlineStoreConfig"
+                },
+                "OfflineStoreConfig": {
+                    "$ref": "#/definitions/OfflineStoreConfig"
+                },
+                "FeatureGroupStatus": {
+                    "type": "string"
+                },
+                "ProcessingInputs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ProcessingInput"
+                    }
+                },
+                "ProcessingOutputConfig": {
+                    "$ref": "#/definitions/ProcessingOutputConfig"
+                },
+                "ProcessingJobName": {
+                    "type": "string"
+                },
+                "ProcessingResources": {
+                    "$ref": "#/definitions/ProcessingResources"
+                },
+                "AppSpecification": {
+                    "$ref": "#/definitions/AppSpecification"
+                },
+                "NetworkConfig": {
+                    "$ref": "#/definitions/NetworkConfig"
+                },
+                "ExperimentConfig": {
+                    "$ref": "#/definitions/ExperimentConfig"
+                },
+                "ProcessingJobArn": {
+                    "type": "string"
+                },
+                "ProcessingJobStatus": {
+                    "type": "string"
+                },
+                "ImageName": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "ImageArn": {
+                    "type": "string"
+                },
+                "ImageStatus": {
+                    "type": "string"
+                },
+                "Version": {
+                    "type": "integer"
+                },
+                "ImageVersionArn": {
+                    "type": "string"
+                },
+                "ImageVersionStatus": {
+                    "type": "string"
+                },
+                "pipelineExecutionDisplayName": {
+                    "type": "string"
+                },
+                "currentPipelineExecutionStatus": {
+                    "type": "string"
+                },
+                "previousPipelineExecutionStatus": {
+                    "type": "string"
+                },
+                "executionStartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "executionEndTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "pipelineExecutionDescription": {
+                    "type": "string"
+                },
+                "pipelineArn": {
+                    "type": "string"
+                },
+                "pipelineExecutionArn": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/Metadata"
+                },
+                "stepStartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "stepEndTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "stepName": {
+                    "type": "string"
+                },
+                "stepType": {
+                    "type": "string"
+                },
+                "previousStepStatus": {
+                    "type": "string"
+                },
+                "currentStepStatus": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "Detail"
+        },
+        "DetailAlgorithmSpecification": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "TrainingImage": {
+                    "type": "string"
+                },
+                "TrainingInputMode": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "TrainingImage",
+                "TrainingInputMode"
+            ],
+            "title": "DetailAlgorithmSpecification"
+        },
+        "AppSpecification": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ImageUri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ImageUri"
+            ],
+            "title": "AppSpecification"
+        },
+        "Environment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "environment1": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "environment1"
+            ],
+            "title": "Environment"
+        },
+        "ExperimentConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "ExperimentConfig"
+        },
+        "FeatureDefinition": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "FeatureName": {
+                    "type": "string"
+                },
+                "FeatureType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "FeatureName",
+                "FeatureType"
+            ],
+            "title": "FeatureDefinition"
+        },
+        "HyperParameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Hyper": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Hyper"
+            ],
+            "title": "HyperParameters"
+        },
+        "InputDataConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ChannelName": {
+                    "type": "string"
+                },
+                "DataSource": {
+                    "$ref": "#/definitions/InputDataConfigDataSource"
+                },
+                "ContentType": {
+                    "type": "string"
+                },
+                "CompressionType": {
+                    "type": "string"
+                },
+                "RecordWrapperType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ChannelName",
+                "CompressionType",
+                "ContentType",
+                "DataSource",
+                "RecordWrapperType"
+            ],
+            "title": "InputDataConfig"
+        },
+        "InputDataConfigDataSource": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3DataSource": {
+                    "$ref": "#/definitions/PurpleS3DataSource"
+                }
+            },
+            "required": [
+                "S3DataSource"
+            ],
+            "title": "InputDataConfigDataSource"
+        },
+        "PurpleS3DataSource": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3DataType": {
+                    "type": "string"
+                },
+                "S3Uri": {
+                    "type": "string"
+                },
+                "S3DataDistributionType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "S3DataDistributionType",
+                "S3DataType",
+                "S3Uri"
+            ],
+            "title": "PurpleS3DataSource"
+        },
+        "NetworkConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "EnableInterContainerTrafficEncryption": {
+                    "type": "boolean"
+                },
+                "EnableNetworkIsolation": {
+                    "type": "boolean"
+                },
+                "VpcConfig": {
+                    "$ref": "#/definitions/VpcConfig"
+                }
+            },
+            "required": [
+                "EnableInterContainerTrafficEncryption",
+                "EnableNetworkIsolation",
+                "VpcConfig"
+            ],
+            "title": "NetworkConfig"
+        },
+        "VpcConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "SecurityGroupIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "Subnets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "SecurityGroupIds",
+                "Subnets"
+            ],
+            "title": "VpcConfig"
+        },
+        "ObjectiveStatusCounters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Succeeded": {
+                    "type": "integer"
+                },
+                "Pending": {
+                    "type": "integer"
+                },
+                "Failed": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "Failed",
+                "Pending",
+                "Succeeded"
+            ],
+            "title": "ObjectiveStatusCounters"
+        },
+        "OfflineStoreConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3StorageConfig": {
+                    "$ref": "#/definitions/S3StorageConfig"
+                },
+                "DisableGlueTableCreation": {
+                    "type": "boolean"
+                },
+                "DataCatalogConfig": {
+                    "$ref": "#/definitions/DataCatalogConfig"
+                }
+            },
+            "required": [
+                "DataCatalogConfig",
+                "DisableGlueTableCreation",
+                "S3StorageConfig"
+            ],
+            "title": "OfflineStoreConfig"
+        },
+        "DataCatalogConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "TableName": {
+                    "type": "string"
+                },
+                "Catalog": {
+                    "type": "string"
+                },
+                "Database": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Catalog",
+                "Database",
+                "TableName"
+            ],
+            "title": "DataCatalogConfig"
+        },
+        "S3StorageConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3Uri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "S3Uri"
+            ],
+            "title": "S3StorageConfig"
+        },
+        "OnlineStoreConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "EnableOnlineStore": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "EnableOnlineStore"
+            ],
+            "title": "OnlineStoreConfig"
+        },
+        "OutputDataConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "KmsKeyId": {
+                    "type": "string"
+                },
+                "S3OutputPath": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "KmsKeyId",
+                "S3OutputPath"
+            ],
+            "title": "OutputDataConfig"
+        },
+        "ProcessingInput": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "InputName": {
+                    "type": "string"
+                },
+                "S3Input": {
+                    "$ref": "#/definitions/S3Input"
+                }
+            },
+            "required": [
+                "InputName",
+                "S3Input"
+            ],
+            "title": "ProcessingInput"
+        },
+        "S3Input": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3Uri": {
+                    "type": "string"
+                },
+                "LocalPath": {
+                    "type": "string"
+                },
+                "S3DataType": {
+                    "type": "string"
+                },
+                "S3InputMode": {
+                    "type": "string"
+                },
+                "S3DataDistributionType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "LocalPath",
+                "S3DataDistributionType",
+                "S3DataType",
+                "S3InputMode",
+                "S3Uri"
+            ],
+            "title": "S3Input"
+        },
+        "ProcessingOutputConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Outputs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Output"
+                    }
+                },
+                "KmsKeyId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "KmsKeyId",
+                "Outputs"
+            ],
+            "title": "ProcessingOutputConfig"
+        },
+        "Output": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "OutputName": {
+                    "type": "string"
+                },
+                "S3Output": {
+                    "$ref": "#/definitions/S3Output"
+                }
+            },
+            "required": [
+                "OutputName",
+                "S3Output"
+            ],
+            "title": "Output"
+        },
+        "S3Output": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3Uri": {
+                    "type": "string"
+                },
+                "LocalPath": {
+                    "type": "string"
+                },
+                "S3UploadMode": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "LocalPath",
+                "S3UploadMode",
+                "S3Uri"
+            ],
+            "title": "S3Output"
+        },
+        "ProcessingResources": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ClusterConfig": {
+                    "$ref": "#/definitions/Config"
+                }
+            },
+            "required": [
+                "ClusterConfig"
+            ],
+            "title": "ProcessingResources"
+        },
+        "Config": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "InstanceCount": {
+                    "type": "integer"
+                },
+                "InstanceType": {
+                    "type": "string"
+                },
+                "VolumeSizeInGB": {
+                    "type": "integer"
+                },
+                "VolumeKmsKeyId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "InstanceCount",
+                "InstanceType",
+                "VolumeKmsKeyId",
+                "VolumeSizeInGB"
+            ],
+            "title": "Config"
+        },
+        "StoppingCondition": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MaxRuntimeInSeconds": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "MaxRuntimeInSeconds"
+            ],
+            "title": "StoppingCondition"
+        },
+        "TrainingJobDefinition": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "StaticHyperParameters": {
+                    "$ref": "#/definitions/ExperimentConfig"
+                },
+                "AlgorithmSpecification": {
+                    "$ref": "#/definitions/TrainingJobDefinitionAlgorithmSpecification"
+                },
+                "RoleArn": {
+                    "type": "string"
+                },
+                "InputDataConfig": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/InputDataConfig"
+                    }
+                },
+                "VpcConfig": {
+                    "$ref": "#/definitions/VpcConfig"
+                },
+                "OutputDataConfig": {
+                    "$ref": "#/definitions/OutputDataConfig"
+                },
+                "ResourceConfig": {
+                    "$ref": "#/definitions/Config"
+                },
+                "StoppingCondition": {
+                    "$ref": "#/definitions/StoppingCondition"
+                }
+            },
+            "required": [
+                "AlgorithmSpecification",
+                "InputDataConfig",
+                "OutputDataConfig",
+                "ResourceConfig",
+                "RoleArn",
+                "StaticHyperParameters",
+                "StoppingCondition",
+                "VpcConfig"
+            ],
+            "title": "TrainingJobDefinition"
+        },
+        "TrainingJobDefinitionAlgorithmSpecification": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "TrainingImage": {
+                    "type": "string"
+                },
+                "TrainingInputMode": {
+                    "type": "string"
+                },
+                "MetricDefinitions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MetricDefinition"
+                    }
+                }
+            },
+            "required": [
+                "MetricDefinitions",
+                "TrainingImage",
+                "TrainingInputMode"
+            ],
+            "title": "TrainingJobDefinitionAlgorithmSpecification"
+        },
+        "MetricDefinition": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "Regex": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Name",
+                "Regex"
+            ],
+            "title": "MetricDefinition"
+        },
+        "TrainingJobStatusCounters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Completed": {
+                    "type": "integer"
+                },
+                "InProgress": {
+                    "type": "integer"
+                },
+                "RetryableError": {
+                    "type": "integer"
+                },
+                "NonRetryableError": {
+                    "type": "integer"
+                },
+                "Stopped": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "Completed",
+                "InProgress",
+                "NonRetryableError",
+                "RetryableError",
+                "Stopped"
+            ],
+            "title": "TrainingJobStatusCounters"
+        },
+        "TransformInput": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "DataSource": {
+                    "$ref": "#/definitions/TransformInputDataSource"
+                },
+                "ContentType": {
+                    "type": "string"
+                },
+                "CompressionType": {
+                    "type": "string"
+                },
+                "SplitType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "CompressionType",
+                "ContentType",
+                "DataSource",
+                "SplitType"
+            ],
+            "title": "TransformInput"
+        },
+        "TransformInputDataSource": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3DataSource": {
+                    "$ref": "#/definitions/FluffyS3DataSource"
+                }
+            },
+            "required": [
+                "S3DataSource"
+            ],
+            "title": "TransformInputDataSource"
+        },
+        "FluffyS3DataSource": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3DataType": {
+                    "type": "string"
+                },
+                "S3Uri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "S3DataType",
+                "S3Uri"
+            ],
+            "title": "FluffyS3DataSource"
+        },
+        "TransformOutput": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3OutputPath": {
+                    "type": "string"
+                },
+                "Accept": {
+                    "type": "string"
+                },
+                "AssembleWith": {
+                    "type": "string"
+                },
+                "KmsKeyId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Accept",
+                "AssembleWith",
+                "KmsKeyId",
+                "S3OutputPath"
+            ],
+            "title": "TransformOutput"
+        },
+        "TransformResources": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "InstanceType": {
+                    "type": "string"
+                },
+                "InstanceCount": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "InstanceCount",
+                "InstanceType"
+            ],
+            "title": "TransformResources"
+        },
+        "Metadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "processingJob": {
+                    "$ref": "#/definitions/ProcessingJob"
+                }
+            },
+            "required": [
+                "processingJob"
+            ],
+            "title": "Metadata"
+        },
+        "ProcessingJob": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "arn": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "arn"
+            ],
+            "title": "ProcessingJob"
+        },
+        "Time": {
+            "anyOf": [
+                {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                {
+                    "type": "integer"
+                }
+            ],
+            "title": "Time"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "us-east-1",
+                "us-west-2"
+            ],
+            "title": "Region"
+        },
+        "Source": {
+            "type": "string",
+            "enum": [
+                "aws.sagemaker"
+            ],
+            "title": "Source"
+        }
+    }
+}

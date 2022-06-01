@@ -1,0 +1,182 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsCloudtrailElement"
+    },
+    "definitions": {
+        "AwsCloudtrailElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsCloudtrailElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "eventVersion": {
+                    "type": "string"
+                },
+                "eventTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "awsRegion": {
+                    "type": "string"
+                },
+                "eventID": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "eventType": {
+                    "type": "string"
+                },
+                "recipientAccountId": {
+                    "type": "string"
+                },
+                "sharedEventID": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "insightDetails": {
+                    "$ref": "#/definitions/InsightDetails"
+                },
+                "eventCategory": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "awsRegion",
+                "eventCategory",
+                "eventID",
+                "eventTime",
+                "eventType",
+                "eventVersion",
+                "insightDetails",
+                "recipientAccountId",
+                "sharedEventID"
+            ],
+            "title": "Detail"
+        },
+        "InsightDetails": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "state": {
+                    "type": "string"
+                },
+                "eventSource": {
+                    "type": "string"
+                },
+                "eventName": {
+                    "type": "string"
+                },
+                "insightType": {
+                    "type": "string"
+                },
+                "insightContext": {
+                    "$ref": "#/definitions/InsightContext"
+                }
+            },
+            "required": [
+                "eventName",
+                "eventSource",
+                "insightContext",
+                "insightType",
+                "state"
+            ],
+            "title": "InsightDetails"
+        },
+        "InsightContext": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "statistics": {
+                    "$ref": "#/definitions/Statistics"
+                }
+            },
+            "required": [
+                "statistics"
+            ],
+            "title": "InsightContext"
+        },
+        "Statistics": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "baseline": {
+                    "$ref": "#/definitions/Baseline"
+                },
+                "insight": {
+                    "$ref": "#/definitions/Baseline"
+                },
+                "insightDuration": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "baseline",
+                "insight",
+                "insightDuration"
+            ],
+            "title": "Statistics"
+        },
+        "Baseline": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "average": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "average"
+            ],
+            "title": "Baseline"
+        }
+    }
+}

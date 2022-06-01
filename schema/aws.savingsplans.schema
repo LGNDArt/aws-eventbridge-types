@@ -1,0 +1,94 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsSavingsplan"
+    },
+    "definitions": {
+        "AwsSavingsplan": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsSavingsplan"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "severity": {
+                    "type": "string"
+                },
+                "previousState": {
+                    "type": "string"
+                },
+                "currentState": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "nextState": {
+                    "type": "string"
+                },
+                "remainingDays": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "nextStateChangeDate": {
+                    "type": "string",
+                    "format": "date"
+                }
+            },
+            "required": [
+                "currentState",
+                "message"
+            ],
+            "title": "Detail"
+        }
+    }
+}

@@ -1,0 +1,101 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsNetworkmanagerElement"
+    },
+    "definitions": {
+        "AwsNetworkmanagerElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsNetworkmanagerElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "change-type": {
+                    "type": "string"
+                },
+                "change-description": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "transit-gateway-arn": {
+                    "type": "string"
+                },
+                "transit-gateway-attachment-arn": {
+                    "type": "string"
+                },
+                "vpn-connection-arn": {
+                    "type": "string"
+                },
+                "outside-ip-address": {
+                    "type": "string"
+                },
+                "transit-gateway-route-table-arn": {
+                    "type": "string"
+                },
+                "peer-transit-gateway-arn": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "change-description",
+                "change-type",
+                "region",
+                "transit-gateway-arn",
+                "transit-gateway-attachment-arn"
+            ],
+            "title": "Detail"
+        }
+    }
+}

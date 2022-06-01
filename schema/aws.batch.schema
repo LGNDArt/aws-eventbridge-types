@@ -1,0 +1,199 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsBatchElement"
+    },
+    "definitions": {
+        "AwsBatchElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsBatchElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "jobName": {
+                    "type": "string"
+                },
+                "jobId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "jobQueue": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "attempts": {
+                    "type": "array",
+                    "items": {}
+                },
+                "createdAt": {
+                    "type": "integer"
+                },
+                "retryStrategy": {
+                    "$ref": "#/definitions/RetryStrategy"
+                },
+                "dependsOn": {
+                    "type": "array",
+                    "items": {}
+                },
+                "jobDefinition": {
+                    "type": "string"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/Parameters"
+                },
+                "container": {
+                    "$ref": "#/definitions/Container"
+                }
+            },
+            "required": [
+                "attempts",
+                "container",
+                "createdAt",
+                "dependsOn",
+                "jobDefinition",
+                "jobId",
+                "jobName",
+                "jobQueue",
+                "parameters",
+                "retryStrategy",
+                "status"
+            ],
+            "title": "Detail"
+        },
+        "Container": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "image": {
+                    "type": "string"
+                },
+                "resourceRequirements": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceRequirement"
+                    }
+                },
+                "command": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "volumes": {
+                    "type": "array",
+                    "items": {}
+                },
+                "environment": {
+                    "type": "array",
+                    "items": {}
+                },
+                "mountPoints": {
+                    "type": "array",
+                    "items": {}
+                },
+                "ulimits": {
+                    "type": "array",
+                    "items": {}
+                }
+            },
+            "required": [
+                "command",
+                "environment",
+                "image",
+                "mountPoints",
+                "resourceRequirements",
+                "ulimits",
+                "volumes"
+            ],
+            "title": "Container"
+        },
+        "ResourceRequirement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "format": "integer"
+                }
+            },
+            "required": [
+                "type",
+                "value"
+            ],
+            "title": "ResourceRequirement"
+        },
+        "Parameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "Parameters"
+        },
+        "RetryStrategy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "attempts": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "attempts"
+            ],
+            "title": "RetryStrategy"
+        }
+    }
+}

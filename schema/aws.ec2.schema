@@ -1,0 +1,172 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsEc2Element"
+    },
+    "definitions": {
+        "AwsEc2Element": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/Source"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsEc2Element"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instance-id": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "event": {
+                    "type": "string"
+                },
+                "result": {
+                    "$ref": "#/definitions/Result"
+                },
+                "cause": {
+                    "type": "string"
+                },
+                "request-id": {
+                    "type": "string"
+                },
+                "snapshot_id": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "StartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "EndTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "instance-action": {
+                    "type": "string"
+                },
+                "startTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "snapshots": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Snapshot"
+                    }
+                },
+                "spot-instance-request-id": {
+                    "type": "string"
+                },
+                "snapshot-id": {
+                    "type": "string"
+                },
+                "zone": {
+                    "type": "null"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "Detail"
+        },
+        "Snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "snapshot_id": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "snapshot_id",
+                "source",
+                "status"
+            ],
+            "title": "Snapshot"
+        },
+        "Result": {
+            "type": "string",
+            "enum": [
+                "succeeded",
+                "failed"
+            ],
+            "title": "Result"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "us-east-1",
+                "sa-east-1"
+            ],
+            "title": "Region"
+        },
+        "Source": {
+            "type": "string",
+            "enum": [
+                "aws.ec2"
+            ],
+            "title": "Source"
+        }
+    }
+}

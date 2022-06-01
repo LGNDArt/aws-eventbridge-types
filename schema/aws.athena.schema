@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsAthenaElement"
+    },
+    "definitions": {
+        "AwsAthenaElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsAthenaElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "versionId": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "currentState": {
+                    "type": "string"
+                },
+                "previousState": {
+                    "type": "string"
+                },
+                "statementType": {
+                    "type": "string"
+                },
+                "queryExecutionId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "workgroupName": {
+                    "type": "string"
+                },
+                "sequenceNumber": {
+                    "type": "string",
+                    "format": "integer"
+                }
+            },
+            "required": [
+                "currentState",
+                "previousState",
+                "queryExecutionId",
+                "sequenceNumber",
+                "statementType",
+                "versionId",
+                "workgroupName"
+            ],
+            "title": "Detail"
+        }
+    }
+}

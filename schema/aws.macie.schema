@@ -1,0 +1,1118 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsMacieElement"
+    },
+    "definitions": {
+        "AwsMacieElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsMacieElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "notification-type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ]
+                },
+                "alert-arn": {
+                    "type": "string"
+                },
+                "risk-score": {
+                    "type": "integer"
+                },
+                "trigger": {
+                    "$ref": "#/definitions/Trigger"
+                },
+                "created-at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "actor": {
+                    "type": "string"
+                },
+                "summary": {
+                    "$ref": "#/definitions/Summary"
+                },
+                "schemaVersion": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "partition": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "severity": {
+                    "$ref": "#/definitions/Severity"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "resourcesAffected": {
+                    "$ref": "#/definitions/ResourcesAffected"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "classificationDetails": {
+                    "$ref": "#/definitions/ClassificationDetails"
+                },
+                "policyDetails": {
+                    "type": "null"
+                },
+                "sample": {
+                    "type": "boolean"
+                },
+                "archived": {
+                    "type": "boolean"
+                },
+                "internalInfo": {
+                    "type": "null"
+                }
+            },
+            "required": [],
+            "title": "Detail"
+        },
+        "ClassificationDetails": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "jobArn": {
+                    "type": "string"
+                },
+                "jobId": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "result": {
+                    "$ref": "#/definitions/Result"
+                },
+                "detailedResultsLocation": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "detailedResultsLocation",
+                "jobArn",
+                "jobId",
+                "result"
+            ],
+            "title": "ClassificationDetails"
+        },
+        "Result": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/Status"
+                },
+                "sizeClassified": {
+                    "type": "integer"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "sensitiveData": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SensitiveDatum"
+                    }
+                },
+                "customDataIdentifiers": {
+                    "$ref": "#/definitions/CustomDataIdentifiers"
+                }
+            },
+            "required": [
+                "customDataIdentifiers",
+                "mimeType",
+                "sensitiveData",
+                "sizeClassified",
+                "status"
+            ],
+            "title": "Result"
+        },
+        "CustomDataIdentifiers": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "totalCount": {
+                    "type": "integer"
+                },
+                "detections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomDataIdentifiersDetection"
+                    }
+                }
+            },
+            "required": [
+                "detections",
+                "totalCount"
+            ],
+            "title": "CustomDataIdentifiers"
+        },
+        "CustomDataIdentifiersDetection": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "arn": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "count": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "arn",
+                "count",
+                "name"
+            ],
+            "title": "CustomDataIdentifiersDetection"
+        },
+        "SensitiveDatum": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "totalCount": {
+                    "type": "integer"
+                },
+                "detections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SensitiveDatumDetection"
+                    }
+                }
+            },
+            "required": [
+                "category",
+                "detections",
+                "totalCount"
+            ],
+            "title": "SensitiveDatum"
+        },
+        "SensitiveDatumDetection": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "count",
+                "type"
+            ],
+            "title": "SensitiveDatumDetection"
+        },
+        "Status": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "reason"
+            ],
+            "title": "Status"
+        },
+        "ResourcesAffected": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "s3Bucket": {
+                    "$ref": "#/definitions/S3Bucket"
+                },
+                "s3Object": {
+                    "$ref": "#/definitions/S3Object"
+                }
+            },
+            "required": [
+                "s3Bucket",
+                "s3Object"
+            ],
+            "title": "ResourcesAffected"
+        },
+        "S3Bucket": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "arn": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "owner": {
+                    "$ref": "#/definitions/Owner"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Tag"
+                    }
+                },
+                "defaultServerSideEncryption": {
+                    "$ref": "#/definitions/ServerSideEncryption"
+                },
+                "publicAccess": {
+                    "$ref": "#/definitions/PublicAccess"
+                }
+            },
+            "required": [
+                "arn",
+                "createdAt",
+                "defaultServerSideEncryption",
+                "name",
+                "owner",
+                "publicAccess",
+                "tags"
+            ],
+            "title": "S3Bucket"
+        },
+        "ServerSideEncryption": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "encryptionType": {
+                    "type": "string"
+                },
+                "kmsMasterKeyId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "encryptionType",
+                "kmsMasterKeyId"
+            ],
+            "title": "ServerSideEncryption"
+        },
+        "Owner": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "displayName": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "displayName",
+                "id"
+            ],
+            "title": "Owner"
+        },
+        "PublicAccess": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "permissionConfiguration": {
+                    "$ref": "#/definitions/PermissionConfiguration"
+                },
+                "effectivePermission": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "effectivePermission",
+                "permissionConfiguration"
+            ],
+            "title": "PublicAccess"
+        },
+        "PermissionConfiguration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bucketLevelPermissions": {
+                    "$ref": "#/definitions/BucketLevelPermissions"
+                },
+                "accountLevelPermissions": {
+                    "$ref": "#/definitions/AccountLevelPermissions"
+                }
+            },
+            "required": [
+                "accountLevelPermissions",
+                "bucketLevelPermissions"
+            ],
+            "title": "PermissionConfiguration"
+        },
+        "AccountLevelPermissions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "blockPublicAccess": {
+                    "$ref": "#/definitions/BlockPublicAccess"
+                }
+            },
+            "required": [
+                "blockPublicAccess"
+            ],
+            "title": "AccountLevelPermissions"
+        },
+        "BlockPublicAccess": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ignorePublicAcls": {
+                    "type": "boolean"
+                },
+                "restrictPublicBuckets": {
+                    "type": "boolean"
+                },
+                "blockPublicAcls": {
+                    "type": "boolean"
+                },
+                "blockPublicPolicy": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "blockPublicAcls",
+                "blockPublicPolicy",
+                "ignorePublicAcls",
+                "restrictPublicBuckets"
+            ],
+            "title": "BlockPublicAccess"
+        },
+        "BucketLevelPermissions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "accessControlList": {
+                    "$ref": "#/definitions/AccessControlList"
+                },
+                "bucketPolicy": {
+                    "$ref": "#/definitions/AccessControlList"
+                },
+                "blockPublicAccess": {
+                    "$ref": "#/definitions/BlockPublicAccess"
+                }
+            },
+            "required": [
+                "accessControlList",
+                "blockPublicAccess",
+                "bucketPolicy"
+            ],
+            "title": "BucketLevelPermissions"
+        },
+        "AccessControlList": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "allowsPublicReadAccess": {
+                    "type": "boolean"
+                },
+                "allowsPublicWriteAccess": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "allowsPublicReadAccess",
+                "allowsPublicWriteAccess"
+            ],
+            "title": "AccessControlList"
+        },
+        "Tag": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "value": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "key",
+                "value"
+            ],
+            "title": "Tag"
+        },
+        "S3Object": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bucketArn": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "extension": {
+                    "type": "string"
+                },
+                "lastModified": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "versionId": {
+                    "type": "string"
+                },
+                "serverSideEncryption": {
+                    "$ref": "#/definitions/ServerSideEncryption"
+                },
+                "size": {
+                    "type": "integer"
+                },
+                "storageClass": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Tag"
+                    }
+                },
+                "publicAccess": {
+                    "type": "boolean"
+                },
+                "etag": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bucketArn",
+                "etag",
+                "extension",
+                "key",
+                "lastModified",
+                "path",
+                "publicAccess",
+                "serverSideEncryption",
+                "size",
+                "storageClass",
+                "tags",
+                "versionId"
+            ],
+            "title": "S3Object"
+        },
+        "Severity": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "score": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "score"
+            ],
+            "title": "Severity"
+        },
+        "Summary": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Description": {
+                    "type": "string"
+                },
+                "IP": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                },
+                "Time Range": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TimeRange"
+                    }
+                },
+                "Source ARN": {
+                    "type": "string"
+                },
+                "Record Count": {
+                    "type": "integer"
+                },
+                "Location": {
+                    "$ref": "#/definitions/Location"
+                },
+                "Event Count": {
+                    "type": "integer"
+                },
+                "Events": {
+                    "$ref": "#/definitions/Events"
+                },
+                "recipientAccountId": {
+                    "$ref": "#/definitions/RecipientAccountID"
+                },
+                "Bucket": {
+                    "$ref": "#/definitions/Bucket"
+                },
+                "ACL": {
+                    "$ref": "#/definitions/ACL"
+                },
+                "Timestamps": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                },
+                "Object": {
+                    "$ref": "#/definitions/Object"
+                },
+                "Themes": {
+                    "$ref": "#/definitions/Themes"
+                },
+                "DLP risk": {
+                    "$ref": "#/definitions/DLPRisk"
+                },
+                "Owner": {
+                    "$ref": "#/definitions/SummaryOwner"
+                }
+            },
+            "required": [
+                "Description",
+                "Event Count",
+                "Record Count"
+            ],
+            "title": "Summary"
+        },
+        "ACL": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "secret-bucket-name": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SecretBucketName"
+                    }
+                }
+            },
+            "required": [
+                "secret-bucket-name"
+            ],
+            "title": "ACL"
+        },
+        "SecretBucketName": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Owner": {
+                    "$ref": "#/definitions/SecretBucketNameOwner"
+                },
+                "Grants": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Grant"
+                    }
+                }
+            },
+            "required": [
+                "Grants",
+                "Owner"
+            ],
+            "title": "SecretBucketName"
+        },
+        "Grant": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Grantee": {
+                    "$ref": "#/definitions/Grantee"
+                },
+                "Permission": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Grantee",
+                "Permission"
+            ],
+            "title": "Grant"
+        },
+        "Grantee": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Type": {
+                    "type": "string"
+                },
+                "URI": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                }
+            },
+            "required": [
+                "Type",
+                "URI"
+            ],
+            "title": "Grantee"
+        },
+        "SecretBucketNameOwner": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "DisplayName": {
+                    "type": "string"
+                },
+                "ID": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "DisplayName",
+                "ID"
+            ],
+            "title": "SecretBucketNameOwner"
+        },
+        "Bucket": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "secret-bucket-name": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "secret-bucket-name"
+            ],
+            "title": "Bucket"
+        },
+        "DLPRisk": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "7": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "7"
+            ],
+            "title": "DLPRisk"
+        },
+        "Events": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "GetBucketLocation": {
+                    "$ref": "#/definitions/GetBucketACL"
+                },
+                "ListRoles": {
+                    "$ref": "#/definitions/GetBucketACL"
+                },
+                "GetBucketPolicy": {
+                    "$ref": "#/definitions/GetBucketPolicy"
+                },
+                "GetBucketAcl": {
+                    "$ref": "#/definitions/GetBucketACL"
+                },
+                "ListBuckets": {
+                    "$ref": "#/definitions/GetBucketACL"
+                }
+            },
+            "required": [
+                "GetBucketAcl",
+                "GetBucketLocation",
+                "GetBucketPolicy",
+                "ListBuckets",
+                "ListRoles"
+            ],
+            "title": "Events"
+        },
+        "GetBucketACL": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "count": {
+                    "type": "integer"
+                },
+                "ISP": {
+                    "$ref": "#/definitions/ISP"
+                }
+            },
+            "required": [
+                "ISP",
+                "count"
+            ],
+            "title": "GetBucketACL"
+        },
+        "ISP": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Amazon": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "Amazon"
+            ],
+            "title": "ISP"
+        },
+        "GetBucketPolicy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "count": {
+                    "type": "integer"
+                },
+                "ISP": {
+                    "$ref": "#/definitions/ISP"
+                },
+                "Error Code": {
+                    "$ref": "#/definitions/ErrorCode"
+                }
+            },
+            "required": [
+                "Error Code",
+                "ISP",
+                "count"
+            ],
+            "title": "GetBucketPolicy"
+        },
+        "ErrorCode": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "NoSuchBucketPolicy": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "NoSuchBucketPolicy"
+            ],
+            "title": "ErrorCode"
+        },
+        "Location": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "us-east-1": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "us-east-1"
+            ],
+            "title": "Location"
+        },
+        "Object": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "public_bucket/secret_key.txt": {
+                    "type": "integer"
+                },
+                "public_bucket/financial_summary.txt": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "public_bucket/financial_summary.txt",
+                "public_bucket/secret_key.txt"
+            ],
+            "title": "Object"
+        },
+        "SummaryOwner": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bucket_owner": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "bucket_owner"
+            ],
+            "title": "SummaryOwner"
+        },
+        "Themes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Secret Markings": {
+                    "type": "integer"
+                },
+                "Corporate Proposals": {
+                    "type": "integer"
+                },
+                "Confidential Markings": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "Confidential Markings",
+                "Corporate Proposals",
+                "Secret Markings"
+            ],
+            "title": "Themes"
+        },
+        "TimeRange": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "count": {
+                    "type": "integer"
+                },
+                "start": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "end": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "count",
+                "end",
+                "start"
+            ],
+            "title": "TimeRange"
+        },
+        "RecipientAccountID": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "123456789012": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "123456789012"
+            ],
+            "title": "RecipientAccountID"
+        },
+        "Trigger": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "rule-arn": {
+                    "type": "string"
+                },
+                "alert-type": {
+                    "type": "string"
+                },
+                "created-at": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "risk": {
+                    "type": "integer"
+                },
+                "features": {
+                    "$ref": "#/definitions/Features"
+                }
+            },
+            "required": [
+                "alert-type"
+            ],
+            "title": "Trigger"
+        },
+        "Features": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "distinctEventName": {
+                    "$ref": "#/definitions/DistinctEventName"
+                },
+                "ListInstanceProfilesForRole": {
+                    "$ref": "#/definitions/List"
+                },
+                "ListRolePolicies": {
+                    "$ref": "#/definitions/List"
+                }
+            },
+            "required": [
+                "ListInstanceProfilesForRole",
+                "ListRolePolicies",
+                "distinctEventName"
+            ],
+            "title": "Features"
+        },
+        "List": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "narrative": {
+                    "type": "string"
+                },
+                "anomalous": {
+                    "type": "boolean"
+                },
+                "multiplier": {
+                    "type": "number"
+                },
+                "excession_times": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "risk": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "anomalous",
+                "description",
+                "excession_times",
+                "multiplier",
+                "name",
+                "narrative",
+                "risk"
+            ],
+            "title": "List"
+        },
+        "DistinctEventName": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "narrative": {
+                    "type": "string"
+                },
+                "risk": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "description",
+                "name",
+                "narrative",
+                "risk"
+            ],
+            "title": "DistinctEventName"
+        }
+    }
+}

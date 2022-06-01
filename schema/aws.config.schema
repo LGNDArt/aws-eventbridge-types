@@ -1,0 +1,468 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsConfigElement"
+    },
+    "definitions": {
+        "AwsConfigElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsConfigElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "recordVersion": {
+                    "type": "string"
+                },
+                "messageType": {
+                    "type": "string"
+                },
+                "configurationItemDiff": {
+                    "$ref": "#/definitions/ConfigurationItemDiff"
+                },
+                "notificationCreationTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "configurationItem": {
+                    "$ref": "#/definitions/ConfigurationItem"
+                },
+                "s3ObjectKey": {
+                    "type": "string"
+                },
+                "s3Bucket": {
+                    "type": "string"
+                },
+                "configSnapshotId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "resourceId": {
+                    "type": "string"
+                },
+                "awsRegion": {
+                    "type": "string"
+                },
+                "awsAccountId": {
+                    "type": "string"
+                },
+                "configRuleName": {
+                    "type": "string"
+                },
+                "configRuleARN": {
+                    "type": "string"
+                },
+                "newEvaluationResult": {
+                    "$ref": "#/definitions/NewEvaluationResult"
+                },
+                "resourceType": {
+                    "type": "string"
+                },
+                "configRuleNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "messageType",
+                "notificationCreationTime",
+                "recordVersion"
+            ],
+            "title": "Detail"
+        },
+        "ConfigurationItem": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "relatedEvents": {
+                    "type": "array",
+                    "items": {}
+                },
+                "relationships": {
+                    "type": "array",
+                    "items": {}
+                },
+                "configuration": {
+                    "$ref": "#/definitions/Configuration"
+                },
+                "supplementaryConfiguration": {
+                    "$ref": "#/definitions/SupplementaryConfiguration"
+                },
+                "tags": {
+                    "$ref": "#/definitions/Tags"
+                },
+                "configurationItemVersion": {
+                    "type": "string"
+                },
+                "configurationItemCaptureTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "configurationStateId": {
+                    "type": "integer"
+                },
+                "awsAccountId": {
+                    "type": "string"
+                },
+                "configurationItemStatus": {
+                    "type": "string"
+                },
+                "resourceType": {
+                    "type": "string"
+                },
+                "resourceId": {
+                    "type": "string"
+                },
+                "resourceName": {
+                    "type": "string"
+                },
+                "ARN": {
+                    "type": "string"
+                },
+                "awsRegion": {
+                    "type": "string"
+                },
+                "availabilityZone": {
+                    "type": "string"
+                },
+                "configurationStateMd5Hash": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ARN",
+                "availabilityZone",
+                "awsAccountId",
+                "awsRegion",
+                "configuration",
+                "configurationItemCaptureTime",
+                "configurationItemStatus",
+                "configurationItemVersion",
+                "configurationStateId",
+                "configurationStateMd5Hash",
+                "relatedEvents",
+                "relationships",
+                "resourceId",
+                "resourceName",
+                "resourceType",
+                "supplementaryConfiguration",
+                "tags"
+            ],
+            "title": "ConfigurationItem"
+        },
+        "Configuration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "FileSystemId": {
+                    "type": "string"
+                },
+                "Arn": {
+                    "type": "string"
+                },
+                "Encrypted": {
+                    "type": "boolean"
+                },
+                "FileSystemTags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FileSystemTag"
+                    }
+                },
+                "PerformanceMode": {
+                    "type": "string"
+                },
+                "ThroughputMode": {
+                    "type": "string"
+                },
+                "LifecyclePolicies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LifecyclePolicy"
+                    }
+                },
+                "BackupPolicy": {
+                    "$ref": "#/definitions/BackupPolicy"
+                },
+                "FileSystemPolicy": {
+                    "$ref": "#/definitions/SupplementaryConfiguration"
+                },
+                "KmsKeyId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Arn",
+                "BackupPolicy",
+                "Encrypted",
+                "FileSystemId",
+                "FileSystemPolicy",
+                "FileSystemTags",
+                "KmsKeyId",
+                "LifecyclePolicies",
+                "PerformanceMode",
+                "ThroughputMode"
+            ],
+            "title": "Configuration"
+        },
+        "BackupPolicy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Status": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Status"
+            ],
+            "title": "BackupPolicy"
+        },
+        "SupplementaryConfiguration": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "SupplementaryConfiguration"
+        },
+        "FileSystemTag": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Key": {
+                    "type": "string"
+                },
+                "Value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Key",
+                "Value"
+            ],
+            "title": "FileSystemTag"
+        },
+        "LifecyclePolicy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "TransitionToIA": {
+                    "type": "string"
+                },
+                "TransitionToPrimaryStorageClass": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "LifecyclePolicy"
+        },
+        "Tags": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "aws:elasticfilesystem:default-backup": {
+                    "type": "string"
+                },
+                "test": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Name",
+                "aws:elasticfilesystem:default-backup",
+                "test"
+            ],
+            "title": "Tags"
+        },
+        "ConfigurationItemDiff": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "changedProperties": {
+                    "$ref": "#/definitions/ChangedProperties"
+                },
+                "changeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "changeType",
+                "changedProperties"
+            ],
+            "title": "ConfigurationItemDiff"
+        },
+        "ChangedProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Configuration.FileSystemTags.0": {
+                    "$ref": "#/definitions/ConfigurationFileSystemTags0"
+                },
+                "Tags.2": {
+                    "$ref": "#/definitions/Tags2"
+                }
+            },
+            "required": [
+                "Configuration.FileSystemTags.0",
+                "Tags.2"
+            ],
+            "title": "ChangedProperties"
+        },
+        "ConfigurationFileSystemTags0": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "updatedValue": {
+                    "$ref": "#/definitions/FileSystemTag"
+                },
+                "changeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "changeType",
+                "updatedValue"
+            ],
+            "title": "ConfigurationFileSystemTags0"
+        },
+        "Tags2": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "updatedValue": {
+                    "type": "string"
+                },
+                "changeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "changeType",
+                "updatedValue"
+            ],
+            "title": "Tags2"
+        },
+        "NewEvaluationResult": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "evaluationResultIdentifier": {
+                    "$ref": "#/definitions/EvaluationResultIdentifier"
+                },
+                "complianceType": {
+                    "type": "string"
+                },
+                "resultRecordedTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "configRuleInvokedTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "annotation": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "annotation",
+                "complianceType",
+                "configRuleInvokedTime",
+                "evaluationResultIdentifier",
+                "resultRecordedTime"
+            ],
+            "title": "NewEvaluationResult"
+        },
+        "EvaluationResultIdentifier": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "evaluationResultQualifier": {
+                    "$ref": "#/definitions/EvaluationResultQualifier"
+                },
+                "orderingTimestamp": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "evaluationResultQualifier",
+                "orderingTimestamp"
+            ],
+            "title": "EvaluationResultIdentifier"
+        },
+        "EvaluationResultQualifier": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "configRuleName": {
+                    "type": "string"
+                },
+                "resourceType": {
+                    "type": "string"
+                },
+                "resourceId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "configRuleName",
+                "resourceId",
+                "resourceType"
+            ],
+            "title": "EvaluationResultQualifier"
+        }
+    }
+}

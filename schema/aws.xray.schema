@@ -1,0 +1,214 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsXrayElement"
+    },
+    "definitions": {
+        "AwsXrayElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "region": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsXrayElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "InsightId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "Summary": {
+                    "type": "string"
+                },
+                "GroupName": {
+                    "type": "string"
+                },
+                "RootCauseServiceId": {
+                    "$ref": "#/definitions/ServiceID"
+                },
+                "Categories": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "State": {
+                    "type": "string"
+                },
+                "StartTime": {
+                    "type": "integer"
+                },
+                "EndTime": {
+                    "type": "null"
+                },
+                "ClientRequestImpactStatistics": {
+                    "$ref": "#/definitions/RequestImpactStatistics"
+                },
+                "RootCauseServiceRequestImpactStatistics": {
+                    "$ref": "#/definitions/RequestImpactStatistics"
+                },
+                "TopAnomalousServices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TopAnomalousService"
+                    }
+                },
+                "Event": {
+                    "$ref": "#/definitions/Event"
+                }
+            },
+            "required": [
+                "Categories",
+                "ClientRequestImpactStatistics",
+                "EndTime",
+                "Event",
+                "GroupName",
+                "InsightId",
+                "RootCauseServiceId",
+                "RootCauseServiceRequestImpactStatistics",
+                "StartTime",
+                "State",
+                "Summary",
+                "TopAnomalousServices"
+            ],
+            "title": "Detail"
+        },
+        "RequestImpactStatistics": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "FaultCount": {
+                    "type": "integer"
+                },
+                "OkCount": {
+                    "type": "integer"
+                },
+                "TotalCount": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "FaultCount",
+                "OkCount",
+                "TotalCount"
+            ],
+            "title": "RequestImpactStatistics"
+        },
+        "Event": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Summary": {
+                    "type": "string"
+                },
+                "EventTime": {
+                    "type": "string"
+                },
+                "ClientRequestImpactStatistics": {
+                    "$ref": "#/definitions/RequestImpactStatistics"
+                },
+                "RootCauseServiceRequestImpactStatistics": {
+                    "$ref": "#/definitions/RequestImpactStatistics"
+                },
+                "TopAnomalousServices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TopAnomalousService"
+                    }
+                }
+            },
+            "required": [
+                "ClientRequestImpactStatistics",
+                "EventTime",
+                "RootCauseServiceRequestImpactStatistics",
+                "Summary",
+                "TopAnomalousServices"
+            ],
+            "title": "Event"
+        },
+        "TopAnomalousService": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ServiceId": {
+                    "$ref": "#/definitions/ServiceID"
+                }
+            },
+            "required": [
+                "ServiceId"
+            ],
+            "title": "TopAnomalousService"
+        },
+        "ServiceID": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Type": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Names": {
+                    "type": "array",
+                    "items": {}
+                },
+                "AccountId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "AccountId",
+                "Name",
+                "Names",
+                "Type"
+            ],
+            "title": "ServiceID"
+        }
+    }
+}

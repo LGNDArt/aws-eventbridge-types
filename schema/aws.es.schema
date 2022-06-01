@@ -1,0 +1,115 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsE"
+    },
+    "definitions": {
+        "AwsE": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/Source"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsE"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "event": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "severity": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "scheduleTime": {
+                    "type": "string"
+                },
+                "startTime": {
+                    "type": "string"
+                },
+                "completionTime": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "event",
+                "severity",
+                "status"
+            ],
+            "title": "Detail"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "us-east-1"
+            ],
+            "title": "Region"
+        },
+        "Resource": {
+            "type": "string",
+            "enum": [
+                "arn:aws:es:us-east-1:123456789012:domain/test-domain"
+            ],
+            "title": "Resource"
+        },
+        "Source": {
+            "type": "string",
+            "enum": [
+                "aws.es"
+            ],
+            "title": "Source"
+        }
+    }
+}

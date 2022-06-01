@@ -1,0 +1,138 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsCodebuildElement"
+    },
+    "definitions": {
+        "AwsCodebuildElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "$ref": "#/definitions/DetailType"
+                },
+                "source": {
+                    "$ref": "#/definitions/Source"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsCodebuildElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "build-status": {
+                    "type": "string"
+                },
+                "project-name": {
+                    "$ref": "#/definitions/ProjectName"
+                },
+                "build-id": {
+                    "type": "string"
+                },
+                "current-phase": {
+                    "type": "string"
+                },
+                "current-phase-context": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "completed-phase": {
+                    "type": "string"
+                },
+                "completed-phase-context": {
+                    "type": "string"
+                },
+                "completed-phase-status": {
+                    "type": "string"
+                },
+                "completed-phase-duration-seconds": {
+                    "type": "string"
+                },
+                "completed-phase-start": {
+                    "type": "string"
+                },
+                "completed-phase-end": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "build-id",
+                "project-name",
+                "version"
+            ],
+            "title": "Detail"
+        },
+        "ProjectName": {
+            "type": "string",
+            "enum": [
+                "SampleProjectName"
+            ],
+            "title": "ProjectName"
+        },
+        "DetailType": {
+            "type": "string",
+            "enum": [
+                "CodeBuild Build State Change",
+                "CodeBuild Build Phase Change"
+            ],
+            "title": "DetailType"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "us-east-1"
+            ],
+            "title": "Region"
+        },
+        "Source": {
+            "type": "string",
+            "enum": [
+                "aws.codebuild"
+            ],
+            "title": "Source"
+        }
+    }
+}

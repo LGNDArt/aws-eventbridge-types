@@ -1,0 +1,315 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsWellarchitectedElement"
+    },
+    "definitions": {
+        "AwsWellarchitectedElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsWellarchitectedElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "eventVersion": {
+                    "type": "string"
+                },
+                "userIdentity": {
+                    "$ref": "#/definitions/UserIdentity"
+                },
+                "eventTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "eventSource": {
+                    "type": "string"
+                },
+                "eventName": {
+                    "type": "string"
+                },
+                "awsRegion": {
+                    "type": "string"
+                },
+                "sourceIPAddress": {
+                    "type": "string"
+                },
+                "userAgent": {
+                    "type": "string"
+                },
+                "requestParameters": {
+                    "$ref": "#/definitions/RequestParameters"
+                },
+                "responseElements": {
+                    "$ref": "#/definitions/ResponseElements"
+                },
+                "requestID": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "eventID": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "readOnly": {
+                    "type": "boolean"
+                },
+                "eventType": {
+                    "type": "string"
+                },
+                "managementEvent": {
+                    "type": "boolean"
+                },
+                "recipientAccountId": {
+                    "type": "string"
+                },
+                "eventCategory": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "awsRegion",
+                "eventCategory",
+                "eventID",
+                "eventName",
+                "eventSource",
+                "eventTime",
+                "eventType",
+                "eventVersion",
+                "managementEvent",
+                "readOnly",
+                "recipientAccountId",
+                "requestID",
+                "requestParameters",
+                "responseElements",
+                "sourceIPAddress",
+                "userAgent",
+                "userIdentity"
+            ],
+            "title": "Detail"
+        },
+        "RequestParameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Status": {
+                    "type": "string"
+                },
+                "SelectedChoices": {
+                    "type": "string"
+                },
+                "ChoiceUpdates": {
+                    "type": "string"
+                },
+                "QuestionId": {
+                    "type": "string"
+                },
+                "WorkloadId": {
+                    "type": "string"
+                },
+                "IsApplicable": {
+                    "type": "boolean"
+                },
+                "LensAlias": {
+                    "type": "string"
+                },
+                "Reason": {
+                    "type": "string"
+                },
+                "Notes": {
+                    "type": "string"
+                },
+                "IsMajorVersion": {
+                    "type": "boolean"
+                },
+                "LensVersion": {
+                    "type": "string"
+                },
+                "ClientRequestToken": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            },
+            "required": [
+                "LensAlias"
+            ],
+            "title": "RequestParameters"
+        },
+        "ResponseElements": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Answer": {
+                    "type": "string"
+                },
+                "LensAlias": {
+                    "type": "string"
+                },
+                "WorkloadId": {
+                    "type": "string"
+                },
+                "LensArn": {
+                    "type": "string"
+                },
+                "LensVersion": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "ResponseElements"
+        },
+        "UserIdentity": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "principalId": {
+                    "type": "string"
+                },
+                "arn": {
+                    "type": "string"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "accessKeyId": {
+                    "type": "string"
+                },
+                "sessionContext": {
+                    "$ref": "#/definitions/SessionContext"
+                }
+            },
+            "required": [
+                "accessKeyId",
+                "accountId",
+                "arn",
+                "principalId",
+                "sessionContext",
+                "type"
+            ],
+            "title": "UserIdentity"
+        },
+        "SessionContext": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "sessionIssuer": {
+                    "$ref": "#/definitions/SessionIssuer"
+                },
+                "webIdFederationData": {
+                    "$ref": "#/definitions/WebIDFederationData"
+                },
+                "attributes": {
+                    "$ref": "#/definitions/Attributes"
+                }
+            },
+            "required": [
+                "attributes",
+                "sessionIssuer",
+                "webIdFederationData"
+            ],
+            "title": "SessionContext"
+        },
+        "Attributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "creationDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "mfaAuthenticated": {
+                    "type": "string",
+                    "format": "boolean"
+                }
+            },
+            "required": [
+                "creationDate",
+                "mfaAuthenticated"
+            ],
+            "title": "Attributes"
+        },
+        "SessionIssuer": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "principalId": {
+                    "type": "string"
+                },
+                "arn": {
+                    "type": "string"
+                },
+                "accountId": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accountId",
+                "arn",
+                "principalId",
+                "type",
+                "userName"
+            ],
+            "title": "SessionIssuer"
+        },
+        "WebIDFederationData": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "WebIDFederationData"
+        }
+    }
+}

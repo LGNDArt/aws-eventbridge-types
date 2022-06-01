@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsDatabrewElement"
+    },
+    "definitions": {
+        "AwsDatabrewElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsDatabrewElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "jobName": {
+                    "type": "string"
+                },
+                "severity": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "jobRunId": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "rulesetArn": {
+                    "type": "string"
+                },
+                "datasetName": {
+                    "type": "string"
+                },
+                "validationReportS3Location": {
+                    "type": "string"
+                },
+                "rulesetName": {
+                    "type": "string"
+                },
+                "validationState": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "jobName",
+                "jobRunId"
+            ],
+            "title": "Detail"
+        }
+    }
+}

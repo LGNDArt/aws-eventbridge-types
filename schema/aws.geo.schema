@@ -1,0 +1,135 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsGeoElement"
+    },
+    "definitions": {
+        "AwsGeoElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsGeoElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "EventType": {
+                    "type": "string"
+                },
+                "GeofenceId": {
+                    "type": "string"
+                },
+                "DeviceId": {
+                    "type": "string"
+                },
+                "SampleTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "Position": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "Accuracy": {
+                    "$ref": "#/definitions/Accuracy"
+                },
+                "PositionProperties": {
+                    "$ref": "#/definitions/PositionProperties"
+                }
+            },
+            "required": [
+                "Accuracy",
+                "DeviceId",
+                "EventType",
+                "GeofenceId",
+                "Position",
+                "PositionProperties",
+                "SampleTime"
+            ],
+            "title": "Detail"
+        },
+        "Accuracy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Horizontal": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "Horizontal"
+            ],
+            "title": "Accuracy"
+        },
+        "PositionProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "field1": {
+                    "type": "string"
+                },
+                "field2": {
+                    "type": "string"
+                },
+                "field3": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "field1",
+                "field2",
+                "field3"
+            ],
+            "title": "PositionProperties"
+        }
+    }
+}

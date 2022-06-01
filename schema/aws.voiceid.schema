@@ -1,0 +1,608 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsVoiceidElement"
+    },
+    "definitions": {
+        "AwsVoiceidElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/Source"
+                },
+                "id": {
+                    "$ref": "#/definitions/IDUnion"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsVoiceidElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "domainId": {
+                    "$ref": "#/definitions/DomainID"
+                },
+                "errorInfo": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ErrorInfo"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "session": {
+                    "$ref": "#/definitions/Session"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "systemAttributes": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/SystemAttributes"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "sourceId": {
+                    "type": "string"
+                },
+                "data": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Data"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "generatedSpeakerId": {
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "generatedFraudsterId": {
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "batchJobId": {
+                    "type": "string"
+                },
+                "sessionId": {
+                    "type": "string"
+                },
+                "sessionName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "action",
+                "domainId",
+                "errorInfo",
+                "sourceId",
+                "status"
+            ],
+            "title": "Detail"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "enrollmentSource": {
+                    "type": "string"
+                },
+                "enrollmentSourceId": {
+                    "type": "string"
+                },
+                "enrollmentStatus": {
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "registrationSource": {
+                    "type": "string"
+                },
+                "registrationSourceId": {
+                    "type": "string"
+                },
+                "registrationStatus": {
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "dataAccessRoleArn": {
+                    "type": "string"
+                },
+                "inputDataConfig": {
+                    "$ref": "#/definitions/InputDataConfig"
+                },
+                "outputDataConfig": {
+                    "$ref": "#/definitions/OutputDataConfig"
+                },
+                "registrationConfig": {
+                    "$ref": "#/definitions/RegistrationConfig"
+                },
+                "enrollmentConfig": {
+                    "$ref": "#/definitions/EnrollmentConfig"
+                }
+            },
+            "required": [],
+            "title": "Data"
+        },
+        "EnrollmentConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "existingEnrollmentAction": {
+                    "type": "string"
+                },
+                "fraudDetectionConfig": {
+                    "$ref": "#/definitions/FraudDetectionConfig"
+                }
+            },
+            "required": [
+                "existingEnrollmentAction",
+                "fraudDetectionConfig"
+            ],
+            "title": "EnrollmentConfig"
+        },
+        "FraudDetectionConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "fraudDetectionAction": {
+                    "type": "string"
+                },
+                "fraudDetectionThreshold": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "fraudDetectionAction",
+                "fraudDetectionThreshold"
+            ],
+            "title": "FraudDetectionConfig"
+        },
+        "InputDataConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "s3Uri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "s3Uri"
+            ],
+            "title": "InputDataConfig"
+        },
+        "OutputDataConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "kmsKeyId": {
+                    "type": "string"
+                },
+                "s3Uri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "kmsKeyId",
+                "s3Uri"
+            ],
+            "title": "OutputDataConfig"
+        },
+        "RegistrationConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "duplicateRegistrationAction": {
+                    "type": "string"
+                },
+                "fraudsterSimilarityThreshold": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "duplicateRegistrationAction",
+                "fraudsterSimilarityThreshold"
+            ],
+            "title": "RegistrationConfig"
+        },
+        "ErrorInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "errorCode": {
+                    "type": "integer"
+                },
+                "errorMessage": {
+                    "type": "string"
+                },
+                "errorType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "errorCode",
+                "errorMessage",
+                "errorType"
+            ],
+            "title": "ErrorInfo"
+        },
+        "Session": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "authenticationAudioProgress": {
+                    "$ref": "#/definitions/TionAudioProgress"
+                },
+                "authenticationConfiguration": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/AuthenticationConfigurationClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "enrollmentAudioProgress": {
+                    "$ref": "#/definitions/EnrollmentAudioProgress"
+                },
+                "fraudDetectionAudioProgress": {
+                    "$ref": "#/definitions/TionAudioProgress"
+                },
+                "fraudDetectionConfiguration": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/FraudDetectionConfigurationClass"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "generatedSpeakerId": {
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "sessionId": {
+                    "type": "string"
+                },
+                "sessionName": {
+                    "type": "string"
+                },
+                "streamingConfiguration": {
+                    "$ref": "#/definitions/StreamingConfiguration"
+                },
+                "authenticationResult": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/AuthenticationResult"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "fraudDetectionResult": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/FraudDetectionResult"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "streamingStatus": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "generatedSpeakerId",
+                "sessionId",
+                "sessionName"
+            ],
+            "title": "Session"
+        },
+        "TionAudioProgress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "audioAggregationEndedAt": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "audioAggregationStartedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            },
+            "required": [
+                "audioAggregationEndedAt",
+                "audioAggregationStartedAt"
+            ],
+            "title": "TionAudioProgress"
+        },
+        "AuthenticationConfigurationClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "acceptanceThreshold": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "acceptanceThreshold"
+            ],
+            "title": "AuthenticationConfigurationClass"
+        },
+        "AuthenticationResult": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "audioAggregationEndedAt": {
+                    "type": "null"
+                },
+                "audioAggregationStartedAt": {
+                    "type": "null"
+                },
+                "authenticationResultId": {
+                    "type": "string"
+                },
+                "configuration": {
+                    "$ref": "#/definitions/AuthenticationConfigurationClass"
+                },
+                "decision": {
+                    "type": "string"
+                },
+                "score": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "audioAggregationEndedAt",
+                "audioAggregationStartedAt",
+                "authenticationResultId",
+                "configuration",
+                "decision",
+                "score"
+            ],
+            "title": "AuthenticationResult"
+        },
+        "EnrollmentAudioProgress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "audioAggregationEndedAt": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "audioAggregationStartedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "audioAggregationStatus": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "audioAggregationEndedAt",
+                "audioAggregationStartedAt",
+                "audioAggregationStatus"
+            ],
+            "title": "EnrollmentAudioProgress"
+        },
+        "FraudDetectionConfigurationClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "riskThreshold": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "riskThreshold"
+            ],
+            "title": "FraudDetectionConfigurationClass"
+        },
+        "FraudDetectionResult": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "audioAggregationEndedAt": {
+                    "type": "null"
+                },
+                "audioAggregationStartedAt": {
+                    "type": "null"
+                },
+                "configuration": {
+                    "$ref": "#/definitions/FraudDetectionConfigurationClass"
+                },
+                "decision": {
+                    "type": "string"
+                },
+                "fraudDetectionResultId": {
+                    "type": "string"
+                },
+                "reasons": {
+                    "type": "null"
+                },
+                "riskDetails": {
+                    "type": "null"
+                }
+            },
+            "required": [
+                "audioAggregationEndedAt",
+                "audioAggregationStartedAt",
+                "configuration",
+                "decision",
+                "fraudDetectionResultId",
+                "reasons",
+                "riskDetails"
+            ],
+            "title": "FraudDetectionResult"
+        },
+        "StreamingConfiguration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "authenticationMinimumSpeechInSeconds": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "authenticationMinimumSpeechInSeconds"
+            ],
+            "title": "StreamingConfiguration"
+        },
+        "SystemAttributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "aws:connect:OriginalContactArn": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aws:connect:OriginalContactArn"
+            ],
+            "title": "SystemAttributes"
+        },
+        "IDUnion": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/IDEnum"
+                },
+                {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ],
+            "title": "IDUnion"
+        },
+        "DomainID": {
+            "type": "string",
+            "enum": [
+                "7777aaaaaaaa77777777aa"
+            ],
+            "title": "DomainID"
+        },
+        "IDEnum": {
+            "type": "string",
+            "enum": [
+                "ty5d2fd3-6d89-3892-168a-9e1dab06268f",
+                "t55d2fd3-6d89-3892-168a-9e1dab06268f",
+                "t65d2fd3-6d89-3892-168a-9e1dab06268f",
+                "q65d2fd3-6d89-3892-168a-9e1dab06268f"
+            ],
+            "title": "IDEnum"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "us-east-1"
+            ],
+            "title": "Region"
+        },
+        "Source": {
+            "type": "string",
+            "enum": [
+                "aws.voiceid"
+            ],
+            "title": "Source"
+        }
+    }
+}

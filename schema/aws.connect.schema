@@ -1,0 +1,187 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsConnectElement"
+    },
+    "definitions": {
+        "AwsConnectElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsConnectElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instance": {
+                    "type": "string"
+                },
+                "contact": {
+                    "type": "string"
+                },
+                "channel": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "reasonCode": {
+                    "type": "string"
+                },
+                "eventType": {
+                    "type": "string"
+                },
+                "contactId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "initialContactId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "previousContactId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "instanceArn": {
+                    "type": "string"
+                },
+                "initiationMethod": {
+                    "type": "string"
+                },
+                "queueInfo": {
+                    "$ref": "#/definitions/QueueInfo"
+                },
+                "agentInfo": {
+                    "$ref": "#/definitions/AgentInfo"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "ruleName": {
+                    "type": "string"
+                },
+                "actionName": {
+                    "type": "string"
+                },
+                "contactArn": {
+                    "type": "string"
+                },
+                "agentArn": {
+                    "type": "string"
+                },
+                "queueArn": {
+                    "type": "string"
+                },
+                "ruleId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "actionType": {
+                    "type": "string"
+                },
+                "triggerEvent": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "additionalInfo": {
+                    "$ref": "#/definitions/AdditionalInfo"
+                }
+            },
+            "required": [],
+            "title": "Detail"
+        },
+        "AdditionalInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "contactFlowId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contactFlowId"
+            ],
+            "title": "AdditionalInfo"
+        },
+        "AgentInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "agentArn": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "agentArn"
+            ],
+            "title": "AgentInfo"
+        },
+        "QueueInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "queueArn": {
+                    "type": "string"
+                },
+                "queueType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "queueArn",
+                "queueType"
+            ],
+            "title": "QueueInfo"
+        }
+    }
+}

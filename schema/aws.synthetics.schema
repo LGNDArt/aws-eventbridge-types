@@ -1,0 +1,165 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsSynthetic"
+    },
+    "definitions": {
+        "AwsSynthetic": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsSynthetic"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "account-id": {
+                    "type": "string"
+                },
+                "canary-id": {
+                    "type": "string"
+                },
+                "canary-name": {
+                    "type": "string"
+                },
+                "current-state": {
+                    "type": "string"
+                },
+                "previous-state": {
+                    "type": "string"
+                },
+                "source-location": {
+                    "type": "string"
+                },
+                "updated-on": {
+                    "type": "number"
+                },
+                "changed-config": {
+                    "$ref": "#/definitions/ChangedConfig"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "canary-run-id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "artifact-location": {
+                    "type": "string"
+                },
+                "test-run-status": {
+                    "type": "string"
+                },
+                "state-reason": {
+                    "type": "string"
+                },
+                "canary-run-timeline": {
+                    "$ref": "#/definitions/CanaryRunTimeline"
+                }
+            },
+            "required": [
+                "account-id",
+                "canary-id",
+                "canary-name",
+                "message"
+            ],
+            "title": "Detail"
+        },
+        "CanaryRunTimeline": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "started": {
+                    "type": "integer"
+                },
+                "completed": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "completed",
+                "started"
+            ],
+            "title": "CanaryRunTimeline"
+        },
+        "ChangedConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "executionArn": {
+                    "$ref": "#/definitions/IonArn"
+                },
+                "testCodeLayerVersionArn": {
+                    "$ref": "#/definitions/IonArn"
+                }
+            },
+            "required": [
+                "executionArn",
+                "testCodeLayerVersionArn"
+            ],
+            "title": "ChangedConfig"
+        },
+        "IonArn": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "previous-value": {
+                    "type": "string"
+                },
+                "current-value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "current-value",
+                "previous-value"
+            ],
+            "title": "IonArn"
+        }
+    }
+}

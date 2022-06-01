@@ -1,0 +1,87 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsSupportElement"
+    },
+    "definitions": {
+        "AwsSupportElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                },
+                "account": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsSupportElement"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "case-id": {
+                    "type": "string"
+                },
+                "display-id": {
+                    "type": "string"
+                },
+                "communication-id": {
+                    "type": "string"
+                },
+                "event-name": {
+                    "type": "string"
+                },
+                "origin": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "case-id",
+                "communication-id",
+                "display-id",
+                "event-name",
+                "origin"
+            ],
+            "title": "Detail"
+        }
+    }
+}

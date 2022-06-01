@@ -1,0 +1,102 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsDR"
+    },
+    "definitions": {
+        "AwsDR": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/Source"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "$ref": "#/definitions/Region"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsDR"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "state": {
+                    "type": "string"
+                },
+                "job-id": {
+                    "type": "string"
+                },
+                "is_drill": {
+                    "type": "string"
+                },
+                "DrsSnapshotID": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "EbsSnapshotID": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "Detail"
+        },
+        "Region": {
+            "type": "string",
+            "enum": [
+                "us-west-2"
+            ],
+            "title": "Region"
+        },
+        "Source": {
+            "type": "string",
+            "enum": [
+                "aws.drs"
+            ],
+            "title": "Source"
+        }
+    }
+}

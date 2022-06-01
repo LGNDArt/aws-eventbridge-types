@@ -1,0 +1,148 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AwsManagedservice"
+    },
+    "definitions": {
+        "AwsManagedservice": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "detail-type": {
+                    "type": "string"
+                },
+                "account": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "region": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {}
+                },
+                "detail": {
+                    "$ref": "#/definitions/Detail"
+                }
+            },
+            "required": [
+                "account",
+                "detail",
+                "detail-type",
+                "id",
+                "region",
+                "resources",
+                "source",
+                "time",
+                "version"
+            ],
+            "title": "AwsManagedservice"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ActionState": {
+                    "type": "string"
+                },
+                "ActualExecutionTimeRange": {
+                    "$ref": "#/definitions/ExecutionTimeRange"
+                },
+                "AutomationStatus": {
+                    "type": "string"
+                },
+                "AwsAccountId": {
+                    "type": "string"
+                },
+                "AwsApprovalStatus": {
+                    "type": "string"
+                },
+                "ChangeTypeId": {
+                    "type": "string"
+                },
+                "ChangeTypeVersion": {
+                    "type": "string"
+                },
+                "CreatedTime": {
+                    "type": "integer"
+                },
+                "CustomerApprovalStatus": {
+                    "type": "string"
+                },
+                "EventType": {
+                    "type": "string"
+                },
+                "LastModifiedTime": {
+                    "type": "integer"
+                },
+                "LastSubmittedTime": {
+                    "type": "integer"
+                },
+                "RequestedExecutionTimeRange": {
+                    "$ref": "#/definitions/ExecutionTimeRange"
+                },
+                "RfcId": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ActionState",
+                "ActualExecutionTimeRange",
+                "AutomationStatus",
+                "AwsAccountId",
+                "AwsApprovalStatus",
+                "ChangeTypeId",
+                "ChangeTypeVersion",
+                "CreatedTime",
+                "CustomerApprovalStatus",
+                "EventType",
+                "LastModifiedTime",
+                "LastSubmittedTime",
+                "RequestedExecutionTimeRange",
+                "RfcId",
+                "Status",
+                "Title"
+            ],
+            "title": "Detail"
+        },
+        "ExecutionTimeRange": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "StartTime": {
+                    "type": "integer"
+                },
+                "EndTime": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "EndTime",
+                "StartTime"
+            ],
+            "title": "ExecutionTimeRange"
+        }
+    }
+}
