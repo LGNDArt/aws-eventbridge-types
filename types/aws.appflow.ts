@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsAppflow } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsAppflow = Convert.toAwsAppflow(json);
 //
@@ -8,116 +8,54 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsAppflow {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsAppflowElement:            AwsAppflowElement;
-    Detail:                       Detail;
-    IncrementalTransferTimeRange: IncrementalTransferTimeRange;
-}
-
-export interface AwsAppflowElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsAppflowElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsAppflowElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    "flow-name":                       Account;
-    "created-by":                      Account;
-    "flow-arn":                        Account;
-    source:                            Account;
-    destination:                       Account;
-    "source-object":                   Account;
-    "destination-object":              Account;
-    "trigger-type":                    Account;
-    "incremental-transfer-time-range": DetailClass;
-    "start-time":                      Account;
-    "end-time":                        Account;
-    status:                            Account;
-    error:                             Account;
-    "num-of-records-processed":        Account;
-    "num-of-records-filtered":         Account;
-    "num-of-record-failures":          Account;
-    "data-processed":                  Account;
-    "deactivated-time":                Account;
-    reason:                            Account;
-    "status-report":                   Account;
+    "flow-name":                       string;
+    "created-by":                      string;
+    "flow-arn":                        string;
+    source:                            string;
+    destination:                       string;
+    "source-object":                   string;
+    "destination-object":              string;
+    "trigger-type":                    string;
+    "incremental-transfer-time-range": IncrementalTransferTimeRange;
+    "start-time"?:                     string;
+    "end-time"?:                       string;
+    status?:                           string;
+    error?:                            string;
+    "num-of-records-processed"?:       string;
+    "num-of-records-filtered"?:        string;
+    "num-of-record-failures"?:         string;
+    "data-processed"?:                 string;
+    "deactivated-time"?:               string;
+    reason?:                           string;
+    "status-report"?:                  string;
 }
 
 export interface IncrementalTransferTimeRange {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           IncrementalTransferTimeRangeProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface IncrementalTransferTimeRangeProperties {
-    "schedule-start-time": Account;
-    "schedule-end-time":   Account;
+    "schedule-start-time": string;
+    "schedule-end-time":   string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsAppflow(json: string): AwsAppflow {
-        return cast(JSON.parse(json), r("AwsAppflow"));
+    public static toAwsAppflow(json: string): AwsAppflow[] {
+        return cast(JSON.parse(json), a(r("AwsAppflow")));
     }
 
-    public static awsAppflowToJson(value: AwsAppflow): string {
-        return JSON.stringify(uncast(value, r("AwsAppflow")), null, 2);
+    public static awsAppflowToJson(value: AwsAppflow[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsAppflow"))), null, 2);
     }
 }
 
@@ -255,91 +193,40 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsAppflow": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsAppflowElement", js: "AwsAppflowElement", typ: r("AwsAppflowElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "IncrementalTransferTimeRange", js: "IncrementalTransferTimeRange", typ: r("IncrementalTransferTimeRange") },
-    ], false),
-    "AwsAppflowElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsAppflowElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsAppflowElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "flow-name", js: "flow-name", typ: r("Account") },
-        { json: "created-by", js: "created-by", typ: r("Account") },
-        { json: "flow-arn", js: "flow-arn", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "destination", js: "destination", typ: r("Account") },
-        { json: "source-object", js: "source-object", typ: r("Account") },
-        { json: "destination-object", js: "destination-object", typ: r("Account") },
-        { json: "trigger-type", js: "trigger-type", typ: r("Account") },
-        { json: "incremental-transfer-time-range", js: "incremental-transfer-time-range", typ: r("DetailClass") },
-        { json: "start-time", js: "start-time", typ: r("Account") },
-        { json: "end-time", js: "end-time", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "error", js: "error", typ: r("Account") },
-        { json: "num-of-records-processed", js: "num-of-records-processed", typ: r("Account") },
-        { json: "num-of-records-filtered", js: "num-of-records-filtered", typ: r("Account") },
-        { json: "num-of-record-failures", js: "num-of-record-failures", typ: r("Account") },
-        { json: "data-processed", js: "data-processed", typ: r("Account") },
-        { json: "deactivated-time", js: "deactivated-time", typ: r("Account") },
-        { json: "reason", js: "reason", typ: r("Account") },
-        { json: "status-report", js: "status-report", typ: r("Account") },
+        { json: "flow-name", js: "flow-name", typ: "" },
+        { json: "created-by", js: "created-by", typ: "" },
+        { json: "flow-arn", js: "flow-arn", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "destination", js: "destination", typ: "" },
+        { json: "source-object", js: "source-object", typ: "" },
+        { json: "destination-object", js: "destination-object", typ: "" },
+        { json: "trigger-type", js: "trigger-type", typ: "" },
+        { json: "incremental-transfer-time-range", js: "incremental-transfer-time-range", typ: r("IncrementalTransferTimeRange") },
+        { json: "start-time", js: "start-time", typ: u(undefined, "") },
+        { json: "end-time", js: "end-time", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "error", js: "error", typ: u(undefined, "") },
+        { json: "num-of-records-processed", js: "num-of-records-processed", typ: u(undefined, "") },
+        { json: "num-of-records-filtered", js: "num-of-records-filtered", typ: u(undefined, "") },
+        { json: "num-of-record-failures", js: "num-of-record-failures", typ: u(undefined, "") },
+        { json: "data-processed", js: "data-processed", typ: u(undefined, "") },
+        { json: "deactivated-time", js: "deactivated-time", typ: u(undefined, "") },
+        { json: "reason", js: "reason", typ: u(undefined, "") },
+        { json: "status-report", js: "status-report", typ: u(undefined, "") },
     ], false),
     "IncrementalTransferTimeRange": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("IncrementalTransferTimeRangeProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "schedule-start-time", js: "schedule-start-time", typ: "" },
+        { json: "schedule-end-time", js: "schedule-end-time", typ: "" },
     ], false),
-    "IncrementalTransferTimeRangeProperties": o([
-        { json: "schedule-start-time", js: "schedule-start-time", typ: r("Account") },
-        { json: "schedule-end-time", js: "schedule-end-time", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsBraket } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsBraket = Convert.toAwsBraket(json);
 //
@@ -8,86 +8,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsBraket {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsBraketElement: AwsBraketElement;
-    Detail:           Detail;
-}
-
-export interface AwsBraketElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsBraketElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsBraketElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    quantumTaskArn:    Account;
-    status:            Account;
-    deviceArn:         Account;
-    shots:             ID;
-    outputS3Bucket:    Account;
-    outputS3KeyPrefix: Account;
-    createdAt:         ID;
+    quantumTaskArn:    string;
+    status:            string;
+    deviceArn:         string;
+    shots:             string;
+    outputS3Bucket:    string;
+    outputS3KeyPrefix: string;
+    createdAt:         Date;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsBraket(json: string): AwsBraket {
-        return cast(JSON.parse(json), r("AwsBraket"));
+    public static toAwsBraket(json: string): AwsBraket[] {
+        return cast(JSON.parse(json), a(r("AwsBraket")));
     }
 
-    public static awsBraketToJson(value: AwsBraket): string {
-        return JSON.stringify(uncast(value, r("AwsBraket")), null, 2);
+    public static awsBraketToJson(value: AwsBraket[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsBraket"))), null, 2);
     }
 }
 
@@ -225,64 +175,23 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsBraket": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsBraketElement", js: "AwsBraketElement", typ: r("AwsBraketElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsBraketElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsBraketElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsBraketElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "quantumTaskArn", js: "quantumTaskArn", typ: "" },
+        { json: "status", js: "status", typ: "" },
+        { json: "deviceArn", js: "deviceArn", typ: "" },
+        { json: "shots", js: "shots", typ: "" },
+        { json: "outputS3Bucket", js: "outputS3Bucket", typ: "" },
+        { json: "outputS3KeyPrefix", js: "outputS3KeyPrefix", typ: "" },
+        { json: "createdAt", js: "createdAt", typ: Date },
     ], false),
-    "DetailProperties": o([
-        { json: "quantumTaskArn", js: "quantumTaskArn", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "deviceArn", js: "deviceArn", typ: r("Account") },
-        { json: "shots", js: "shots", typ: r("ID") },
-        { json: "outputS3Bucket", js: "outputS3Bucket", typ: r("Account") },
-        { json: "outputS3KeyPrefix", js: "outputS3KeyPrefix", typ: r("Account") },
-        { json: "createdAt", js: "createdAt", typ: r("ID") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

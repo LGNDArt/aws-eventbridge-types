@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsEcs } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsEcs = Convert.toAwsEcs(json);
 //
@@ -8,184 +8,78 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsEcs {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsEc:             AwsEc;
-    Detail:            Detail;
-    Container:         Container;
-    Overrides:         Overrides;
-    ContainerOverride: ContainerOverride;
-    Environment:       EnvironmentClass;
-    Resource:          Resource;
-    VersionInfo:       VersionInfo;
-}
-
-export interface AwsEc {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsEcProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsEcProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Container {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ContainerProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ContainerProperties {
-    containerArn: Account;
-    lastStatus:   Account;
-    name:         Account;
-    taskArn:      Account;
-}
-
-export interface ContainerOverride {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ContainerOverrideProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ContainerOverrideProperties {
-    command:     Resources;
-    environment: Environment;
-    name:        Account;
-}
-
-export interface Environment {
-    type:  string;
-    items: Items;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    agentConnected?:      boolean;
+    clusterArn:           string;
+    containerInstanceArn: string;
+    pendingTasksCount?:   number;
+    registeredResources?: Resource[];
+    remainingResources?:  Resource[];
+    runningTasksCount?:   number;
+    status?:              string;
+    version:              number;
+    versionInfo?:         VersionInfo;
+    updatedAt:            Date;
+    containers?:          Container[];
+    createdAt?:           Date;
+    desiredStatus?:       string;
+    lastStatus?:          string;
+    overrides?:           Overrides;
+    taskArn?:             string;
+    taskDefinitionArn?:   string;
 }
 
-export interface DetailProperties {
-    agentConnected:       Account;
-    clusterArn:           Account;
-    containerInstanceArn: Account;
-    pendingTasksCount:    Account;
-    registeredResources:  Environment;
-    remainingResources:   Environment;
-    runningTasksCount:    Account;
-    status:               Account;
-    version:              Account;
-    versionInfo:          Items;
-    updatedAt:            ID;
-    containers:           Environment;
-    createdAt:            ID;
-    desiredStatus:        Account;
-    lastStatus:           Account;
-    overrides:            Items;
-    taskArn:              Account;
-    taskDefinitionArn:    Account;
-}
-
-export interface EnvironmentClass {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           EnvironmentProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface EnvironmentProperties {
-    name:  Account;
-    value: Account;
+export interface Container {
+    containerArn: string;
+    lastStatus:   string;
+    name:         string;
+    taskArn:      string;
 }
 
 export interface Overrides {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           OverridesProperties;
-    required:             string[];
-    title:                string;
+    containerOverrides: ContainerOverride[];
 }
 
-export interface OverridesProperties {
-    containerOverrides: Environment;
+export interface ContainerOverride {
+    command:     string[];
+    environment: Environment[];
+    name:        string;
+}
+
+export interface Environment {
+    name:  string;
+    value: string;
 }
 
 export interface Resource {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResourceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResourceProperties {
-    name:         Account;
-    type:         Account;
-    integerValue: Account;
+    name:         string;
+    type:         string;
+    integerValue: number;
 }
 
 export interface VersionInfo {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsEcs(json: string): AwsEcs {
-        return cast(JSON.parse(json), r("AwsEcs"));
+    public static toAwsEcs(json: string): AwsEcs[] {
+        return cast(JSON.parse(json), a(r("AwsEcs")));
     }
 
-    public static awsEcsToJson(value: AwsEcs): string {
-        return JSON.stringify(uncast(value, r("AwsEcs")), null, 2);
+    public static awsEcsToJson(value: AwsEcs[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsEcs"))), null, 2);
     }
 }
 
@@ -323,150 +217,59 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsEcs": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsEc", js: "AwsEc", typ: r("AwsEc") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Container", js: "Container", typ: r("Container") },
-        { json: "Overrides", js: "Overrides", typ: r("Overrides") },
-        { json: "ContainerOverride", js: "ContainerOverride", typ: r("ContainerOverride") },
-        { json: "Environment", js: "Environment", typ: r("EnvironmentClass") },
-        { json: "Resource", js: "Resource", typ: r("Resource") },
-        { json: "VersionInfo", js: "VersionInfo", typ: r("VersionInfo") },
-    ], false),
-    "AwsEc": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsEcProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsEcProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Container": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ContainerProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ContainerProperties": o([
-        { json: "containerArn", js: "containerArn", typ: r("Account") },
-        { json: "lastStatus", js: "lastStatus", typ: r("Account") },
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "taskArn", js: "taskArn", typ: r("Account") },
-    ], false),
-    "ContainerOverride": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ContainerOverrideProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ContainerOverrideProperties": o([
-        { json: "command", js: "command", typ: r("Resources") },
-        { json: "environment", js: "environment", typ: r("Environment") },
-        { json: "name", js: "name", typ: r("Account") },
-    ], false),
-    "Environment": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "agentConnected", js: "agentConnected", typ: u(undefined, true) },
+        { json: "clusterArn", js: "clusterArn", typ: "" },
+        { json: "containerInstanceArn", js: "containerInstanceArn", typ: "" },
+        { json: "pendingTasksCount", js: "pendingTasksCount", typ: u(undefined, 0) },
+        { json: "registeredResources", js: "registeredResources", typ: u(undefined, a(r("Resource"))) },
+        { json: "remainingResources", js: "remainingResources", typ: u(undefined, a(r("Resource"))) },
+        { json: "runningTasksCount", js: "runningTasksCount", typ: u(undefined, 0) },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "version", js: "version", typ: 0 },
+        { json: "versionInfo", js: "versionInfo", typ: u(undefined, r("VersionInfo")) },
+        { json: "updatedAt", js: "updatedAt", typ: Date },
+        { json: "containers", js: "containers", typ: u(undefined, a(r("Container"))) },
+        { json: "createdAt", js: "createdAt", typ: u(undefined, Date) },
+        { json: "desiredStatus", js: "desiredStatus", typ: u(undefined, "") },
+        { json: "lastStatus", js: "lastStatus", typ: u(undefined, "") },
+        { json: "overrides", js: "overrides", typ: u(undefined, r("Overrides")) },
+        { json: "taskArn", js: "taskArn", typ: u(undefined, "") },
+        { json: "taskDefinitionArn", js: "taskDefinitionArn", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "agentConnected", js: "agentConnected", typ: r("Account") },
-        { json: "clusterArn", js: "clusterArn", typ: r("Account") },
-        { json: "containerInstanceArn", js: "containerInstanceArn", typ: r("Account") },
-        { json: "pendingTasksCount", js: "pendingTasksCount", typ: r("Account") },
-        { json: "registeredResources", js: "registeredResources", typ: r("Environment") },
-        { json: "remainingResources", js: "remainingResources", typ: r("Environment") },
-        { json: "runningTasksCount", js: "runningTasksCount", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "version", js: "version", typ: r("Account") },
-        { json: "versionInfo", js: "versionInfo", typ: r("Items") },
-        { json: "updatedAt", js: "updatedAt", typ: r("ID") },
-        { json: "containers", js: "containers", typ: r("Environment") },
-        { json: "createdAt", js: "createdAt", typ: r("ID") },
-        { json: "desiredStatus", js: "desiredStatus", typ: r("Account") },
-        { json: "lastStatus", js: "lastStatus", typ: r("Account") },
-        { json: "overrides", js: "overrides", typ: r("Items") },
-        { json: "taskArn", js: "taskArn", typ: r("Account") },
-        { json: "taskDefinitionArn", js: "taskDefinitionArn", typ: r("Account") },
-    ], false),
-    "EnvironmentClass": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("EnvironmentProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "EnvironmentProperties": o([
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "value", js: "value", typ: r("Account") },
+    "Container": o([
+        { json: "containerArn", js: "containerArn", typ: "" },
+        { json: "lastStatus", js: "lastStatus", typ: "" },
+        { json: "name", js: "name", typ: "" },
+        { json: "taskArn", js: "taskArn", typ: "" },
     ], false),
     "Overrides": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OverridesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "containerOverrides", js: "containerOverrides", typ: a(r("ContainerOverride")) },
     ], false),
-    "OverridesProperties": o([
-        { json: "containerOverrides", js: "containerOverrides", typ: r("Environment") },
+    "ContainerOverride": o([
+        { json: "command", js: "command", typ: a("") },
+        { json: "environment", js: "environment", typ: a(r("Environment")) },
+        { json: "name", js: "name", typ: "" },
+    ], false),
+    "Environment": o([
+        { json: "name", js: "name", typ: "" },
+        { json: "value", js: "value", typ: "" },
     ], false),
     "Resource": o([
+        { json: "name", js: "name", typ: "" },
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResourceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResourceProperties": o([
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "integerValue", js: "integerValue", typ: r("Account") },
+        { json: "integerValue", js: "integerValue", typ: 0 },
     ], false),
     "VersionInfo": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
     ], false),
-    "Type": [
-        "boolean",
-        "integer",
-        "string",
-    ],
 };

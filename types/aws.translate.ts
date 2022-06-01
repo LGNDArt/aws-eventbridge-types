@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsTranslate } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsTranslate = Convert.toAwsTranslate(json);
 //
@@ -8,86 +8,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsTranslate {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsTranslateElement: AwsTranslateElement;
-    Detail:              Detail;
-}
-
-export interface AwsTranslateElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsTranslateElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsTranslateElementProperties {
-    version:       Time;
-    id:            Account;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          Time;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Time {
-    type:   Type;
-    format: string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    jobId:                     Time;
-    jobStatus:                 Account;
-    operation:                 Account;
-    name:                      Account;
-    status:                    Account;
-    latestUpdateAttemptStatus: Account;
-    latestUpdateAttemptAt:     Time;
+    jobId?:                     string;
+    jobStatus?:                 string;
+    operation?:                 string;
+    name?:                      string;
+    status?:                    string;
+    latestUpdateAttemptStatus?: string;
+    latestUpdateAttemptAt?:     Date;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsTranslate(json: string): AwsTranslate {
-        return cast(JSON.parse(json), r("AwsTranslate"));
+    public static toAwsTranslate(json: string): AwsTranslate[] {
+        return cast(JSON.parse(json), a(r("AwsTranslate")));
     }
 
-    public static awsTranslateToJson(value: AwsTranslate): string {
-        return JSON.stringify(uncast(value, r("AwsTranslate")), null, 2);
+    public static awsTranslateToJson(value: AwsTranslate[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsTranslate"))), null, 2);
     }
 }
 
@@ -225,64 +175,23 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsTranslate": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsTranslateElement", js: "AwsTranslateElement", typ: r("AwsTranslateElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsTranslateElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsTranslateElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsTranslateElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "jobId", js: "jobId", typ: u(undefined, "") },
+        { json: "jobStatus", js: "jobStatus", typ: u(undefined, "") },
+        { json: "operation", js: "operation", typ: u(undefined, "") },
+        { json: "name", js: "name", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "latestUpdateAttemptStatus", js: "latestUpdateAttemptStatus", typ: u(undefined, "") },
+        { json: "latestUpdateAttemptAt", js: "latestUpdateAttemptAt", typ: u(undefined, Date) },
     ], false),
-    "DetailProperties": o([
-        { json: "jobId", js: "jobId", typ: r("Time") },
-        { json: "jobStatus", js: "jobStatus", typ: r("Account") },
-        { json: "operation", js: "operation", typ: r("Account") },
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "latestUpdateAttemptStatus", js: "latestUpdateAttemptStatus", typ: r("Account") },
-        { json: "latestUpdateAttemptAt", js: "latestUpdateAttemptAt", typ: r("Time") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsEmr } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsEmr = Convert.toAwsEmr(json);
 //
@@ -8,106 +8,52 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsEmr {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsEmrElement: AwsEmrElement;
-    Detail:        Detail;
-}
-
-export interface AwsEmrElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsEmrElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsEmrElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    severity:                    Account;
-    stateChangeReason:           Account;
-    name:                        Account;
-    clusterId:                   Account;
-    state:                       Account;
-    message:                     Account;
-    market:                      Account;
-    requestedInstanceCount:      ID;
-    instanceType:                Account;
-    instanceGroupType:           Account;
-    instanceGroupId:             Account;
-    runningInstanceCount:        ID;
-    actionOnFailure:             Account;
-    stepId:                      Account;
-    resourceId:                  Account;
-    scalingResourceType:         Account;
-    provisionedSpotCapacity:     Account;
-    targetSpotCapacity:          Account;
-    targetOnDemandCapacity:      Account;
-    instanceFleetId:             Account;
-    provisionedOnDemandCapacity: Account;
-    instanceFleetType:           Account;
-    description:                 Account;
+    severity?:                    string;
+    stateChangeReason?:           string;
+    name?:                        string;
+    clusterId:                    string;
+    state?:                       string;
+    message?:                     string;
+    market?:                      string;
+    requestedInstanceCount?:      string;
+    instanceType?:                string;
+    instanceGroupType?:           string;
+    instanceGroupId?:             string;
+    runningInstanceCount?:        string;
+    actionOnFailure?:             string;
+    stepId?:                      string;
+    resourceId?:                  string;
+    scalingResourceType?:         string;
+    provisionedSpotCapacity?:     number;
+    targetSpotCapacity?:          number;
+    targetOnDemandCapacity?:      number;
+    instanceFleetId?:             string;
+    provisionedOnDemandCapacity?: number;
+    instanceFleetType?:           string;
+    description?:                 string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsEmr(json: string): AwsEmr {
-        return cast(JSON.parse(json), r("AwsEmr"));
+    public static toAwsEmr(json: string): AwsEmr[] {
+        return cast(JSON.parse(json), a(r("AwsEmr")));
     }
 
-    public static awsEmrToJson(value: AwsEmr): string {
-        return JSON.stringify(uncast(value, r("AwsEmr")), null, 2);
+    public static awsEmrToJson(value: AwsEmr[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsEmr"))), null, 2);
     }
 }
 
@@ -245,83 +191,39 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsEmr": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsEmrElement", js: "AwsEmrElement", typ: r("AwsEmrElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsEmrElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsEmrElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsEmrElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "severity", js: "severity", typ: u(undefined, "") },
+        { json: "stateChangeReason", js: "stateChangeReason", typ: u(undefined, "") },
+        { json: "name", js: "name", typ: u(undefined, "") },
+        { json: "clusterId", js: "clusterId", typ: "" },
+        { json: "state", js: "state", typ: u(undefined, "") },
+        { json: "message", js: "message", typ: u(undefined, "") },
+        { json: "market", js: "market", typ: u(undefined, "") },
+        { json: "requestedInstanceCount", js: "requestedInstanceCount", typ: u(undefined, "") },
+        { json: "instanceType", js: "instanceType", typ: u(undefined, "") },
+        { json: "instanceGroupType", js: "instanceGroupType", typ: u(undefined, "") },
+        { json: "instanceGroupId", js: "instanceGroupId", typ: u(undefined, "") },
+        { json: "runningInstanceCount", js: "runningInstanceCount", typ: u(undefined, "") },
+        { json: "actionOnFailure", js: "actionOnFailure", typ: u(undefined, "") },
+        { json: "stepId", js: "stepId", typ: u(undefined, "") },
+        { json: "resourceId", js: "resourceId", typ: u(undefined, "") },
+        { json: "scalingResourceType", js: "scalingResourceType", typ: u(undefined, "") },
+        { json: "provisionedSpotCapacity", js: "provisionedSpotCapacity", typ: u(undefined, 0) },
+        { json: "targetSpotCapacity", js: "targetSpotCapacity", typ: u(undefined, 0) },
+        { json: "targetOnDemandCapacity", js: "targetOnDemandCapacity", typ: u(undefined, 0) },
+        { json: "instanceFleetId", js: "instanceFleetId", typ: u(undefined, "") },
+        { json: "provisionedOnDemandCapacity", js: "provisionedOnDemandCapacity", typ: u(undefined, 0) },
+        { json: "instanceFleetType", js: "instanceFleetType", typ: u(undefined, "") },
+        { json: "description", js: "description", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "severity", js: "severity", typ: r("Account") },
-        { json: "stateChangeReason", js: "stateChangeReason", typ: r("Account") },
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "clusterId", js: "clusterId", typ: r("Account") },
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "message", js: "message", typ: r("Account") },
-        { json: "market", js: "market", typ: r("Account") },
-        { json: "requestedInstanceCount", js: "requestedInstanceCount", typ: r("ID") },
-        { json: "instanceType", js: "instanceType", typ: r("Account") },
-        { json: "instanceGroupType", js: "instanceGroupType", typ: r("Account") },
-        { json: "instanceGroupId", js: "instanceGroupId", typ: r("Account") },
-        { json: "runningInstanceCount", js: "runningInstanceCount", typ: r("ID") },
-        { json: "actionOnFailure", js: "actionOnFailure", typ: r("Account") },
-        { json: "stepId", js: "stepId", typ: r("Account") },
-        { json: "resourceId", js: "resourceId", typ: r("Account") },
-        { json: "scalingResourceType", js: "scalingResourceType", typ: r("Account") },
-        { json: "provisionedSpotCapacity", js: "provisionedSpotCapacity", typ: r("Account") },
-        { json: "targetSpotCapacity", js: "targetSpotCapacity", typ: r("Account") },
-        { json: "targetOnDemandCapacity", js: "targetOnDemandCapacity", typ: r("Account") },
-        { json: "instanceFleetId", js: "instanceFleetId", typ: r("Account") },
-        { json: "provisionedOnDemandCapacity", js: "provisionedOnDemandCapacity", typ: r("Account") },
-        { json: "instanceFleetType", js: "instanceFleetType", typ: r("Account") },
-        { json: "description", js: "description", typ: r("Account") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

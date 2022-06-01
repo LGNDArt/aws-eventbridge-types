@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSupport } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSupport = Convert.toAwsSupport(json);
 //
@@ -8,83 +8,34 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSupport {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSupportElement: AwsSupportElement;
-    Detail:            Detail;
-}
-
-export interface AwsSupportElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSupportElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSupportElementProperties {
-    version:       ID;
-    id:            ID;
-    region:        Account;
-    time:          ID;
-    source:        Account;
-    "detail-type": Account;
-    resources:     Resources;
-    detail:        DetailClass;
-    account:       Account;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    region:        string;
+    time:          Date;
+    source:        string;
+    "detail-type": string;
+    resources:     any[];
+    detail:        Detail;
+    account:       string;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    "case-id":          Account;
-    "display-id":       Account;
-    "communication-id": Account;
-    "event-name":       Account;
-    origin:             Account;
+    "case-id":          string;
+    "display-id":       string;
+    "communication-id": string;
+    "event-name":       string;
+    origin:             string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSupport(json: string): AwsSupport {
-        return cast(JSON.parse(json), r("AwsSupport"));
+    public static toAwsSupport(json: string): AwsSupport[] {
+        return cast(JSON.parse(json), a(r("AwsSupport")));
     }
 
-    public static awsSupportToJson(value: AwsSupport): string {
-        return JSON.stringify(uncast(value, r("AwsSupport")), null, 2);
+    public static awsSupportToJson(value: AwsSupport[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSupport"))), null, 2);
     }
 }
 
@@ -222,61 +173,21 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSupport": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSupportElement", js: "AwsSupportElement", typ: r("AwsSupportElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsSupportElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSupportElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSupportElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-        { json: "account", js: "account", typ: r("Account") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "source", js: "source", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
+        { json: "account", js: "account", typ: "" },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "case-id", js: "case-id", typ: r("Account") },
-        { json: "display-id", js: "display-id", typ: r("Account") },
-        { json: "communication-id", js: "communication-id", typ: r("Account") },
-        { json: "event-name", js: "event-name", typ: r("Account") },
-        { json: "origin", js: "origin", typ: r("Account") },
+        { json: "case-id", js: "case-id", typ: "" },
+        { json: "display-id", js: "display-id", typ: "" },
+        { json: "communication-id", js: "communication-id", typ: "" },
+        { json: "event-name", js: "event-name", typ: "" },
+        { json: "origin", js: "origin", typ: "" },
     ], false),
 };

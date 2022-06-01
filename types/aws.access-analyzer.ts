@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsAccessAnalyzer } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsAccessAnalyzer = Convert.toAwsAccessAnalyzer(json);
 //
@@ -8,116 +8,52 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsAccessAnalyzer {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsAccessAnalyzerElement: AwsAccessAnalyzerElement;
-    Detail:                   Detail;
-    Condition:                Condition;
-    Principal:                Principal;
-}
-
-export interface AwsAccessAnalyzerElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsAccessAnalyzerElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsAccessAnalyzerElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Condition {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    version:      string;
+    accountId:    string;
+    region:       string;
+    isDeleted:    boolean;
+    id:           string;
+    status:       string;
+    resourceType: string;
+    resource:     string;
+    createdAt:    Date;
+    analyzedAt:   Date;
+    updatedAt:    Date;
+    principal?:   Principal;
+    action?:      string[];
+    condition?:   Condition;
+    isPublic?:    boolean;
+    error?:       string;
 }
 
-export interface DetailProperties {
-    version:      Account;
-    accountId:    Account;
-    region:       Account;
-    isDeleted:    Account;
-    id:           ID;
-    status:       Account;
-    resourceType: Account;
-    resource:     Account;
-    createdAt:    ID;
-    analyzedAt:   ID;
-    updatedAt:    ID;
-    principal:    Items;
-    action:       Resources;
-    condition:    Items;
-    isPublic:     Account;
-    error:        Account;
+export interface Condition {
 }
 
 export interface Principal {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           PrincipalProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface PrincipalProperties {
-    AWS: Account;
+    AWS: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsAccessAnalyzer(json: string): AwsAccessAnalyzer {
-        return cast(JSON.parse(json), r("AwsAccessAnalyzer"));
+    public static toAwsAccessAnalyzer(json: string): AwsAccessAnalyzer[] {
+        return cast(JSON.parse(json), a(r("AwsAccessAnalyzer")));
     }
 
-    public static awsAccessAnalyzerToJson(value: AwsAccessAnalyzer): string {
-        return JSON.stringify(uncast(value, r("AwsAccessAnalyzer")), null, 2);
+    public static awsAccessAnalyzerToJson(value: AwsAccessAnalyzer[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsAccessAnalyzer"))), null, 2);
     }
 }
 
@@ -255,91 +191,37 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsAccessAnalyzer": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsAccessAnalyzerElement", js: "AwsAccessAnalyzerElement", typ: r("AwsAccessAnalyzerElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Condition", js: "Condition", typ: r("Condition") },
-        { json: "Principal", js: "Principal", typ: r("Principal") },
-    ], false),
-    "AwsAccessAnalyzerElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsAccessAnalyzerElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsAccessAnalyzerElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Condition": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "isDeleted", js: "isDeleted", typ: true },
+        { json: "id", js: "id", typ: "" },
+        { json: "status", js: "status", typ: "" },
+        { json: "resourceType", js: "resourceType", typ: "" },
+        { json: "resource", js: "resource", typ: "" },
+        { json: "createdAt", js: "createdAt", typ: Date },
+        { json: "analyzedAt", js: "analyzedAt", typ: Date },
+        { json: "updatedAt", js: "updatedAt", typ: Date },
+        { json: "principal", js: "principal", typ: u(undefined, r("Principal")) },
+        { json: "action", js: "action", typ: u(undefined, a("")) },
+        { json: "condition", js: "condition", typ: u(undefined, r("Condition")) },
+        { json: "isPublic", js: "isPublic", typ: u(undefined, true) },
+        { json: "error", js: "error", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "version", js: "version", typ: r("Account") },
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "isDeleted", js: "isDeleted", typ: r("Account") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "resourceType", js: "resourceType", typ: r("Account") },
-        { json: "resource", js: "resource", typ: r("Account") },
-        { json: "createdAt", js: "createdAt", typ: r("ID") },
-        { json: "analyzedAt", js: "analyzedAt", typ: r("ID") },
-        { json: "updatedAt", js: "updatedAt", typ: r("ID") },
-        { json: "principal", js: "principal", typ: r("Items") },
-        { json: "action", js: "action", typ: r("Resources") },
-        { json: "condition", js: "condition", typ: r("Items") },
-        { json: "isPublic", js: "isPublic", typ: r("Account") },
-        { json: "error", js: "error", typ: r("Account") },
+    "Condition": o([
     ], false),
     "Principal": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("PrincipalProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "AWS", js: "AWS", typ: "" },
     ], false),
-    "PrincipalProperties": o([
-        { json: "AWS", js: "AWS", typ: r("Account") },
-    ], false),
-    "Type": [
-        "boolean",
-        "string",
-    ],
 };

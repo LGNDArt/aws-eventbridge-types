@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSavingsplans } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSavingsplans = Convert.toAwsSavingsplans(json);
 //
@@ -8,86 +8,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSavingsplans {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSavingsplan: AwsSavingsplan;
-    Detail:         Detail;
-}
-
-export interface AwsSavingsplan {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSavingsplanProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSavingsplanProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    severity:            Account;
-    previousState:       Account;
-    currentState:        Account;
-    message:             Account;
-    nextState:           Account;
-    remainingDays:       ID;
-    nextStateChangeDate: ID;
+    severity?:            string;
+    previousState?:       string;
+    currentState:         string;
+    message:              string;
+    nextState?:           string;
+    remainingDays?:       string;
+    nextStateChangeDate?: Date;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSavingsplans(json: string): AwsSavingsplans {
-        return cast(JSON.parse(json), r("AwsSavingsplans"));
+    public static toAwsSavingsplans(json: string): AwsSavingsplans[] {
+        return cast(JSON.parse(json), a(r("AwsSavingsplans")));
     }
 
-    public static awsSavingsplansToJson(value: AwsSavingsplans): string {
-        return JSON.stringify(uncast(value, r("AwsSavingsplans")), null, 2);
+    public static awsSavingsplansToJson(value: AwsSavingsplans[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSavingsplans"))), null, 2);
     }
 }
 
@@ -225,64 +175,23 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSavingsplans": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSavingsplan", js: "AwsSavingsplan", typ: r("AwsSavingsplan") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsSavingsplan": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSavingsplanProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSavingsplanProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "severity", js: "severity", typ: u(undefined, "") },
+        { json: "previousState", js: "previousState", typ: u(undefined, "") },
+        { json: "currentState", js: "currentState", typ: "" },
+        { json: "message", js: "message", typ: "" },
+        { json: "nextState", js: "nextState", typ: u(undefined, "") },
+        { json: "remainingDays", js: "remainingDays", typ: u(undefined, "") },
+        { json: "nextStateChangeDate", js: "nextStateChangeDate", typ: u(undefined, Date) },
     ], false),
-    "DetailProperties": o([
-        { json: "severity", js: "severity", typ: r("Account") },
-        { json: "previousState", js: "previousState", typ: r("Account") },
-        { json: "currentState", js: "currentState", typ: r("Account") },
-        { json: "message", js: "message", typ: r("Account") },
-        { json: "nextState", js: "nextState", typ: r("Account") },
-        { json: "remainingDays", js: "remainingDays", typ: r("ID") },
-        { json: "nextStateChangeDate", js: "nextStateChangeDate", typ: r("ID") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

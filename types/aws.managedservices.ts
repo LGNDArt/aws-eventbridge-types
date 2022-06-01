@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsManagedservices } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsManagedservices = Convert.toAwsManagedservices(json);
 //
@@ -8,113 +8,50 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsManagedservices {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsManagedservice:  AwsManagedservice;
-    Detail:             Detail;
-    ExecutionTimeRange: ExecutionTimeRange;
-}
-
-export interface AwsManagedservice {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsManagedserviceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsManagedserviceProperties {
-    version:       ID;
-    id:            ID;
-    source:        Account;
-    "detail-type": Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    source:        string;
+    "detail-type": string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    ActionState:                 Account;
-    ActualExecutionTimeRange:    DetailClass;
-    AutomationStatus:            Account;
-    AwsAccountId:                Account;
-    AwsApprovalStatus:           Account;
-    ChangeTypeId:                Account;
-    ChangeTypeVersion:           Account;
-    CreatedTime:                 Account;
-    CustomerApprovalStatus:      Account;
-    EventType:                   Account;
-    LastModifiedTime:            Account;
-    LastSubmittedTime:           Account;
-    RequestedExecutionTimeRange: DetailClass;
-    RfcId:                       Account;
-    Status:                      Account;
-    Title:                       Account;
+    ActionState:                 string;
+    ActualExecutionTimeRange:    ExecutionTimeRange;
+    AutomationStatus:            string;
+    AwsAccountId:                string;
+    AwsApprovalStatus:           string;
+    ChangeTypeId:                string;
+    ChangeTypeVersion:           string;
+    CreatedTime:                 number;
+    CustomerApprovalStatus:      string;
+    EventType:                   string;
+    LastModifiedTime:            number;
+    LastSubmittedTime:           number;
+    RequestedExecutionTimeRange: ExecutionTimeRange;
+    RfcId:                       string;
+    Status:                      string;
+    Title:                       string;
 }
 
 export interface ExecutionTimeRange {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ExecutionTimeRangeProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ExecutionTimeRangeProperties {
-    StartTime: Account;
-    EndTime:   Account;
+    StartTime: number;
+    EndTime:   number;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsManagedservices(json: string): AwsManagedservices {
-        return cast(JSON.parse(json), r("AwsManagedservices"));
+    public static toAwsManagedservices(json: string): AwsManagedservices[] {
+        return cast(JSON.parse(json), a(r("AwsManagedservices")));
     }
 
-    public static awsManagedservicesToJson(value: AwsManagedservices): string {
-        return JSON.stringify(uncast(value, r("AwsManagedservices")), null, 2);
+    public static awsManagedservicesToJson(value: AwsManagedservices[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsManagedservices"))), null, 2);
     }
 }
 
@@ -252,88 +189,36 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsManagedservices": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsManagedservice", js: "AwsManagedservice", typ: r("AwsManagedservice") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "ExecutionTimeRange", js: "ExecutionTimeRange", typ: r("ExecutionTimeRange") },
-    ], false),
-    "AwsManagedservice": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsManagedserviceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsManagedserviceProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "ActionState", js: "ActionState", typ: r("Account") },
-        { json: "ActualExecutionTimeRange", js: "ActualExecutionTimeRange", typ: r("DetailClass") },
-        { json: "AutomationStatus", js: "AutomationStatus", typ: r("Account") },
-        { json: "AwsAccountId", js: "AwsAccountId", typ: r("Account") },
-        { json: "AwsApprovalStatus", js: "AwsApprovalStatus", typ: r("Account") },
-        { json: "ChangeTypeId", js: "ChangeTypeId", typ: r("Account") },
-        { json: "ChangeTypeVersion", js: "ChangeTypeVersion", typ: r("Account") },
-        { json: "CreatedTime", js: "CreatedTime", typ: r("Account") },
-        { json: "CustomerApprovalStatus", js: "CustomerApprovalStatus", typ: r("Account") },
-        { json: "EventType", js: "EventType", typ: r("Account") },
-        { json: "LastModifiedTime", js: "LastModifiedTime", typ: r("Account") },
-        { json: "LastSubmittedTime", js: "LastSubmittedTime", typ: r("Account") },
-        { json: "RequestedExecutionTimeRange", js: "RequestedExecutionTimeRange", typ: r("DetailClass") },
-        { json: "RfcId", js: "RfcId", typ: r("Account") },
-        { json: "Status", js: "Status", typ: r("Account") },
-        { json: "Title", js: "Title", typ: r("Account") },
+        { json: "ActionState", js: "ActionState", typ: "" },
+        { json: "ActualExecutionTimeRange", js: "ActualExecutionTimeRange", typ: r("ExecutionTimeRange") },
+        { json: "AutomationStatus", js: "AutomationStatus", typ: "" },
+        { json: "AwsAccountId", js: "AwsAccountId", typ: "" },
+        { json: "AwsApprovalStatus", js: "AwsApprovalStatus", typ: "" },
+        { json: "ChangeTypeId", js: "ChangeTypeId", typ: "" },
+        { json: "ChangeTypeVersion", js: "ChangeTypeVersion", typ: "" },
+        { json: "CreatedTime", js: "CreatedTime", typ: 0 },
+        { json: "CustomerApprovalStatus", js: "CustomerApprovalStatus", typ: "" },
+        { json: "EventType", js: "EventType", typ: "" },
+        { json: "LastModifiedTime", js: "LastModifiedTime", typ: 0 },
+        { json: "LastSubmittedTime", js: "LastSubmittedTime", typ: 0 },
+        { json: "RequestedExecutionTimeRange", js: "RequestedExecutionTimeRange", typ: r("ExecutionTimeRange") },
+        { json: "RfcId", js: "RfcId", typ: "" },
+        { json: "Status", js: "Status", typ: "" },
+        { json: "Title", js: "Title", typ: "" },
     ], false),
     "ExecutionTimeRange": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ExecutionTimeRangeProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "StartTime", js: "StartTime", typ: 0 },
+        { json: "EndTime", js: "EndTime", typ: 0 },
     ], false),
-    "ExecutionTimeRangeProperties": o([
-        { json: "StartTime", js: "StartTime", typ: r("Account") },
-        { json: "EndTime", js: "EndTime", typ: r("Account") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

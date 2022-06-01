@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsApplicationinsights } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsApplicationinsights = Convert.toAwsApplicationinsights(json);
 //
@@ -8,123 +8,52 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsApplicationinsights {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsApplicationinsight: AwsApplicationinsight;
-    Detail:                Detail;
-    UpdatedObservation:    UpdatedObservation;
-}
-
-export interface AwsApplicationinsight {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsApplicationinsightProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsApplicationinsightProperties {
-    version:       ID;
-    account:       Account;
-    region:        Account;
-    "detail-type": Account;
-    source:        Account;
-    time:          ID;
-    id:            ID;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    account:       string;
+    region:        string;
+    "detail-type": string;
+    source:        string;
+    time:          Date;
+    id:            string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    problemId:           Account;
-    region:              Account;
-    resourceGroupName:   Account;
-    severity:            Account;
-    status:              Account;
-    problemUrl:          ProblemURL;
-    opsItemArn:          Account;
-    startTime:           Account;
-    updatedObservations: UpdatedObservations;
-    lastUpdatedTime:     Account;
-    recurringCount:      Account;
-    lastRecurrenceTime:  Account;
-    affectedResource:    Account;
-    insights:            Resources;
-    ruleName:            Account;
-    endTime:             Account;
-}
-
-export interface ProblemURL {
-    type:               Type;
-    format:             string;
-    "qt-uri-protocols": string[];
-}
-
-export interface UpdatedObservations {
-    type:  string;
-    items: Items;
+    problemId:           string;
+    region:              string;
+    resourceGroupName:   string;
+    severity:            string;
+    status:              string;
+    problemUrl:          string;
+    opsItemArn:          string;
+    startTime:           number;
+    updatedObservations: UpdatedObservation[];
+    lastUpdatedTime:     number;
+    recurringCount:      number;
+    lastRecurrenceTime:  number;
+    affectedResource:    string;
+    insights:            string[];
+    ruleName:            string;
+    endTime:             number;
 }
 
 export interface UpdatedObservation {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UpdatedObservationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface UpdatedObservationProperties {
-    id:              Account;
-    startTime:       Account;
-    endTime:         Account;
-    observationType: Account;
+    id:              string;
+    startTime:       number;
+    endTime:         number;
+    observationType: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsApplicationinsights(json: string): AwsApplicationinsights {
-        return cast(JSON.parse(json), r("AwsApplicationinsights"));
+    public static toAwsApplicationinsights(json: string): AwsApplicationinsights[] {
+        return cast(JSON.parse(json), a(r("AwsApplicationinsights")));
     }
 
-    public static awsApplicationinsightsToJson(value: AwsApplicationinsights): string {
-        return JSON.stringify(uncast(value, r("AwsApplicationinsights")), null, 2);
+    public static awsApplicationinsightsToJson(value: AwsApplicationinsights[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsApplicationinsights"))), null, 2);
     }
 }
 
@@ -262,97 +191,38 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsApplicationinsights": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsApplicationinsight", js: "AwsApplicationinsight", typ: r("AwsApplicationinsight") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "UpdatedObservation", js: "UpdatedObservation", typ: r("UpdatedObservation") },
-    ], false),
-    "AwsApplicationinsight": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsApplicationinsightProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsApplicationinsightProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "id", js: "id", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "problemId", js: "problemId", typ: r("Account") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resourceGroupName", js: "resourceGroupName", typ: r("Account") },
-        { json: "severity", js: "severity", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "problemUrl", js: "problemUrl", typ: r("ProblemURL") },
-        { json: "opsItemArn", js: "opsItemArn", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("Account") },
-        { json: "updatedObservations", js: "updatedObservations", typ: r("UpdatedObservations") },
-        { json: "lastUpdatedTime", js: "lastUpdatedTime", typ: r("Account") },
-        { json: "recurringCount", js: "recurringCount", typ: r("Account") },
-        { json: "lastRecurrenceTime", js: "lastRecurrenceTime", typ: r("Account") },
-        { json: "affectedResource", js: "affectedResource", typ: r("Account") },
-        { json: "insights", js: "insights", typ: r("Resources") },
-        { json: "ruleName", js: "ruleName", typ: r("Account") },
-        { json: "endTime", js: "endTime", typ: r("Account") },
-    ], false),
-    "ProblemURL": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-        { json: "qt-uri-protocols", js: "qt-uri-protocols", typ: a("") },
-    ], false),
-    "UpdatedObservations": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
+        { json: "problemId", js: "problemId", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "resourceGroupName", js: "resourceGroupName", typ: "" },
+        { json: "severity", js: "severity", typ: "" },
+        { json: "status", js: "status", typ: "" },
+        { json: "problemUrl", js: "problemUrl", typ: "" },
+        { json: "opsItemArn", js: "opsItemArn", typ: "" },
+        { json: "startTime", js: "startTime", typ: 0 },
+        { json: "updatedObservations", js: "updatedObservations", typ: a(r("UpdatedObservation")) },
+        { json: "lastUpdatedTime", js: "lastUpdatedTime", typ: 0 },
+        { json: "recurringCount", js: "recurringCount", typ: 0 },
+        { json: "lastRecurrenceTime", js: "lastRecurrenceTime", typ: 0 },
+        { json: "affectedResource", js: "affectedResource", typ: "" },
+        { json: "insights", js: "insights", typ: a("") },
+        { json: "ruleName", js: "ruleName", typ: "" },
+        { json: "endTime", js: "endTime", typ: 0 },
     ], false),
     "UpdatedObservation": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UpdatedObservationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "startTime", js: "startTime", typ: 0 },
+        { json: "endTime", js: "endTime", typ: 0 },
+        { json: "observationType", js: "observationType", typ: "" },
     ], false),
-    "UpdatedObservationProperties": o([
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("Account") },
-        { json: "endTime", js: "endTime", typ: r("Account") },
-        { json: "observationType", js: "observationType", typ: r("Account") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

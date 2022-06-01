@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsElasticbeanstalk } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsElasticbeanstalk = Convert.toAwsElasticbeanstalk(json);
 //
@@ -8,86 +8,35 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsElasticbeanstalk {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsElasticbeanstalkElement: AwsElasticbeanstalkElement;
-    Detail:                     Detail;
-}
-
-export interface AwsElasticbeanstalkElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsElasticbeanstalkElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsElasticbeanstalkElementProperties {
-    version:       Time;
-    id:            Account;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          Time;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Time {
-    type:   Type;
-    format: string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    Status:          Account;
-    EventDate:       Account;
-    ApplicationName: Account;
-    Message:         Account;
-    EnvironmentName: Account;
-    Severity:        Account;
+    Status:          string;
+    EventDate:       number;
+    ApplicationName: string;
+    Message:         string;
+    EnvironmentName: string;
+    Severity:        string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsElasticbeanstalk(json: string): AwsElasticbeanstalk {
-        return cast(JSON.parse(json), r("AwsElasticbeanstalk"));
+    public static toAwsElasticbeanstalk(json: string): AwsElasticbeanstalk[] {
+        return cast(JSON.parse(json), a(r("AwsElasticbeanstalk")));
     }
 
-    public static awsElasticbeanstalkToJson(value: AwsElasticbeanstalk): string {
-        return JSON.stringify(uncast(value, r("AwsElasticbeanstalk")), null, 2);
+    public static awsElasticbeanstalkToJson(value: AwsElasticbeanstalk[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsElasticbeanstalk"))), null, 2);
     }
 }
 
@@ -225,64 +174,22 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsElasticbeanstalk": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsElasticbeanstalkElement", js: "AwsElasticbeanstalkElement", typ: r("AwsElasticbeanstalkElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsElasticbeanstalkElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsElasticbeanstalkElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsElasticbeanstalkElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "Status", js: "Status", typ: "" },
+        { json: "EventDate", js: "EventDate", typ: 0 },
+        { json: "ApplicationName", js: "ApplicationName", typ: "" },
+        { json: "Message", js: "Message", typ: "" },
+        { json: "EnvironmentName", js: "EnvironmentName", typ: "" },
+        { json: "Severity", js: "Severity", typ: "" },
     ], false),
-    "DetailProperties": o([
-        { json: "Status", js: "Status", typ: r("Account") },
-        { json: "EventDate", js: "EventDate", typ: r("Account") },
-        { json: "ApplicationName", js: "ApplicationName", typ: r("Account") },
-        { json: "Message", js: "Message", typ: r("Account") },
-        { json: "EnvironmentName", js: "EnvironmentName", typ: r("Account") },
-        { json: "Severity", js: "Severity", typ: r("Account") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, Route53RecoveryReadinessAmazonawsCOM } from "./file";
+//   import { Convert } from "./file";
 //
 //   const route53RecoveryReadinessAmazonawsCOM = Convert.toRoute53RecoveryReadinessAmazonawsCOM(json);
 //
@@ -8,98 +8,38 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface Route53RecoveryReadinessAmazonawsCOM {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    Route53RecoveryReadinessAmazonawsCOMElement: Route53RecoveryReadinessAmazonawsCOMElement;
-    Detail:                                      Detail;
-    State:                                       State;
+    version:       number;
+    account:       string;
+    region:        string;
+    "detail-type": string;
+    source:        string;
+    time:          Date;
+    id:            string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    "recovery-group-name":  CellName;
-    "previous-state":       Items;
-    "new-state":            Items;
-    "cell-name":            CellName;
-    "readiness-check-name": CellName;
-}
-
-export interface CellName {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface Route53RecoveryReadinessAmazonawsCOMElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           Route53RecoveryReadinessAmazonawsCOMElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface Route53RecoveryReadinessAmazonawsCOMElementProperties {
-    version:       CellName;
-    account:       CellName;
-    region:        CellName;
-    "detail-type": CellName;
-    source:        CellName;
-    time:          ID;
-    id:            ID;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: CellName;
+    "recovery-group-name"?:  string;
+    "previous-state":        State;
+    "new-state":             State;
+    "cell-name"?:            string;
+    "readiness-check-name"?: string;
 }
 
 export interface State {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           StateProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface StateProperties {
-    "readiness-status": CellName;
+    "readiness-status": string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toRoute53RecoveryReadinessAmazonawsCOM(json: string): Route53RecoveryReadinessAmazonawsCOM {
-        return cast(JSON.parse(json), r("Route53RecoveryReadinessAmazonawsCOM"));
+    public static toRoute53RecoveryReadinessAmazonawsCOM(json: string): Route53RecoveryReadinessAmazonawsCOM[] {
+        return cast(JSON.parse(json), a(r("Route53RecoveryReadinessAmazonawsCOM")));
     }
 
-    public static route53RecoveryReadinessAmazonawsCOMToJson(value: Route53RecoveryReadinessAmazonawsCOM): string {
-        return JSON.stringify(uncast(value, r("Route53RecoveryReadinessAmazonawsCOM")), null, 2);
+    public static route53RecoveryReadinessAmazonawsCOMToJson(value: Route53RecoveryReadinessAmazonawsCOM[]): string {
+        return JSON.stringify(uncast(value, a(r("Route53RecoveryReadinessAmazonawsCOM"))), null, 2);
     }
 }
 
@@ -237,74 +177,24 @@ function r(name: string) {
 
 const typeMap: any = {
     "Route53RecoveryReadinessAmazonawsCOM": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Route53RecoveryReadinessAmazonawsCOMElement", js: "Route53RecoveryReadinessAmazonawsCOMElement", typ: r("Route53RecoveryReadinessAmazonawsCOMElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "State", js: "State", typ: r("State") },
+        { json: "version", js: "version", typ: 0 },
+        { json: "account", js: "account", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "id", js: "id", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "recovery-group-name", js: "recovery-group-name", typ: r("CellName") },
-        { json: "previous-state", js: "previous-state", typ: r("Items") },
-        { json: "new-state", js: "new-state", typ: r("Items") },
-        { json: "cell-name", js: "cell-name", typ: r("CellName") },
-        { json: "readiness-check-name", js: "readiness-check-name", typ: r("CellName") },
-    ], false),
-    "CellName": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Route53RecoveryReadinessAmazonawsCOMElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("Route53RecoveryReadinessAmazonawsCOMElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "Route53RecoveryReadinessAmazonawsCOMElementProperties": o([
-        { json: "version", js: "version", typ: r("CellName") },
-        { json: "account", js: "account", typ: r("CellName") },
-        { json: "region", js: "region", typ: r("CellName") },
-        { json: "detail-type", js: "detail-type", typ: r("CellName") },
-        { json: "source", js: "source", typ: r("CellName") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("CellName") },
+        { json: "recovery-group-name", js: "recovery-group-name", typ: u(undefined, "") },
+        { json: "previous-state", js: "previous-state", typ: r("State") },
+        { json: "new-state", js: "new-state", typ: r("State") },
+        { json: "cell-name", js: "cell-name", typ: u(undefined, "") },
+        { json: "readiness-check-name", js: "readiness-check-name", typ: u(undefined, "") },
     ], false),
     "State": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("StateProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "readiness-status", js: "readiness-status", typ: "" },
     ], false),
-    "StateProperties": o([
-        { json: "readiness-status", js: "readiness-status", typ: r("CellName") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

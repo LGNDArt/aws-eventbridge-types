@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsGamelift } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsGamelift = Convert.toAwsGamelift(json);
 //
@@ -8,154 +8,63 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsGamelift {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsGameliftElement:  AwsGameliftElement;
-    Detail:              Detail;
-    GameSessionInfo:     GameSessionInfo;
-    Player:              Player;
-    PlacedPlayerSession: PlacedPlayerSession;
-    Ticket:              Ticket;
-}
-
-export interface AwsGameliftElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsGameliftElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsGameliftElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    tickets:              PlacedPlayerSessions;
-    acceptance:           Account;
-    type:                 Account;
-    gameSessionInfo:      Items;
-    matchId:              ID;
-    placementId:          ID;
-    port:                 ID;
-    gameSessionArn:       Account;
-    ipAddress:            Account;
-    dnsName:              Account;
-    startTime:            ID;
-    endTime:              ID;
-    gameSessionRegion:    Account;
-    placedPlayerSessions: PlacedPlayerSessions;
-}
-
-export interface PlacedPlayerSessions {
-    type:  string;
-    items: Items;
+    tickets?:              Ticket[];
+    acceptance?:           string;
+    type:                  string;
+    gameSessionInfo?:      GameSessionInfo;
+    matchId?:              string;
+    placementId?:          string;
+    port?:                 string;
+    gameSessionArn?:       string;
+    ipAddress?:            string;
+    dnsName?:              string;
+    startTime?:            Date;
+    endTime?:              Date;
+    gameSessionRegion?:    string;
+    placedPlayerSessions?: PlacedPlayerSession[];
 }
 
 export interface GameSessionInfo {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           GameSessionInfoProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface GameSessionInfoProperties {
-    players: PlacedPlayerSessions;
-}
-
-export interface PlacedPlayerSession {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           PlacedPlayerSessionProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface PlacedPlayerSessionProperties {
-    playerId:        Account;
-    playerSessionId: Account;
+    players: Player[];
 }
 
 export interface Player {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           PlayerProperties;
-    required:             string[];
-    title:                string;
+    playerId: string;
+    team:     string;
 }
 
-export interface PlayerProperties {
-    playerId: Account;
-    team:     Account;
+export interface PlacedPlayerSession {
+    playerId:        string;
+    playerSessionId: string;
 }
 
 export interface Ticket {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TicketProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface TicketProperties {
-    ticketId:  Account;
-    startTime: ID;
-    players:   PlacedPlayerSessions;
+    ticketId:  string;
+    startTime: Date;
+    players:   Player[];
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsGamelift(json: string): AwsGamelift {
-        return cast(JSON.parse(json), r("AwsGamelift"));
+    public static toAwsGamelift(json: string): AwsGamelift[] {
+        return cast(JSON.parse(json), a(r("AwsGamelift")));
     }
 
-    public static awsGameliftToJson(value: AwsGamelift): string {
-        return JSON.stringify(uncast(value, r("AwsGamelift")), null, 2);
+    public static awsGameliftToJson(value: AwsGamelift[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsGamelift"))), null, 2);
     }
 }
 
@@ -293,123 +202,46 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsGamelift": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsGameliftElement", js: "AwsGameliftElement", typ: r("AwsGameliftElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "GameSessionInfo", js: "GameSessionInfo", typ: r("GameSessionInfo") },
-        { json: "Player", js: "Player", typ: r("Player") },
-        { json: "PlacedPlayerSession", js: "PlacedPlayerSession", typ: r("PlacedPlayerSession") },
-        { json: "Ticket", js: "Ticket", typ: r("Ticket") },
-    ], false),
-    "AwsGameliftElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsGameliftElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsGameliftElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
+        { json: "tickets", js: "tickets", typ: u(undefined, a(r("Ticket"))) },
+        { json: "acceptance", js: "acceptance", typ: u(undefined, "") },
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "tickets", js: "tickets", typ: r("PlacedPlayerSessions") },
-        { json: "acceptance", js: "acceptance", typ: r("Account") },
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "gameSessionInfo", js: "gameSessionInfo", typ: r("Items") },
-        { json: "matchId", js: "matchId", typ: r("ID") },
-        { json: "placementId", js: "placementId", typ: r("ID") },
-        { json: "port", js: "port", typ: r("ID") },
-        { json: "gameSessionArn", js: "gameSessionArn", typ: r("Account") },
-        { json: "ipAddress", js: "ipAddress", typ: r("Account") },
-        { json: "dnsName", js: "dnsName", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("ID") },
-        { json: "endTime", js: "endTime", typ: r("ID") },
-        { json: "gameSessionRegion", js: "gameSessionRegion", typ: r("Account") },
-        { json: "placedPlayerSessions", js: "placedPlayerSessions", typ: r("PlacedPlayerSessions") },
-    ], false),
-    "PlacedPlayerSessions": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
+        { json: "gameSessionInfo", js: "gameSessionInfo", typ: u(undefined, r("GameSessionInfo")) },
+        { json: "matchId", js: "matchId", typ: u(undefined, "") },
+        { json: "placementId", js: "placementId", typ: u(undefined, "") },
+        { json: "port", js: "port", typ: u(undefined, "") },
+        { json: "gameSessionArn", js: "gameSessionArn", typ: u(undefined, "") },
+        { json: "ipAddress", js: "ipAddress", typ: u(undefined, "") },
+        { json: "dnsName", js: "dnsName", typ: u(undefined, "") },
+        { json: "startTime", js: "startTime", typ: u(undefined, Date) },
+        { json: "endTime", js: "endTime", typ: u(undefined, Date) },
+        { json: "gameSessionRegion", js: "gameSessionRegion", typ: u(undefined, "") },
+        { json: "placedPlayerSessions", js: "placedPlayerSessions", typ: u(undefined, a(r("PlacedPlayerSession"))) },
     ], false),
     "GameSessionInfo": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("GameSessionInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "GameSessionInfoProperties": o([
-        { json: "players", js: "players", typ: r("PlacedPlayerSessions") },
-    ], false),
-    "PlacedPlayerSession": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("PlacedPlayerSessionProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "PlacedPlayerSessionProperties": o([
-        { json: "playerId", js: "playerId", typ: r("Account") },
-        { json: "playerSessionId", js: "playerSessionId", typ: r("Account") },
+        { json: "players", js: "players", typ: a(r("Player")) },
     ], false),
     "Player": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("PlayerProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "playerId", js: "playerId", typ: "" },
+        { json: "team", js: "team", typ: "" },
     ], false),
-    "PlayerProperties": o([
-        { json: "playerId", js: "playerId", typ: r("Account") },
-        { json: "team", js: "team", typ: r("Account") },
+    "PlacedPlayerSession": o([
+        { json: "playerId", js: "playerId", typ: "" },
+        { json: "playerSessionId", js: "playerSessionId", typ: "" },
     ], false),
     "Ticket": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TicketProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "ticketId", js: "ticketId", typ: "" },
+        { json: "startTime", js: "startTime", typ: Date },
+        { json: "players", js: "players", typ: a(r("Player")) },
     ], false),
-    "TicketProperties": o([
-        { json: "ticketId", js: "ticketId", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("ID") },
-        { json: "players", js: "players", typ: r("PlacedPlayerSessions") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

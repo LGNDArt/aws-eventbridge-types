@@ -13,8 +13,5 @@ cat AWSSampleEvents.json | jq '.[] | .source' -r | uniq > unique_sources.txt
 # split by source
 for source in $(cat unique_sources.txt); do cat AWSSampleEvents.json | jq '[.[] | select(.source == "'$source'")]' > ./sampleevents_by_source/$source.json; done
 
-# generate schema by running it through quicktype
-for f in ./sampleevents_by_source/*.json; do quicktype -l schema $f > ./schema/$(basename $f .json).schema; done
-
-# generate types for all known schema
-for f in ./schema/*.schema; do quicktype -l typescript $f > ./types/$(basename $f .schema).ts; done
+# generate types for all sample sources
+for f in ./sampleevents_by_source/*.json; do quicktype -l typescript $f > ./types/$(basename $f .json).ts; done

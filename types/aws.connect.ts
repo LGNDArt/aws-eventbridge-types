@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsConnect } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsConnect = Convert.toAwsConnect(json);
 //
@@ -8,143 +8,66 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsConnect {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsConnectElement: AwsConnectElement;
-    Detail:            Detail;
-    AdditionalInfo:    AdditionalInfo;
-    AgentInfo:         AgentInfo;
-    QueueInfo:         QueueInfo;
-}
-
-export interface AdditionalInfo {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AdditionalInfoProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AdditionalInfoProperties {
-    contactFlowId: ContactFlowID;
-}
-
-export interface ContactFlowID {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface AgentInfo {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AgentInfoProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AgentInfoProperties {
-    agentArn: ContactFlowID;
-}
-
-export interface AwsConnectElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsConnectElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsConnectElementProperties {
-    version:       ID;
-    id:            ID;
-    source:        ContactFlowID;
-    "detail-type": ContactFlowID;
-    account:       ContactFlowID;
-    time:          ID;
-    region:        ContactFlowID;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ContactFlowID;
+    version:       string;
+    id:            string;
+    source:        string;
+    "detail-type": string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
+    instance?:          string;
+    contact?:           string;
+    channel?:           string;
+    state?:             string;
+    reasonCode?:        string;
+    eventType?:         string;
+    contactId?:         string;
+    initialContactId?:  string;
+    previousContactId?: string;
+    instanceArn?:       string;
+    initiationMethod?:  string;
+    queueInfo?:         QueueInfo;
+    agentInfo?:         AgentInfo;
+    version?:           string;
+    ruleName?:          string;
+    actionName?:        string;
+    contactArn?:        string;
+    agentArn?:          string;
+    queueArn?:          string;
+    ruleId?:            string;
+    actionType?:        string;
+    triggerEvent?:      string;
+    error?:             string;
+    additionalInfo?:    AdditionalInfo;
 }
 
-export interface DetailProperties {
-    instance:          ContactFlowID;
-    contact:           ContactFlowID;
-    channel:           ContactFlowID;
-    state:             ContactFlowID;
-    reasonCode:        ContactFlowID;
-    eventType:         ContactFlowID;
-    contactId:         ID;
-    initialContactId:  ID;
-    previousContactId: ID;
-    instanceArn:       ContactFlowID;
-    initiationMethod:  ContactFlowID;
-    queueInfo:         Items;
-    agentInfo:         Items;
-    version:           ContactFlowID;
-    ruleName:          ContactFlowID;
-    actionName:        ContactFlowID;
-    contactArn:        ContactFlowID;
-    agentArn:          ContactFlowID;
-    queueArn:          ContactFlowID;
-    ruleId:            ID;
-    actionType:        ContactFlowID;
-    triggerEvent:      ContactFlowID;
-    error:             ContactFlowID;
-    additionalInfo:    Items;
+export interface AdditionalInfo {
+    contactFlowId: string;
+}
+
+export interface AgentInfo {
+    agentArn: string;
 }
 
 export interface QueueInfo {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           QueueInfoProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface QueueInfoProperties {
-    queueArn:  ContactFlowID;
-    queueType: ContactFlowID;
+    queueArn:  string;
+    queueType: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsConnect(json: string): AwsConnect {
-        return cast(JSON.parse(json), r("AwsConnect"));
+    public static toAwsConnect(json: string): AwsConnect[] {
+        return cast(JSON.parse(json), a(r("AwsConnect")));
     }
 
-    public static awsConnectToJson(value: AwsConnect): string {
-        return JSON.stringify(uncast(value, r("AwsConnect")), null, 2);
+    public static awsConnectToJson(value: AwsConnect[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsConnect"))), null, 2);
     }
 }
 
@@ -282,115 +205,50 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsConnect": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsConnectElement", js: "AwsConnectElement", typ: r("AwsConnectElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "AdditionalInfo", js: "AdditionalInfo", typ: r("AdditionalInfo") },
-        { json: "AgentInfo", js: "AgentInfo", typ: r("AgentInfo") },
-        { json: "QueueInfo", js: "QueueInfo", typ: r("QueueInfo") },
-    ], false),
-    "AdditionalInfo": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AdditionalInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AdditionalInfoProperties": o([
-        { json: "contactFlowId", js: "contactFlowId", typ: r("ContactFlowID") },
-    ], false),
-    "ContactFlowID": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "AgentInfo": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AgentInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AgentInfoProperties": o([
-        { json: "agentArn", js: "agentArn", typ: r("ContactFlowID") },
-    ], false),
-    "AwsConnectElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsConnectElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsConnectElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "source", js: "source", typ: r("ContactFlowID") },
-        { json: "detail-type", js: "detail-type", typ: r("ContactFlowID") },
-        { json: "account", js: "account", typ: r("ContactFlowID") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("ContactFlowID") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ContactFlowID") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "instance", js: "instance", typ: u(undefined, "") },
+        { json: "contact", js: "contact", typ: u(undefined, "") },
+        { json: "channel", js: "channel", typ: u(undefined, "") },
+        { json: "state", js: "state", typ: u(undefined, "") },
+        { json: "reasonCode", js: "reasonCode", typ: u(undefined, "") },
+        { json: "eventType", js: "eventType", typ: u(undefined, "") },
+        { json: "contactId", js: "contactId", typ: u(undefined, "") },
+        { json: "initialContactId", js: "initialContactId", typ: u(undefined, "") },
+        { json: "previousContactId", js: "previousContactId", typ: u(undefined, "") },
+        { json: "instanceArn", js: "instanceArn", typ: u(undefined, "") },
+        { json: "initiationMethod", js: "initiationMethod", typ: u(undefined, "") },
+        { json: "queueInfo", js: "queueInfo", typ: u(undefined, r("QueueInfo")) },
+        { json: "agentInfo", js: "agentInfo", typ: u(undefined, r("AgentInfo")) },
+        { json: "version", js: "version", typ: u(undefined, "") },
+        { json: "ruleName", js: "ruleName", typ: u(undefined, "") },
+        { json: "actionName", js: "actionName", typ: u(undefined, "") },
+        { json: "contactArn", js: "contactArn", typ: u(undefined, "") },
+        { json: "agentArn", js: "agentArn", typ: u(undefined, "") },
+        { json: "queueArn", js: "queueArn", typ: u(undefined, "") },
+        { json: "ruleId", js: "ruleId", typ: u(undefined, "") },
+        { json: "actionType", js: "actionType", typ: u(undefined, "") },
+        { json: "triggerEvent", js: "triggerEvent", typ: u(undefined, "") },
+        { json: "error", js: "error", typ: u(undefined, "") },
+        { json: "additionalInfo", js: "additionalInfo", typ: u(undefined, r("AdditionalInfo")) },
     ], false),
-    "DetailProperties": o([
-        { json: "instance", js: "instance", typ: r("ContactFlowID") },
-        { json: "contact", js: "contact", typ: r("ContactFlowID") },
-        { json: "channel", js: "channel", typ: r("ContactFlowID") },
-        { json: "state", js: "state", typ: r("ContactFlowID") },
-        { json: "reasonCode", js: "reasonCode", typ: r("ContactFlowID") },
-        { json: "eventType", js: "eventType", typ: r("ContactFlowID") },
-        { json: "contactId", js: "contactId", typ: r("ID") },
-        { json: "initialContactId", js: "initialContactId", typ: r("ID") },
-        { json: "previousContactId", js: "previousContactId", typ: r("ID") },
-        { json: "instanceArn", js: "instanceArn", typ: r("ContactFlowID") },
-        { json: "initiationMethod", js: "initiationMethod", typ: r("ContactFlowID") },
-        { json: "queueInfo", js: "queueInfo", typ: r("Items") },
-        { json: "agentInfo", js: "agentInfo", typ: r("Items") },
-        { json: "version", js: "version", typ: r("ContactFlowID") },
-        { json: "ruleName", js: "ruleName", typ: r("ContactFlowID") },
-        { json: "actionName", js: "actionName", typ: r("ContactFlowID") },
-        { json: "contactArn", js: "contactArn", typ: r("ContactFlowID") },
-        { json: "agentArn", js: "agentArn", typ: r("ContactFlowID") },
-        { json: "queueArn", js: "queueArn", typ: r("ContactFlowID") },
-        { json: "ruleId", js: "ruleId", typ: r("ID") },
-        { json: "actionType", js: "actionType", typ: r("ContactFlowID") },
-        { json: "triggerEvent", js: "triggerEvent", typ: r("ContactFlowID") },
-        { json: "error", js: "error", typ: r("ContactFlowID") },
-        { json: "additionalInfo", js: "additionalInfo", typ: r("Items") },
+    "AdditionalInfo": o([
+        { json: "contactFlowId", js: "contactFlowId", typ: "" },
+    ], false),
+    "AgentInfo": o([
+        { json: "agentArn", js: "agentArn", typ: "" },
     ], false),
     "QueueInfo": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("QueueInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "queueArn", js: "queueArn", typ: "" },
+        { json: "queueType", js: "queueType", typ: "" },
     ], false),
-    "QueueInfoProperties": o([
-        { json: "queueArn", js: "queueArn", typ: r("ContactFlowID") },
-        { json: "queueType", js: "queueType", typ: r("ContactFlowID") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

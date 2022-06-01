@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSWF } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSWF = Convert.toAwsSWF(json);
 //
@@ -8,200 +8,84 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSWF {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSWFElement:           AwsSWFElement;
-    Detail:                  Detail;
-    WorkflowExecutionDetail: WorkflowExecutionDetail;
-    ExecutionConfiguration:  ExecutionConfiguration;
-    TaskList:                TaskList;
-    ExecutionInfo:           ExecutionInfo;
-    Execution:               Execution;
-    WorkflowType:            WorkflowType;
-    OpenCounts:              OpenCounts;
-}
-
-export interface AwsSWFElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSWFElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSWFElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Integer = "integer",
-    Null = "null",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventId:                 Account;
-    eventType:               Account;
-    workflowExecutionDetail: Items;
-}
-
-export interface Execution {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ExecutionProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ExecutionProperties {
-    workflowId: ID;
-    runId:      Account;
-}
-
-export interface ExecutionConfiguration {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ExecutionConfigurationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ExecutionConfigurationProperties {
-    taskStartToCloseTimeout:      ID;
-    executionStartToCloseTimeout: ID;
-    taskList:                     Items;
-    taskPriority:                 Account;
-    childPolicy:                  Account;
-    lambdaRole:                   Account;
-}
-
-export interface ExecutionInfo {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ExecutionInfoProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ExecutionInfoProperties {
-    execution:          Items;
-    workflowType:       Items;
-    startTimestamp:     Account;
-    closeTimestamp:     Account;
-    executionStatus:    Account;
-    closeStatus:        Account;
-    parent:             Account;
-    parentExecutionArn: Account;
-    tagList:            Account;
-    cancelRequested:    Account;
-}
-
-export interface OpenCounts {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           OpenCountsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface OpenCountsProperties {
-    openActivityTasks:           Account;
-    openDecisionTasks:           Account;
-    openTimers:                  Account;
-    openChildWorkflowExecutions: Account;
-    openLambdaFunctions:         Account;
-}
-
-export interface TaskList {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TaskListProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface TaskListProperties {
-    name: ID;
+    eventId:                 number;
+    eventType:               string;
+    workflowExecutionDetail: WorkflowExecutionDetail;
 }
 
 export interface WorkflowExecutionDetail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           WorkflowExecutionDetailProperties;
-    required:             string[];
-    title:                string;
+    executionInfo:               ExecutionInfo;
+    executionConfiguration:      ExecutionConfiguration;
+    openCounts:                  OpenCounts;
+    latestActivityTaskTimestamp: null;
+    latestExecutionContext:      null;
 }
 
-export interface WorkflowExecutionDetailProperties {
-    executionInfo:               Items;
-    executionConfiguration:      Items;
-    openCounts:                  Items;
-    latestActivityTaskTimestamp: Account;
-    latestExecutionContext:      Account;
+export interface ExecutionConfiguration {
+    taskStartToCloseTimeout:      string;
+    executionStartToCloseTimeout: string;
+    taskList:                     TaskList;
+    taskPriority:                 null;
+    childPolicy:                  string;
+    lambdaRole:                   string;
+}
+
+export interface TaskList {
+    name: string;
+}
+
+export interface ExecutionInfo {
+    execution:          Execution;
+    workflowType:       WorkflowType;
+    startTimestamp:     number;
+    closeTimestamp:     null;
+    executionStatus:    string;
+    closeStatus:        null;
+    parent:             null;
+    parentExecutionArn: null;
+    tagList:            null;
+    cancelRequested:    boolean;
+}
+
+export interface Execution {
+    workflowId: string;
+    runId:      string;
 }
 
 export interface WorkflowType {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           WorkflowTypeProperties;
-    required:             string[];
-    title:                string;
+    name:    string;
+    version: string;
 }
 
-export interface WorkflowTypeProperties {
-    name:    Account;
-    version: Account;
+export interface OpenCounts {
+    openActivityTasks:           number;
+    openDecisionTasks:           number;
+    openTimers:                  number;
+    openChildWorkflowExecutions: number;
+    openLambdaFunctions:         number;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSWF(json: string): AwsSWF {
-        return cast(JSON.parse(json), r("AwsSWF"));
+    public static toAwsSWF(json: string): AwsSWF[] {
+        return cast(JSON.parse(json), a(r("AwsSWF")));
     }
 
-    public static awsSWFToJson(value: AwsSWF): string {
-        return JSON.stringify(uncast(value, r("AwsSWF")), null, 2);
+    public static awsSWFToJson(value: AwsSWF[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSWF"))), null, 2);
     }
 }
 
@@ -339,164 +223,64 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSWF": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSWFElement", js: "AwsSWFElement", typ: r("AwsSWFElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "WorkflowExecutionDetail", js: "WorkflowExecutionDetail", typ: r("WorkflowExecutionDetail") },
-        { json: "ExecutionConfiguration", js: "ExecutionConfiguration", typ: r("ExecutionConfiguration") },
-        { json: "TaskList", js: "TaskList", typ: r("TaskList") },
-        { json: "ExecutionInfo", js: "ExecutionInfo", typ: r("ExecutionInfo") },
-        { json: "Execution", js: "Execution", typ: r("Execution") },
-        { json: "WorkflowType", js: "WorkflowType", typ: r("WorkflowType") },
-        { json: "OpenCounts", js: "OpenCounts", typ: r("OpenCounts") },
-    ], false),
-    "AwsSWFElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSWFElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSWFElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "eventId", js: "eventId", typ: r("Account") },
-        { json: "eventType", js: "eventType", typ: r("Account") },
-        { json: "workflowExecutionDetail", js: "workflowExecutionDetail", typ: r("Items") },
-    ], false),
-    "Execution": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ExecutionProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ExecutionProperties": o([
-        { json: "workflowId", js: "workflowId", typ: r("ID") },
-        { json: "runId", js: "runId", typ: r("Account") },
-    ], false),
-    "ExecutionConfiguration": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ExecutionConfigurationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ExecutionConfigurationProperties": o([
-        { json: "taskStartToCloseTimeout", js: "taskStartToCloseTimeout", typ: r("ID") },
-        { json: "executionStartToCloseTimeout", js: "executionStartToCloseTimeout", typ: r("ID") },
-        { json: "taskList", js: "taskList", typ: r("Items") },
-        { json: "taskPriority", js: "taskPriority", typ: r("Account") },
-        { json: "childPolicy", js: "childPolicy", typ: r("Account") },
-        { json: "lambdaRole", js: "lambdaRole", typ: r("Account") },
-    ], false),
-    "ExecutionInfo": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ExecutionInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ExecutionInfoProperties": o([
-        { json: "execution", js: "execution", typ: r("Items") },
-        { json: "workflowType", js: "workflowType", typ: r("Items") },
-        { json: "startTimestamp", js: "startTimestamp", typ: r("Account") },
-        { json: "closeTimestamp", js: "closeTimestamp", typ: r("Account") },
-        { json: "executionStatus", js: "executionStatus", typ: r("Account") },
-        { json: "closeStatus", js: "closeStatus", typ: r("Account") },
-        { json: "parent", js: "parent", typ: r("Account") },
-        { json: "parentExecutionArn", js: "parentExecutionArn", typ: r("Account") },
-        { json: "tagList", js: "tagList", typ: r("Account") },
-        { json: "cancelRequested", js: "cancelRequested", typ: r("Account") },
-    ], false),
-    "OpenCounts": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OpenCountsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "OpenCountsProperties": o([
-        { json: "openActivityTasks", js: "openActivityTasks", typ: r("Account") },
-        { json: "openDecisionTasks", js: "openDecisionTasks", typ: r("Account") },
-        { json: "openTimers", js: "openTimers", typ: r("Account") },
-        { json: "openChildWorkflowExecutions", js: "openChildWorkflowExecutions", typ: r("Account") },
-        { json: "openLambdaFunctions", js: "openLambdaFunctions", typ: r("Account") },
-    ], false),
-    "TaskList": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TaskListProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "TaskListProperties": o([
-        { json: "name", js: "name", typ: r("ID") },
+        { json: "eventId", js: "eventId", typ: 0 },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "workflowExecutionDetail", js: "workflowExecutionDetail", typ: r("WorkflowExecutionDetail") },
     ], false),
     "WorkflowExecutionDetail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("WorkflowExecutionDetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "executionInfo", js: "executionInfo", typ: r("ExecutionInfo") },
+        { json: "executionConfiguration", js: "executionConfiguration", typ: r("ExecutionConfiguration") },
+        { json: "openCounts", js: "openCounts", typ: r("OpenCounts") },
+        { json: "latestActivityTaskTimestamp", js: "latestActivityTaskTimestamp", typ: null },
+        { json: "latestExecutionContext", js: "latestExecutionContext", typ: null },
     ], false),
-    "WorkflowExecutionDetailProperties": o([
-        { json: "executionInfo", js: "executionInfo", typ: r("Items") },
-        { json: "executionConfiguration", js: "executionConfiguration", typ: r("Items") },
-        { json: "openCounts", js: "openCounts", typ: r("Items") },
-        { json: "latestActivityTaskTimestamp", js: "latestActivityTaskTimestamp", typ: r("Account") },
-        { json: "latestExecutionContext", js: "latestExecutionContext", typ: r("Account") },
+    "ExecutionConfiguration": o([
+        { json: "taskStartToCloseTimeout", js: "taskStartToCloseTimeout", typ: "" },
+        { json: "executionStartToCloseTimeout", js: "executionStartToCloseTimeout", typ: "" },
+        { json: "taskList", js: "taskList", typ: r("TaskList") },
+        { json: "taskPriority", js: "taskPriority", typ: null },
+        { json: "childPolicy", js: "childPolicy", typ: "" },
+        { json: "lambdaRole", js: "lambdaRole", typ: "" },
+    ], false),
+    "TaskList": o([
+        { json: "name", js: "name", typ: "" },
+    ], false),
+    "ExecutionInfo": o([
+        { json: "execution", js: "execution", typ: r("Execution") },
+        { json: "workflowType", js: "workflowType", typ: r("WorkflowType") },
+        { json: "startTimestamp", js: "startTimestamp", typ: 0 },
+        { json: "closeTimestamp", js: "closeTimestamp", typ: null },
+        { json: "executionStatus", js: "executionStatus", typ: "" },
+        { json: "closeStatus", js: "closeStatus", typ: null },
+        { json: "parent", js: "parent", typ: null },
+        { json: "parentExecutionArn", js: "parentExecutionArn", typ: null },
+        { json: "tagList", js: "tagList", typ: null },
+        { json: "cancelRequested", js: "cancelRequested", typ: true },
+    ], false),
+    "Execution": o([
+        { json: "workflowId", js: "workflowId", typ: "" },
+        { json: "runId", js: "runId", typ: "" },
     ], false),
     "WorkflowType": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("WorkflowTypeProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "name", js: "name", typ: "" },
+        { json: "version", js: "version", typ: "" },
     ], false),
-    "WorkflowTypeProperties": o([
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "version", js: "version", typ: r("Account") },
+    "OpenCounts": o([
+        { json: "openActivityTasks", js: "openActivityTasks", typ: 0 },
+        { json: "openDecisionTasks", js: "openDecisionTasks", typ: 0 },
+        { json: "openTimers", js: "openTimers", typ: 0 },
+        { json: "openChildWorkflowExecutions", js: "openChildWorkflowExecutions", typ: 0 },
+        { json: "openLambdaFunctions", js: "openLambdaFunctions", typ: 0 },
     ], false),
-    "Type": [
-        "boolean",
-        "integer",
-        "null",
-        "string",
-    ],
 };

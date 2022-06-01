@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsManagedblockchain } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsManagedblockchain = Convert.toAwsManagedblockchain(json);
 //
@@ -8,90 +8,40 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsManagedblockchain {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsManagedblockchainElement: AwsManagedblockchainElement;
-    Detail:                      Detail;
-}
-
-export interface AwsManagedblockchainElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsManagedblockchainElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsManagedblockchainElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    invitationId:         Account;
-    networkId:            Account;
-    status:               Account;
-    expiresAt:            ID;
-    createdAt:            ID;
-    message:              Account;
-    proposalId:           Account;
-    proposedByMemberId:   Account;
-    proposedByMemberName: Account;
-    expirationDate:       ID;
-    description:          Account;
+    invitationId?:         string;
+    networkId:             string;
+    status:                string;
+    expiresAt?:            Date;
+    createdAt?:            Date;
+    message:               string;
+    proposalId?:           string;
+    proposedByMemberId?:   string;
+    proposedByMemberName?: string;
+    expirationDate?:       Date;
+    description?:          string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsManagedblockchain(json: string): AwsManagedblockchain {
-        return cast(JSON.parse(json), r("AwsManagedblockchain"));
+    public static toAwsManagedblockchain(json: string): AwsManagedblockchain[] {
+        return cast(JSON.parse(json), a(r("AwsManagedblockchain")));
     }
 
-    public static awsManagedblockchainToJson(value: AwsManagedblockchain): string {
-        return JSON.stringify(uncast(value, r("AwsManagedblockchain")), null, 2);
+    public static awsManagedblockchainToJson(value: AwsManagedblockchain[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsManagedblockchain"))), null, 2);
     }
 }
 
@@ -229,68 +179,27 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsManagedblockchain": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsManagedblockchainElement", js: "AwsManagedblockchainElement", typ: r("AwsManagedblockchainElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsManagedblockchainElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsManagedblockchainElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsManagedblockchainElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "invitationId", js: "invitationId", typ: u(undefined, "") },
+        { json: "networkId", js: "networkId", typ: "" },
+        { json: "status", js: "status", typ: "" },
+        { json: "expiresAt", js: "expiresAt", typ: u(undefined, Date) },
+        { json: "createdAt", js: "createdAt", typ: u(undefined, Date) },
+        { json: "message", js: "message", typ: "" },
+        { json: "proposalId", js: "proposalId", typ: u(undefined, "") },
+        { json: "proposedByMemberId", js: "proposedByMemberId", typ: u(undefined, "") },
+        { json: "proposedByMemberName", js: "proposedByMemberName", typ: u(undefined, "") },
+        { json: "expirationDate", js: "expirationDate", typ: u(undefined, Date) },
+        { json: "description", js: "description", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "invitationId", js: "invitationId", typ: r("Account") },
-        { json: "networkId", js: "networkId", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "expiresAt", js: "expiresAt", typ: r("ID") },
-        { json: "createdAt", js: "createdAt", typ: r("ID") },
-        { json: "message", js: "message", typ: r("Account") },
-        { json: "proposalId", js: "proposalId", typ: r("Account") },
-        { json: "proposedByMemberId", js: "proposedByMemberId", typ: r("Account") },
-        { json: "proposedByMemberName", js: "proposedByMemberName", typ: r("Account") },
-        { json: "expirationDate", js: "expirationDate", typ: r("ID") },
-        { json: "description", js: "description", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

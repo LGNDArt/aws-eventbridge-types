@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsEs } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsEs = Convert.toAwsEs(json);
 //
@@ -8,91 +8,48 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsEs {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsE:     AwsE;
-    Detail:   Detail;
-    Region:   Region;
-    Resource: Region;
-    Source:   Region;
-}
-
-export interface AwsE {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsEProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsEProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Items;
-    account:       Account;
-    time:          ID;
-    region:        Items;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Items;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        Source;
+    account:       string;
+    time:          Date;
+    region:        Region;
+    resources:     Resource[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    event:           string;
+    status:          string;
+    severity:        string;
+    description:     string;
+    scheduleTime?:   string;
+    startTime?:      string;
+    completionTime?: string;
 }
 
-export interface DetailProperties {
-    event:          Account;
-    status:         Account;
-    severity:       Account;
-    description:    Account;
-    scheduleTime:   Account;
-    startTime:      Account;
-    completionTime: Account;
+export enum Region {
+    UsEast1 = "us-east-1",
 }
 
-export interface Region {
-    type:  string;
-    enum:  string[];
-    title: string;
+export enum Resource {
+    ArnAwsEsUsEast1123456789012DomainTestDomain = "arn:aws:es:us-east-1:123456789012:domain/test-domain",
+}
+
+export enum Source {
+    AwsEs = "aws.es",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsEs(json: string): AwsEs {
-        return cast(JSON.parse(json), r("AwsEs"));
+    public static toAwsEs(json: string): AwsEs[] {
+        return cast(JSON.parse(json), a(r("AwsEs")));
     }
 
-    public static awsEsToJson(value: AwsEs): string {
-        return JSON.stringify(uncast(value, r("AwsEs")), null, 2);
+    public static awsEsToJson(value: AwsEs[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsEs"))), null, 2);
     }
 }
 
@@ -230,69 +187,32 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsEs": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsE", js: "AwsE", typ: r("AwsE") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Region", js: "Region", typ: r("Region") },
-        { json: "Resource", js: "Resource", typ: r("Region") },
-        { json: "Source", js: "Source", typ: r("Region") },
-    ], false),
-    "AwsE": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsEProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsEProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Items") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Items") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: r("Region") },
+        { json: "resources", js: "resources", typ: a(r("Resource")) },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "event", js: "event", typ: "" },
+        { json: "status", js: "status", typ: "" },
+        { json: "severity", js: "severity", typ: "" },
+        { json: "description", js: "description", typ: "" },
+        { json: "scheduleTime", js: "scheduleTime", typ: u(undefined, "") },
+        { json: "startTime", js: "startTime", typ: u(undefined, "") },
+        { json: "completionTime", js: "completionTime", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "event", js: "event", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "severity", js: "severity", typ: r("Account") },
-        { json: "description", js: "description", typ: r("Account") },
-        { json: "scheduleTime", js: "scheduleTime", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("Account") },
-        { json: "completionTime", js: "completionTime", typ: r("Account") },
-    ], false),
-    "Region": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
+    "Region": [
+        "us-east-1",
+    ],
+    "Resource": [
+        "arn:aws:es:us-east-1:123456789012:domain/test-domain",
+    ],
+    "Source": [
+        "aws.es",
+    ],
 };

@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCloudformation } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCloudformation = Convert.toAwsCloudformation(json);
 //
@@ -8,116 +8,47 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCloudformation {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCloudformationElement: AwsCloudformationElement;
-    Detail:                   Detail;
-    DriftDetectionDetails:    DriftDetectionDetails;
-    StatusDetails:            StatusDetails;
-}
-
-export interface AwsCloudformationElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCloudformationElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCloudformationElementProperties {
-    version:       ID;
-    source:        Account;
-    account:       Account;
-    id:            ID;
-    region:        Account;
-    "detail-type": Account;
-    time:          Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    source:        string;
+    account:       string;
+    id:            string;
+    region:        string;
+    "detail-type": string;
+    time:          string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    "stack-id":                 Account;
-    "logical-resource-id":      Account;
-    "physical-resource-id":     Account;
-    "status-details":           Items;
-    "resource-type":            Account;
-    "stack-drift-detection-id": Account;
-    "drift-detection-details":  Items;
+    "stack-id":                  string;
+    "logical-resource-id"?:      string;
+    "physical-resource-id"?:     string;
+    "status-details":            StatusDetails;
+    "resource-type"?:            string;
+    "stack-drift-detection-id"?: string;
+    "drift-detection-details"?:  DriftDetectionDetails;
 }
 
 export interface DriftDetectionDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DriftDetectionDetailsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DriftDetectionDetailsProperties {
-    "drifted-stack-resource-count": Account;
+    "drifted-stack-resource-count": number;
 }
 
 export interface StatusDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           StatusDetailsProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface StatusDetailsProperties {
-    status:               Account;
-    "status-reason":      Account;
-    "stack-drift-status": Account;
-    "detection-status":   Account;
+    status?:               string;
+    "status-reason"?:      string;
+    "stack-drift-status"?: string;
+    "detection-status"?:   string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCloudformation(json: string): AwsCloudformation {
-        return cast(JSON.parse(json), r("AwsCloudformation"));
+    public static toAwsCloudformation(json: string): AwsCloudformation[] {
+        return cast(JSON.parse(json), a(r("AwsCloudformation")));
     }
 
-    public static awsCloudformationToJson(value: AwsCloudformation): string {
-        return JSON.stringify(uncast(value, r("AwsCloudformation")), null, 2);
+    public static awsCloudformationToJson(value: AwsCloudformation[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCloudformation"))), null, 2);
     }
 }
 
@@ -255,90 +186,32 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCloudformation": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCloudformationElement", js: "AwsCloudformationElement", typ: r("AwsCloudformationElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "DriftDetectionDetails", js: "DriftDetectionDetails", typ: r("DriftDetectionDetails") },
-        { json: "StatusDetails", js: "StatusDetails", typ: r("StatusDetails") },
-    ], false),
-    "AwsCloudformationElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCloudformationElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCloudformationElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "time", js: "time", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "stack-id", js: "stack-id", typ: r("Account") },
-        { json: "logical-resource-id", js: "logical-resource-id", typ: r("Account") },
-        { json: "physical-resource-id", js: "physical-resource-id", typ: r("Account") },
-        { json: "status-details", js: "status-details", typ: r("Items") },
-        { json: "resource-type", js: "resource-type", typ: r("Account") },
-        { json: "stack-drift-detection-id", js: "stack-drift-detection-id", typ: r("Account") },
-        { json: "drift-detection-details", js: "drift-detection-details", typ: r("Items") },
+        { json: "stack-id", js: "stack-id", typ: "" },
+        { json: "logical-resource-id", js: "logical-resource-id", typ: u(undefined, "") },
+        { json: "physical-resource-id", js: "physical-resource-id", typ: u(undefined, "") },
+        { json: "status-details", js: "status-details", typ: r("StatusDetails") },
+        { json: "resource-type", js: "resource-type", typ: u(undefined, "") },
+        { json: "stack-drift-detection-id", js: "stack-drift-detection-id", typ: u(undefined, "") },
+        { json: "drift-detection-details", js: "drift-detection-details", typ: u(undefined, r("DriftDetectionDetails")) },
     ], false),
     "DriftDetectionDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DriftDetectionDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DriftDetectionDetailsProperties": o([
-        { json: "drifted-stack-resource-count", js: "drifted-stack-resource-count", typ: r("Account") },
+        { json: "drifted-stack-resource-count", js: "drifted-stack-resource-count", typ: 0 },
     ], false),
     "StatusDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("StatusDetailsProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "status-reason", js: "status-reason", typ: u(undefined, "") },
+        { json: "stack-drift-status", js: "stack-drift-status", typ: u(undefined, "") },
+        { json: "detection-status", js: "detection-status", typ: u(undefined, "") },
     ], false),
-    "StatusDetailsProperties": o([
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "status-reason", js: "status-reason", typ: r("Account") },
-        { json: "stack-drift-status", js: "stack-drift-status", typ: r("Account") },
-        { json: "detection-status", js: "detection-status", typ: r("Account") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

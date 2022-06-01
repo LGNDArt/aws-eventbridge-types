@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCloudwatch } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCloudwatch = Convert.toAwsCloudwatch(json);
 //
@@ -8,197 +8,78 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCloudwatch {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCloudwatchElement: AwsCloudwatchElement;
-    Detail:               Detail;
-    Configuration:        Configuration;
-    MetricElement:        MetricElement;
-    MetricStat:           MetricStat;
-    MetricStatMetric:     MetricStatMetric;
-    Dimensions:           Dimensions;
-    State:                State;
-}
-
-export interface AwsCloudwatchElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCloudwatchElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCloudwatchElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Integer = "integer",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Configuration {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ConfigurationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ConfigurationProperties {
-    description:             Account;
-    metrics:                 Metrics;
-    evaluationPeriods:       Account;
-    threshold:               Account;
-    comparisonOperator:      Account;
-    treatMissingData:        Account;
-    alarmName:               Account;
-    actionsEnabled:          Account;
-    timestamp:               Account;
-    okActions:               Actions;
-    alarmActions:            Actions;
-    insufficientDataActions: Actions;
-}
-
-export interface Actions {
-    type:  string;
-    items: AlarmActionsItems;
-}
-
-export interface AlarmActionsItems {
-}
-
-export interface Metrics {
-    type:  string;
-    items: DetailClass;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    alarmName:      string;
+    configuration:  Configuration;
+    previousState?: State;
+    state:          State;
+    operation?:     string;
 }
 
-export interface DetailProperties {
-    alarmName:     Account;
-    configuration: DetailClass;
-    previousState: DetailClass;
-    state:         DetailClass;
-    operation:     Account;
-}
-
-export interface Dimensions {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DimensionsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DimensionsProperties {
-    InstanceId: Account;
+export interface Configuration {
+    description:              string;
+    metrics:                  MetricElement[];
+    evaluationPeriods?:       number;
+    threshold?:               number;
+    comparisonOperator?:      string;
+    treatMissingData?:        string;
+    alarmName?:               string;
+    actionsEnabled?:          boolean;
+    timestamp?:               string;
+    okActions?:               any[];
+    alarmActions?:            any[];
+    insufficientDataActions?: any[];
 }
 
 export interface MetricElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           MetricElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface MetricElementProperties {
-    id:         ID;
-    metricStat: DetailClass;
-    returnData: Account;
+    id:         string;
+    metricStat: MetricStat;
+    returnData: boolean;
 }
 
 export interface MetricStat {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           MetricStatProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface MetricStatProperties {
-    metric: DetailClass;
-    period: Account;
-    stat:   Account;
+    metric: MetricStatMetric;
+    period: number;
+    stat:   string;
 }
 
 export interface MetricStatMetric {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           MetricStatMetricProperties;
-    required:             string[];
-    title:                string;
+    dimensions: Dimensions;
+    name:       string;
+    namespace:  string;
 }
 
-export interface MetricStatMetricProperties {
-    dimensions: DetailClass;
-    name:       Account;
-    namespace:  Account;
+export interface Dimensions {
+    InstanceId: string;
 }
 
 export interface State {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           StateProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface StateProperties {
-    reason:     Account;
-    reasonData: Account;
-    timestamp:  Account;
-    value:      Account;
+    reason?:     string;
+    reasonData?: string;
+    timestamp:   string;
+    value:       string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCloudwatch(json: string): AwsCloudwatch {
-        return cast(JSON.parse(json), r("AwsCloudwatch"));
+    public static toAwsCloudwatch(json: string): AwsCloudwatch[] {
+        return cast(JSON.parse(json), a(r("AwsCloudwatch")));
     }
 
-    public static awsCloudwatchToJson(value: AwsCloudwatch): string {
-        return JSON.stringify(uncast(value, r("AwsCloudwatch")), null, 2);
+    public static awsCloudwatchToJson(value: AwsCloudwatch[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCloudwatch"))), null, 2);
     }
 }
 
@@ -336,160 +217,59 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCloudwatch": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCloudwatchElement", js: "AwsCloudwatchElement", typ: r("AwsCloudwatchElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Configuration", js: "Configuration", typ: r("Configuration") },
-        { json: "MetricElement", js: "MetricElement", typ: r("MetricElement") },
-        { json: "MetricStat", js: "MetricStat", typ: r("MetricStat") },
-        { json: "MetricStatMetric", js: "MetricStatMetric", typ: r("MetricStatMetric") },
-        { json: "Dimensions", js: "Dimensions", typ: r("Dimensions") },
-        { json: "State", js: "State", typ: r("State") },
-    ], false),
-    "AwsCloudwatchElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCloudwatchElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCloudwatchElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Configuration": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ConfigurationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ConfigurationProperties": o([
-        { json: "description", js: "description", typ: r("Account") },
-        { json: "metrics", js: "metrics", typ: r("Metrics") },
-        { json: "evaluationPeriods", js: "evaluationPeriods", typ: r("Account") },
-        { json: "threshold", js: "threshold", typ: r("Account") },
-        { json: "comparisonOperator", js: "comparisonOperator", typ: r("Account") },
-        { json: "treatMissingData", js: "treatMissingData", typ: r("Account") },
-        { json: "alarmName", js: "alarmName", typ: r("Account") },
-        { json: "actionsEnabled", js: "actionsEnabled", typ: r("Account") },
-        { json: "timestamp", js: "timestamp", typ: r("Account") },
-        { json: "okActions", js: "okActions", typ: r("Actions") },
-        { json: "alarmActions", js: "alarmActions", typ: r("Actions") },
-        { json: "insufficientDataActions", js: "insufficientDataActions", typ: r("Actions") },
-    ], false),
-    "Actions": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("AlarmActionsItems") },
-    ], false),
-    "AlarmActionsItems": o([
-    ], false),
-    "Metrics": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "alarmName", js: "alarmName", typ: "" },
+        { json: "configuration", js: "configuration", typ: r("Configuration") },
+        { json: "previousState", js: "previousState", typ: u(undefined, r("State")) },
+        { json: "state", js: "state", typ: r("State") },
+        { json: "operation", js: "operation", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "alarmName", js: "alarmName", typ: r("Account") },
-        { json: "configuration", js: "configuration", typ: r("DetailClass") },
-        { json: "previousState", js: "previousState", typ: r("DetailClass") },
-        { json: "state", js: "state", typ: r("DetailClass") },
-        { json: "operation", js: "operation", typ: r("Account") },
-    ], false),
-    "Dimensions": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DimensionsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DimensionsProperties": o([
-        { json: "InstanceId", js: "InstanceId", typ: r("Account") },
+    "Configuration": o([
+        { json: "description", js: "description", typ: "" },
+        { json: "metrics", js: "metrics", typ: a(r("MetricElement")) },
+        { json: "evaluationPeriods", js: "evaluationPeriods", typ: u(undefined, 0) },
+        { json: "threshold", js: "threshold", typ: u(undefined, 0) },
+        { json: "comparisonOperator", js: "comparisonOperator", typ: u(undefined, "") },
+        { json: "treatMissingData", js: "treatMissingData", typ: u(undefined, "") },
+        { json: "alarmName", js: "alarmName", typ: u(undefined, "") },
+        { json: "actionsEnabled", js: "actionsEnabled", typ: u(undefined, true) },
+        { json: "timestamp", js: "timestamp", typ: u(undefined, "") },
+        { json: "okActions", js: "okActions", typ: u(undefined, a("any")) },
+        { json: "alarmActions", js: "alarmActions", typ: u(undefined, a("any")) },
+        { json: "insufficientDataActions", js: "insufficientDataActions", typ: u(undefined, a("any")) },
     ], false),
     "MetricElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MetricElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "MetricElementProperties": o([
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "metricStat", js: "metricStat", typ: r("DetailClass") },
-        { json: "returnData", js: "returnData", typ: r("Account") },
+        { json: "id", js: "id", typ: "" },
+        { json: "metricStat", js: "metricStat", typ: r("MetricStat") },
+        { json: "returnData", js: "returnData", typ: true },
     ], false),
     "MetricStat": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MetricStatProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "MetricStatProperties": o([
-        { json: "metric", js: "metric", typ: r("DetailClass") },
-        { json: "period", js: "period", typ: r("Account") },
-        { json: "stat", js: "stat", typ: r("Account") },
+        { json: "metric", js: "metric", typ: r("MetricStatMetric") },
+        { json: "period", js: "period", typ: 0 },
+        { json: "stat", js: "stat", typ: "" },
     ], false),
     "MetricStatMetric": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MetricStatMetricProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "dimensions", js: "dimensions", typ: r("Dimensions") },
+        { json: "name", js: "name", typ: "" },
+        { json: "namespace", js: "namespace", typ: "" },
     ], false),
-    "MetricStatMetricProperties": o([
-        { json: "dimensions", js: "dimensions", typ: r("DetailClass") },
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "namespace", js: "namespace", typ: r("Account") },
+    "Dimensions": o([
+        { json: "InstanceId", js: "InstanceId", typ: "" },
     ], false),
     "State": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("StateProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "reason", js: "reason", typ: u(undefined, "") },
+        { json: "reasonData", js: "reasonData", typ: u(undefined, "") },
+        { json: "timestamp", js: "timestamp", typ: "" },
+        { json: "value", js: "value", typ: "" },
     ], false),
-    "StateProperties": o([
-        { json: "reason", js: "reason", typ: r("Account") },
-        { json: "reasonData", js: "reasonData", typ: r("Account") },
-        { json: "timestamp", js: "timestamp", typ: r("Account") },
-        { json: "value", js: "value", typ: r("Account") },
-    ], false),
-    "Type": [
-        "boolean",
-        "integer",
-        "string",
-    ],
 };

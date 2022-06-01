@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsACMPca } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsACMPca = Convert.toAwsACMPca(json);
 //
@@ -8,86 +8,44 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsACMPca {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsACMPcaElement: AwsACMPcaElement;
-    Detail:           Detail;
-    Result:           Region;
-    Region:           Region;
-    Source:           Region;
-}
-
-export interface AwsACMPcaElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsACMPcaElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsACMPcaElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Items;
-    account:       Account;
-    time:          ID;
-    region:        Items;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        Source;
+    account:       string;
+    time:          Date;
+    region:        Region;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    result:  Result;
+    reason?: string;
 }
 
-export interface DetailProperties {
-    result: Items;
-    reason: Account;
+export enum Result {
+    Failure = "failure",
+    Success = "success",
 }
 
-export interface Region {
-    type:  string;
-    enum:  string[];
-    title: string;
+export enum Region {
+    UsEast1 = "us-east-1",
+}
+
+export enum Source {
+    AwsACMPca = "aws.acm-pca",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsACMPca(json: string): AwsACMPca {
-        return cast(JSON.parse(json), r("AwsACMPca"));
+    public static toAwsACMPca(json: string): AwsACMPca[] {
+        return cast(JSON.parse(json), a(r("AwsACMPca")));
     }
 
-    public static awsACMPcaToJson(value: AwsACMPca): string {
-        return JSON.stringify(uncast(value, r("AwsACMPca")), null, 2);
+    public static awsACMPcaToJson(value: AwsACMPca[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsACMPca"))), null, 2);
     }
 }
 
@@ -225,64 +183,28 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsACMPca": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsACMPcaElement", js: "AwsACMPcaElement", typ: r("AwsACMPcaElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Result", js: "Result", typ: r("Region") },
-        { json: "Region", js: "Region", typ: r("Region") },
-        { json: "Source", js: "Source", typ: r("Region") },
-    ], false),
-    "AwsACMPcaElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsACMPcaElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsACMPcaElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Items") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Items") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: r("Region") },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "result", js: "result", typ: r("Result") },
+        { json: "reason", js: "reason", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "result", js: "result", typ: r("Items") },
-        { json: "reason", js: "reason", typ: r("Account") },
-    ], false),
-    "Region": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
+    "Result": [
+        "failure",
+        "success",
+    ],
+    "Region": [
+        "us-east-1",
+    ],
+    "Source": [
+        "aws.acm-pca",
+    ],
 };

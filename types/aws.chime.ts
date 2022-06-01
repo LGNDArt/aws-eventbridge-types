@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsChime } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsChime = Convert.toAwsChime(json);
 //
@@ -8,105 +8,55 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsChime {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsChimeElement: AwsChimeElement;
-    Detail:          Detail;
-    DetailType:      DetailType;
-    Region:          DetailType;
-    Source:          DetailType;
-}
-
-export interface AwsChimeElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsChimeElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsChimeElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": DetailClass;
-    source:        DetailClass;
-    account:       Account;
-    time:          ID;
-    region:        DetailClass;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": DetailType;
+    source:        Source;
+    account:       string;
+    time:          Date;
+    region:        Region;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    streamingStatus?:     string;
+    voiceConnectorId?:    string;
+    transactionId?:       string;
+    callId?:              string;
+    direction?:           string;
+    mediaType?:           string;
+    startFragmentNumber?: string;
+    startTime?:           string;
+    streamArn?:           string;
+    version:              string;
+    eventType?:           string;
+    timestamp?:           number;
+    meetingId?:           string;
 }
 
-export interface DetailProperties {
-    streamingStatus:     Account;
-    voiceConnectorId:    Account;
-    transactionId:       Account;
-    callId:              Account;
-    direction:           Account;
-    mediaType:           Account;
-    startFragmentNumber: Account;
-    startTime:           Account;
-    streamArn:           Account;
-    version:             ID;
-    eventType:           Account;
-    timestamp:           Account;
-    meetingId:           ID;
+export enum DetailType {
+    ChimeMeetingStateChange = "Chime Meeting State Change",
+    ChimeVoiceConnectorStreamingStatus = "Chime VoiceConnector Streaming Status",
 }
 
-export interface DetailType {
-    type:  Type;
-    enum:  string[];
-    title: string;
+export enum Region {
+    UsEast1 = "us-east-1",
+}
+
+export enum Source {
+    AwsChime = "aws.chime",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsChime(json: string): AwsChime {
-        return cast(JSON.parse(json), r("AwsChime"));
+    public static toAwsChime(json: string): AwsChime[] {
+        return cast(JSON.parse(json), a(r("AwsChime")));
     }
 
-    public static awsChimeToJson(value: AwsChime): string {
-        return JSON.stringify(uncast(value, r("AwsChime")), null, 2);
+    public static awsChimeToJson(value: AwsChime[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsChime"))), null, 2);
     }
 }
 
@@ -244,81 +194,39 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsChime": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsChimeElement", js: "AwsChimeElement", typ: r("AwsChimeElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "DetailType", js: "DetailType", typ: r("DetailType") },
-        { json: "Region", js: "Region", typ: r("DetailType") },
-        { json: "Source", js: "Source", typ: r("DetailType") },
-    ], false),
-    "AwsChimeElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsChimeElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsChimeElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("DetailClass") },
-        { json: "source", js: "source", typ: r("DetailClass") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("DetailClass") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: r("DetailType") },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: r("Region") },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "streamingStatus", js: "streamingStatus", typ: u(undefined, "") },
+        { json: "voiceConnectorId", js: "voiceConnectorId", typ: u(undefined, "") },
+        { json: "transactionId", js: "transactionId", typ: u(undefined, "") },
+        { json: "callId", js: "callId", typ: u(undefined, "") },
+        { json: "direction", js: "direction", typ: u(undefined, "") },
+        { json: "mediaType", js: "mediaType", typ: u(undefined, "") },
+        { json: "startFragmentNumber", js: "startFragmentNumber", typ: u(undefined, "") },
+        { json: "startTime", js: "startTime", typ: u(undefined, "") },
+        { json: "streamArn", js: "streamArn", typ: u(undefined, "") },
+        { json: "version", js: "version", typ: "" },
+        { json: "eventType", js: "eventType", typ: u(undefined, "") },
+        { json: "timestamp", js: "timestamp", typ: u(undefined, 0) },
+        { json: "meetingId", js: "meetingId", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "streamingStatus", js: "streamingStatus", typ: r("Account") },
-        { json: "voiceConnectorId", js: "voiceConnectorId", typ: r("Account") },
-        { json: "transactionId", js: "transactionId", typ: r("Account") },
-        { json: "callId", js: "callId", typ: r("Account") },
-        { json: "direction", js: "direction", typ: r("Account") },
-        { json: "mediaType", js: "mediaType", typ: r("Account") },
-        { json: "startFragmentNumber", js: "startFragmentNumber", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("Account") },
-        { json: "streamArn", js: "streamArn", typ: r("Account") },
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "eventType", js: "eventType", typ: r("Account") },
-        { json: "timestamp", js: "timestamp", typ: r("Account") },
-        { json: "meetingId", js: "meetingId", typ: r("ID") },
-    ], false),
-    "DetailType": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
+    "DetailType": [
+        "Chime Meeting State Change",
+        "Chime VoiceConnector Streaming Status",
+    ],
+    "Region": [
+        "us-east-1",
+    ],
+    "Source": [
+        "aws.chime",
     ],
 };

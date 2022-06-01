@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSigner } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSigner = Convert.toAwsSigner(json);
 //
@@ -8,114 +8,46 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSigner {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSignerElement: AwsSignerElement;
-    Detail:           Detail;
-    Destination:      Destination;
-    Source:           Source;
-}
-
-export interface AwsSignerElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSignerElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSignerElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Destination {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DestinationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DestinationProperties {
-    bucketName: Account;
-    key:        ID;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    certificate_arn: string;
+    job_id:          string;
+    destination:     Destination;
+    source:          Source;
+    platform:        string;
+    status:          string;
 }
 
-export interface DetailProperties {
-    certificate_arn: Account;
-    job_id:          ID;
-    destination:     Items;
-    source:          Items;
-    platform:        Account;
-    status:          Account;
+export interface Destination {
+    bucketName: string;
+    key:        string;
 }
 
 export interface Source {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SourceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SourceProperties {
-    bucketName: Account;
-    key:        Account;
-    version:    Account;
+    bucketName: string;
+    key:        string;
+    version:    string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSigner(json: string): AwsSigner {
-        return cast(JSON.parse(json), r("AwsSigner"));
+    public static toAwsSigner(json: string): AwsSigner[] {
+        return cast(JSON.parse(json), a(r("AwsSigner")));
     }
 
-    public static awsSignerToJson(value: AwsSigner): string {
-        return JSON.stringify(uncast(value, r("AwsSigner")), null, 2);
+    public static awsSignerToJson(value: AwsSigner[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSigner"))), null, 2);
     }
 }
 
@@ -253,88 +185,31 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSigner": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSignerElement", js: "AwsSignerElement", typ: r("AwsSignerElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Destination", js: "Destination", typ: r("Destination") },
-        { json: "Source", js: "Source", typ: r("Source") },
-    ], false),
-    "AwsSignerElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSignerElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSignerElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Destination": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DestinationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DestinationProperties": o([
-        { json: "bucketName", js: "bucketName", typ: r("Account") },
-        { json: "key", js: "key", typ: r("ID") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "certificate_arn", js: "certificate_arn", typ: "" },
+        { json: "job_id", js: "job_id", typ: "" },
+        { json: "destination", js: "destination", typ: r("Destination") },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "platform", js: "platform", typ: "" },
+        { json: "status", js: "status", typ: "" },
     ], false),
-    "DetailProperties": o([
-        { json: "certificate_arn", js: "certificate_arn", typ: r("Account") },
-        { json: "job_id", js: "job_id", typ: r("ID") },
-        { json: "destination", js: "destination", typ: r("Items") },
-        { json: "source", js: "source", typ: r("Items") },
-        { json: "platform", js: "platform", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
+    "Destination": o([
+        { json: "bucketName", js: "bucketName", typ: "" },
+        { json: "key", js: "key", typ: "" },
     ], false),
     "Source": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SourceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "bucketName", js: "bucketName", typ: "" },
+        { json: "key", js: "key", typ: "" },
+        { json: "version", js: "version", typ: "" },
     ], false),
-    "SourceProperties": o([
-        { json: "bucketName", js: "bucketName", typ: r("Account") },
-        { json: "key", js: "key", typ: r("Account") },
-        { json: "version", js: "version", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

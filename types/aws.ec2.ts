@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsEc2 } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsEc2 = Convert.toAwsEc2(json);
 //
@@ -8,127 +8,67 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsEc2 {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsEc2Element: AwsEc2Element;
-    Detail:        Detail;
-    Snapshot:      Snapshot;
-    Result:        Region;
-    Region:        Region;
-    Source:        Region;
-}
-
-export interface AwsEc2Element {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsEc2ElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsEc2ElementProperties {
-    version:       Time;
-    id:            Account;
-    "detail-type": Account;
-    source:        Items;
-    account:       Account;
-    time:          Time;
-    region:        Items;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Null = "null",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Time {
-    type:   Type;
-    format: string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        Source;
+    account:       string;
+    time:          Date;
+    region:        Region;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
+    "instance-id"?:              string;
+    state?:                      string;
+    event?:                      string;
+    result?:                     Result;
+    cause?:                      string;
+    "request-id"?:               string;
+    snapshot_id?:                string;
+    source?:                     string;
+    StartTime?:                  Date;
+    EndTime?:                    Date;
+    "instance-action"?:          string;
+    startTime?:                  Date;
+    endTime?:                    Date;
+    snapshots?:                  Snapshot[];
+    "spot-instance-request-id"?: string;
+    "snapshot-id"?:              string;
+    zone?:                       null;
+    message?:                    string;
 }
 
-export interface DetailProperties {
-    "instance-id":              Account;
-    state:                      Account;
-    event:                      Account;
-    result:                     Items;
-    cause:                      Account;
-    "request-id":               Account;
-    snapshot_id:                Account;
-    source:                     Account;
-    StartTime:                  Time;
-    EndTime:                    Time;
-    "instance-action":          Account;
-    startTime:                  Time;
-    endTime:                    Time;
-    snapshots:                  Snapshots;
-    "spot-instance-request-id": Account;
-    "snapshot-id":              Account;
-    zone:                       Account;
-    message:                    Account;
-}
-
-export interface Snapshots {
-    type:  string;
-    items: Items;
-}
-
-export interface Region {
-    type:  Type;
-    enum:  string[];
-    title: string;
+export enum Result {
+    Failed = "failed",
+    Succeeded = "succeeded",
 }
 
 export interface Snapshot {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SnapshotProperties;
-    required:             string[];
-    title:                string;
+    snapshot_id: string;
+    source:      string;
+    status:      string;
 }
 
-export interface SnapshotProperties {
-    snapshot_id: Account;
-    source:      Account;
-    status:      Account;
+export enum Region {
+    SaEast1 = "sa-east-1",
+    UsEast1 = "us-east-1",
+}
+
+export enum Source {
+    AwsEc2 = "aws.ec2",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsEc2(json: string): AwsEc2 {
-        return cast(JSON.parse(json), r("AwsEc2"));
+    public static toAwsEc2(json: string): AwsEc2[] {
+        return cast(JSON.parse(json), a(r("AwsEc2")));
     }
 
-    public static awsEc2ToJson(value: AwsEc2): string {
-        return JSON.stringify(uncast(value, r("AwsEc2")), null, 2);
+    public static awsEc2ToJson(value: AwsEc2[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsEc2"))), null, 2);
     }
 }
 
@@ -266,101 +206,50 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsEc2": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsEc2Element", js: "AwsEc2Element", typ: r("AwsEc2Element") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Snapshot", js: "Snapshot", typ: r("Snapshot") },
-        { json: "Result", js: "Result", typ: r("Region") },
-        { json: "Region", js: "Region", typ: r("Region") },
-        { json: "Source", js: "Source", typ: r("Region") },
-    ], false),
-    "AwsEc2Element": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsEc2ElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsEc2ElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Items") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "region", js: "region", typ: r("Items") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: r("Region") },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "instance-id", js: "instance-id", typ: r("Account") },
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "event", js: "event", typ: r("Account") },
-        { json: "result", js: "result", typ: r("Items") },
-        { json: "cause", js: "cause", typ: r("Account") },
-        { json: "request-id", js: "request-id", typ: r("Account") },
-        { json: "snapshot_id", js: "snapshot_id", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "StartTime", js: "StartTime", typ: r("Time") },
-        { json: "EndTime", js: "EndTime", typ: r("Time") },
-        { json: "instance-action", js: "instance-action", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("Time") },
-        { json: "endTime", js: "endTime", typ: r("Time") },
-        { json: "snapshots", js: "snapshots", typ: r("Snapshots") },
-        { json: "spot-instance-request-id", js: "spot-instance-request-id", typ: r("Account") },
-        { json: "snapshot-id", js: "snapshot-id", typ: r("Account") },
-        { json: "zone", js: "zone", typ: r("Account") },
-        { json: "message", js: "message", typ: r("Account") },
-    ], false),
-    "Snapshots": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-    ], false),
-    "Region": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "instance-id", js: "instance-id", typ: u(undefined, "") },
+        { json: "state", js: "state", typ: u(undefined, "") },
+        { json: "event", js: "event", typ: u(undefined, "") },
+        { json: "result", js: "result", typ: u(undefined, r("Result")) },
+        { json: "cause", js: "cause", typ: u(undefined, "") },
+        { json: "request-id", js: "request-id", typ: u(undefined, "") },
+        { json: "snapshot_id", js: "snapshot_id", typ: u(undefined, "") },
+        { json: "source", js: "source", typ: u(undefined, "") },
+        { json: "StartTime", js: "StartTime", typ: u(undefined, Date) },
+        { json: "EndTime", js: "EndTime", typ: u(undefined, Date) },
+        { json: "instance-action", js: "instance-action", typ: u(undefined, "") },
+        { json: "startTime", js: "startTime", typ: u(undefined, Date) },
+        { json: "endTime", js: "endTime", typ: u(undefined, Date) },
+        { json: "snapshots", js: "snapshots", typ: u(undefined, a(r("Snapshot"))) },
+        { json: "spot-instance-request-id", js: "spot-instance-request-id", typ: u(undefined, "") },
+        { json: "snapshot-id", js: "snapshot-id", typ: u(undefined, "") },
+        { json: "zone", js: "zone", typ: u(undefined, null) },
+        { json: "message", js: "message", typ: u(undefined, "") },
     ], false),
     "Snapshot": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SnapshotProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "snapshot_id", js: "snapshot_id", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "status", js: "status", typ: "" },
     ], false),
-    "SnapshotProperties": o([
-        { json: "snapshot_id", js: "snapshot_id", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-    ], false),
-    "Type": [
-        "null",
-        "string",
+    "Result": [
+        "failed",
+        "succeeded",
+    ],
+    "Region": [
+        "sa-east-1",
+        "us-east-1",
+    ],
+    "Source": [
+        "aws.ec2",
     ],
 };

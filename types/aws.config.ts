@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsConfig } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsConfig = Convert.toAwsConfig(json);
 //
@@ -8,326 +8,140 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsConfig {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsConfigElement:             AwsConfigElement;
-    Detail:                       Detail;
-    ConfigurationItem:            ConfigurationItem;
-    Configuration:                Configuration;
-    BackupPolicy:                 BackupPolicy;
-    SupplementaryConfiguration:   SupplementaryConfiguration;
-    FileSystemTag:                FileSystemTag;
-    LifecyclePolicy:              LifecyclePolicy;
-    Tags:                         Tags;
-    ConfigurationItemDiff:        ConfigurationItemDiff;
-    ChangedProperties:            ChangedProperties;
-    ConfigurationFileSystemTags0: ConfigurationFileSystemTags0;
-    Tags2:                        Tags2;
-    NewEvaluationResult:          NewEvaluationResult;
-    EvaluationResultIdentifier:   EvaluationResultIdentifier;
-    EvaluationResultQualifier:    EvaluationResultQualifier;
-}
-
-export interface AwsConfigElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsConfigElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsConfigElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Integer = "integer",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface BackupPolicy {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           BackupPolicyProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface BackupPolicyProperties {
-    Status: Account;
-}
-
-export interface ChangedProperties {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ChangedPropertiesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ChangedPropertiesProperties {
-    "Configuration.FileSystemTags.0": DetailClass;
-    "Tags.2":                         DetailClass;
-}
-
-export interface Configuration {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ConfigurationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ConfigurationProperties {
-    FileSystemId:      Account;
-    Arn:               Account;
-    Encrypted:         Account;
-    FileSystemTags:    FileSystemTags;
-    PerformanceMode:   Account;
-    ThroughputMode:    Account;
-    LifecyclePolicies: FileSystemTags;
-    BackupPolicy:      DetailClass;
-    FileSystemPolicy:  DetailClass;
-    KmsKeyId:          Account;
-}
-
-export interface FileSystemTags {
-    type:  string;
-    items: DetailClass;
-}
-
-export interface ConfigurationFileSystemTags0 {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ConfigurationFileSystemTags0Properties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ConfigurationFileSystemTags0Properties {
-    updatedValue: DetailClass;
-    changeType:   Account;
-}
-
-export interface ConfigurationItem {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ConfigurationItemProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ConfigurationItemProperties {
-    relatedEvents:                Relat;
-    relationships:                Relat;
-    configuration:                DetailClass;
-    supplementaryConfiguration:   DetailClass;
-    tags:                         DetailClass;
-    configurationItemVersion:     Account;
-    configurationItemCaptureTime: ID;
-    configurationStateId:         Account;
-    awsAccountId:                 Account;
-    configurationItemStatus:      Account;
-    resourceType:                 Account;
-    resourceId:                   Account;
-    resourceName:                 Account;
-    ARN:                          Account;
-    awsRegion:                    Account;
-    availabilityZone:             Account;
-    configurationStateMd5Hash:    Account;
-}
-
-export interface Relat {
-    type:  string;
-    items: RelatedEventsItems;
-}
-
-export interface RelatedEventsItems {
-}
-
-export interface ConfigurationItemDiff {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ConfigurationItemDiffProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ConfigurationItemDiffProperties {
-    changedProperties: DetailClass;
-    changeType:        Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    recordVersion:            string;
+    messageType:              string;
+    configurationItemDiff?:   ConfigurationItemDiff;
+    notificationCreationTime: Date;
+    configurationItem?:       ConfigurationItem;
+    s3ObjectKey?:             string;
+    s3Bucket?:                string;
+    configSnapshotId?:        string;
+    resourceId?:              string;
+    awsRegion?:               string;
+    awsAccountId?:            string;
+    configRuleName?:          string;
+    configRuleARN?:           string;
+    newEvaluationResult?:     NewEvaluationResult;
+    resourceType?:            string;
+    configRuleNames?:         string[];
 }
 
-export interface DetailProperties {
-    recordVersion:            Account;
-    messageType:              Account;
-    configurationItemDiff:    DetailClass;
-    notificationCreationTime: ID;
-    configurationItem:        DetailClass;
-    s3ObjectKey:              Account;
-    s3Bucket:                 Account;
-    configSnapshotId:         ID;
-    resourceId:               Account;
-    awsRegion:                Account;
-    awsAccountId:             Account;
-    configRuleName:           Account;
-    configRuleARN:            Account;
-    newEvaluationResult:      DetailClass;
-    resourceType:             Account;
-    configRuleNames:          Resources;
+export interface ConfigurationItem {
+    relatedEvents:                any[];
+    relationships:                any[];
+    configuration:                Configuration;
+    supplementaryConfiguration:   SupplementaryConfiguration;
+    tags:                         Tags;
+    configurationItemVersion:     string;
+    configurationItemCaptureTime: Date;
+    configurationStateId:         number;
+    awsAccountId:                 string;
+    configurationItemStatus:      string;
+    resourceType:                 string;
+    resourceId:                   string;
+    resourceName:                 string;
+    ARN:                          string;
+    awsRegion:                    string;
+    availabilityZone:             string;
+    configurationStateMd5Hash:    string;
 }
 
-export interface EvaluationResultIdentifier {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           EvaluationResultIdentifierProperties;
-    required:             string[];
-    title:                string;
+export interface Configuration {
+    FileSystemId:      string;
+    Arn:               string;
+    Encrypted:         boolean;
+    FileSystemTags:    FileSystemTag[];
+    PerformanceMode:   string;
+    ThroughputMode:    string;
+    LifecyclePolicies: LifecyclePolicy[];
+    BackupPolicy:      BackupPolicy;
+    FileSystemPolicy:  SupplementaryConfiguration;
+    KmsKeyId:          string;
 }
 
-export interface EvaluationResultIdentifierProperties {
-    evaluationResultQualifier: DetailClass;
-    orderingTimestamp:         ID;
-}
-
-export interface EvaluationResultQualifier {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           EvaluationResultQualifierProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface EvaluationResultQualifierProperties {
-    configRuleName: Account;
-    resourceType:   Account;
-    resourceId:     Account;
-}
-
-export interface FileSystemTag {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           FileSystemTagProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface FileSystemTagProperties {
-    Key:   Account;
-    Value: Account;
-}
-
-export interface LifecyclePolicy {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           LifecyclePolicyProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface LifecyclePolicyProperties {
-    TransitionToIA:                  Account;
-    TransitionToPrimaryStorageClass: Account;
-}
-
-export interface NewEvaluationResult {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           NewEvaluationResultProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface NewEvaluationResultProperties {
-    evaluationResultIdentifier: DetailClass;
-    complianceType:             Account;
-    resultRecordedTime:         ID;
-    configRuleInvokedTime:      ID;
-    annotation:                 Account;
+export interface BackupPolicy {
+    Status: string;
 }
 
 export interface SupplementaryConfiguration {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
+}
+
+export interface FileSystemTag {
+    Key:   string;
+    Value: string;
+}
+
+export interface LifecyclePolicy {
+    TransitionToIA?:                  string;
+    TransitionToPrimaryStorageClass?: string;
 }
 
 export interface Tags {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TagsProperties;
-    required:             string[];
-    title:                string;
+    "aws:elasticfilesystem:default-backup": string;
+    test:                                   string;
+    Name:                                   string;
 }
 
-export interface TagsProperties {
-    "aws:elasticfilesystem:default-backup": Account;
-    test:                                   Account;
-    Name:                                   Account;
+export interface ConfigurationItemDiff {
+    changedProperties: ChangedProperties;
+    changeType:        string;
+}
+
+export interface ChangedProperties {
+    "Configuration.FileSystemTags.0": ConfigurationFileSystemTags0;
+    "Tags.2":                         Tags2;
+}
+
+export interface ConfigurationFileSystemTags0 {
+    updatedValue: FileSystemTag;
+    changeType:   string;
 }
 
 export interface Tags2 {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           Tags2Properties;
-    required:             string[];
-    title:                string;
+    updatedValue: string;
+    changeType:   string;
 }
 
-export interface Tags2Properties {
-    updatedValue: Account;
-    changeType:   Account;
+export interface NewEvaluationResult {
+    evaluationResultIdentifier: EvaluationResultIdentifier;
+    complianceType:             string;
+    resultRecordedTime:         Date;
+    configRuleInvokedTime:      Date;
+    annotation:                 string;
+}
+
+export interface EvaluationResultIdentifier {
+    evaluationResultQualifier: EvaluationResultQualifier;
+    orderingTimestamp:         Date;
+}
+
+export interface EvaluationResultQualifier {
+    configRuleName: string;
+    resourceType:   string;
+    resourceId:     string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsConfig(json: string): AwsConfig {
-        return cast(JSON.parse(json), r("AwsConfig"));
+    public static toAwsConfig(json: string): AwsConfig[] {
+        return cast(JSON.parse(json), a(r("AwsConfig")));
     }
 
-    public static awsConfigToJson(value: AwsConfig): string {
-        return JSON.stringify(uncast(value, r("AwsConfig")), null, 2);
+    public static awsConfigToJson(value: AwsConfig[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsConfig"))), null, 2);
     }
 }
 
@@ -465,274 +279,113 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsConfig": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsConfigElement", js: "AwsConfigElement", typ: r("AwsConfigElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "ConfigurationItem", js: "ConfigurationItem", typ: r("ConfigurationItem") },
-        { json: "Configuration", js: "Configuration", typ: r("Configuration") },
-        { json: "BackupPolicy", js: "BackupPolicy", typ: r("BackupPolicy") },
-        { json: "SupplementaryConfiguration", js: "SupplementaryConfiguration", typ: r("SupplementaryConfiguration") },
-        { json: "FileSystemTag", js: "FileSystemTag", typ: r("FileSystemTag") },
-        { json: "LifecyclePolicy", js: "LifecyclePolicy", typ: r("LifecyclePolicy") },
-        { json: "Tags", js: "Tags", typ: r("Tags") },
-        { json: "ConfigurationItemDiff", js: "ConfigurationItemDiff", typ: r("ConfigurationItemDiff") },
-        { json: "ChangedProperties", js: "ChangedProperties", typ: r("ChangedProperties") },
-        { json: "ConfigurationFileSystemTags0", js: "ConfigurationFileSystemTags0", typ: r("ConfigurationFileSystemTags0") },
-        { json: "Tags2", js: "Tags2", typ: r("Tags2") },
-        { json: "NewEvaluationResult", js: "NewEvaluationResult", typ: r("NewEvaluationResult") },
-        { json: "EvaluationResultIdentifier", js: "EvaluationResultIdentifier", typ: r("EvaluationResultIdentifier") },
-        { json: "EvaluationResultQualifier", js: "EvaluationResultQualifier", typ: r("EvaluationResultQualifier") },
-    ], false),
-    "AwsConfigElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsConfigElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsConfigElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "BackupPolicy": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("BackupPolicyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "BackupPolicyProperties": o([
-        { json: "Status", js: "Status", typ: r("Account") },
-    ], false),
-    "ChangedProperties": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ChangedPropertiesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ChangedPropertiesProperties": o([
-        { json: "Configuration.FileSystemTags.0", js: "Configuration.FileSystemTags.0", typ: r("DetailClass") },
-        { json: "Tags.2", js: "Tags.2", typ: r("DetailClass") },
-    ], false),
-    "Configuration": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ConfigurationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ConfigurationProperties": o([
-        { json: "FileSystemId", js: "FileSystemId", typ: r("Account") },
-        { json: "Arn", js: "Arn", typ: r("Account") },
-        { json: "Encrypted", js: "Encrypted", typ: r("Account") },
-        { json: "FileSystemTags", js: "FileSystemTags", typ: r("FileSystemTags") },
-        { json: "PerformanceMode", js: "PerformanceMode", typ: r("Account") },
-        { json: "ThroughputMode", js: "ThroughputMode", typ: r("Account") },
-        { json: "LifecyclePolicies", js: "LifecyclePolicies", typ: r("FileSystemTags") },
-        { json: "BackupPolicy", js: "BackupPolicy", typ: r("DetailClass") },
-        { json: "FileSystemPolicy", js: "FileSystemPolicy", typ: r("DetailClass") },
-        { json: "KmsKeyId", js: "KmsKeyId", typ: r("Account") },
-    ], false),
-    "FileSystemTags": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-    ], false),
-    "ConfigurationFileSystemTags0": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ConfigurationFileSystemTags0Properties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ConfigurationFileSystemTags0Properties": o([
-        { json: "updatedValue", js: "updatedValue", typ: r("DetailClass") },
-        { json: "changeType", js: "changeType", typ: r("Account") },
-    ], false),
-    "ConfigurationItem": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ConfigurationItemProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ConfigurationItemProperties": o([
-        { json: "relatedEvents", js: "relatedEvents", typ: r("Relat") },
-        { json: "relationships", js: "relationships", typ: r("Relat") },
-        { json: "configuration", js: "configuration", typ: r("DetailClass") },
-        { json: "supplementaryConfiguration", js: "supplementaryConfiguration", typ: r("DetailClass") },
-        { json: "tags", js: "tags", typ: r("DetailClass") },
-        { json: "configurationItemVersion", js: "configurationItemVersion", typ: r("Account") },
-        { json: "configurationItemCaptureTime", js: "configurationItemCaptureTime", typ: r("ID") },
-        { json: "configurationStateId", js: "configurationStateId", typ: r("Account") },
-        { json: "awsAccountId", js: "awsAccountId", typ: r("Account") },
-        { json: "configurationItemStatus", js: "configurationItemStatus", typ: r("Account") },
-        { json: "resourceType", js: "resourceType", typ: r("Account") },
-        { json: "resourceId", js: "resourceId", typ: r("Account") },
-        { json: "resourceName", js: "resourceName", typ: r("Account") },
-        { json: "ARN", js: "ARN", typ: r("Account") },
-        { json: "awsRegion", js: "awsRegion", typ: r("Account") },
-        { json: "availabilityZone", js: "availabilityZone", typ: r("Account") },
-        { json: "configurationStateMd5Hash", js: "configurationStateMd5Hash", typ: r("Account") },
-    ], false),
-    "Relat": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("RelatedEventsItems") },
-    ], false),
-    "RelatedEventsItems": o([
-    ], false),
-    "ConfigurationItemDiff": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ConfigurationItemDiffProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ConfigurationItemDiffProperties": o([
-        { json: "changedProperties", js: "changedProperties", typ: r("DetailClass") },
-        { json: "changeType", js: "changeType", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "recordVersion", js: "recordVersion", typ: "" },
+        { json: "messageType", js: "messageType", typ: "" },
+        { json: "configurationItemDiff", js: "configurationItemDiff", typ: u(undefined, r("ConfigurationItemDiff")) },
+        { json: "notificationCreationTime", js: "notificationCreationTime", typ: Date },
+        { json: "configurationItem", js: "configurationItem", typ: u(undefined, r("ConfigurationItem")) },
+        { json: "s3ObjectKey", js: "s3ObjectKey", typ: u(undefined, "") },
+        { json: "s3Bucket", js: "s3Bucket", typ: u(undefined, "") },
+        { json: "configSnapshotId", js: "configSnapshotId", typ: u(undefined, "") },
+        { json: "resourceId", js: "resourceId", typ: u(undefined, "") },
+        { json: "awsRegion", js: "awsRegion", typ: u(undefined, "") },
+        { json: "awsAccountId", js: "awsAccountId", typ: u(undefined, "") },
+        { json: "configRuleName", js: "configRuleName", typ: u(undefined, "") },
+        { json: "configRuleARN", js: "configRuleARN", typ: u(undefined, "") },
+        { json: "newEvaluationResult", js: "newEvaluationResult", typ: u(undefined, r("NewEvaluationResult")) },
+        { json: "resourceType", js: "resourceType", typ: u(undefined, "") },
+        { json: "configRuleNames", js: "configRuleNames", typ: u(undefined, a("")) },
     ], false),
-    "DetailProperties": o([
-        { json: "recordVersion", js: "recordVersion", typ: r("Account") },
-        { json: "messageType", js: "messageType", typ: r("Account") },
-        { json: "configurationItemDiff", js: "configurationItemDiff", typ: r("DetailClass") },
-        { json: "notificationCreationTime", js: "notificationCreationTime", typ: r("ID") },
-        { json: "configurationItem", js: "configurationItem", typ: r("DetailClass") },
-        { json: "s3ObjectKey", js: "s3ObjectKey", typ: r("Account") },
-        { json: "s3Bucket", js: "s3Bucket", typ: r("Account") },
-        { json: "configSnapshotId", js: "configSnapshotId", typ: r("ID") },
-        { json: "resourceId", js: "resourceId", typ: r("Account") },
-        { json: "awsRegion", js: "awsRegion", typ: r("Account") },
-        { json: "awsAccountId", js: "awsAccountId", typ: r("Account") },
-        { json: "configRuleName", js: "configRuleName", typ: r("Account") },
-        { json: "configRuleARN", js: "configRuleARN", typ: r("Account") },
-        { json: "newEvaluationResult", js: "newEvaluationResult", typ: r("DetailClass") },
-        { json: "resourceType", js: "resourceType", typ: r("Account") },
-        { json: "configRuleNames", js: "configRuleNames", typ: r("Resources") },
+    "ConfigurationItem": o([
+        { json: "relatedEvents", js: "relatedEvents", typ: a("any") },
+        { json: "relationships", js: "relationships", typ: a("any") },
+        { json: "configuration", js: "configuration", typ: r("Configuration") },
+        { json: "supplementaryConfiguration", js: "supplementaryConfiguration", typ: r("SupplementaryConfiguration") },
+        { json: "tags", js: "tags", typ: r("Tags") },
+        { json: "configurationItemVersion", js: "configurationItemVersion", typ: "" },
+        { json: "configurationItemCaptureTime", js: "configurationItemCaptureTime", typ: Date },
+        { json: "configurationStateId", js: "configurationStateId", typ: 0 },
+        { json: "awsAccountId", js: "awsAccountId", typ: "" },
+        { json: "configurationItemStatus", js: "configurationItemStatus", typ: "" },
+        { json: "resourceType", js: "resourceType", typ: "" },
+        { json: "resourceId", js: "resourceId", typ: "" },
+        { json: "resourceName", js: "resourceName", typ: "" },
+        { json: "ARN", js: "ARN", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "availabilityZone", js: "availabilityZone", typ: "" },
+        { json: "configurationStateMd5Hash", js: "configurationStateMd5Hash", typ: "" },
     ], false),
-    "EvaluationResultIdentifier": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("EvaluationResultIdentifierProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+    "Configuration": o([
+        { json: "FileSystemId", js: "FileSystemId", typ: "" },
+        { json: "Arn", js: "Arn", typ: "" },
+        { json: "Encrypted", js: "Encrypted", typ: true },
+        { json: "FileSystemTags", js: "FileSystemTags", typ: a(r("FileSystemTag")) },
+        { json: "PerformanceMode", js: "PerformanceMode", typ: "" },
+        { json: "ThroughputMode", js: "ThroughputMode", typ: "" },
+        { json: "LifecyclePolicies", js: "LifecyclePolicies", typ: a(r("LifecyclePolicy")) },
+        { json: "BackupPolicy", js: "BackupPolicy", typ: r("BackupPolicy") },
+        { json: "FileSystemPolicy", js: "FileSystemPolicy", typ: r("SupplementaryConfiguration") },
+        { json: "KmsKeyId", js: "KmsKeyId", typ: "" },
     ], false),
-    "EvaluationResultIdentifierProperties": o([
-        { json: "evaluationResultQualifier", js: "evaluationResultQualifier", typ: r("DetailClass") },
-        { json: "orderingTimestamp", js: "orderingTimestamp", typ: r("ID") },
-    ], false),
-    "EvaluationResultQualifier": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("EvaluationResultQualifierProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "EvaluationResultQualifierProperties": o([
-        { json: "configRuleName", js: "configRuleName", typ: r("Account") },
-        { json: "resourceType", js: "resourceType", typ: r("Account") },
-        { json: "resourceId", js: "resourceId", typ: r("Account") },
-    ], false),
-    "FileSystemTag": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("FileSystemTagProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "FileSystemTagProperties": o([
-        { json: "Key", js: "Key", typ: r("Account") },
-        { json: "Value", js: "Value", typ: r("Account") },
-    ], false),
-    "LifecyclePolicy": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("LifecyclePolicyProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "LifecyclePolicyProperties": o([
-        { json: "TransitionToIA", js: "TransitionToIA", typ: r("Account") },
-        { json: "TransitionToPrimaryStorageClass", js: "TransitionToPrimaryStorageClass", typ: r("Account") },
-    ], false),
-    "NewEvaluationResult": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("NewEvaluationResultProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "NewEvaluationResultProperties": o([
-        { json: "evaluationResultIdentifier", js: "evaluationResultIdentifier", typ: r("DetailClass") },
-        { json: "complianceType", js: "complianceType", typ: r("Account") },
-        { json: "resultRecordedTime", js: "resultRecordedTime", typ: r("ID") },
-        { json: "configRuleInvokedTime", js: "configRuleInvokedTime", typ: r("ID") },
-        { json: "annotation", js: "annotation", typ: r("Account") },
+    "BackupPolicy": o([
+        { json: "Status", js: "Status", typ: "" },
     ], false),
     "SupplementaryConfiguration": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
+    ], false),
+    "FileSystemTag": o([
+        { json: "Key", js: "Key", typ: "" },
+        { json: "Value", js: "Value", typ: "" },
+    ], false),
+    "LifecyclePolicy": o([
+        { json: "TransitionToIA", js: "TransitionToIA", typ: u(undefined, "") },
+        { json: "TransitionToPrimaryStorageClass", js: "TransitionToPrimaryStorageClass", typ: u(undefined, "") },
     ], false),
     "Tags": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TagsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "aws:elasticfilesystem:default-backup", js: "aws:elasticfilesystem:default-backup", typ: "" },
+        { json: "test", js: "test", typ: "" },
+        { json: "Name", js: "Name", typ: "" },
     ], false),
-    "TagsProperties": o([
-        { json: "aws:elasticfilesystem:default-backup", js: "aws:elasticfilesystem:default-backup", typ: r("Account") },
-        { json: "test", js: "test", typ: r("Account") },
-        { json: "Name", js: "Name", typ: r("Account") },
+    "ConfigurationItemDiff": o([
+        { json: "changedProperties", js: "changedProperties", typ: r("ChangedProperties") },
+        { json: "changeType", js: "changeType", typ: "" },
+    ], false),
+    "ChangedProperties": o([
+        { json: "Configuration.FileSystemTags.0", js: "Configuration.FileSystemTags.0", typ: r("ConfigurationFileSystemTags0") },
+        { json: "Tags.2", js: "Tags.2", typ: r("Tags2") },
+    ], false),
+    "ConfigurationFileSystemTags0": o([
+        { json: "updatedValue", js: "updatedValue", typ: r("FileSystemTag") },
+        { json: "changeType", js: "changeType", typ: "" },
     ], false),
     "Tags2": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("Tags2Properties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "updatedValue", js: "updatedValue", typ: "" },
+        { json: "changeType", js: "changeType", typ: "" },
     ], false),
-    "Tags2Properties": o([
-        { json: "updatedValue", js: "updatedValue", typ: r("Account") },
-        { json: "changeType", js: "changeType", typ: r("Account") },
+    "NewEvaluationResult": o([
+        { json: "evaluationResultIdentifier", js: "evaluationResultIdentifier", typ: r("EvaluationResultIdentifier") },
+        { json: "complianceType", js: "complianceType", typ: "" },
+        { json: "resultRecordedTime", js: "resultRecordedTime", typ: Date },
+        { json: "configRuleInvokedTime", js: "configRuleInvokedTime", typ: Date },
+        { json: "annotation", js: "annotation", typ: "" },
     ], false),
-    "Type": [
-        "boolean",
-        "integer",
-        "string",
-    ],
+    "EvaluationResultIdentifier": o([
+        { json: "evaluationResultQualifier", js: "evaluationResultQualifier", typ: r("EvaluationResultQualifier") },
+        { json: "orderingTimestamp", js: "orderingTimestamp", typ: Date },
+    ], false),
+    "EvaluationResultQualifier": o([
+        { json: "configRuleName", js: "configRuleName", typ: "" },
+        { json: "resourceType", js: "resourceType", typ: "" },
+        { json: "resourceId", js: "resourceId", typ: "" },
+    ], false),
 };

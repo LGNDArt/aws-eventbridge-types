@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSqs } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSqs = Convert.toAwsSqs(json);
 //
@@ -8,226 +8,99 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSqs {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSq:               AwsSq;
-    Detail:              Detail;
-    RequestParameters:   RequestParameters;
-    Attribute:           Attribute;
-    ResponseElements:    ResponseElements;
-    UserIdentity:        UserIdentity;
-    SessionContext:      SessionContext;
-    Attributes:          Attributes;
-    SessionIssuer:       SessionIssuer;
-    WebIDFederationData: WebIDFederationData;
-}
-
-export interface Attribute {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AttributeProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AttributeProperties {
-    Policy:                        KmsMasterKeyID;
-    ReceiveMessageWaitTimeSeconds: DelaySeconds;
-    SqsManagedSseEnabled:          DelaySeconds;
-    DelaySeconds:                  DelaySeconds;
-    KmsMasterKeyId:                KmsMasterKeyID;
-    RedrivePolicy:                 KmsMasterKeyID;
-    MessageRetentionPeriod:        DelaySeconds;
-    MaximumMessageSize:            DelaySeconds;
-    VisibilityTimeout:             DelaySeconds;
-    RedriveAllowPolicy:            KmsMasterKeyID;
-}
-
-export interface DelaySeconds {
-    type:   Type;
-    format: string;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    String = "string",
-}
-
-export interface KmsMasterKeyID {
-    type: Type;
-}
-
-export interface Attributes {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AttributesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AttributesProperties {
-    creationDate:     DelaySeconds;
-    mfaAuthenticated: DelaySeconds;
-}
-
-export interface AwsSq {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSqProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSqProperties {
-    version:       DelaySeconds;
-    id:            DelaySeconds;
-    "detail-type": KmsMasterKeyID;
-    source:        KmsMasterKeyID;
-    account:       KmsMasterKeyID;
-    time:          DelaySeconds;
-    region:        KmsMasterKeyID;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventVersion:       KmsMasterKeyID;
-    userIdentity:       DetailClass;
-    eventTime:          DelaySeconds;
-    eventSource:        KmsMasterKeyID;
-    eventName:          KmsMasterKeyID;
-    awsRegion:          KmsMasterKeyID;
-    sourceIPAddress:    KmsMasterKeyID;
-    userAgent:          KmsMasterKeyID;
-    requestParameters:  DetailClass;
-    responseElements:   DetailClass;
-    requestID:          DelaySeconds;
-    eventID:            DelaySeconds;
-    readOnly:           KmsMasterKeyID;
-    eventType:          KmsMasterKeyID;
-    managementEvent:    KmsMasterKeyID;
-    recipientAccountId: KmsMasterKeyID;
-    eventCategory:      KmsMasterKeyID;
+    eventVersion:       string;
+    userIdentity:       UserIdentity;
+    eventTime:          Date;
+    eventSource:        string;
+    eventName:          string;
+    awsRegion:          string;
+    sourceIPAddress:    string;
+    userAgent:          string;
+    requestParameters:  RequestParameters;
+    responseElements:   ResponseElements;
+    requestID:          string;
+    eventID:            string;
+    readOnly:           boolean;
+    eventType:          string;
+    managementEvent:    boolean;
+    recipientAccountId: string;
+    eventCategory:      string;
 }
 
 export interface RequestParameters {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RequestParametersProperties;
-    required:             string[];
-    title:                string;
+    queueName: string;
+    attribute: Attribute;
 }
 
-export interface RequestParametersProperties {
-    queueName: KmsMasterKeyID;
-    attribute: DetailClass;
+export interface Attribute {
+    Policy:                        string;
+    ReceiveMessageWaitTimeSeconds: string;
+    SqsManagedSseEnabled:          string;
+    DelaySeconds:                  string;
+    KmsMasterKeyId:                string;
+    RedrivePolicy:                 string;
+    MessageRetentionPeriod:        string;
+    MaximumMessageSize:            string;
+    VisibilityTimeout:             string;
+    RedriveAllowPolicy:            string;
 }
 
 export interface ResponseElements {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResponseElementsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResponseElementsProperties {
-    queueUrl: QueueURL;
-}
-
-export interface QueueURL {
-    type:               Type;
-    format:             string;
-    "qt-uri-protocols": string[];
-}
-
-export interface SessionContext {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionContextProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionContextProperties {
-    sessionIssuer:       DetailClass;
-    webIdFederationData: DetailClass;
-    attributes:          DetailClass;
-}
-
-export interface SessionIssuer {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionIssuerProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionIssuerProperties {
-    type:        KmsMasterKeyID;
-    principalId: KmsMasterKeyID;
-    arn:         KmsMasterKeyID;
-    accountId:   KmsMasterKeyID;
-    userName:    KmsMasterKeyID;
+    queueUrl: string;
 }
 
 export interface UserIdentity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UserIdentityProperties;
-    required:             string[];
-    title:                string;
+    type:           string;
+    principalId:    string;
+    arn:            string;
+    accountId:      string;
+    accessKeyId:    string;
+    sessionContext: SessionContext;
 }
 
-export interface UserIdentityProperties {
-    type:           KmsMasterKeyID;
-    principalId:    KmsMasterKeyID;
-    arn:            KmsMasterKeyID;
-    accountId:      KmsMasterKeyID;
-    accessKeyId:    KmsMasterKeyID;
-    sessionContext: DetailClass;
+export interface SessionContext {
+    sessionIssuer:       SessionIssuer;
+    webIdFederationData: WebIDFederationData;
+    attributes:          Attributes;
+}
+
+export interface Attributes {
+    creationDate:     Date;
+    mfaAuthenticated: string;
+}
+
+export interface SessionIssuer {
+    type:        string;
+    principalId: string;
+    arn:         string;
+    accountId:   string;
+    userName:    string;
 }
 
 export interface WebIDFederationData {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSqs(json: string): AwsSqs {
-        return cast(JSON.parse(json), r("AwsSqs"));
+    public static toAwsSqs(json: string): AwsSqs[] {
+        return cast(JSON.parse(json), a(r("AwsSqs")));
     }
 
-    public static awsSqsToJson(value: AwsSqs): string {
-        return JSON.stringify(uncast(value, r("AwsSqs")), null, 2);
+    public static awsSqsToJson(value: AwsSqs[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSqs"))), null, 2);
     }
 }
 
@@ -365,187 +238,78 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSqs": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSq", js: "AwsSq", typ: r("AwsSq") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "RequestParameters", js: "RequestParameters", typ: r("RequestParameters") },
-        { json: "Attribute", js: "Attribute", typ: r("Attribute") },
-        { json: "ResponseElements", js: "ResponseElements", typ: r("ResponseElements") },
-        { json: "UserIdentity", js: "UserIdentity", typ: r("UserIdentity") },
-        { json: "SessionContext", js: "SessionContext", typ: r("SessionContext") },
-        { json: "Attributes", js: "Attributes", typ: r("Attributes") },
-        { json: "SessionIssuer", js: "SessionIssuer", typ: r("SessionIssuer") },
-        { json: "WebIDFederationData", js: "WebIDFederationData", typ: r("WebIDFederationData") },
-    ], false),
-    "Attribute": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AttributeProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AttributeProperties": o([
-        { json: "Policy", js: "Policy", typ: r("KmsMasterKeyID") },
-        { json: "ReceiveMessageWaitTimeSeconds", js: "ReceiveMessageWaitTimeSeconds", typ: r("DelaySeconds") },
-        { json: "SqsManagedSseEnabled", js: "SqsManagedSseEnabled", typ: r("DelaySeconds") },
-        { json: "DelaySeconds", js: "DelaySeconds", typ: r("DelaySeconds") },
-        { json: "KmsMasterKeyId", js: "KmsMasterKeyId", typ: r("KmsMasterKeyID") },
-        { json: "RedrivePolicy", js: "RedrivePolicy", typ: r("KmsMasterKeyID") },
-        { json: "MessageRetentionPeriod", js: "MessageRetentionPeriod", typ: r("DelaySeconds") },
-        { json: "MaximumMessageSize", js: "MaximumMessageSize", typ: r("DelaySeconds") },
-        { json: "VisibilityTimeout", js: "VisibilityTimeout", typ: r("DelaySeconds") },
-        { json: "RedriveAllowPolicy", js: "RedriveAllowPolicy", typ: r("KmsMasterKeyID") },
-    ], false),
-    "DelaySeconds": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "KmsMasterKeyID": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Attributes": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AttributesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AttributesProperties": o([
-        { json: "creationDate", js: "creationDate", typ: r("DelaySeconds") },
-        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: r("DelaySeconds") },
-    ], false),
-    "AwsSq": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSqProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSqProperties": o([
-        { json: "version", js: "version", typ: r("DelaySeconds") },
-        { json: "id", js: "id", typ: r("DelaySeconds") },
-        { json: "detail-type", js: "detail-type", typ: r("KmsMasterKeyID") },
-        { json: "source", js: "source", typ: r("KmsMasterKeyID") },
-        { json: "account", js: "account", typ: r("KmsMasterKeyID") },
-        { json: "time", js: "time", typ: r("DelaySeconds") },
-        { json: "region", js: "region", typ: r("KmsMasterKeyID") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("KmsMasterKeyID") },
-        { json: "userIdentity", js: "userIdentity", typ: r("DetailClass") },
-        { json: "eventTime", js: "eventTime", typ: r("DelaySeconds") },
-        { json: "eventSource", js: "eventSource", typ: r("KmsMasterKeyID") },
-        { json: "eventName", js: "eventName", typ: r("KmsMasterKeyID") },
-        { json: "awsRegion", js: "awsRegion", typ: r("KmsMasterKeyID") },
-        { json: "sourceIPAddress", js: "sourceIPAddress", typ: r("KmsMasterKeyID") },
-        { json: "userAgent", js: "userAgent", typ: r("KmsMasterKeyID") },
-        { json: "requestParameters", js: "requestParameters", typ: r("DetailClass") },
-        { json: "responseElements", js: "responseElements", typ: r("DetailClass") },
-        { json: "requestID", js: "requestID", typ: r("DelaySeconds") },
-        { json: "eventID", js: "eventID", typ: r("DelaySeconds") },
-        { json: "readOnly", js: "readOnly", typ: r("KmsMasterKeyID") },
-        { json: "eventType", js: "eventType", typ: r("KmsMasterKeyID") },
-        { json: "managementEvent", js: "managementEvent", typ: r("KmsMasterKeyID") },
-        { json: "recipientAccountId", js: "recipientAccountId", typ: r("KmsMasterKeyID") },
-        { json: "eventCategory", js: "eventCategory", typ: r("KmsMasterKeyID") },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "userIdentity", js: "userIdentity", typ: r("UserIdentity") },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "sourceIPAddress", js: "sourceIPAddress", typ: "" },
+        { json: "userAgent", js: "userAgent", typ: "" },
+        { json: "requestParameters", js: "requestParameters", typ: r("RequestParameters") },
+        { json: "responseElements", js: "responseElements", typ: r("ResponseElements") },
+        { json: "requestID", js: "requestID", typ: "" },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "readOnly", js: "readOnly", typ: true },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "managementEvent", js: "managementEvent", typ: true },
+        { json: "recipientAccountId", js: "recipientAccountId", typ: "" },
+        { json: "eventCategory", js: "eventCategory", typ: "" },
     ], false),
     "RequestParameters": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RequestParametersProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "queueName", js: "queueName", typ: "" },
+        { json: "attribute", js: "attribute", typ: r("Attribute") },
     ], false),
-    "RequestParametersProperties": o([
-        { json: "queueName", js: "queueName", typ: r("KmsMasterKeyID") },
-        { json: "attribute", js: "attribute", typ: r("DetailClass") },
+    "Attribute": o([
+        { json: "Policy", js: "Policy", typ: "" },
+        { json: "ReceiveMessageWaitTimeSeconds", js: "ReceiveMessageWaitTimeSeconds", typ: "" },
+        { json: "SqsManagedSseEnabled", js: "SqsManagedSseEnabled", typ: "" },
+        { json: "DelaySeconds", js: "DelaySeconds", typ: "" },
+        { json: "KmsMasterKeyId", js: "KmsMasterKeyId", typ: "" },
+        { json: "RedrivePolicy", js: "RedrivePolicy", typ: "" },
+        { json: "MessageRetentionPeriod", js: "MessageRetentionPeriod", typ: "" },
+        { json: "MaximumMessageSize", js: "MaximumMessageSize", typ: "" },
+        { json: "VisibilityTimeout", js: "VisibilityTimeout", typ: "" },
+        { json: "RedriveAllowPolicy", js: "RedriveAllowPolicy", typ: "" },
     ], false),
     "ResponseElements": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResponseElementsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResponseElementsProperties": o([
-        { json: "queueUrl", js: "queueUrl", typ: r("QueueURL") },
-    ], false),
-    "QueueURL": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-        { json: "qt-uri-protocols", js: "qt-uri-protocols", typ: a("") },
-    ], false),
-    "SessionContext": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionContextProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionContextProperties": o([
-        { json: "sessionIssuer", js: "sessionIssuer", typ: r("DetailClass") },
-        { json: "webIdFederationData", js: "webIdFederationData", typ: r("DetailClass") },
-        { json: "attributes", js: "attributes", typ: r("DetailClass") },
-    ], false),
-    "SessionIssuer": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionIssuerProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionIssuerProperties": o([
-        { json: "type", js: "type", typ: r("KmsMasterKeyID") },
-        { json: "principalId", js: "principalId", typ: r("KmsMasterKeyID") },
-        { json: "arn", js: "arn", typ: r("KmsMasterKeyID") },
-        { json: "accountId", js: "accountId", typ: r("KmsMasterKeyID") },
-        { json: "userName", js: "userName", typ: r("KmsMasterKeyID") },
+        { json: "queueUrl", js: "queueUrl", typ: "" },
     ], false),
     "UserIdentity": o([
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UserIdentityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "accessKeyId", js: "accessKeyId", typ: "" },
+        { json: "sessionContext", js: "sessionContext", typ: r("SessionContext") },
     ], false),
-    "UserIdentityProperties": o([
-        { json: "type", js: "type", typ: r("KmsMasterKeyID") },
-        { json: "principalId", js: "principalId", typ: r("KmsMasterKeyID") },
-        { json: "arn", js: "arn", typ: r("KmsMasterKeyID") },
-        { json: "accountId", js: "accountId", typ: r("KmsMasterKeyID") },
-        { json: "accessKeyId", js: "accessKeyId", typ: r("KmsMasterKeyID") },
-        { json: "sessionContext", js: "sessionContext", typ: r("DetailClass") },
+    "SessionContext": o([
+        { json: "sessionIssuer", js: "sessionIssuer", typ: r("SessionIssuer") },
+        { json: "webIdFederationData", js: "webIdFederationData", typ: r("WebIDFederationData") },
+        { json: "attributes", js: "attributes", typ: r("Attributes") },
+    ], false),
+    "Attributes": o([
+        { json: "creationDate", js: "creationDate", typ: Date },
+        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: "" },
+    ], false),
+    "SessionIssuer": o([
+        { json: "type", js: "type", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "userName", js: "userName", typ: "" },
     ], false),
     "WebIDFederationData": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
     ], false),
-    "Type": [
-        "boolean",
-        "string",
-    ],
 };

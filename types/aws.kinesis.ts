@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsKinesis } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsKinesis = Convert.toAwsKinesis(json);
 //
@@ -8,200 +8,87 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsKinesis {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsKinesi:           AwsKinesi;
-    Detail:              Detail;
-    RequestParameters:   RequestParameters;
-    StreamModeDetails:   StreamModeDetails;
-    UserIdentity:        UserIdentity;
-    SessionContext:      SessionContext;
-    Attributes:          Attributes;
-    SessionIssuer:       SessionIssuer;
-    WebIDFederationData: WebIDFederationData;
-}
-
-export interface Attributes {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AttributesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AttributesProperties {
-    creationDate:     CreationDate;
-    mfaAuthenticated: CreationDate;
-}
-
-export interface CreationDate {
-    type:   Type;
-    format: string;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Null = "null",
-    String = "string",
-}
-
-export interface AwsKinesi {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsKinesiProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsKinesiProperties {
-    version:       CreationDate;
-    id:            CreationDate;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          CreationDate;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventVersion:                 Account;
-    userIdentity:                 DetailClass;
-    eventTime:                    CreationDate;
-    eventSource:                  Account;
-    eventName:                    Account;
-    awsRegion:                    Account;
-    sourceIPAddress:              Account;
-    userAgent:                    Account;
-    requestParameters:            DetailClass;
-    responseElements:             Account;
-    requestID:                    CreationDate;
-    eventID:                      CreationDate;
-    readOnly:                     Account;
-    eventType:                    Account;
-    managementEvent:              Account;
-    recipientAccountId:           Account;
-    eventCategory:                Account;
-    sessionCredentialFromConsole: CreationDate;
+    eventVersion:                 string;
+    userIdentity:                 UserIdentity;
+    eventTime:                    Date;
+    eventSource:                  string;
+    eventName:                    string;
+    awsRegion:                    string;
+    sourceIPAddress:              string;
+    userAgent:                    string;
+    requestParameters:            RequestParameters;
+    responseElements:             null;
+    requestID:                    string;
+    eventID:                      string;
+    readOnly:                     boolean;
+    eventType:                    string;
+    managementEvent:              boolean;
+    recipientAccountId:           string;
+    eventCategory:                string;
+    sessionCredentialFromConsole: string;
 }
 
 export interface RequestParameters {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RequestParametersProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RequestParametersProperties {
-    streamARN:         Account;
-    streamModeDetails: DetailClass;
-}
-
-export interface SessionContext {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionContextProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionContextProperties {
-    sessionIssuer:       DetailClass;
-    webIdFederationData: DetailClass;
-    attributes:          DetailClass;
-}
-
-export interface SessionIssuer {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionIssuerProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionIssuerProperties {
-    type:        Account;
-    principalId: Account;
-    arn:         Account;
-    accountId:   Account;
-    userName:    Account;
+    streamARN:         string;
+    streamModeDetails: StreamModeDetails;
 }
 
 export interface StreamModeDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           StreamModeDetailsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface StreamModeDetailsProperties {
-    streamMode: Account;
+    streamMode: string;
 }
 
 export interface UserIdentity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UserIdentityProperties;
-    required:             string[];
-    title:                string;
+    type:           string;
+    principalId:    string;
+    arn:            string;
+    accountId:      string;
+    accessKeyId:    string;
+    sessionContext: SessionContext;
 }
 
-export interface UserIdentityProperties {
-    type:           Account;
-    principalId:    Account;
-    arn:            Account;
-    accountId:      Account;
-    accessKeyId:    Account;
-    sessionContext: DetailClass;
+export interface SessionContext {
+    sessionIssuer:       SessionIssuer;
+    webIdFederationData: WebIDFederationData;
+    attributes:          Attributes;
+}
+
+export interface Attributes {
+    creationDate:     Date;
+    mfaAuthenticated: string;
+}
+
+export interface SessionIssuer {
+    type:        string;
+    principalId: string;
+    arn:         string;
+    accountId:   string;
+    userName:    string;
 }
 
 export interface WebIDFederationData {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsKinesis(json: string): AwsKinesis {
-        return cast(JSON.parse(json), r("AwsKinesis"));
+    public static toAwsKinesis(json: string): AwsKinesis[] {
+        return cast(JSON.parse(json), a(r("AwsKinesis")));
     }
 
-    public static awsKinesisToJson(value: AwsKinesis): string {
-        return JSON.stringify(uncast(value, r("AwsKinesis")), null, 2);
+    public static awsKinesisToJson(value: AwsKinesis[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsKinesis"))), null, 2);
     }
 }
 
@@ -339,164 +226,67 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsKinesis": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsKinesi", js: "AwsKinesi", typ: r("AwsKinesi") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "RequestParameters", js: "RequestParameters", typ: r("RequestParameters") },
-        { json: "StreamModeDetails", js: "StreamModeDetails", typ: r("StreamModeDetails") },
-        { json: "UserIdentity", js: "UserIdentity", typ: r("UserIdentity") },
-        { json: "SessionContext", js: "SessionContext", typ: r("SessionContext") },
-        { json: "Attributes", js: "Attributes", typ: r("Attributes") },
-        { json: "SessionIssuer", js: "SessionIssuer", typ: r("SessionIssuer") },
-        { json: "WebIDFederationData", js: "WebIDFederationData", typ: r("WebIDFederationData") },
-    ], false),
-    "Attributes": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AttributesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AttributesProperties": o([
-        { json: "creationDate", js: "creationDate", typ: r("CreationDate") },
-        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: r("CreationDate") },
-    ], false),
-    "CreationDate": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "AwsKinesi": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsKinesiProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsKinesiProperties": o([
-        { json: "version", js: "version", typ: r("CreationDate") },
-        { json: "id", js: "id", typ: r("CreationDate") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("CreationDate") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("Account") },
-        { json: "userIdentity", js: "userIdentity", typ: r("DetailClass") },
-        { json: "eventTime", js: "eventTime", typ: r("CreationDate") },
-        { json: "eventSource", js: "eventSource", typ: r("Account") },
-        { json: "eventName", js: "eventName", typ: r("Account") },
-        { json: "awsRegion", js: "awsRegion", typ: r("Account") },
-        { json: "sourceIPAddress", js: "sourceIPAddress", typ: r("Account") },
-        { json: "userAgent", js: "userAgent", typ: r("Account") },
-        { json: "requestParameters", js: "requestParameters", typ: r("DetailClass") },
-        { json: "responseElements", js: "responseElements", typ: r("Account") },
-        { json: "requestID", js: "requestID", typ: r("CreationDate") },
-        { json: "eventID", js: "eventID", typ: r("CreationDate") },
-        { json: "readOnly", js: "readOnly", typ: r("Account") },
-        { json: "eventType", js: "eventType", typ: r("Account") },
-        { json: "managementEvent", js: "managementEvent", typ: r("Account") },
-        { json: "recipientAccountId", js: "recipientAccountId", typ: r("Account") },
-        { json: "eventCategory", js: "eventCategory", typ: r("Account") },
-        { json: "sessionCredentialFromConsole", js: "sessionCredentialFromConsole", typ: r("CreationDate") },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "userIdentity", js: "userIdentity", typ: r("UserIdentity") },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "sourceIPAddress", js: "sourceIPAddress", typ: "" },
+        { json: "userAgent", js: "userAgent", typ: "" },
+        { json: "requestParameters", js: "requestParameters", typ: r("RequestParameters") },
+        { json: "responseElements", js: "responseElements", typ: null },
+        { json: "requestID", js: "requestID", typ: "" },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "readOnly", js: "readOnly", typ: true },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "managementEvent", js: "managementEvent", typ: true },
+        { json: "recipientAccountId", js: "recipientAccountId", typ: "" },
+        { json: "eventCategory", js: "eventCategory", typ: "" },
+        { json: "sessionCredentialFromConsole", js: "sessionCredentialFromConsole", typ: "" },
     ], false),
     "RequestParameters": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RequestParametersProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RequestParametersProperties": o([
-        { json: "streamARN", js: "streamARN", typ: r("Account") },
-        { json: "streamModeDetails", js: "streamModeDetails", typ: r("DetailClass") },
-    ], false),
-    "SessionContext": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionContextProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionContextProperties": o([
-        { json: "sessionIssuer", js: "sessionIssuer", typ: r("DetailClass") },
-        { json: "webIdFederationData", js: "webIdFederationData", typ: r("DetailClass") },
-        { json: "attributes", js: "attributes", typ: r("DetailClass") },
-    ], false),
-    "SessionIssuer": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionIssuerProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionIssuerProperties": o([
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "principalId", js: "principalId", typ: r("Account") },
-        { json: "arn", js: "arn", typ: r("Account") },
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "userName", js: "userName", typ: r("Account") },
+        { json: "streamARN", js: "streamARN", typ: "" },
+        { json: "streamModeDetails", js: "streamModeDetails", typ: r("StreamModeDetails") },
     ], false),
     "StreamModeDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("StreamModeDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "StreamModeDetailsProperties": o([
-        { json: "streamMode", js: "streamMode", typ: r("Account") },
+        { json: "streamMode", js: "streamMode", typ: "" },
     ], false),
     "UserIdentity": o([
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UserIdentityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "accessKeyId", js: "accessKeyId", typ: "" },
+        { json: "sessionContext", js: "sessionContext", typ: r("SessionContext") },
     ], false),
-    "UserIdentityProperties": o([
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "principalId", js: "principalId", typ: r("Account") },
-        { json: "arn", js: "arn", typ: r("Account") },
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "accessKeyId", js: "accessKeyId", typ: r("Account") },
-        { json: "sessionContext", js: "sessionContext", typ: r("DetailClass") },
+    "SessionContext": o([
+        { json: "sessionIssuer", js: "sessionIssuer", typ: r("SessionIssuer") },
+        { json: "webIdFederationData", js: "webIdFederationData", typ: r("WebIDFederationData") },
+        { json: "attributes", js: "attributes", typ: r("Attributes") },
+    ], false),
+    "Attributes": o([
+        { json: "creationDate", js: "creationDate", typ: Date },
+        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: "" },
+    ], false),
+    "SessionIssuer": o([
+        { json: "type", js: "type", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "userName", js: "userName", typ: "" },
     ], false),
     "WebIDFederationData": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
     ], false),
-    "Type": [
-        "boolean",
-        "null",
-        "string",
-    ],
 };

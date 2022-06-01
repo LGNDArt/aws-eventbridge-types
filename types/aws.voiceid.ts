@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsVoiceid } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsVoiceid = Convert.toAwsVoiceid(json);
 //
@@ -8,382 +8,159 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsVoiceid {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsVoiceidElement:                AwsVoiceidElement;
-    Detail:                           Detail;
-    Data:                             Data;
-    EnrollmentConfig:                 EnrollmentConfig;
-    FraudDetectionConfig:             FraudDetectionConfig;
-    InputDataConfig:                  InputDataConfig;
-    OutputDataConfig:                 OutputDataConfig;
-    RegistrationConfig:               RegistrationConfig;
-    ErrorInfo:                        ErrorInfo;
-    Session:                          Session;
-    TionAudioProgress:                TionAudioProgress;
-    AuthenticationConfigurationClass: AuthenticationConfigurationClass;
-    AuthenticationResult:             AuthenticationResult;
-    EnrollmentAudioProgress:          EnrollmentAudioProgress;
-    FraudDetectionConfigurationClass: FraudDetectionConfigurationClass;
-    FraudDetectionResult:             FraudDetectionResult;
-    StreamingConfiguration:           StreamingConfiguration;
-    SystemAttributes:                 SystemAttributes;
-    IDUnion:                          IDUnion;
-    DomainID:                         DomainID;
-    IDEnum:                           DomainID;
-    Region:                           DomainID;
-    Source:                           DomainID;
-}
-
-export interface AuthenticationConfigurationClass {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AuthenticationConfigurationClassProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AuthenticationConfigurationClassProperties {
-    acceptanceThreshold: AcceptanceThreshold;
-}
-
-export interface AcceptanceThreshold {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    Null = "null",
-    String = "string",
-}
-
-export interface AuthenticationResult {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AuthenticationResultProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AuthenticationResultProperties {
-    audioAggregationEndedAt:   AcceptanceThreshold;
-    audioAggregationStartedAt: AcceptanceThreshold;
-    authenticationResultId:    AcceptanceThreshold;
-    configuration:             Items;
-    decision:                  AcceptanceThreshold;
-    score:                     AcceptanceThreshold;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface AwsVoiceidElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsVoiceidElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsVoiceidElementProperties {
-    version:       Time;
-    account:       AcceptanceThreshold;
-    region:        Items;
-    detail:        Items;
-    "detail-type": AcceptanceThreshold;
-    source:        Items;
-    id:            Items;
-    time:          Time;
-    resources:     Resources;
-}
-
-export interface Resources {
-    type:  string;
-    items: AcceptanceThreshold;
-}
-
-export interface Time {
-    type:    Type;
-    format?: string;
-}
-
-export interface Data {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DataProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface DataProperties {
-    enrollmentSource:     AcceptanceThreshold;
-    enrollmentSourceId:   AcceptanceThreshold;
-    enrollmentStatus:     EnrollmentStatus;
-    registrationSource:   AcceptanceThreshold;
-    registrationSourceId: AcceptanceThreshold;
-    registrationStatus:   EnrollmentStatus;
-    dataAccessRoleArn:    AcceptanceThreshold;
-    inputDataConfig:      Items;
-    outputDataConfig:     Items;
-    registrationConfig:   Items;
-    enrollmentConfig:     Items;
-}
-
-export interface EnrollmentStatus {
-    anyOf: AcceptanceThreshold[];
+    version:       string;
+    account:       string;
+    region:        Region;
+    detail:        Detail;
+    "detail-type": string;
+    source:        Source;
+    id:            string;
+    time:          Date;
+    resources:     string[];
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    action:                string;
+    domainId:              DomainID;
+    errorInfo:             ErrorInfo | null;
+    session?:              Session;
+    status:                string;
+    systemAttributes?:     SystemAttributes | null;
+    sourceId:              string;
+    data?:                 Data | null;
+    generatedSpeakerId?:   null | string;
+    generatedFraudsterId?: null | string;
+    batchJobId?:           string;
+    sessionId?:            string;
+    sessionName?:          string;
 }
 
-export interface DetailProperties {
-    action:               AcceptanceThreshold;
-    domainId:             Items;
-    errorInfo:            DataClass;
-    session:              Items;
-    status:               AcceptanceThreshold;
-    systemAttributes:     DataClass;
-    sourceId:             AcceptanceThreshold;
-    data:                 DataClass;
-    generatedSpeakerId:   EnrollmentStatus;
-    generatedFraudsterId: EnrollmentStatus;
-    batchJobId:           AcceptanceThreshold;
-    sessionId:            AcceptanceThreshold;
-    sessionName:          AcceptanceThreshold;
-}
-
-export interface DataClass {
-    anyOf: DataAnyOf[];
-}
-
-export interface DataAnyOf {
-    $ref?: string;
-    type?: Type;
-}
-
-export interface DomainID {
-    type:  Type;
-    enum:  string[];
-    title: string;
-}
-
-export interface EnrollmentAudioProgress {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           EnrollmentAudioProgressProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface EnrollmentAudioProgressProperties {
-    audioAggregationEndedAt:   AudioAggregationEndedAt;
-    audioAggregationStartedAt: Time;
-    audioAggregationStatus:    AcceptanceThreshold;
-}
-
-export interface AudioAggregationEndedAt {
-    anyOf: Time[];
+export interface Data {
+    enrollmentSource?:     string;
+    enrollmentSourceId?:   string;
+    enrollmentStatus?:     null | string;
+    registrationSource?:   string;
+    registrationSourceId?: string;
+    registrationStatus?:   null | string;
+    dataAccessRoleArn?:    string;
+    inputDataConfig?:      InputDataConfig;
+    outputDataConfig?:     OutputDataConfig;
+    registrationConfig?:   RegistrationConfig;
+    enrollmentConfig?:     EnrollmentConfig;
 }
 
 export interface EnrollmentConfig {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           EnrollmentConfigProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface EnrollmentConfigProperties {
-    existingEnrollmentAction: AcceptanceThreshold;
-    fraudDetectionConfig:     Items;
-}
-
-export interface ErrorInfo {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ErrorInfoProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ErrorInfoProperties {
-    errorCode:    AcceptanceThreshold;
-    errorMessage: AcceptanceThreshold;
-    errorType:    AcceptanceThreshold;
+    existingEnrollmentAction: string;
+    fraudDetectionConfig:     FraudDetectionConfig;
 }
 
 export interface FraudDetectionConfig {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           FraudDetectionConfigProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface FraudDetectionConfigProperties {
-    fraudDetectionAction:    AcceptanceThreshold;
-    fraudDetectionThreshold: AcceptanceThreshold;
-}
-
-export interface FraudDetectionConfigurationClass {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           FraudDetectionConfigurationClassProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface FraudDetectionConfigurationClassProperties {
-    riskThreshold: AcceptanceThreshold;
-}
-
-export interface FraudDetectionResult {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           FraudDetectionResultProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface FraudDetectionResultProperties {
-    audioAggregationEndedAt:   AcceptanceThreshold;
-    audioAggregationStartedAt: AcceptanceThreshold;
-    configuration:             Items;
-    decision:                  AcceptanceThreshold;
-    fraudDetectionResultId:    AcceptanceThreshold;
-    reasons:                   AcceptanceThreshold;
-    riskDetails:               AcceptanceThreshold;
-}
-
-export interface IDUnion {
-    anyOf: IDUnionAnyOf[];
-    title: string;
-}
-
-export interface IDUnionAnyOf {
-    $ref?:   string;
-    type?:   Type;
-    format?: string;
+    fraudDetectionAction:    string;
+    fraudDetectionThreshold: number;
 }
 
 export interface InputDataConfig {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           InputDataConfigProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface InputDataConfigProperties {
-    s3Uri: AcceptanceThreshold;
+    s3Uri: string;
 }
 
 export interface OutputDataConfig {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           OutputDataConfigProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface OutputDataConfigProperties {
-    kmsKeyId: AcceptanceThreshold;
-    s3Uri:    AcceptanceThreshold;
+    kmsKeyId: string;
+    s3Uri:    string;
 }
 
 export interface RegistrationConfig {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RegistrationConfigProperties;
-    required:             string[];
-    title:                string;
+    duplicateRegistrationAction:  string;
+    fraudsterSimilarityThreshold: number;
 }
 
-export interface RegistrationConfigProperties {
-    duplicateRegistrationAction:  AcceptanceThreshold;
-    fraudsterSimilarityThreshold: AcceptanceThreshold;
+export enum DomainID {
+    The7777Aaaaaaaa77777777Aa = "7777aaaaaaaa77777777aa",
+}
+
+export interface ErrorInfo {
+    errorCode:    number;
+    errorMessage: string;
+    errorType:    string;
 }
 
 export interface Session {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionProperties {
-    authenticationAudioProgress: Items;
-    authenticationConfiguration: DataClass;
-    enrollmentAudioProgress:     Items;
-    fraudDetectionAudioProgress: Items;
-    fraudDetectionConfiguration: DataClass;
-    generatedSpeakerId:          EnrollmentStatus;
-    sessionId:                   AcceptanceThreshold;
-    sessionName:                 AcceptanceThreshold;
-    streamingConfiguration:      Items;
-    authenticationResult:        DataClass;
-    fraudDetectionResult:        DataClass;
-    streamingStatus:             AcceptanceThreshold;
-}
-
-export interface StreamingConfiguration {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           StreamingConfigurationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface StreamingConfigurationProperties {
-    authenticationMinimumSpeechInSeconds: AcceptanceThreshold;
-}
-
-export interface SystemAttributes {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SystemAttributesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SystemAttributesProperties {
-    "aws:connect:OriginalContactArn": AcceptanceThreshold;
+    authenticationAudioProgress?: TionAudioProgress;
+    authenticationConfiguration?: AuthenticationConfigurationClass | null;
+    enrollmentAudioProgress?:     EnrollmentAudioProgress;
+    fraudDetectionAudioProgress?: TionAudioProgress;
+    fraudDetectionConfiguration?: FraudDetectionConfigurationClass | null;
+    generatedSpeakerId:           null | string;
+    sessionId:                    string;
+    sessionName:                  string;
+    streamingConfiguration?:      StreamingConfiguration;
+    authenticationResult?:        AuthenticationResult | null;
+    fraudDetectionResult?:        FraudDetectionResult | null;
+    streamingStatus?:             string;
 }
 
 export interface TionAudioProgress {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TionAudioProgressProperties;
-    required:             string[];
-    title:                string;
+    audioAggregationEndedAt:   Date | null;
+    audioAggregationStartedAt: Date;
 }
 
-export interface TionAudioProgressProperties {
-    audioAggregationEndedAt:   AudioAggregationEndedAt;
-    audioAggregationStartedAt: Time;
+export interface AuthenticationConfigurationClass {
+    acceptanceThreshold: number;
+}
+
+export interface AuthenticationResult {
+    audioAggregationEndedAt:   null;
+    audioAggregationStartedAt: null;
+    authenticationResultId:    string;
+    configuration:             AuthenticationConfigurationClass;
+    decision:                  string;
+    score:                     null;
+}
+
+export interface EnrollmentAudioProgress {
+    audioAggregationEndedAt:   Date | null;
+    audioAggregationStartedAt: Date;
+    audioAggregationStatus:    string;
+}
+
+export interface FraudDetectionConfigurationClass {
+    riskThreshold: number;
+}
+
+export interface FraudDetectionResult {
+    audioAggregationEndedAt:   null;
+    audioAggregationStartedAt: null;
+    configuration:             FraudDetectionConfigurationClass;
+    decision:                  string;
+    fraudDetectionResultId:    string;
+    reasons:                   null;
+    riskDetails:               null;
+}
+
+export interface StreamingConfiguration {
+    authenticationMinimumSpeechInSeconds: number;
+}
+
+export interface SystemAttributes {
+    "aws:connect:OriginalContactArn": string;
+}
+
+export enum Region {
+    UsEast1 = "us-east-1",
+}
+
+export enum Source {
+    AwsVoiceid = "aws.voiceid",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsVoiceid(json: string): AwsVoiceid {
-        return cast(JSON.parse(json), r("AwsVoiceid"));
+    public static toAwsVoiceid(json: string): AwsVoiceid[] {
+        return cast(JSON.parse(json), a(r("AwsVoiceid")));
     }
 
-    public static awsVoiceidToJson(value: AwsVoiceid): string {
-        return JSON.stringify(uncast(value, r("AwsVoiceid")), null, 2);
+    public static awsVoiceidToJson(value: AwsVoiceid[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsVoiceid"))), null, 2);
     }
 }
 
@@ -521,321 +298,127 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsVoiceid": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsVoiceidElement", js: "AwsVoiceidElement", typ: r("AwsVoiceidElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "EnrollmentConfig", js: "EnrollmentConfig", typ: r("EnrollmentConfig") },
-        { json: "FraudDetectionConfig", js: "FraudDetectionConfig", typ: r("FraudDetectionConfig") },
-        { json: "InputDataConfig", js: "InputDataConfig", typ: r("InputDataConfig") },
-        { json: "OutputDataConfig", js: "OutputDataConfig", typ: r("OutputDataConfig") },
-        { json: "RegistrationConfig", js: "RegistrationConfig", typ: r("RegistrationConfig") },
-        { json: "ErrorInfo", js: "ErrorInfo", typ: r("ErrorInfo") },
-        { json: "Session", js: "Session", typ: r("Session") },
-        { json: "TionAudioProgress", js: "TionAudioProgress", typ: r("TionAudioProgress") },
-        { json: "AuthenticationConfigurationClass", js: "AuthenticationConfigurationClass", typ: r("AuthenticationConfigurationClass") },
-        { json: "AuthenticationResult", js: "AuthenticationResult", typ: r("AuthenticationResult") },
-        { json: "EnrollmentAudioProgress", js: "EnrollmentAudioProgress", typ: r("EnrollmentAudioProgress") },
-        { json: "FraudDetectionConfigurationClass", js: "FraudDetectionConfigurationClass", typ: r("FraudDetectionConfigurationClass") },
-        { json: "FraudDetectionResult", js: "FraudDetectionResult", typ: r("FraudDetectionResult") },
-        { json: "StreamingConfiguration", js: "StreamingConfiguration", typ: r("StreamingConfiguration") },
-        { json: "SystemAttributes", js: "SystemAttributes", typ: r("SystemAttributes") },
-        { json: "IDUnion", js: "IDUnion", typ: r("IDUnion") },
-        { json: "DomainID", js: "DomainID", typ: r("DomainID") },
-        { json: "IDEnum", js: "IDEnum", typ: r("DomainID") },
-        { json: "Region", js: "Region", typ: r("DomainID") },
-        { json: "Source", js: "Source", typ: r("DomainID") },
-    ], false),
-    "AuthenticationConfigurationClass": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AuthenticationConfigurationClassProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AuthenticationConfigurationClassProperties": o([
-        { json: "acceptanceThreshold", js: "acceptanceThreshold", typ: r("AcceptanceThreshold") },
-    ], false),
-    "AcceptanceThreshold": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "AuthenticationResult": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AuthenticationResultProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AuthenticationResultProperties": o([
-        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: r("AcceptanceThreshold") },
-        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: r("AcceptanceThreshold") },
-        { json: "authenticationResultId", js: "authenticationResultId", typ: r("AcceptanceThreshold") },
-        { json: "configuration", js: "configuration", typ: r("Items") },
-        { json: "decision", js: "decision", typ: r("AcceptanceThreshold") },
-        { json: "score", js: "score", typ: r("AcceptanceThreshold") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "AwsVoiceidElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsVoiceidElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsVoiceidElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "account", js: "account", typ: r("AcceptanceThreshold") },
-        { json: "region", js: "region", typ: r("Items") },
-        { json: "detail", js: "detail", typ: r("Items") },
-        { json: "detail-type", js: "detail-type", typ: r("AcceptanceThreshold") },
-        { json: "source", js: "source", typ: r("Items") },
-        { json: "id", js: "id", typ: r("Items") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("AcceptanceThreshold") },
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: u(undefined, "") },
-    ], false),
-    "Data": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "enrollmentSource", js: "enrollmentSource", typ: r("AcceptanceThreshold") },
-        { json: "enrollmentSourceId", js: "enrollmentSourceId", typ: r("AcceptanceThreshold") },
-        { json: "enrollmentStatus", js: "enrollmentStatus", typ: r("EnrollmentStatus") },
-        { json: "registrationSource", js: "registrationSource", typ: r("AcceptanceThreshold") },
-        { json: "registrationSourceId", js: "registrationSourceId", typ: r("AcceptanceThreshold") },
-        { json: "registrationStatus", js: "registrationStatus", typ: r("EnrollmentStatus") },
-        { json: "dataAccessRoleArn", js: "dataAccessRoleArn", typ: r("AcceptanceThreshold") },
-        { json: "inputDataConfig", js: "inputDataConfig", typ: r("Items") },
-        { json: "outputDataConfig", js: "outputDataConfig", typ: r("Items") },
-        { json: "registrationConfig", js: "registrationConfig", typ: r("Items") },
-        { json: "enrollmentConfig", js: "enrollmentConfig", typ: r("Items") },
-    ], false),
-    "EnrollmentStatus": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("AcceptanceThreshold")) },
+        { json: "version", js: "version", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "region", js: "region", typ: r("Region") },
+        { json: "detail", js: "detail", typ: r("Detail") },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "id", js: "id", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "resources", js: "resources", typ: a("") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "action", js: "action", typ: "" },
+        { json: "domainId", js: "domainId", typ: r("DomainID") },
+        { json: "errorInfo", js: "errorInfo", typ: u(r("ErrorInfo"), null) },
+        { json: "session", js: "session", typ: u(undefined, r("Session")) },
+        { json: "status", js: "status", typ: "" },
+        { json: "systemAttributes", js: "systemAttributes", typ: u(undefined, u(r("SystemAttributes"), null)) },
+        { json: "sourceId", js: "sourceId", typ: "" },
+        { json: "data", js: "data", typ: u(undefined, u(r("Data"), null)) },
+        { json: "generatedSpeakerId", js: "generatedSpeakerId", typ: u(undefined, u(null, "")) },
+        { json: "generatedFraudsterId", js: "generatedFraudsterId", typ: u(undefined, u(null, "")) },
+        { json: "batchJobId", js: "batchJobId", typ: u(undefined, "") },
+        { json: "sessionId", js: "sessionId", typ: u(undefined, "") },
+        { json: "sessionName", js: "sessionName", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "action", js: "action", typ: r("AcceptanceThreshold") },
-        { json: "domainId", js: "domainId", typ: r("Items") },
-        { json: "errorInfo", js: "errorInfo", typ: r("DataClass") },
-        { json: "session", js: "session", typ: r("Items") },
-        { json: "status", js: "status", typ: r("AcceptanceThreshold") },
-        { json: "systemAttributes", js: "systemAttributes", typ: r("DataClass") },
-        { json: "sourceId", js: "sourceId", typ: r("AcceptanceThreshold") },
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "generatedSpeakerId", js: "generatedSpeakerId", typ: r("EnrollmentStatus") },
-        { json: "generatedFraudsterId", js: "generatedFraudsterId", typ: r("EnrollmentStatus") },
-        { json: "batchJobId", js: "batchJobId", typ: r("AcceptanceThreshold") },
-        { json: "sessionId", js: "sessionId", typ: r("AcceptanceThreshold") },
-        { json: "sessionName", js: "sessionName", typ: r("AcceptanceThreshold") },
-    ], false),
-    "DataClass": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("DataAnyOf")) },
-    ], false),
-    "DataAnyOf": o([
-        { json: "$ref", js: "$ref", typ: u(undefined, "") },
-        { json: "type", js: "type", typ: u(undefined, r("Type")) },
-    ], false),
-    "DomainID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "EnrollmentAudioProgress": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("EnrollmentAudioProgressProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "EnrollmentAudioProgressProperties": o([
-        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: r("AudioAggregationEndedAt") },
-        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: r("Time") },
-        { json: "audioAggregationStatus", js: "audioAggregationStatus", typ: r("AcceptanceThreshold") },
-    ], false),
-    "AudioAggregationEndedAt": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("Time")) },
+    "Data": o([
+        { json: "enrollmentSource", js: "enrollmentSource", typ: u(undefined, "") },
+        { json: "enrollmentSourceId", js: "enrollmentSourceId", typ: u(undefined, "") },
+        { json: "enrollmentStatus", js: "enrollmentStatus", typ: u(undefined, u(null, "")) },
+        { json: "registrationSource", js: "registrationSource", typ: u(undefined, "") },
+        { json: "registrationSourceId", js: "registrationSourceId", typ: u(undefined, "") },
+        { json: "registrationStatus", js: "registrationStatus", typ: u(undefined, u(null, "")) },
+        { json: "dataAccessRoleArn", js: "dataAccessRoleArn", typ: u(undefined, "") },
+        { json: "inputDataConfig", js: "inputDataConfig", typ: u(undefined, r("InputDataConfig")) },
+        { json: "outputDataConfig", js: "outputDataConfig", typ: u(undefined, r("OutputDataConfig")) },
+        { json: "registrationConfig", js: "registrationConfig", typ: u(undefined, r("RegistrationConfig")) },
+        { json: "enrollmentConfig", js: "enrollmentConfig", typ: u(undefined, r("EnrollmentConfig")) },
     ], false),
     "EnrollmentConfig": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("EnrollmentConfigProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "EnrollmentConfigProperties": o([
-        { json: "existingEnrollmentAction", js: "existingEnrollmentAction", typ: r("AcceptanceThreshold") },
-        { json: "fraudDetectionConfig", js: "fraudDetectionConfig", typ: r("Items") },
-    ], false),
-    "ErrorInfo": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ErrorInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ErrorInfoProperties": o([
-        { json: "errorCode", js: "errorCode", typ: r("AcceptanceThreshold") },
-        { json: "errorMessage", js: "errorMessage", typ: r("AcceptanceThreshold") },
-        { json: "errorType", js: "errorType", typ: r("AcceptanceThreshold") },
+        { json: "existingEnrollmentAction", js: "existingEnrollmentAction", typ: "" },
+        { json: "fraudDetectionConfig", js: "fraudDetectionConfig", typ: r("FraudDetectionConfig") },
     ], false),
     "FraudDetectionConfig": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("FraudDetectionConfigProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "FraudDetectionConfigProperties": o([
-        { json: "fraudDetectionAction", js: "fraudDetectionAction", typ: r("AcceptanceThreshold") },
-        { json: "fraudDetectionThreshold", js: "fraudDetectionThreshold", typ: r("AcceptanceThreshold") },
-    ], false),
-    "FraudDetectionConfigurationClass": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("FraudDetectionConfigurationClassProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "FraudDetectionConfigurationClassProperties": o([
-        { json: "riskThreshold", js: "riskThreshold", typ: r("AcceptanceThreshold") },
-    ], false),
-    "FraudDetectionResult": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("FraudDetectionResultProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "FraudDetectionResultProperties": o([
-        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: r("AcceptanceThreshold") },
-        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: r("AcceptanceThreshold") },
-        { json: "configuration", js: "configuration", typ: r("Items") },
-        { json: "decision", js: "decision", typ: r("AcceptanceThreshold") },
-        { json: "fraudDetectionResultId", js: "fraudDetectionResultId", typ: r("AcceptanceThreshold") },
-        { json: "reasons", js: "reasons", typ: r("AcceptanceThreshold") },
-        { json: "riskDetails", js: "riskDetails", typ: r("AcceptanceThreshold") },
-    ], false),
-    "IDUnion": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("IDUnionAnyOf")) },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "IDUnionAnyOf": o([
-        { json: "$ref", js: "$ref", typ: u(undefined, "") },
-        { json: "type", js: "type", typ: u(undefined, r("Type")) },
-        { json: "format", js: "format", typ: u(undefined, "") },
+        { json: "fraudDetectionAction", js: "fraudDetectionAction", typ: "" },
+        { json: "fraudDetectionThreshold", js: "fraudDetectionThreshold", typ: 0 },
     ], false),
     "InputDataConfig": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("InputDataConfigProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "InputDataConfigProperties": o([
-        { json: "s3Uri", js: "s3Uri", typ: r("AcceptanceThreshold") },
+        { json: "s3Uri", js: "s3Uri", typ: "" },
     ], false),
     "OutputDataConfig": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OutputDataConfigProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "OutputDataConfigProperties": o([
-        { json: "kmsKeyId", js: "kmsKeyId", typ: r("AcceptanceThreshold") },
-        { json: "s3Uri", js: "s3Uri", typ: r("AcceptanceThreshold") },
+        { json: "kmsKeyId", js: "kmsKeyId", typ: "" },
+        { json: "s3Uri", js: "s3Uri", typ: "" },
     ], false),
     "RegistrationConfig": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RegistrationConfigProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "duplicateRegistrationAction", js: "duplicateRegistrationAction", typ: "" },
+        { json: "fraudsterSimilarityThreshold", js: "fraudsterSimilarityThreshold", typ: 0 },
     ], false),
-    "RegistrationConfigProperties": o([
-        { json: "duplicateRegistrationAction", js: "duplicateRegistrationAction", typ: r("AcceptanceThreshold") },
-        { json: "fraudsterSimilarityThreshold", js: "fraudsterSimilarityThreshold", typ: r("AcceptanceThreshold") },
+    "ErrorInfo": o([
+        { json: "errorCode", js: "errorCode", typ: 0 },
+        { json: "errorMessage", js: "errorMessage", typ: "" },
+        { json: "errorType", js: "errorType", typ: "" },
     ], false),
     "Session": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionProperties": o([
-        { json: "authenticationAudioProgress", js: "authenticationAudioProgress", typ: r("Items") },
-        { json: "authenticationConfiguration", js: "authenticationConfiguration", typ: r("DataClass") },
-        { json: "enrollmentAudioProgress", js: "enrollmentAudioProgress", typ: r("Items") },
-        { json: "fraudDetectionAudioProgress", js: "fraudDetectionAudioProgress", typ: r("Items") },
-        { json: "fraudDetectionConfiguration", js: "fraudDetectionConfiguration", typ: r("DataClass") },
-        { json: "generatedSpeakerId", js: "generatedSpeakerId", typ: r("EnrollmentStatus") },
-        { json: "sessionId", js: "sessionId", typ: r("AcceptanceThreshold") },
-        { json: "sessionName", js: "sessionName", typ: r("AcceptanceThreshold") },
-        { json: "streamingConfiguration", js: "streamingConfiguration", typ: r("Items") },
-        { json: "authenticationResult", js: "authenticationResult", typ: r("DataClass") },
-        { json: "fraudDetectionResult", js: "fraudDetectionResult", typ: r("DataClass") },
-        { json: "streamingStatus", js: "streamingStatus", typ: r("AcceptanceThreshold") },
-    ], false),
-    "StreamingConfiguration": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("StreamingConfigurationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "StreamingConfigurationProperties": o([
-        { json: "authenticationMinimumSpeechInSeconds", js: "authenticationMinimumSpeechInSeconds", typ: r("AcceptanceThreshold") },
-    ], false),
-    "SystemAttributes": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SystemAttributesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SystemAttributesProperties": o([
-        { json: "aws:connect:OriginalContactArn", js: "aws:connect:OriginalContactArn", typ: r("AcceptanceThreshold") },
+        { json: "authenticationAudioProgress", js: "authenticationAudioProgress", typ: u(undefined, r("TionAudioProgress")) },
+        { json: "authenticationConfiguration", js: "authenticationConfiguration", typ: u(undefined, u(r("AuthenticationConfigurationClass"), null)) },
+        { json: "enrollmentAudioProgress", js: "enrollmentAudioProgress", typ: u(undefined, r("EnrollmentAudioProgress")) },
+        { json: "fraudDetectionAudioProgress", js: "fraudDetectionAudioProgress", typ: u(undefined, r("TionAudioProgress")) },
+        { json: "fraudDetectionConfiguration", js: "fraudDetectionConfiguration", typ: u(undefined, u(r("FraudDetectionConfigurationClass"), null)) },
+        { json: "generatedSpeakerId", js: "generatedSpeakerId", typ: u(null, "") },
+        { json: "sessionId", js: "sessionId", typ: "" },
+        { json: "sessionName", js: "sessionName", typ: "" },
+        { json: "streamingConfiguration", js: "streamingConfiguration", typ: u(undefined, r("StreamingConfiguration")) },
+        { json: "authenticationResult", js: "authenticationResult", typ: u(undefined, u(r("AuthenticationResult"), null)) },
+        { json: "fraudDetectionResult", js: "fraudDetectionResult", typ: u(undefined, u(r("FraudDetectionResult"), null)) },
+        { json: "streamingStatus", js: "streamingStatus", typ: u(undefined, "") },
     ], false),
     "TionAudioProgress": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TionAudioProgressProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: u(Date, null) },
+        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: Date },
     ], false),
-    "TionAudioProgressProperties": o([
-        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: r("AudioAggregationEndedAt") },
-        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: r("Time") },
+    "AuthenticationConfigurationClass": o([
+        { json: "acceptanceThreshold", js: "acceptanceThreshold", typ: 0 },
     ], false),
-    "Type": [
-        "integer",
-        "null",
-        "string",
+    "AuthenticationResult": o([
+        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: null },
+        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: null },
+        { json: "authenticationResultId", js: "authenticationResultId", typ: "" },
+        { json: "configuration", js: "configuration", typ: r("AuthenticationConfigurationClass") },
+        { json: "decision", js: "decision", typ: "" },
+        { json: "score", js: "score", typ: null },
+    ], false),
+    "EnrollmentAudioProgress": o([
+        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: u(Date, null) },
+        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: Date },
+        { json: "audioAggregationStatus", js: "audioAggregationStatus", typ: "" },
+    ], false),
+    "FraudDetectionConfigurationClass": o([
+        { json: "riskThreshold", js: "riskThreshold", typ: 0 },
+    ], false),
+    "FraudDetectionResult": o([
+        { json: "audioAggregationEndedAt", js: "audioAggregationEndedAt", typ: null },
+        { json: "audioAggregationStartedAt", js: "audioAggregationStartedAt", typ: null },
+        { json: "configuration", js: "configuration", typ: r("FraudDetectionConfigurationClass") },
+        { json: "decision", js: "decision", typ: "" },
+        { json: "fraudDetectionResultId", js: "fraudDetectionResultId", typ: "" },
+        { json: "reasons", js: "reasons", typ: null },
+        { json: "riskDetails", js: "riskDetails", typ: null },
+    ], false),
+    "StreamingConfiguration": o([
+        { json: "authenticationMinimumSpeechInSeconds", js: "authenticationMinimumSpeechInSeconds", typ: 0 },
+    ], false),
+    "SystemAttributes": o([
+        { json: "aws:connect:OriginalContactArn", js: "aws:connect:OriginalContactArn", typ: "" },
+    ], false),
+    "DomainID": [
+        "7777aaaaaaaa77777777aa",
+    ],
+    "Region": [
+        "us-east-1",
+    ],
+    "Source": [
+        "aws.voiceid",
     ],
 };

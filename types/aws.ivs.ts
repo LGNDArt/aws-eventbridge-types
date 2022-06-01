@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsIvs } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsIvs = Convert.toAwsIvs(json);
 //
@@ -8,77 +8,40 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsIvs {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsIv:  AwsIv;
-    Detail: Detail;
-}
-
-export interface AwsIv {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           Properties;
-    required:             string[];
-    title:                string;
-}
-
-export interface Properties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           { [key: string]: Account };
-    required:             any[];
-    title:                string;
+    eventName?:                string;
+    limit?:                    string;
+    "limit-value"?:            number;
+    "exceeded-by"?:            number;
+    "limit-unit"?:             string;
+    channel_name?:             string;
+    stream_id?:                string;
+    recording_status?:         string;
+    recording_status_reason?:  string;
+    recording_s3_bucket_name?: string;
+    recording_s3_key_prefix?:  string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsIvs(json: string): AwsIvs {
-        return cast(JSON.parse(json), r("AwsIvs"));
+    public static toAwsIvs(json: string): AwsIvs[] {
+        return cast(JSON.parse(json), a(r("AwsIvs")));
     }
 
-    public static awsIvsToJson(value: AwsIvs): string {
-        return JSON.stringify(uncast(value, r("AwsIvs")), null, 2);
+    public static awsIvsToJson(value: AwsIvs[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsIvs"))), null, 2);
     }
 }
 
@@ -216,56 +179,27 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsIvs": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsIv", js: "AwsIv", typ: r("AwsIv") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsIv": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("Properties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "Properties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: m(r("Account")) },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "eventName", js: "eventName", typ: u(undefined, "") },
+        { json: "limit", js: "limit", typ: u(undefined, "") },
+        { json: "limit-value", js: "limit-value", typ: u(undefined, 0) },
+        { json: "exceeded-by", js: "exceeded-by", typ: u(undefined, 0) },
+        { json: "limit-unit", js: "limit-unit", typ: u(undefined, "") },
+        { json: "channel_name", js: "channel_name", typ: u(undefined, "") },
+        { json: "stream_id", js: "stream_id", typ: u(undefined, "") },
+        { json: "recording_status", js: "recording_status", typ: u(undefined, "") },
+        { json: "recording_status_reason", js: "recording_status_reason", typ: u(undefined, "") },
+        { json: "recording_s3_bucket_name", js: "recording_s3_bucket_name", typ: u(undefined, "") },
+        { json: "recording_s3_key_prefix", js: "recording_s3_key_prefix", typ: u(undefined, "") },
     ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

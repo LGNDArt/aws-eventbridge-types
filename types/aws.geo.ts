@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsGeo } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsGeo = Convert.toAwsGeo(json);
 //
@@ -8,115 +8,46 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsGeo {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
-export interface Definitions {
-    AwsGeoElement:      AwsGeoElement;
-    Detail:             Detail;
+export interface Detail {
+    EventType:          string;
+    GeofenceId:         string;
+    DeviceId:           string;
+    SampleTime:         Date;
+    Position:           number[];
     Accuracy:           Accuracy;
     PositionProperties: PositionProperties;
 }
 
 export interface Accuracy {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AccuracyProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AccuracyProperties {
-    Horizontal: Horizontal;
-}
-
-export interface Horizontal {
-    type: Type;
-}
-
-export enum Type {
-    Number = "number",
-    String = "string",
-}
-
-export interface AwsGeoElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsGeoElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsGeoElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Horizontal;
-    source:        Horizontal;
-    account:       Horizontal;
-    time:          ID;
-    region:        Horizontal;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Horizontal;
-}
-
-export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    EventType:          Horizontal;
-    GeofenceId:         Horizontal;
-    DeviceId:           Horizontal;
-    SampleTime:         ID;
-    Position:           Resources;
-    Accuracy:           Items;
-    PositionProperties: Items;
+    Horizontal: number;
 }
 
 export interface PositionProperties {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           PositionPropertiesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface PositionPropertiesProperties {
-    field1: Horizontal;
-    field2: Horizontal;
-    field3: Horizontal;
+    field1: string;
+    field2: string;
+    field3: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsGeo(json: string): AwsGeo {
-        return cast(JSON.parse(json), r("AwsGeo"));
+    public static toAwsGeo(json: string): AwsGeo[] {
+        return cast(JSON.parse(json), a(r("AwsGeo")));
     }
 
-    public static awsGeoToJson(value: AwsGeo): string {
-        return JSON.stringify(uncast(value, r("AwsGeo")), null, 2);
+    public static awsGeoToJson(value: AwsGeo[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsGeo"))), null, 2);
     }
 }
 
@@ -254,89 +185,31 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsGeo": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
-    "Definitions": o([
-        { json: "AwsGeoElement", js: "AwsGeoElement", typ: r("AwsGeoElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
+    "Detail": o([
+        { json: "EventType", js: "EventType", typ: "" },
+        { json: "GeofenceId", js: "GeofenceId", typ: "" },
+        { json: "DeviceId", js: "DeviceId", typ: "" },
+        { json: "SampleTime", js: "SampleTime", typ: Date },
+        { json: "Position", js: "Position", typ: a(3.14) },
         { json: "Accuracy", js: "Accuracy", typ: r("Accuracy") },
         { json: "PositionProperties", js: "PositionProperties", typ: r("PositionProperties") },
     ], false),
     "Accuracy": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AccuracyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AccuracyProperties": o([
-        { json: "Horizontal", js: "Horizontal", typ: r("Horizontal") },
-    ], false),
-    "Horizontal": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "AwsGeoElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsGeoElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsGeoElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Horizontal") },
-        { json: "source", js: "source", typ: r("Horizontal") },
-        { json: "account", js: "account", typ: r("Horizontal") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Horizontal") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Horizontal") },
-    ], false),
-    "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "EventType", js: "EventType", typ: r("Horizontal") },
-        { json: "GeofenceId", js: "GeofenceId", typ: r("Horizontal") },
-        { json: "DeviceId", js: "DeviceId", typ: r("Horizontal") },
-        { json: "SampleTime", js: "SampleTime", typ: r("ID") },
-        { json: "Position", js: "Position", typ: r("Resources") },
-        { json: "Accuracy", js: "Accuracy", typ: r("Items") },
-        { json: "PositionProperties", js: "PositionProperties", typ: r("Items") },
+        { json: "Horizontal", js: "Horizontal", typ: 3.14 },
     ], false),
     "PositionProperties": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("PositionPropertiesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "field1", js: "field1", typ: "" },
+        { json: "field2", js: "field2", typ: "" },
+        { json: "field3", js: "field3", typ: "" },
     ], false),
-    "PositionPropertiesProperties": o([
-        { json: "field1", js: "field1", typ: r("Horizontal") },
-        { json: "field2", js: "field2", typ: r("Horizontal") },
-        { json: "field3", js: "field3", typ: r("Horizontal") },
-    ], false),
-    "Type": [
-        "number",
-        "string",
-    ],
 };

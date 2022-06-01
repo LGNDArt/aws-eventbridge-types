@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsXray } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsXray = Convert.toAwsXray(json);
 //
@@ -8,167 +8,66 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsXray {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsXrayElement:          AwsXrayElement;
-    Detail:                  Detail;
-    RequestImpactStatistics: RequestImpactStatistics;
-    Event:                   Event;
-    TopAnomalousService:     TopAnomalousService;
-    ServiceID:               ServiceID;
-}
-
-export interface AwsXrayElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsXrayElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsXrayElementProperties {
-    version:       ID;
-    account:       Account;
-    resources:     Resources;
-    region:        Account;
-    time:          ID;
-    id:            ID;
-    source:        Account;
-    "detail-type": Account;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    Null = "null",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    account:       string;
+    resources:     any[];
+    region:        string;
+    time:          Date;
+    id:            string;
+    source:        string;
+    "detail-type": string;
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    InsightId:                               ID;
-    Summary:                                 Account;
-    GroupName:                               Account;
-    RootCauseServiceId:                      DetailClass;
-    Categories:                              Categories;
-    State:                                   Account;
-    StartTime:                               Account;
-    EndTime:                                 Account;
-    ClientRequestImpactStatistics:           DetailClass;
-    RootCauseServiceRequestImpactStatistics: DetailClass;
-    TopAnomalousServices:                    TopAnomalousServices;
-    Event:                                   DetailClass;
-}
-
-export interface Categories {
-    type:  string;
-    items: Account;
-}
-
-export interface TopAnomalousServices {
-    type:  string;
-    items: DetailClass;
-}
-
-export interface Event {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           EventProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface EventProperties {
-    Summary:                                 Account;
-    EventTime:                               Account;
-    ClientRequestImpactStatistics:           DetailClass;
-    RootCauseServiceRequestImpactStatistics: DetailClass;
-    TopAnomalousServices:                    TopAnomalousServices;
+    InsightId:                               string;
+    Summary:                                 string;
+    GroupName:                               string;
+    RootCauseServiceId:                      ServiceID;
+    Categories:                              string[];
+    State:                                   string;
+    StartTime:                               number;
+    EndTime:                                 null;
+    ClientRequestImpactStatistics:           RequestImpactStatistics;
+    RootCauseServiceRequestImpactStatistics: RequestImpactStatistics;
+    TopAnomalousServices:                    TopAnomalousService[];
+    Event:                                   Event;
 }
 
 export interface RequestImpactStatistics {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RequestImpactStatisticsProperties;
-    required:             string[];
-    title:                string;
+    FaultCount: number;
+    OkCount:    number;
+    TotalCount: number;
 }
 
-export interface RequestImpactStatisticsProperties {
-    FaultCount: Account;
-    OkCount:    Account;
-    TotalCount: Account;
-}
-
-export interface ServiceID {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ServiceIDProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ServiceIDProperties {
-    Type:      Account;
-    Name:      Account;
-    Names:     Resources;
-    AccountId: Account;
+export interface Event {
+    Summary:                                 string;
+    EventTime:                               string;
+    ClientRequestImpactStatistics:           RequestImpactStatistics;
+    RootCauseServiceRequestImpactStatistics: RequestImpactStatistics;
+    TopAnomalousServices:                    TopAnomalousService[];
 }
 
 export interface TopAnomalousService {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TopAnomalousServiceProperties;
-    required:             string[];
-    title:                string;
+    ServiceId: ServiceID;
 }
 
-export interface TopAnomalousServiceProperties {
-    ServiceId: DetailClass;
+export interface ServiceID {
+    Type:      string;
+    Name:      string;
+    Names:     any[];
+    AccountId: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsXray(json: string): AwsXray {
-        return cast(JSON.parse(json), r("AwsXray"));
+    public static toAwsXray(json: string): AwsXray[] {
+        return cast(JSON.parse(json), a(r("AwsXray")));
     }
 
-    public static awsXrayToJson(value: AwsXray): string {
-        return JSON.stringify(uncast(value, r("AwsXray")), null, 2);
+    public static awsXrayToJson(value: AwsXray[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsXray"))), null, 2);
     }
 }
 
@@ -306,134 +205,49 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsXray": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsXrayElement", js: "AwsXrayElement", typ: r("AwsXrayElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "RequestImpactStatistics", js: "RequestImpactStatistics", typ: r("RequestImpactStatistics") },
-        { json: "Event", js: "Event", typ: r("Event") },
-        { json: "TopAnomalousService", js: "TopAnomalousService", typ: r("TopAnomalousService") },
-        { json: "ServiceID", js: "ServiceID", typ: r("ServiceID") },
-    ], false),
-    "AwsXrayElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsXrayElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsXrayElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "region", js: "region", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "id", js: "id", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "InsightId", js: "InsightId", typ: r("ID") },
-        { json: "Summary", js: "Summary", typ: r("Account") },
-        { json: "GroupName", js: "GroupName", typ: r("Account") },
-        { json: "RootCauseServiceId", js: "RootCauseServiceId", typ: r("DetailClass") },
-        { json: "Categories", js: "Categories", typ: r("Categories") },
-        { json: "State", js: "State", typ: r("Account") },
-        { json: "StartTime", js: "StartTime", typ: r("Account") },
-        { json: "EndTime", js: "EndTime", typ: r("Account") },
-        { json: "ClientRequestImpactStatistics", js: "ClientRequestImpactStatistics", typ: r("DetailClass") },
-        { json: "RootCauseServiceRequestImpactStatistics", js: "RootCauseServiceRequestImpactStatistics", typ: r("DetailClass") },
-        { json: "TopAnomalousServices", js: "TopAnomalousServices", typ: r("TopAnomalousServices") },
-        { json: "Event", js: "Event", typ: r("DetailClass") },
-    ], false),
-    "Categories": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "TopAnomalousServices": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-    ], false),
-    "Event": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("EventProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "EventProperties": o([
-        { json: "Summary", js: "Summary", typ: r("Account") },
-        { json: "EventTime", js: "EventTime", typ: r("Account") },
-        { json: "ClientRequestImpactStatistics", js: "ClientRequestImpactStatistics", typ: r("DetailClass") },
-        { json: "RootCauseServiceRequestImpactStatistics", js: "RootCauseServiceRequestImpactStatistics", typ: r("DetailClass") },
-        { json: "TopAnomalousServices", js: "TopAnomalousServices", typ: r("TopAnomalousServices") },
+        { json: "InsightId", js: "InsightId", typ: "" },
+        { json: "Summary", js: "Summary", typ: "" },
+        { json: "GroupName", js: "GroupName", typ: "" },
+        { json: "RootCauseServiceId", js: "RootCauseServiceId", typ: r("ServiceID") },
+        { json: "Categories", js: "Categories", typ: a("") },
+        { json: "State", js: "State", typ: "" },
+        { json: "StartTime", js: "StartTime", typ: 0 },
+        { json: "EndTime", js: "EndTime", typ: null },
+        { json: "ClientRequestImpactStatistics", js: "ClientRequestImpactStatistics", typ: r("RequestImpactStatistics") },
+        { json: "RootCauseServiceRequestImpactStatistics", js: "RootCauseServiceRequestImpactStatistics", typ: r("RequestImpactStatistics") },
+        { json: "TopAnomalousServices", js: "TopAnomalousServices", typ: a(r("TopAnomalousService")) },
+        { json: "Event", js: "Event", typ: r("Event") },
     ], false),
     "RequestImpactStatistics": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RequestImpactStatisticsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "FaultCount", js: "FaultCount", typ: 0 },
+        { json: "OkCount", js: "OkCount", typ: 0 },
+        { json: "TotalCount", js: "TotalCount", typ: 0 },
     ], false),
-    "RequestImpactStatisticsProperties": o([
-        { json: "FaultCount", js: "FaultCount", typ: r("Account") },
-        { json: "OkCount", js: "OkCount", typ: r("Account") },
-        { json: "TotalCount", js: "TotalCount", typ: r("Account") },
-    ], false),
-    "ServiceID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ServiceIDProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ServiceIDProperties": o([
-        { json: "Type", js: "Type", typ: r("Account") },
-        { json: "Name", js: "Name", typ: r("Account") },
-        { json: "Names", js: "Names", typ: r("Resources") },
-        { json: "AccountId", js: "AccountId", typ: r("Account") },
+    "Event": o([
+        { json: "Summary", js: "Summary", typ: "" },
+        { json: "EventTime", js: "EventTime", typ: "" },
+        { json: "ClientRequestImpactStatistics", js: "ClientRequestImpactStatistics", typ: r("RequestImpactStatistics") },
+        { json: "RootCauseServiceRequestImpactStatistics", js: "RootCauseServiceRequestImpactStatistics", typ: r("RequestImpactStatistics") },
+        { json: "TopAnomalousServices", js: "TopAnomalousServices", typ: a(r("TopAnomalousService")) },
     ], false),
     "TopAnomalousService": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TopAnomalousServiceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "ServiceId", js: "ServiceId", typ: r("ServiceID") },
     ], false),
-    "TopAnomalousServiceProperties": o([
-        { json: "ServiceId", js: "ServiceId", typ: r("DetailClass") },
+    "ServiceID": o([
+        { json: "Type", js: "Type", typ: "" },
+        { json: "Name", js: "Name", typ: "" },
+        { json: "Names", js: "Names", typ: a("any") },
+        { json: "AccountId", js: "AccountId", typ: "" },
     ], false),
-    "Type": [
-        "integer",
-        "null",
-        "string",
-    ],
 };

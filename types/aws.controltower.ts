@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsControltower } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsControltower = Convert.toAwsControltower(json);
 //
@@ -8,242 +8,109 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsControltower {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsControltowerElement: AwsControltowerElement;
-    Detail:                 Detail;
-    ServiceEventDetails:    ServiceEventDetails;
-    TStatus:                TStatus;
-    AbleGuardrailStatus:    AbleGuardrailStatus;
-    Guardrail:              Guardrail;
-    OrganizationalUnit:     OrganizationalUnit;
-    LandingZoneStatus:      LandingZoneStatus;
-    Account:                Account;
-    UserIdentity:           UserIdentity;
-    OrganizationalUnitName: OrganizationalUnitName;
-}
-
-export interface AbleGuardrailStatus {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AbleGuardrailStatusProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AbleGuardrailStatusProperties {
-    organizationalUnits: Guardrails;
-    guardrails:          Guardrails;
-    state:               CompletedTimestamp;
-    message:             CompletedTimestamp;
-    requestTimestamp:    CompletedTimestamp;
-    completedTimestamp:  CompletedTimestamp;
-}
-
-export interface CompletedTimestamp {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Null = "null",
-    String = "string",
-}
-
-export interface Guardrails {
-    type:  string;
-    items: DetailClass;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface Account {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AccountProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AccountProperties {
-    accountName: CompletedTimestamp;
-    accountId:   CompletedTimestamp;
-}
-
-export interface AwsControltowerElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsControltowerElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsControltowerElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": CompletedTimestamp;
-    source:        CompletedTimestamp;
-    account:       CompletedTimestamp;
-    time:          ID;
-    region:        CompletedTimestamp;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventVersion:        CompletedTimestamp;
-    userIdentity:        DetailClass;
-    eventTime:           ID;
-    eventSource:         CompletedTimestamp;
-    eventName:           CompletedTimestamp;
-    awsRegion:           CompletedTimestamp;
-    sourceIPAddress:     CompletedTimestamp;
-    userAgent:           CompletedTimestamp;
-    requestParameters:   CompletedTimestamp;
-    responseElements:    CompletedTimestamp;
-    eventID:             CompletedTimestamp;
-    readOnly:            CompletedTimestamp;
-    eventType:           CompletedTimestamp;
-    recipientAccountId:  CompletedTimestamp;
-    serviceEventDetails: DetailClass;
-}
-
-export interface Guardrail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           GuardrailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface GuardrailProperties {
-    guardrailId:       CompletedTimestamp;
-    guardrailBehavior: CompletedTimestamp;
-}
-
-export interface LandingZoneStatus {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           LandingZoneStatusProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface LandingZoneStatusProperties {
-    rootOrganizationalUnitId: CompletedTimestamp;
-    organizationalUnits:      Guardrails;
-    accounts:                 Guardrails;
-    state:                    CompletedTimestamp;
-    message:                  CompletedTimestamp;
-    requestedTimestamp:       CompletedTimestamp;
-    completedTimestamp:       CompletedTimestamp;
-}
-
-export interface OrganizationalUnit {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           OrganizationalUnitProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface OrganizationalUnitProperties {
-    organizationalUnitName: DetailClass;
-    organizationalUnitId:   CompletedTimestamp;
-}
-
-export interface OrganizationalUnitName {
-    type:  Type;
-    enum:  string[];
-    title: string;
+    eventVersion:        string;
+    userIdentity:        UserIdentity;
+    eventTime:           Date;
+    eventSource:         string;
+    eventName:           string;
+    awsRegion:           string;
+    sourceIPAddress:     string;
+    userAgent:           string;
+    requestParameters:   null;
+    responseElements:    null;
+    eventID:             string;
+    readOnly:            boolean;
+    eventType:           string;
+    recipientAccountId:  string;
+    serviceEventDetails: ServiceEventDetails;
 }
 
 export interface ServiceEventDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ServiceEventDetailsProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface ServiceEventDetailsProperties {
-    updateManagedAccountStatus:         DetailClass;
-    registerOrganizationalUnitStatus:   DetailClass;
-    disableGuardrailStatus:             DetailClass;
-    deregisterOrganizationalUnitStatus: DetailClass;
-    enableGuardrailStatus:              DetailClass;
-    createManagedAccountStatus:         DetailClass;
-    setupLandingZoneStatus:             DetailClass;
-    updateLandingZoneStatus:            DetailClass;
+    updateManagedAccountStatus?:         TStatus;
+    registerOrganizationalUnitStatus?:   TStatus;
+    disableGuardrailStatus?:             AbleGuardrailStatus;
+    deregisterOrganizationalUnitStatus?: TStatus;
+    enableGuardrailStatus?:              AbleGuardrailStatus;
+    createManagedAccountStatus?:         TStatus;
+    setupLandingZoneStatus?:             LandingZoneStatus;
+    updateLandingZoneStatus?:            LandingZoneStatus;
 }
 
 export interface TStatus {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TStatusProperties;
-    required:             string[];
-    title:                string;
+    organizationalUnit: OrganizationalUnit;
+    account?:           Account;
+    state:              string;
+    message:            string;
+    requestedTimestamp: string;
+    completedTimestamp: string;
 }
 
-export interface TStatusProperties {
-    organizationalUnit: DetailClass;
-    account:            DetailClass;
-    state:              CompletedTimestamp;
-    message:            CompletedTimestamp;
-    requestedTimestamp: CompletedTimestamp;
-    completedTimestamp: CompletedTimestamp;
+export interface Account {
+    accountName: string;
+    accountId:   string;
+}
+
+export interface OrganizationalUnit {
+    organizationalUnitName: OrganizationalUnitName;
+    organizationalUnitId:   string;
+}
+
+export enum OrganizationalUnitName {
+    Core = "Core",
+    Custom = "Custom",
+    Test = "Test",
+}
+
+export interface AbleGuardrailStatus {
+    organizationalUnits: OrganizationalUnit[];
+    guardrails:          Guardrail[];
+    state:               string;
+    message:             string;
+    requestTimestamp?:   string;
+    completedTimestamp:  string;
+}
+
+export interface Guardrail {
+    guardrailId:       string;
+    guardrailBehavior: string;
+}
+
+export interface LandingZoneStatus {
+    rootOrganizationalUnitId: string;
+    organizationalUnits:      OrganizationalUnit[];
+    accounts:                 Account[];
+    state:                    string;
+    message:                  string;
+    requestedTimestamp:       string;
+    completedTimestamp:       string;
 }
 
 export interface UserIdentity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UserIdentityProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface UserIdentityProperties {
-    accountId: CompletedTimestamp;
-    invokedBy: CompletedTimestamp;
+    accountId: string;
+    invokedBy: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsControltower(json: string): AwsControltower {
-        return cast(JSON.parse(json), r("AwsControltower"));
+    public static toAwsControltower(json: string): AwsControltower[] {
+        return cast(JSON.parse(json), a(r("AwsControltower")));
     }
 
-    public static awsControltowerToJson(value: AwsControltower): string {
-        return JSON.stringify(uncast(value, r("AwsControltower")), null, 2);
+    public static awsControltowerToJson(value: AwsControltower[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsControltower"))), null, 2);
     }
 }
 
@@ -381,201 +248,87 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsControltower": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsControltowerElement", js: "AwsControltowerElement", typ: r("AwsControltowerElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "ServiceEventDetails", js: "ServiceEventDetails", typ: r("ServiceEventDetails") },
-        { json: "TStatus", js: "TStatus", typ: r("TStatus") },
-        { json: "AbleGuardrailStatus", js: "AbleGuardrailStatus", typ: r("AbleGuardrailStatus") },
-        { json: "Guardrail", js: "Guardrail", typ: r("Guardrail") },
-        { json: "OrganizationalUnit", js: "OrganizationalUnit", typ: r("OrganizationalUnit") },
-        { json: "LandingZoneStatus", js: "LandingZoneStatus", typ: r("LandingZoneStatus") },
-        { json: "Account", js: "Account", typ: r("Account") },
-        { json: "UserIdentity", js: "UserIdentity", typ: r("UserIdentity") },
-        { json: "OrganizationalUnitName", js: "OrganizationalUnitName", typ: r("OrganizationalUnitName") },
-    ], false),
-    "AbleGuardrailStatus": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AbleGuardrailStatusProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AbleGuardrailStatusProperties": o([
-        { json: "organizationalUnits", js: "organizationalUnits", typ: r("Guardrails") },
-        { json: "guardrails", js: "guardrails", typ: r("Guardrails") },
-        { json: "state", js: "state", typ: r("CompletedTimestamp") },
-        { json: "message", js: "message", typ: r("CompletedTimestamp") },
-        { json: "requestTimestamp", js: "requestTimestamp", typ: r("CompletedTimestamp") },
-        { json: "completedTimestamp", js: "completedTimestamp", typ: r("CompletedTimestamp") },
-    ], false),
-    "CompletedTimestamp": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Guardrails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AccountProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AccountProperties": o([
-        { json: "accountName", js: "accountName", typ: r("CompletedTimestamp") },
-        { json: "accountId", js: "accountId", typ: r("CompletedTimestamp") },
-    ], false),
-    "AwsControltowerElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsControltowerElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsControltowerElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("CompletedTimestamp") },
-        { json: "source", js: "source", typ: r("CompletedTimestamp") },
-        { json: "account", js: "account", typ: r("CompletedTimestamp") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("CompletedTimestamp") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("CompletedTimestamp") },
-        { json: "userIdentity", js: "userIdentity", typ: r("DetailClass") },
-        { json: "eventTime", js: "eventTime", typ: r("ID") },
-        { json: "eventSource", js: "eventSource", typ: r("CompletedTimestamp") },
-        { json: "eventName", js: "eventName", typ: r("CompletedTimestamp") },
-        { json: "awsRegion", js: "awsRegion", typ: r("CompletedTimestamp") },
-        { json: "sourceIPAddress", js: "sourceIPAddress", typ: r("CompletedTimestamp") },
-        { json: "userAgent", js: "userAgent", typ: r("CompletedTimestamp") },
-        { json: "requestParameters", js: "requestParameters", typ: r("CompletedTimestamp") },
-        { json: "responseElements", js: "responseElements", typ: r("CompletedTimestamp") },
-        { json: "eventID", js: "eventID", typ: r("CompletedTimestamp") },
-        { json: "readOnly", js: "readOnly", typ: r("CompletedTimestamp") },
-        { json: "eventType", js: "eventType", typ: r("CompletedTimestamp") },
-        { json: "recipientAccountId", js: "recipientAccountId", typ: r("CompletedTimestamp") },
-        { json: "serviceEventDetails", js: "serviceEventDetails", typ: r("DetailClass") },
-    ], false),
-    "Guardrail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("GuardrailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "GuardrailProperties": o([
-        { json: "guardrailId", js: "guardrailId", typ: r("CompletedTimestamp") },
-        { json: "guardrailBehavior", js: "guardrailBehavior", typ: r("CompletedTimestamp") },
-    ], false),
-    "LandingZoneStatus": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("LandingZoneStatusProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "LandingZoneStatusProperties": o([
-        { json: "rootOrganizationalUnitId", js: "rootOrganizationalUnitId", typ: r("CompletedTimestamp") },
-        { json: "organizationalUnits", js: "organizationalUnits", typ: r("Guardrails") },
-        { json: "accounts", js: "accounts", typ: r("Guardrails") },
-        { json: "state", js: "state", typ: r("CompletedTimestamp") },
-        { json: "message", js: "message", typ: r("CompletedTimestamp") },
-        { json: "requestedTimestamp", js: "requestedTimestamp", typ: r("CompletedTimestamp") },
-        { json: "completedTimestamp", js: "completedTimestamp", typ: r("CompletedTimestamp") },
-    ], false),
-    "OrganizationalUnit": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OrganizationalUnitProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "OrganizationalUnitProperties": o([
-        { json: "organizationalUnitName", js: "organizationalUnitName", typ: r("DetailClass") },
-        { json: "organizationalUnitId", js: "organizationalUnitId", typ: r("CompletedTimestamp") },
-    ], false),
-    "OrganizationalUnitName": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "userIdentity", js: "userIdentity", typ: r("UserIdentity") },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "sourceIPAddress", js: "sourceIPAddress", typ: "" },
+        { json: "userAgent", js: "userAgent", typ: "" },
+        { json: "requestParameters", js: "requestParameters", typ: null },
+        { json: "responseElements", js: "responseElements", typ: null },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "readOnly", js: "readOnly", typ: true },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "recipientAccountId", js: "recipientAccountId", typ: "" },
+        { json: "serviceEventDetails", js: "serviceEventDetails", typ: r("ServiceEventDetails") },
     ], false),
     "ServiceEventDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ServiceEventDetailsProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ServiceEventDetailsProperties": o([
-        { json: "updateManagedAccountStatus", js: "updateManagedAccountStatus", typ: r("DetailClass") },
-        { json: "registerOrganizationalUnitStatus", js: "registerOrganizationalUnitStatus", typ: r("DetailClass") },
-        { json: "disableGuardrailStatus", js: "disableGuardrailStatus", typ: r("DetailClass") },
-        { json: "deregisterOrganizationalUnitStatus", js: "deregisterOrganizationalUnitStatus", typ: r("DetailClass") },
-        { json: "enableGuardrailStatus", js: "enableGuardrailStatus", typ: r("DetailClass") },
-        { json: "createManagedAccountStatus", js: "createManagedAccountStatus", typ: r("DetailClass") },
-        { json: "setupLandingZoneStatus", js: "setupLandingZoneStatus", typ: r("DetailClass") },
-        { json: "updateLandingZoneStatus", js: "updateLandingZoneStatus", typ: r("DetailClass") },
+        { json: "updateManagedAccountStatus", js: "updateManagedAccountStatus", typ: u(undefined, r("TStatus")) },
+        { json: "registerOrganizationalUnitStatus", js: "registerOrganizationalUnitStatus", typ: u(undefined, r("TStatus")) },
+        { json: "disableGuardrailStatus", js: "disableGuardrailStatus", typ: u(undefined, r("AbleGuardrailStatus")) },
+        { json: "deregisterOrganizationalUnitStatus", js: "deregisterOrganizationalUnitStatus", typ: u(undefined, r("TStatus")) },
+        { json: "enableGuardrailStatus", js: "enableGuardrailStatus", typ: u(undefined, r("AbleGuardrailStatus")) },
+        { json: "createManagedAccountStatus", js: "createManagedAccountStatus", typ: u(undefined, r("TStatus")) },
+        { json: "setupLandingZoneStatus", js: "setupLandingZoneStatus", typ: u(undefined, r("LandingZoneStatus")) },
+        { json: "updateLandingZoneStatus", js: "updateLandingZoneStatus", typ: u(undefined, r("LandingZoneStatus")) },
     ], false),
     "TStatus": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TStatusProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "organizationalUnit", js: "organizationalUnit", typ: r("OrganizationalUnit") },
+        { json: "account", js: "account", typ: u(undefined, r("Account")) },
+        { json: "state", js: "state", typ: "" },
+        { json: "message", js: "message", typ: "" },
+        { json: "requestedTimestamp", js: "requestedTimestamp", typ: "" },
+        { json: "completedTimestamp", js: "completedTimestamp", typ: "" },
     ], false),
-    "TStatusProperties": o([
-        { json: "organizationalUnit", js: "organizationalUnit", typ: r("DetailClass") },
-        { json: "account", js: "account", typ: r("DetailClass") },
-        { json: "state", js: "state", typ: r("CompletedTimestamp") },
-        { json: "message", js: "message", typ: r("CompletedTimestamp") },
-        { json: "requestedTimestamp", js: "requestedTimestamp", typ: r("CompletedTimestamp") },
-        { json: "completedTimestamp", js: "completedTimestamp", typ: r("CompletedTimestamp") },
+    "Account": o([
+        { json: "accountName", js: "accountName", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+    ], false),
+    "OrganizationalUnit": o([
+        { json: "organizationalUnitName", js: "organizationalUnitName", typ: r("OrganizationalUnitName") },
+        { json: "organizationalUnitId", js: "organizationalUnitId", typ: "" },
+    ], false),
+    "AbleGuardrailStatus": o([
+        { json: "organizationalUnits", js: "organizationalUnits", typ: a(r("OrganizationalUnit")) },
+        { json: "guardrails", js: "guardrails", typ: a(r("Guardrail")) },
+        { json: "state", js: "state", typ: "" },
+        { json: "message", js: "message", typ: "" },
+        { json: "requestTimestamp", js: "requestTimestamp", typ: u(undefined, "") },
+        { json: "completedTimestamp", js: "completedTimestamp", typ: "" },
+    ], false),
+    "Guardrail": o([
+        { json: "guardrailId", js: "guardrailId", typ: "" },
+        { json: "guardrailBehavior", js: "guardrailBehavior", typ: "" },
+    ], false),
+    "LandingZoneStatus": o([
+        { json: "rootOrganizationalUnitId", js: "rootOrganizationalUnitId", typ: "" },
+        { json: "organizationalUnits", js: "organizationalUnits", typ: a(r("OrganizationalUnit")) },
+        { json: "accounts", js: "accounts", typ: a(r("Account")) },
+        { json: "state", js: "state", typ: "" },
+        { json: "message", js: "message", typ: "" },
+        { json: "requestedTimestamp", js: "requestedTimestamp", typ: "" },
+        { json: "completedTimestamp", js: "completedTimestamp", typ: "" },
     ], false),
     "UserIdentity": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UserIdentityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "invokedBy", js: "invokedBy", typ: "" },
     ], false),
-    "UserIdentityProperties": o([
-        { json: "accountId", js: "accountId", typ: r("CompletedTimestamp") },
-        { json: "invokedBy", js: "invokedBy", typ: r("CompletedTimestamp") },
-    ], false),
-    "Type": [
-        "boolean",
-        "null",
-        "string",
+    "OrganizationalUnitName": [
+        "Core",
+        "Custom",
+        "Test",
     ],
 };

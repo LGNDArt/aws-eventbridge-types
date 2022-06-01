@@ -1,87 +1,41 @@
 // To parse this data:
 //
-//   import { Convert, AwssSchema } from "./file";
+//   import { Convert } from "./file";
 //
-//   const awssSchema = Convert.toAwssSchema(json);
+//   const awsSchemas = Convert.toAwsSchemas(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-export interface AwssSchema {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSchema: AwsSchema;
-    Detail:    Detail;
-}
-
-export interface AwsSchema {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSchemaProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSchemaProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+export interface AwsSchemas {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    SchemaName:   Account;
-    SchemaType:   Account;
-    RegistryName: Account;
-    CreationDate: ID;
-    Version:      ID;
+    SchemaName:   string;
+    SchemaType:   string;
+    RegistryName: string;
+    CreationDate: Date;
+    Version:      string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwssSchema(json: string): AwssSchema {
-        return cast(JSON.parse(json), r("AwssSchema"));
+    public static toAwsSchemas(json: string): AwsSchemas[] {
+        return cast(JSON.parse(json), a(r("AwsSchemas")));
     }
 
-    public static awssSchemaToJson(value: AwssSchema): string {
-        return JSON.stringify(uncast(value, r("AwssSchema")), null, 2);
+    public static awsSchemasToJson(value: AwsSchemas[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSchemas"))), null, 2);
     }
 }
 
@@ -218,60 +172,22 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-    "AwssSchema": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSchema", js: "AwsSchema", typ: r("AwsSchema") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsSchema": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSchemaProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSchemaProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+    "AwsSchemas": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "SchemaName", js: "SchemaName", typ: r("Account") },
-        { json: "SchemaType", js: "SchemaType", typ: r("Account") },
-        { json: "RegistryName", js: "RegistryName", typ: r("Account") },
-        { json: "CreationDate", js: "CreationDate", typ: r("ID") },
-        { json: "Version", js: "Version", typ: r("ID") },
+        { json: "SchemaName", js: "SchemaName", typ: "" },
+        { json: "SchemaType", js: "SchemaType", typ: "" },
+        { json: "RegistryName", js: "RegistryName", typ: "" },
+        { json: "CreationDate", js: "CreationDate", typ: Date },
+        { json: "Version", js: "Version", typ: "" },
     ], false),
 };

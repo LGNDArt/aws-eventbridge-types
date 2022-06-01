@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSynthetics } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSynthetics = Convert.toAwsSynthetics(json);
 //
@@ -8,140 +8,58 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSynthetics {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSynthetic:      AwsSynthetic;
-    Detail:            Detail;
-    CanaryRunTimeline: CanaryRunTimeline;
-    ChangedConfig:     ChangedConfig;
-    IonArn:            IonArn;
-}
-
-export interface AwsSynthetic {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSyntheticProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSyntheticProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    Number = "number",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
-}
-
-export interface CanaryRunTimeline {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           CanaryRunTimelineProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface CanaryRunTimelineProperties {
-    started:   Account;
-    completed: Account;
-}
-
-export interface ChangedConfig {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ChangedConfigProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ChangedConfigProperties {
-    executionArn:            DetailClass;
-    testCodeLayerVersionArn: DetailClass;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    "account-id":           string;
+    "canary-id":            string;
+    "canary-name":          string;
+    "current-state"?:       string;
+    "previous-state"?:      string;
+    "source-location"?:     string;
+    "updated-on"?:          number;
+    "changed-config"?:      ChangedConfig;
+    message:                string;
+    "canary-run-id"?:       string;
+    "artifact-location"?:   string;
+    "test-run-status"?:     string;
+    "state-reason"?:        string;
+    "canary-run-timeline"?: CanaryRunTimeline;
 }
 
-export interface DetailProperties {
-    "account-id":          Account;
-    "canary-id":           Account;
-    "canary-name":         Account;
-    "current-state":       Account;
-    "previous-state":      Account;
-    "source-location":     Account;
-    "updated-on":          Account;
-    "changed-config":      DetailClass;
-    message:               Account;
-    "canary-run-id":       ID;
-    "artifact-location":   Account;
-    "test-run-status":     Account;
-    "state-reason":        Account;
-    "canary-run-timeline": DetailClass;
+export interface CanaryRunTimeline {
+    started:   number;
+    completed: number;
+}
+
+export interface ChangedConfig {
+    executionArn:            IonArn;
+    testCodeLayerVersionArn: IonArn;
 }
 
 export interface IonArn {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           IonArnProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface IonArnProperties {
-    "previous-value": Account;
-    "current-value":  Account;
+    "previous-value": string;
+    "current-value":  string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSynthetics(json: string): AwsSynthetics {
-        return cast(JSON.parse(json), r("AwsSynthetics"));
+    public static toAwsSynthetics(json: string): AwsSynthetics[] {
+        return cast(JSON.parse(json), a(r("AwsSynthetics")));
     }
 
-    public static awsSyntheticsToJson(value: AwsSynthetics): string {
-        return JSON.stringify(uncast(value, r("AwsSynthetics")), null, 2);
+    public static awsSyntheticsToJson(value: AwsSynthetics[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSynthetics"))), null, 2);
     }
 }
 
@@ -279,111 +197,42 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSynthetics": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSynthetic", js: "AwsSynthetic", typ: r("AwsSynthetic") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "CanaryRunTimeline", js: "CanaryRunTimeline", typ: r("CanaryRunTimeline") },
-        { json: "ChangedConfig", js: "ChangedConfig", typ: r("ChangedConfig") },
-        { json: "IonArn", js: "IonArn", typ: r("IonArn") },
-    ], false),
-    "AwsSynthetic": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSyntheticProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSyntheticProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
-    ], false),
-    "CanaryRunTimeline": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("CanaryRunTimelineProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "CanaryRunTimelineProperties": o([
-        { json: "started", js: "started", typ: r("Account") },
-        { json: "completed", js: "completed", typ: r("Account") },
-    ], false),
-    "ChangedConfig": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ChangedConfigProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ChangedConfigProperties": o([
-        { json: "executionArn", js: "executionArn", typ: r("DetailClass") },
-        { json: "testCodeLayerVersionArn", js: "testCodeLayerVersionArn", typ: r("DetailClass") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "account-id", js: "account-id", typ: "" },
+        { json: "canary-id", js: "canary-id", typ: "" },
+        { json: "canary-name", js: "canary-name", typ: "" },
+        { json: "current-state", js: "current-state", typ: u(undefined, "") },
+        { json: "previous-state", js: "previous-state", typ: u(undefined, "") },
+        { json: "source-location", js: "source-location", typ: u(undefined, "") },
+        { json: "updated-on", js: "updated-on", typ: u(undefined, 3.14) },
+        { json: "changed-config", js: "changed-config", typ: u(undefined, r("ChangedConfig")) },
+        { json: "message", js: "message", typ: "" },
+        { json: "canary-run-id", js: "canary-run-id", typ: u(undefined, "") },
+        { json: "artifact-location", js: "artifact-location", typ: u(undefined, "") },
+        { json: "test-run-status", js: "test-run-status", typ: u(undefined, "") },
+        { json: "state-reason", js: "state-reason", typ: u(undefined, "") },
+        { json: "canary-run-timeline", js: "canary-run-timeline", typ: u(undefined, r("CanaryRunTimeline")) },
     ], false),
-    "DetailProperties": o([
-        { json: "account-id", js: "account-id", typ: r("Account") },
-        { json: "canary-id", js: "canary-id", typ: r("Account") },
-        { json: "canary-name", js: "canary-name", typ: r("Account") },
-        { json: "current-state", js: "current-state", typ: r("Account") },
-        { json: "previous-state", js: "previous-state", typ: r("Account") },
-        { json: "source-location", js: "source-location", typ: r("Account") },
-        { json: "updated-on", js: "updated-on", typ: r("Account") },
-        { json: "changed-config", js: "changed-config", typ: r("DetailClass") },
-        { json: "message", js: "message", typ: r("Account") },
-        { json: "canary-run-id", js: "canary-run-id", typ: r("ID") },
-        { json: "artifact-location", js: "artifact-location", typ: r("Account") },
-        { json: "test-run-status", js: "test-run-status", typ: r("Account") },
-        { json: "state-reason", js: "state-reason", typ: r("Account") },
-        { json: "canary-run-timeline", js: "canary-run-timeline", typ: r("DetailClass") },
+    "CanaryRunTimeline": o([
+        { json: "started", js: "started", typ: 0 },
+        { json: "completed", js: "completed", typ: 0 },
+    ], false),
+    "ChangedConfig": o([
+        { json: "executionArn", js: "executionArn", typ: r("IonArn") },
+        { json: "testCodeLayerVersionArn", js: "testCodeLayerVersionArn", typ: r("IonArn") },
     ], false),
     "IonArn": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("IonArnProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "previous-value", js: "previous-value", typ: "" },
+        { json: "current-value", js: "current-value", typ: "" },
     ], false),
-    "IonArnProperties": o([
-        { json: "previous-value", js: "previous-value", typ: r("Account") },
-        { json: "current-value", js: "current-value", typ: r("Account") },
-    ], false),
-    "Type": [
-        "integer",
-        "number",
-        "string",
-    ],
 };

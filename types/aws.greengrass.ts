@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsGreengrass } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsGreengrass = Convert.toAwsGreengrass(json);
 //
@@ -8,125 +8,48 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsGreengrass {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsGreengrassElement: AwsGreengrassElement;
-    Detail:               Detail;
-    Adp:                  Adp;
-    M:                    DefinitionsM;
-}
-
-export interface Adp {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AdpProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AdpProperties {
-    TS: NS;
-    NS: NS;
-    M:  M;
-}
-
-export interface M {
-    type:  string;
-    items: DetailClass;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface NS {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface AwsGreengrassElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsGreengrassElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsGreengrassElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": NS;
-    source:        NS;
-    account:       NS;
-    time:          ID;
-    region:        NS;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
+    "group-id"?:        string;
+    "deployment-id"?:   string;
+    "deployment-type"?: string;
+    status?:            string;
+    ThingName?:         string;
+    Schema?:            Date;
+    ADP?:               Adp[];
 }
 
-export interface DetailProperties {
-    "group-id":        ID;
-    "deployment-id":   ID;
-    "deployment-type": NS;
-    status:            NS;
-    ThingName:         NS;
-    Schema:            ID;
-    ADP:               M;
+export interface Adp {
+    TS: number;
+    NS: string;
+    M:  M[];
 }
 
-export interface DefinitionsM {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           MProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface MProperties {
-    N:   NS;
-    Sum: NS;
-    U:   NS;
+export interface M {
+    N:   string;
+    Sum: number;
+    U:   string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsGreengrass(json: string): AwsGreengrass {
-        return cast(JSON.parse(json), r("AwsGreengrass"));
+    public static toAwsGreengrass(json: string): AwsGreengrass[] {
+        return cast(JSON.parse(json), a(r("AwsGreengrass")));
     }
 
-    public static awsGreengrassToJson(value: AwsGreengrass): string {
-        return JSON.stringify(uncast(value, r("AwsGreengrass")), null, 2);
+    public static awsGreengrassToJson(value: AwsGreengrass[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsGreengrass"))), null, 2);
     }
 }
 
@@ -264,97 +187,33 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsGreengrass": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsGreengrassElement", js: "AwsGreengrassElement", typ: r("AwsGreengrassElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Adp", js: "Adp", typ: r("Adp") },
-        { json: "M", js: "M", typ: r("DefinitionsM") },
-    ], false),
-    "Adp": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AdpProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AdpProperties": o([
-        { json: "TS", js: "TS", typ: r("NS") },
-        { json: "NS", js: "NS", typ: r("NS") },
-        { json: "M", js: "M", typ: r("M") },
-    ], false),
-    "M": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "NS": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "AwsGreengrassElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsGreengrassElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsGreengrassElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("NS") },
-        { json: "source", js: "source", typ: r("NS") },
-        { json: "account", js: "account", typ: r("NS") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("NS") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "group-id", js: "group-id", typ: u(undefined, "") },
+        { json: "deployment-id", js: "deployment-id", typ: u(undefined, "") },
+        { json: "deployment-type", js: "deployment-type", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "ThingName", js: "ThingName", typ: u(undefined, "") },
+        { json: "Schema", js: "Schema", typ: u(undefined, Date) },
+        { json: "ADP", js: "ADP", typ: u(undefined, a(r("Adp"))) },
     ], false),
-    "DetailProperties": o([
-        { json: "group-id", js: "group-id", typ: r("ID") },
-        { json: "deployment-id", js: "deployment-id", typ: r("ID") },
-        { json: "deployment-type", js: "deployment-type", typ: r("NS") },
-        { json: "status", js: "status", typ: r("NS") },
-        { json: "ThingName", js: "ThingName", typ: r("NS") },
-        { json: "Schema", js: "Schema", typ: r("ID") },
-        { json: "ADP", js: "ADP", typ: r("M") },
+    "Adp": o([
+        { json: "TS", js: "TS", typ: 0 },
+        { json: "NS", js: "NS", typ: "" },
+        { json: "M", js: "M", typ: a(r("M")) },
     ], false),
-    "DefinitionsM": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+    "M": o([
+        { json: "N", js: "N", typ: "" },
+        { json: "Sum", js: "Sum", typ: 0 },
+        { json: "U", js: "U", typ: "" },
     ], false),
-    "MProperties": o([
-        { json: "N", js: "N", typ: r("NS") },
-        { json: "Sum", js: "Sum", typ: r("NS") },
-        { json: "U", js: "U", typ: r("NS") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

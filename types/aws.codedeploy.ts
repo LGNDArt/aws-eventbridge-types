@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCodedeploy } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCodedeploy = Convert.toAwsCodedeploy(json);
 //
@@ -8,86 +8,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCodedeploy {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCodedeployElement: AwsCodedeployElement;
-    Detail:               Detail;
-}
-
-export interface AwsCodedeployElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCodedeployElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCodedeployElementProperties {
-    account:       Account;
-    region:        Account;
-    "detail-type": Account;
-    source:        Account;
-    version:       ID;
-    time:          ID;
-    id:            ID;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    account:       string;
+    region:        string;
+    "detail-type": string;
+    source:        string;
+    version:       string;
+    time:          Date;
+    id:            string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    instanceGroupId: ID;
-    region:          Account;
-    application:     Account;
-    deploymentId:    Account;
-    state:           Account;
-    deploymentGroup: Account;
-    instanceId:      Account;
+    instanceGroupId: string;
+    region:          string;
+    application:     string;
+    deploymentId:    string;
+    state:           string;
+    deploymentGroup: string;
+    instanceId?:     string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCodedeploy(json: string): AwsCodedeploy {
-        return cast(JSON.parse(json), r("AwsCodedeploy"));
+    public static toAwsCodedeploy(json: string): AwsCodedeploy[] {
+        return cast(JSON.parse(json), a(r("AwsCodedeploy")));
     }
 
-    public static awsCodedeployToJson(value: AwsCodedeploy): string {
-        return JSON.stringify(uncast(value, r("AwsCodedeploy")), null, 2);
+    public static awsCodedeployToJson(value: AwsCodedeploy[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCodedeploy"))), null, 2);
     }
 }
 
@@ -225,64 +175,23 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCodedeploy": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCodedeployElement", js: "AwsCodedeployElement", typ: r("AwsCodedeployElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsCodedeployElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCodedeployElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCodedeployElementProperties": o([
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "account", js: "account", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "id", js: "id", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "instanceGroupId", js: "instanceGroupId", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "application", js: "application", typ: "" },
+        { json: "deploymentId", js: "deploymentId", typ: "" },
+        { json: "state", js: "state", typ: "" },
+        { json: "deploymentGroup", js: "deploymentGroup", typ: "" },
+        { json: "instanceId", js: "instanceId", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "instanceGroupId", js: "instanceGroupId", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "application", js: "application", typ: r("Account") },
-        { json: "deploymentId", js: "deploymentId", typ: r("Account") },
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "deploymentGroup", js: "deploymentGroup", typ: r("Account") },
-        { json: "instanceId", js: "instanceId", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsTranscribe } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsTranscribe = Convert.toAwsTranscribe(json);
 //
@@ -8,103 +8,45 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsTranscribe {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsTranscribeElement: AwsTranscribeElement;
-    Detail:               Detail;
-    Region:               Region;
-    Source:               Region;
-}
-
-export interface AwsTranscribeElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsTranscribeElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsTranscribeElementProperties {
-    version:       Time;
-    id:            Account;
-    "detail-type": Account;
-    source:        DetailClass;
-    account:       Account;
-    time:          Time;
-    region:        DetailClass;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
-}
-
-export interface Time {
-    type:   Type;
-    format: string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        Source;
+    account:       string;
+    time:          Date;
+    region:        Region;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
+    TranscriptionJobStatus?:       string[];
+    JobType?:                      string;
+    JobName?:                      string;
+    LanguageIdentificationStatus?: string;
+    JobStatus?:                    string;
+    VocabularyName?:               string;
+    VocabularyState?:              string;
+    FailureReason?:                string;
 }
 
-export interface DetailProperties {
-    TranscriptionJobStatus:       TranscriptionJobStatus;
-    JobType:                      Account;
-    JobName:                      Account;
-    LanguageIdentificationStatus: Account;
-    JobStatus:                    Account;
-    VocabularyName:               Account;
-    VocabularyState:              Account;
-    FailureReason:                Account;
+export enum Region {
+    UsEast1 = "us-east-1",
 }
 
-export interface TranscriptionJobStatus {
-    type:  string;
-    items: Account;
-}
-
-export interface Region {
-    type:  Type;
-    enum:  string[];
-    title: string;
+export enum Source {
+    AwsTranscribe = "aws.transcribe",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsTranscribe(json: string): AwsTranscribe {
-        return cast(JSON.parse(json), r("AwsTranscribe"));
+    public static toAwsTranscribe(json: string): AwsTranscribe[] {
+        return cast(JSON.parse(json), a(r("AwsTranscribe")));
     }
 
-    public static awsTranscribeToJson(value: AwsTranscribe): string {
-        return JSON.stringify(uncast(value, r("AwsTranscribe")), null, 2);
+    public static awsTranscribeToJson(value: AwsTranscribe[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsTranscribe"))), null, 2);
     }
 }
 
@@ -242,78 +184,30 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsTranscribe": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsTranscribeElement", js: "AwsTranscribeElement", typ: r("AwsTranscribeElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Region", js: "Region", typ: r("Region") },
-        { json: "Source", js: "Source", typ: r("Region") },
-    ], false),
-    "AwsTranscribeElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsTranscribeElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsTranscribeElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("DetailClass") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "region", js: "region", typ: r("DetailClass") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: r("Region") },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "TranscriptionJobStatus", js: "TranscriptionJobStatus", typ: u(undefined, a("")) },
+        { json: "JobType", js: "JobType", typ: u(undefined, "") },
+        { json: "JobName", js: "JobName", typ: u(undefined, "") },
+        { json: "LanguageIdentificationStatus", js: "LanguageIdentificationStatus", typ: u(undefined, "") },
+        { json: "JobStatus", js: "JobStatus", typ: u(undefined, "") },
+        { json: "VocabularyName", js: "VocabularyName", typ: u(undefined, "") },
+        { json: "VocabularyState", js: "VocabularyState", typ: u(undefined, "") },
+        { json: "FailureReason", js: "FailureReason", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "TranscriptionJobStatus", js: "TranscriptionJobStatus", typ: r("TranscriptionJobStatus") },
-        { json: "JobType", js: "JobType", typ: r("Account") },
-        { json: "JobName", js: "JobName", typ: r("Account") },
-        { json: "LanguageIdentificationStatus", js: "LanguageIdentificationStatus", typ: r("Account") },
-        { json: "JobStatus", js: "JobStatus", typ: r("Account") },
-        { json: "VocabularyName", js: "VocabularyName", typ: r("Account") },
-        { json: "VocabularyState", js: "VocabularyState", typ: r("Account") },
-        { json: "FailureReason", js: "FailureReason", typ: r("Account") },
-    ], false),
-    "TranscriptionJobStatus": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Region": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "Type": [
-        "string",
+    "Region": [
+        "us-east-1",
+    ],
+    "Source": [
+        "aws.transcribe",
     ],
 };

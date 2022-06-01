@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsDms } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsDms = Convert.toAwsDms(json);
 //
@@ -8,91 +8,35 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsDms {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsDm:  AwsDm;
-    Detail: Detail;
-}
-
-export interface AwsDm {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsDmProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsDmProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventId:       Account;
-    eventType:     Account;
-    resourceLink:  ResourceLink;
-    detailMessage: Account;
-    type:          Account;
-    category:      Account;
-}
-
-export interface ResourceLink {
-    type:               Type;
-    format:             string;
-    "qt-uri-protocols": string[];
+    eventId:       string;
+    eventType:     string;
+    resourceLink:  string;
+    detailMessage: string;
+    type:          string;
+    category:      string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsDms(json: string): AwsDms {
-        return cast(JSON.parse(json), r("AwsDms"));
+    public static toAwsDms(json: string): AwsDms[] {
+        return cast(JSON.parse(json), a(r("AwsDms")));
     }
 
-    public static awsDmsToJson(value: AwsDms): string {
-        return JSON.stringify(uncast(value, r("AwsDms")), null, 2);
+    public static awsDmsToJson(value: AwsDms[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsDms"))), null, 2);
     }
 }
 
@@ -230,68 +174,22 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsDms": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsDm", js: "AwsDm", typ: r("AwsDm") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsDm": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsDmProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsDmProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
+        { json: "eventId", js: "eventId", typ: "" },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "resourceLink", js: "resourceLink", typ: "" },
+        { json: "detailMessage", js: "detailMessage", typ: "" },
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "category", js: "category", typ: "" },
     ], false),
-    "DetailProperties": o([
-        { json: "eventId", js: "eventId", typ: r("Account") },
-        { json: "eventType", js: "eventType", typ: r("Account") },
-        { json: "resourceLink", js: "resourceLink", typ: r("ResourceLink") },
-        { json: "detailMessage", js: "detailMessage", typ: r("Account") },
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "category", js: "category", typ: r("Account") },
-    ], false),
-    "ResourceLink": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-        { json: "qt-uri-protocols", js: "qt-uri-protocols", typ: a("") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

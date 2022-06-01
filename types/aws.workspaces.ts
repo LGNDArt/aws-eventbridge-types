@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsWorkspaces } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsWorkspaces = Convert.toAwsWorkspaces(json);
 //
@@ -8,89 +8,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsWorkspaces {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsWorkspace: AwsWorkspace;
-    Detail:       Detail;
-}
-
-export interface AwsWorkspace {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsWorkspaceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsWorkspaceProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    clientIpAddress:             Account;
-    actionType:                  Account;
-    workspacesClientProductName: Account;
-    loginTime:                   ID;
-    clientPlatform:              Account;
-    directoryId:                 Account;
-    workspaceId:                 Account;
+    clientIpAddress:             string;
+    actionType:                  string;
+    workspacesClientProductName: string;
+    loginTime:                   Date;
+    clientPlatform:              string;
+    directoryId:                 string;
+    workspaceId:                 string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsWorkspaces(json: string): AwsWorkspaces {
-        return cast(JSON.parse(json), r("AwsWorkspaces"));
+    public static toAwsWorkspaces(json: string): AwsWorkspaces[] {
+        return cast(JSON.parse(json), a(r("AwsWorkspaces")));
     }
 
-    public static awsWorkspacesToJson(value: AwsWorkspaces): string {
-        return JSON.stringify(uncast(value, r("AwsWorkspaces")), null, 2);
+    public static awsWorkspacesToJson(value: AwsWorkspaces[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsWorkspaces"))), null, 2);
     }
 }
 
@@ -228,66 +175,23 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsWorkspaces": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsWorkspace", js: "AwsWorkspace", typ: r("AwsWorkspace") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsWorkspace": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsWorkspaceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsWorkspaceProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "clientIpAddress", js: "clientIpAddress", typ: "" },
+        { json: "actionType", js: "actionType", typ: "" },
+        { json: "workspacesClientProductName", js: "workspacesClientProductName", typ: "" },
+        { json: "loginTime", js: "loginTime", typ: Date },
+        { json: "clientPlatform", js: "clientPlatform", typ: "" },
+        { json: "directoryId", js: "directoryId", typ: "" },
+        { json: "workspaceId", js: "workspaceId", typ: "" },
     ], false),
-    "DetailProperties": o([
-        { json: "clientIpAddress", js: "clientIpAddress", typ: r("Account") },
-        { json: "actionType", js: "actionType", typ: r("Account") },
-        { json: "workspacesClientProductName", js: "workspacesClientProductName", typ: r("Account") },
-        { json: "loginTime", js: "loginTime", typ: r("ID") },
-        { json: "clientPlatform", js: "clientPlatform", typ: r("Account") },
-        { json: "directoryId", js: "directoryId", typ: r("Account") },
-        { json: "workspaceId", js: "workspaceId", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

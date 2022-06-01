@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsMediapackage } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsMediapackage = Convert.toAwsMediapackage(json);
 //
@@ -8,77 +8,31 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsMediapackage {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsMediapackageElement: AwsMediapackageElement;
-    Detail:                 Detail;
-}
-
-export interface AwsMediapackageElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsMediapackageElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsMediapackageElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    event:   Account;
-    message: Account;
+    event:   string;
+    message: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsMediapackage(json: string): AwsMediapackage {
-        return cast(JSON.parse(json), r("AwsMediapackage"));
+    public static toAwsMediapackage(json: string): AwsMediapackage[] {
+        return cast(JSON.parse(json), a(r("AwsMediapackage")));
     }
 
-    public static awsMediapackageToJson(value: AwsMediapackage): string {
-        return JSON.stringify(uncast(value, r("AwsMediapackage")), null, 2);
+    public static awsMediapackageToJson(value: AwsMediapackage[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsMediapackage"))), null, 2);
     }
 }
 
@@ -216,56 +170,18 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsMediapackage": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsMediapackageElement", js: "AwsMediapackageElement", typ: r("AwsMediapackageElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsMediapackageElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsMediapackageElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsMediapackageElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "event", js: "event", typ: r("Account") },
-        { json: "message", js: "message", typ: r("Account") },
+        { json: "event", js: "event", typ: "" },
+        { json: "message", js: "message", typ: "" },
     ], false),
 };

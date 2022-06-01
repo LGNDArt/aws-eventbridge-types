@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsEcr } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsEcr = Convert.toAwsEcr(json);
 //
@@ -8,91 +8,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsEcr {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsEcrElement: AwsEcrElement;
-    Detail:        Detail;
-}
-
-export interface AwsEcrElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsEcrElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsEcrElementProperties {
-    account:       Account;
-    detail:        Items;
-    "detail-type": Account;
-    id:            ID;
-    region:        Account;
-    resources:     Resources;
-    source:        Account;
-    time:          ID;
-    version:       ID;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    account:       string;
+    detail:        Detail;
+    "detail-type": string;
+    id:            string;
+    region:        string;
+    resources:     string[];
+    source:        string;
+    time:          Date;
+    version:       string;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    "action-type":     Account;
-    "image-digest":    Account;
-    "image-tag":       Account;
-    "repository-name": Account;
-    result:            Account;
-    "scan-status":     Account;
-    "image-tags":      ImageTags;
-}
-
-export interface ImageTags {
-    type:  string;
-    items: ID;
+    "action-type"?:    string;
+    "image-digest":    string;
+    "image-tag"?:      string;
+    "repository-name": string;
+    result?:           string;
+    "scan-status"?:    string;
+    "image-tags"?:     string[];
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsEcr(json: string): AwsEcr {
-        return cast(JSON.parse(json), r("AwsEcr"));
+    public static toAwsEcr(json: string): AwsEcr[] {
+        return cast(JSON.parse(json), a(r("AwsEcr")));
     }
 
-    public static awsEcrToJson(value: AwsEcr): string {
-        return JSON.stringify(uncast(value, r("AwsEcr")), null, 2);
+    public static awsEcrToJson(value: AwsEcr[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsEcr"))), null, 2);
     }
 }
 
@@ -230,68 +175,23 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsEcr": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsEcrElement", js: "AwsEcrElement", typ: r("AwsEcrElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsEcrElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsEcrElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsEcrElementProperties": o([
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "detail", js: "detail", typ: r("Items") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "version", js: "version", typ: r("ID") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "account", js: "account", typ: "" },
+        { json: "detail", js: "detail", typ: r("Detail") },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "source", js: "source", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "version", js: "version", typ: "" },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "action-type", js: "action-type", typ: u(undefined, "") },
+        { json: "image-digest", js: "image-digest", typ: "" },
+        { json: "image-tag", js: "image-tag", typ: u(undefined, "") },
+        { json: "repository-name", js: "repository-name", typ: "" },
+        { json: "result", js: "result", typ: u(undefined, "") },
+        { json: "scan-status", js: "scan-status", typ: u(undefined, "") },
+        { json: "image-tags", js: "image-tags", typ: u(undefined, a("")) },
     ], false),
-    "DetailProperties": o([
-        { json: "action-type", js: "action-type", typ: r("Account") },
-        { json: "image-digest", js: "image-digest", typ: r("Account") },
-        { json: "image-tag", js: "image-tag", typ: r("Account") },
-        { json: "repository-name", js: "repository-name", typ: r("Account") },
-        { json: "result", js: "result", typ: r("Account") },
-        { json: "scan-status", js: "scan-status", typ: r("Account") },
-        { json: "image-tags", js: "image-tags", typ: r("ImageTags") },
-    ], false),
-    "ImageTags": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ID") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

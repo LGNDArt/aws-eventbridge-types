@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsOrganizations } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsOrganizations = Convert.toAwsOrganizations(json);
 //
@@ -8,140 +8,59 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsOrganizations {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsOrganization:     AwsOrganization;
-    Detail:              Detail;
-    ServiceEventDetails: ServiceEventDetails;
-    CreateAccountStatus: CreateAccountStatus;
-    UserIdentity:        UserIdentity;
-}
-
-export interface AwsOrganization {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsOrganizationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsOrganizationProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
-}
-
-export interface CreateAccountStatus {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           CreateAccountStatusProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface CreateAccountStatusProperties {
-    id:                 Account;
-    state:              Account;
-    accountName:        Account;
-    accountId:          Account;
-    requestedTimestamp: Account;
-    completedTimestamp: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventVersion:        Account;
-    userIdentity:        DetailClass;
-    eventTime:           ID;
-    eventSource:         Account;
-    eventName:           Account;
-    awsRegion:           Account;
-    sourceIPAddress:     Account;
-    userAgent:           Account;
-    eventID:             Account;
-    readOnly:            Account;
-    eventType:           Account;
-    serviceEventDetails: DetailClass;
+    eventVersion:        string;
+    userIdentity:        UserIdentity;
+    eventTime:           Date;
+    eventSource:         string;
+    eventName:           string;
+    awsRegion:           string;
+    sourceIPAddress:     string;
+    userAgent:           string;
+    eventID:             string;
+    readOnly:            boolean;
+    eventType:           string;
+    serviceEventDetails: ServiceEventDetails;
 }
 
 export interface ServiceEventDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ServiceEventDetailsProperties;
-    required:             string[];
-    title:                string;
+    createAccountStatus: CreateAccountStatus;
 }
 
-export interface ServiceEventDetailsProperties {
-    createAccountStatus: DetailClass;
+export interface CreateAccountStatus {
+    id:                 string;
+    state:              string;
+    accountName:        string;
+    accountId:          string;
+    requestedTimestamp: string;
+    completedTimestamp: string;
 }
 
 export interface UserIdentity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UserIdentityProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface UserIdentityProperties {
-    accountId: Account;
-    invokedBy: Account;
+    accountId: string;
+    invokedBy: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsOrganizations(json: string): AwsOrganizations {
-        return cast(JSON.parse(json), r("AwsOrganizations"));
+    public static toAwsOrganizations(json: string): AwsOrganizations[] {
+        return cast(JSON.parse(json), a(r("AwsOrganizations")));
     }
 
-    public static awsOrganizationsToJson(value: AwsOrganizations): string {
-        return JSON.stringify(uncast(value, r("AwsOrganizations")), null, 2);
+    public static awsOrganizationsToJson(value: AwsOrganizations[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsOrganizations"))), null, 2);
     }
 }
 
@@ -279,111 +198,43 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsOrganizations": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsOrganization", js: "AwsOrganization", typ: r("AwsOrganization") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "ServiceEventDetails", js: "ServiceEventDetails", typ: r("ServiceEventDetails") },
-        { json: "CreateAccountStatus", js: "CreateAccountStatus", typ: r("CreateAccountStatus") },
-        { json: "UserIdentity", js: "UserIdentity", typ: r("UserIdentity") },
-    ], false),
-    "AwsOrganization": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsOrganizationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsOrganizationProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
-    ], false),
-    "CreateAccountStatus": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("CreateAccountStatusProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "CreateAccountStatusProperties": o([
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "accountName", js: "accountName", typ: r("Account") },
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "requestedTimestamp", js: "requestedTimestamp", typ: r("Account") },
-        { json: "completedTimestamp", js: "completedTimestamp", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("Account") },
-        { json: "userIdentity", js: "userIdentity", typ: r("DetailClass") },
-        { json: "eventTime", js: "eventTime", typ: r("ID") },
-        { json: "eventSource", js: "eventSource", typ: r("Account") },
-        { json: "eventName", js: "eventName", typ: r("Account") },
-        { json: "awsRegion", js: "awsRegion", typ: r("Account") },
-        { json: "sourceIPAddress", js: "sourceIPAddress", typ: r("Account") },
-        { json: "userAgent", js: "userAgent", typ: r("Account") },
-        { json: "eventID", js: "eventID", typ: r("Account") },
-        { json: "readOnly", js: "readOnly", typ: r("Account") },
-        { json: "eventType", js: "eventType", typ: r("Account") },
-        { json: "serviceEventDetails", js: "serviceEventDetails", typ: r("DetailClass") },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "userIdentity", js: "userIdentity", typ: r("UserIdentity") },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "sourceIPAddress", js: "sourceIPAddress", typ: "" },
+        { json: "userAgent", js: "userAgent", typ: "" },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "readOnly", js: "readOnly", typ: true },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "serviceEventDetails", js: "serviceEventDetails", typ: r("ServiceEventDetails") },
     ], false),
     "ServiceEventDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ServiceEventDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "createAccountStatus", js: "createAccountStatus", typ: r("CreateAccountStatus") },
     ], false),
-    "ServiceEventDetailsProperties": o([
-        { json: "createAccountStatus", js: "createAccountStatus", typ: r("DetailClass") },
+    "CreateAccountStatus": o([
+        { json: "id", js: "id", typ: "" },
+        { json: "state", js: "state", typ: "" },
+        { json: "accountName", js: "accountName", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "requestedTimestamp", js: "requestedTimestamp", typ: "" },
+        { json: "completedTimestamp", js: "completedTimestamp", typ: "" },
     ], false),
     "UserIdentity": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UserIdentityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "invokedBy", js: "invokedBy", typ: "" },
     ], false),
-    "UserIdentityProperties": o([
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "invokedBy", js: "invokedBy", typ: r("Account") },
-    ], false),
-    "Type": [
-        "boolean",
-        "string",
-    ],
 };

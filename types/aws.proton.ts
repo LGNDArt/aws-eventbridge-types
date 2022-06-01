@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsProton } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsProton = Convert.toAwsProton(json);
 //
@@ -8,87 +8,37 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsProton {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsProtonElement: AwsProtonElement;
-    Detail:           Detail;
-}
-
-export interface AwsProtonElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsProtonElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsProtonElementProperties {
-    version:       Time;
-    id:            Account;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          Time;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Time {
-    type:   Type;
-    format: string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    templateName:    Account;
-    status:          Account;
-    previousStatus:  Account;
-    name:            Account;
-    majorVersion:    Time;
-    minorVersion:    Time;
-    serviceName:     Account;
-    environmentName: Account;
+    templateName?:    string;
+    status:           string;
+    previousStatus:   string;
+    name?:            string;
+    majorVersion?:    string;
+    minorVersion?:    string;
+    serviceName?:     string;
+    environmentName?: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsProton(json: string): AwsProton {
-        return cast(JSON.parse(json), r("AwsProton"));
+    public static toAwsProton(json: string): AwsProton[] {
+        return cast(JSON.parse(json), a(r("AwsProton")));
     }
 
-    public static awsProtonToJson(value: AwsProton): string {
-        return JSON.stringify(uncast(value, r("AwsProton")), null, 2);
+    public static awsProtonToJson(value: AwsProton[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsProton"))), null, 2);
     }
 }
 
@@ -226,65 +176,24 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsProton": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsProtonElement", js: "AwsProtonElement", typ: r("AwsProtonElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsProtonElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsProtonElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsProtonElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "templateName", js: "templateName", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: "" },
+        { json: "previousStatus", js: "previousStatus", typ: "" },
+        { json: "name", js: "name", typ: u(undefined, "") },
+        { json: "majorVersion", js: "majorVersion", typ: u(undefined, "") },
+        { json: "minorVersion", js: "minorVersion", typ: u(undefined, "") },
+        { json: "serviceName", js: "serviceName", typ: u(undefined, "") },
+        { json: "environmentName", js: "environmentName", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "templateName", js: "templateName", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "previousStatus", js: "previousStatus", typ: r("Account") },
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "majorVersion", js: "majorVersion", typ: r("Time") },
-        { json: "minorVersion", js: "minorVersion", typ: r("Time") },
-        { json: "serviceName", js: "serviceName", typ: r("Account") },
-        { json: "environmentName", js: "environmentName", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsGroundstation } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsGroundstation = Convert.toAwsGroundstation(json);
 //
@@ -8,87 +8,37 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsGroundstation {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsGroundstationElement: AwsGroundstationElement;
-    Detail:                  Detail;
-}
-
-export interface AwsGroundstationElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsGroundstationElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsGroundstationElementProperties {
-    version:       ID;
-    region:        Account;
-    id:            ID;
-    source:        Account;
-    resources:     Resources;
-    "detail-type": Account;
-    detail:        Items;
-    account:       Account;
-    time:          Account;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    region:        string;
+    id:            string;
+    source:        string;
+    resources:     string[];
+    "detail-type": string;
+    detail:        Detail;
+    account:       string;
+    time:          string;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    dataflowEndpointGroupId:    ID;
-    groundstationId:            Account;
-    contactId:                  ID;
-    dataflowEndpointGroupArn:   Account;
-    missionProfileArn:          Account;
-    dataflowEndpointGroupState: Account;
-    satelliteArn:               Account;
-    contactStatus:              Account;
+    dataflowEndpointGroupId?:    string;
+    groundstationId:             string;
+    contactId:                   string;
+    dataflowEndpointGroupArn?:   string;
+    missionProfileArn:           string;
+    dataflowEndpointGroupState?: string;
+    satelliteArn?:               string;
+    contactStatus?:              string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsGroundstation(json: string): AwsGroundstation {
-        return cast(JSON.parse(json), r("AwsGroundstation"));
+    public static toAwsGroundstation(json: string): AwsGroundstation[] {
+        return cast(JSON.parse(json), a(r("AwsGroundstation")));
     }
 
-    public static awsGroundstationToJson(value: AwsGroundstation): string {
-        return JSON.stringify(uncast(value, r("AwsGroundstation")), null, 2);
+    public static awsGroundstationToJson(value: AwsGroundstation[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsGroundstation"))), null, 2);
     }
 }
 
@@ -226,65 +176,24 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsGroundstation": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsGroundstationElement", js: "AwsGroundstationElement", typ: r("AwsGroundstationElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsGroundstationElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsGroundstationElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsGroundstationElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "detail", js: "detail", typ: r("Items") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Account") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "detail", js: "detail", typ: r("Detail") },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: "" },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "dataflowEndpointGroupId", js: "dataflowEndpointGroupId", typ: u(undefined, "") },
+        { json: "groundstationId", js: "groundstationId", typ: "" },
+        { json: "contactId", js: "contactId", typ: "" },
+        { json: "dataflowEndpointGroupArn", js: "dataflowEndpointGroupArn", typ: u(undefined, "") },
+        { json: "missionProfileArn", js: "missionProfileArn", typ: "" },
+        { json: "dataflowEndpointGroupState", js: "dataflowEndpointGroupState", typ: u(undefined, "") },
+        { json: "satelliteArn", js: "satelliteArn", typ: u(undefined, "") },
+        { json: "contactStatus", js: "contactStatus", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "dataflowEndpointGroupId", js: "dataflowEndpointGroupId", typ: r("ID") },
-        { json: "groundstationId", js: "groundstationId", typ: r("Account") },
-        { json: "contactId", js: "contactId", typ: r("ID") },
-        { json: "dataflowEndpointGroupArn", js: "dataflowEndpointGroupArn", typ: r("Account") },
-        { json: "missionProfileArn", js: "missionProfileArn", typ: r("Account") },
-        { json: "dataflowEndpointGroupState", js: "dataflowEndpointGroupState", typ: r("Account") },
-        { json: "satelliteArn", js: "satelliteArn", typ: r("Account") },
-        { json: "contactStatus", js: "contactStatus", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

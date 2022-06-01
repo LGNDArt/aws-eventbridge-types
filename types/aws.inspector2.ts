@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsInspector2 } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsInspector2 = Convert.toAwsInspector2(json);
 //
@@ -8,314 +8,135 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsInspector2 {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsInspector2Element:        AwsInspector2Element;
-    Detail:                      Detail;
-    FindingSeverityCounts:       FindingSeverityCounts;
-    InspectorScoreDetails:       InspectorScoreDetails;
-    AdjustedCvss:                AdjustedCvss;
-    PackageVulnerabilityDetails: PackageVulnerabilityDetails;
-    Cvss:                        Cvss;
-    VulnerablePackage:           VulnerablePackage;
-    Remediation:                 Remediation;
-    Recommendation:              Recommendation;
-    Resource:                    Resource;
-    Details:                     Details;
-    AwsEc2Instance:              AwsEc2Instance;
-    ScanStatus:                  ScanStatus;
-}
-
-export interface AdjustedCvss {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AdjustedCvssProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AdjustedCvssProperties {
-    adjustments:   Adjustments;
-    cvssSource:    CvssSource;
-    score:         CvssSource;
-    scoreSource:   CvssSource;
-    scoringVector: CvssSource;
-    version:       CvssSource;
-}
-
-export interface Adjustments {
-    type:  string;
-    items: AdjustmentsItems;
-}
-
-export interface AdjustmentsItems {
-}
-
-export interface CvssSource {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    Number = "number",
-    String = "string",
-}
-
-export interface AwsEc2Instance {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsEc2InstanceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsEc2InstanceProperties {
-    iamInstanceProfileArn: CvssSource;
-    imageId:               CvssSource;
-    ipV4Addresses:         IPV4Addresses;
-    ipV6Addresses:         Adjustments;
-    launchedAt:            CvssSource;
-    platform:              CvssSource;
-    subnetId:              CvssSource;
-    type:                  CvssSource;
-    vpcId:                 CvssSource;
-}
-
-export interface IPV4Addresses {
-    type:  string;
-    items: CvssSource;
-}
-
-export interface AwsInspector2Element {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsInspector2ElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsInspector2ElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": CvssSource;
-    source:        CvssSource;
-    account:       CvssSource;
-    time:          ID;
-    region:        CvssSource;
-    resources:     IPV4Addresses;
-    detail:        DetailClass;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Cvss {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           CvssProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface CvssProperties {
-    baseScore:     CvssSource;
-    scoringVector: CvssSource;
-    source:        CvssSource;
-    version:       CvssSource;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    awsAccountId:                CvssSource;
-    description:                 CvssSource;
-    findingArn:                  CvssSource;
-    firstObservedAt:             CvssSource;
-    inspectorScore:              CvssSource;
-    inspectorScoreDetails:       DetailClass;
-    lastObservedAt:              CvssSource;
-    packageVulnerabilityDetails: DetailClass;
-    remediation:                 DetailClass;
-    resources:                   Resources;
-    severity:                    CvssSource;
-    status:                      CvssSource;
-    title:                       CvssSource;
-    type:                        CvssSource;
-    updatedAt:                   CvssSource;
-    scanStatus:                  DetailClass;
-    eventTimestamp:              ID;
-    "scan-status":               CvssSource;
-    "repository-name":           CvssSource;
-    "finding-severity-counts":   DetailClass;
-    "image-digest":              CvssSource;
-    "image-tags":                IPV4Addresses;
-}
-
-export interface Resources {
-    type:  string;
-    items: DetailClass;
-}
-
-export interface Details {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailsProperties {
-    awsEc2Instance: DetailClass;
+    awsAccountId?:                string;
+    description?:                 string;
+    findingArn?:                  string;
+    firstObservedAt?:             string;
+    inspectorScore?:              number;
+    inspectorScoreDetails?:       InspectorScoreDetails;
+    lastObservedAt?:              string;
+    packageVulnerabilityDetails?: PackageVulnerabilityDetails;
+    remediation?:                 Remediation;
+    resources?:                   Resource[];
+    severity?:                    string;
+    status?:                      string;
+    title?:                       string;
+    type?:                        string;
+    updatedAt?:                   string;
+    scanStatus?:                  ScanStatus;
+    eventTimestamp?:              Date;
+    "scan-status"?:               string;
+    "repository-name"?:           string;
+    "finding-severity-counts"?:   FindingSeverityCounts;
+    "image-digest"?:              string;
+    "image-tags"?:                string[];
 }
 
 export interface FindingSeverityCounts {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           FindingSeverityCountsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface FindingSeverityCountsProperties {
-    CRITICAL: CvssSource;
-    HIGH:     CvssSource;
-    MEDIUM:   CvssSource;
-    TOTAL:    CvssSource;
+    CRITICAL: number;
+    HIGH:     number;
+    MEDIUM:   number;
+    TOTAL:    number;
 }
 
 export interface InspectorScoreDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           InspectorScoreDetailsProperties;
-    required:             string[];
-    title:                string;
+    adjustedCvss: AdjustedCvss;
 }
 
-export interface InspectorScoreDetailsProperties {
-    adjustedCvss: DetailClass;
+export interface AdjustedCvss {
+    adjustments:   any[];
+    cvssSource:    string;
+    score:         number;
+    scoreSource:   string;
+    scoringVector: string;
+    version:       string;
 }
 
 export interface PackageVulnerabilityDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           PackageVulnerabilityDetailsProperties;
-    required:             string[];
-    title:                string;
+    cvss:               Cvss[];
+    referenceUrls:      any[];
+    source:             string;
+    sourceUrl:          string;
+    vendorCreatedAt:    string;
+    vendorSeverity:     string;
+    vulnerabilityId:    string;
+    vulnerablePackages: VulnerablePackage[];
 }
 
-export interface PackageVulnerabilityDetailsProperties {
-    cvss:               Resources;
-    referenceUrls:      Adjustments;
-    source:             CvssSource;
-    sourceUrl:          SourceURL;
-    vendorCreatedAt:    CvssSource;
-    vendorSeverity:     CvssSource;
-    vulnerabilityId:    CvssSource;
-    vulnerablePackages: Resources;
-}
-
-export interface SourceURL {
-    type:               Type;
-    format:             string;
-    "qt-uri-protocols": string[];
-}
-
-export interface Recommendation {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RecommendationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RecommendationProperties {
-    text: CvssSource;
-}
-
-export interface Remediation {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RemediationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RemediationProperties {
-    recommendation: DetailClass;
-}
-
-export interface Resource {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResourceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResourceProperties {
-    details:   DetailClass;
-    id:        CvssSource;
-    partition: CvssSource;
-    region:    CvssSource;
-    type:      CvssSource;
-}
-
-export interface ScanStatus {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ScanStatusProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ScanStatusProperties {
-    reason:          CvssSource;
-    statusCodeValue: CvssSource;
+export interface Cvss {
+    baseScore:     number;
+    scoringVector: string;
+    source:        string;
+    version:       string;
 }
 
 export interface VulnerablePackage {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           VulnerablePackageProperties;
-    required:             string[];
-    title:                string;
+    arch:           string;
+    epoch:          number;
+    name:           string;
+    packageManager: string;
+    release:        string;
+    version:        string;
 }
 
-export interface VulnerablePackageProperties {
-    arch:           CvssSource;
-    epoch:          CvssSource;
-    name:           CvssSource;
-    packageManager: CvssSource;
-    release:        CvssSource;
-    version:        CvssSource;
+export interface Remediation {
+    recommendation: Recommendation;
+}
+
+export interface Recommendation {
+    text: string;
+}
+
+export interface Resource {
+    details:   Details;
+    id:        string;
+    partition: string;
+    region:    string;
+    type:      string;
+}
+
+export interface Details {
+    awsEc2Instance: AwsEc2Instance;
+}
+
+export interface AwsEc2Instance {
+    iamInstanceProfileArn: string;
+    imageId:               string;
+    ipV4Addresses:         string[];
+    ipV6Addresses:         any[];
+    launchedAt:            string;
+    platform:              string;
+    subnetId:              string;
+    type:                  string;
+    vpcId:                 string;
+}
+
+export interface ScanStatus {
+    reason:          string;
+    statusCodeValue: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsInspector2(json: string): AwsInspector2 {
-        return cast(JSON.parse(json), r("AwsInspector2"));
+    public static toAwsInspector2(json: string): AwsInspector2[] {
+        return cast(JSON.parse(json), a(r("AwsInspector2")));
     }
 
-    public static awsInspector2ToJson(value: AwsInspector2): string {
-        return JSON.stringify(uncast(value, r("AwsInspector2")), null, 2);
+    public static awsInspector2ToJson(value: AwsInspector2[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsInspector2"))), null, 2);
     }
 }
 
@@ -453,264 +274,110 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsInspector2": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsInspector2Element", js: "AwsInspector2Element", typ: r("AwsInspector2Element") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "FindingSeverityCounts", js: "FindingSeverityCounts", typ: r("FindingSeverityCounts") },
-        { json: "InspectorScoreDetails", js: "InspectorScoreDetails", typ: r("InspectorScoreDetails") },
-        { json: "AdjustedCvss", js: "AdjustedCvss", typ: r("AdjustedCvss") },
-        { json: "PackageVulnerabilityDetails", js: "PackageVulnerabilityDetails", typ: r("PackageVulnerabilityDetails") },
-        { json: "Cvss", js: "Cvss", typ: r("Cvss") },
-        { json: "VulnerablePackage", js: "VulnerablePackage", typ: r("VulnerablePackage") },
-        { json: "Remediation", js: "Remediation", typ: r("Remediation") },
-        { json: "Recommendation", js: "Recommendation", typ: r("Recommendation") },
-        { json: "Resource", js: "Resource", typ: r("Resource") },
-        { json: "Details", js: "Details", typ: r("Details") },
-        { json: "AwsEc2Instance", js: "AwsEc2Instance", typ: r("AwsEc2Instance") },
-        { json: "ScanStatus", js: "ScanStatus", typ: r("ScanStatus") },
-    ], false),
-    "AdjustedCvss": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AdjustedCvssProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AdjustedCvssProperties": o([
-        { json: "adjustments", js: "adjustments", typ: r("Adjustments") },
-        { json: "cvssSource", js: "cvssSource", typ: r("CvssSource") },
-        { json: "score", js: "score", typ: r("CvssSource") },
-        { json: "scoreSource", js: "scoreSource", typ: r("CvssSource") },
-        { json: "scoringVector", js: "scoringVector", typ: r("CvssSource") },
-        { json: "version", js: "version", typ: r("CvssSource") },
-    ], false),
-    "Adjustments": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("AdjustmentsItems") },
-    ], false),
-    "AdjustmentsItems": o([
-    ], false),
-    "CvssSource": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "AwsEc2Instance": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsEc2InstanceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsEc2InstanceProperties": o([
-        { json: "iamInstanceProfileArn", js: "iamInstanceProfileArn", typ: r("CvssSource") },
-        { json: "imageId", js: "imageId", typ: r("CvssSource") },
-        { json: "ipV4Addresses", js: "ipV4Addresses", typ: r("IPV4Addresses") },
-        { json: "ipV6Addresses", js: "ipV6Addresses", typ: r("Adjustments") },
-        { json: "launchedAt", js: "launchedAt", typ: r("CvssSource") },
-        { json: "platform", js: "platform", typ: r("CvssSource") },
-        { json: "subnetId", js: "subnetId", typ: r("CvssSource") },
-        { json: "type", js: "type", typ: r("CvssSource") },
-        { json: "vpcId", js: "vpcId", typ: r("CvssSource") },
-    ], false),
-    "IPV4Addresses": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("CvssSource") },
-    ], false),
-    "AwsInspector2Element": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsInspector2ElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsInspector2ElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("CvssSource") },
-        { json: "source", js: "source", typ: r("CvssSource") },
-        { json: "account", js: "account", typ: r("CvssSource") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("CvssSource") },
-        { json: "resources", js: "resources", typ: r("IPV4Addresses") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Cvss": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("CvssProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "CvssProperties": o([
-        { json: "baseScore", js: "baseScore", typ: r("CvssSource") },
-        { json: "scoringVector", js: "scoringVector", typ: r("CvssSource") },
-        { json: "source", js: "source", typ: r("CvssSource") },
-        { json: "version", js: "version", typ: r("CvssSource") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "awsAccountId", js: "awsAccountId", typ: r("CvssSource") },
-        { json: "description", js: "description", typ: r("CvssSource") },
-        { json: "findingArn", js: "findingArn", typ: r("CvssSource") },
-        { json: "firstObservedAt", js: "firstObservedAt", typ: r("CvssSource") },
-        { json: "inspectorScore", js: "inspectorScore", typ: r("CvssSource") },
-        { json: "inspectorScoreDetails", js: "inspectorScoreDetails", typ: r("DetailClass") },
-        { json: "lastObservedAt", js: "lastObservedAt", typ: r("CvssSource") },
-        { json: "packageVulnerabilityDetails", js: "packageVulnerabilityDetails", typ: r("DetailClass") },
-        { json: "remediation", js: "remediation", typ: r("DetailClass") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "severity", js: "severity", typ: r("CvssSource") },
-        { json: "status", js: "status", typ: r("CvssSource") },
-        { json: "title", js: "title", typ: r("CvssSource") },
-        { json: "type", js: "type", typ: r("CvssSource") },
-        { json: "updatedAt", js: "updatedAt", typ: r("CvssSource") },
-        { json: "scanStatus", js: "scanStatus", typ: r("DetailClass") },
-        { json: "eventTimestamp", js: "eventTimestamp", typ: r("ID") },
-        { json: "scan-status", js: "scan-status", typ: r("CvssSource") },
-        { json: "repository-name", js: "repository-name", typ: r("CvssSource") },
-        { json: "finding-severity-counts", js: "finding-severity-counts", typ: r("DetailClass") },
-        { json: "image-digest", js: "image-digest", typ: r("CvssSource") },
-        { json: "image-tags", js: "image-tags", typ: r("IPV4Addresses") },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-    ], false),
-    "Details": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailsProperties": o([
-        { json: "awsEc2Instance", js: "awsEc2Instance", typ: r("DetailClass") },
+        { json: "awsAccountId", js: "awsAccountId", typ: u(undefined, "") },
+        { json: "description", js: "description", typ: u(undefined, "") },
+        { json: "findingArn", js: "findingArn", typ: u(undefined, "") },
+        { json: "firstObservedAt", js: "firstObservedAt", typ: u(undefined, "") },
+        { json: "inspectorScore", js: "inspectorScore", typ: u(undefined, 3.14) },
+        { json: "inspectorScoreDetails", js: "inspectorScoreDetails", typ: u(undefined, r("InspectorScoreDetails")) },
+        { json: "lastObservedAt", js: "lastObservedAt", typ: u(undefined, "") },
+        { json: "packageVulnerabilityDetails", js: "packageVulnerabilityDetails", typ: u(undefined, r("PackageVulnerabilityDetails")) },
+        { json: "remediation", js: "remediation", typ: u(undefined, r("Remediation")) },
+        { json: "resources", js: "resources", typ: u(undefined, a(r("Resource"))) },
+        { json: "severity", js: "severity", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "title", js: "title", typ: u(undefined, "") },
+        { json: "type", js: "type", typ: u(undefined, "") },
+        { json: "updatedAt", js: "updatedAt", typ: u(undefined, "") },
+        { json: "scanStatus", js: "scanStatus", typ: u(undefined, r("ScanStatus")) },
+        { json: "eventTimestamp", js: "eventTimestamp", typ: u(undefined, Date) },
+        { json: "scan-status", js: "scan-status", typ: u(undefined, "") },
+        { json: "repository-name", js: "repository-name", typ: u(undefined, "") },
+        { json: "finding-severity-counts", js: "finding-severity-counts", typ: u(undefined, r("FindingSeverityCounts")) },
+        { json: "image-digest", js: "image-digest", typ: u(undefined, "") },
+        { json: "image-tags", js: "image-tags", typ: u(undefined, a("")) },
     ], false),
     "FindingSeverityCounts": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("FindingSeverityCountsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "FindingSeverityCountsProperties": o([
-        { json: "CRITICAL", js: "CRITICAL", typ: r("CvssSource") },
-        { json: "HIGH", js: "HIGH", typ: r("CvssSource") },
-        { json: "MEDIUM", js: "MEDIUM", typ: r("CvssSource") },
-        { json: "TOTAL", js: "TOTAL", typ: r("CvssSource") },
+        { json: "CRITICAL", js: "CRITICAL", typ: 0 },
+        { json: "HIGH", js: "HIGH", typ: 0 },
+        { json: "MEDIUM", js: "MEDIUM", typ: 0 },
+        { json: "TOTAL", js: "TOTAL", typ: 0 },
     ], false),
     "InspectorScoreDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("InspectorScoreDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "adjustedCvss", js: "adjustedCvss", typ: r("AdjustedCvss") },
     ], false),
-    "InspectorScoreDetailsProperties": o([
-        { json: "adjustedCvss", js: "adjustedCvss", typ: r("DetailClass") },
+    "AdjustedCvss": o([
+        { json: "adjustments", js: "adjustments", typ: a("any") },
+        { json: "cvssSource", js: "cvssSource", typ: "" },
+        { json: "score", js: "score", typ: 3.14 },
+        { json: "scoreSource", js: "scoreSource", typ: "" },
+        { json: "scoringVector", js: "scoringVector", typ: "" },
+        { json: "version", js: "version", typ: "" },
     ], false),
     "PackageVulnerabilityDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("PackageVulnerabilityDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "cvss", js: "cvss", typ: a(r("Cvss")) },
+        { json: "referenceUrls", js: "referenceUrls", typ: a("any") },
+        { json: "source", js: "source", typ: "" },
+        { json: "sourceUrl", js: "sourceUrl", typ: "" },
+        { json: "vendorCreatedAt", js: "vendorCreatedAt", typ: "" },
+        { json: "vendorSeverity", js: "vendorSeverity", typ: "" },
+        { json: "vulnerabilityId", js: "vulnerabilityId", typ: "" },
+        { json: "vulnerablePackages", js: "vulnerablePackages", typ: a(r("VulnerablePackage")) },
     ], false),
-    "PackageVulnerabilityDetailsProperties": o([
-        { json: "cvss", js: "cvss", typ: r("Resources") },
-        { json: "referenceUrls", js: "referenceUrls", typ: r("Adjustments") },
-        { json: "source", js: "source", typ: r("CvssSource") },
-        { json: "sourceUrl", js: "sourceUrl", typ: r("SourceURL") },
-        { json: "vendorCreatedAt", js: "vendorCreatedAt", typ: r("CvssSource") },
-        { json: "vendorSeverity", js: "vendorSeverity", typ: r("CvssSource") },
-        { json: "vulnerabilityId", js: "vulnerabilityId", typ: r("CvssSource") },
-        { json: "vulnerablePackages", js: "vulnerablePackages", typ: r("Resources") },
-    ], false),
-    "SourceURL": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-        { json: "qt-uri-protocols", js: "qt-uri-protocols", typ: a("") },
-    ], false),
-    "Recommendation": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RecommendationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RecommendationProperties": o([
-        { json: "text", js: "text", typ: r("CvssSource") },
-    ], false),
-    "Remediation": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RemediationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RemediationProperties": o([
-        { json: "recommendation", js: "recommendation", typ: r("DetailClass") },
-    ], false),
-    "Resource": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResourceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResourceProperties": o([
-        { json: "details", js: "details", typ: r("DetailClass") },
-        { json: "id", js: "id", typ: r("CvssSource") },
-        { json: "partition", js: "partition", typ: r("CvssSource") },
-        { json: "region", js: "region", typ: r("CvssSource") },
-        { json: "type", js: "type", typ: r("CvssSource") },
-    ], false),
-    "ScanStatus": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ScanStatusProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ScanStatusProperties": o([
-        { json: "reason", js: "reason", typ: r("CvssSource") },
-        { json: "statusCodeValue", js: "statusCodeValue", typ: r("CvssSource") },
+    "Cvss": o([
+        { json: "baseScore", js: "baseScore", typ: 3.14 },
+        { json: "scoringVector", js: "scoringVector", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "version", js: "version", typ: "" },
     ], false),
     "VulnerablePackage": o([
+        { json: "arch", js: "arch", typ: "" },
+        { json: "epoch", js: "epoch", typ: 0 },
+        { json: "name", js: "name", typ: "" },
+        { json: "packageManager", js: "packageManager", typ: "" },
+        { json: "release", js: "release", typ: "" },
+        { json: "version", js: "version", typ: "" },
+    ], false),
+    "Remediation": o([
+        { json: "recommendation", js: "recommendation", typ: r("Recommendation") },
+    ], false),
+    "Recommendation": o([
+        { json: "text", js: "text", typ: "" },
+    ], false),
+    "Resource": o([
+        { json: "details", js: "details", typ: r("Details") },
+        { json: "id", js: "id", typ: "" },
+        { json: "partition", js: "partition", typ: "" },
+        { json: "region", js: "region", typ: "" },
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("VulnerablePackageProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
     ], false),
-    "VulnerablePackageProperties": o([
-        { json: "arch", js: "arch", typ: r("CvssSource") },
-        { json: "epoch", js: "epoch", typ: r("CvssSource") },
-        { json: "name", js: "name", typ: r("CvssSource") },
-        { json: "packageManager", js: "packageManager", typ: r("CvssSource") },
-        { json: "release", js: "release", typ: r("CvssSource") },
-        { json: "version", js: "version", typ: r("CvssSource") },
+    "Details": o([
+        { json: "awsEc2Instance", js: "awsEc2Instance", typ: r("AwsEc2Instance") },
     ], false),
-    "Type": [
-        "integer",
-        "number",
-        "string",
-    ],
+    "AwsEc2Instance": o([
+        { json: "iamInstanceProfileArn", js: "iamInstanceProfileArn", typ: "" },
+        { json: "imageId", js: "imageId", typ: "" },
+        { json: "ipV4Addresses", js: "ipV4Addresses", typ: a("") },
+        { json: "ipV6Addresses", js: "ipV6Addresses", typ: a("any") },
+        { json: "launchedAt", js: "launchedAt", typ: "" },
+        { json: "platform", js: "platform", typ: "" },
+        { json: "subnetId", js: "subnetId", typ: "" },
+        { json: "type", js: "type", typ: "" },
+        { json: "vpcId", js: "vpcId", typ: "" },
+    ], false),
+    "ScanStatus": o([
+        { json: "reason", js: "reason", typ: "" },
+        { json: "statusCodeValue", js: "statusCodeValue", typ: "" },
+    ], false),
 };

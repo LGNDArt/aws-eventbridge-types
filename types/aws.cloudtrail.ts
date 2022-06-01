@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCloudtrail } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCloudtrail = Convert.toAwsCloudtrail(json);
 //
@@ -8,150 +8,60 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCloudtrail {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCloudtrailElement: AwsCloudtrailElement;
-    Detail:               Detail;
-    InsightDetails:       InsightDetails;
-    InsightContext:       InsightContext;
-    Statistics:           Statistics;
-    Baseline:             Baseline;
-}
-
-export interface AwsCloudtrailElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCloudtrailElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCloudtrailElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
-}
-
-export interface Baseline {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           BaselineProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface BaselineProperties {
-    average: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventVersion:       Account;
-    eventTime:          ID;
-    awsRegion:          Account;
-    eventID:            ID;
-    eventType:          Account;
-    recipientAccountId: Account;
-    sharedEventID:      ID;
-    insightDetails:     DetailClass;
-    eventCategory:      Account;
-}
-
-export interface InsightContext {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           InsightContextProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface InsightContextProperties {
-    statistics: DetailClass;
+    eventVersion:       string;
+    eventTime:          Date;
+    awsRegion:          string;
+    eventID:            string;
+    eventType:          string;
+    recipientAccountId: string;
+    sharedEventID:      string;
+    insightDetails:     InsightDetails;
+    eventCategory:      string;
 }
 
 export interface InsightDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           InsightDetailsProperties;
-    required:             string[];
-    title:                string;
+    state:          string;
+    eventSource:    string;
+    eventName:      string;
+    insightType:    string;
+    insightContext: InsightContext;
 }
 
-export interface InsightDetailsProperties {
-    state:          Account;
-    eventSource:    Account;
-    eventName:      Account;
-    insightType:    Account;
-    insightContext: DetailClass;
+export interface InsightContext {
+    statistics: Statistics;
 }
 
 export interface Statistics {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           StatisticsProperties;
-    required:             string[];
-    title:                string;
+    baseline:        Baseline;
+    insight:         Baseline;
+    insightDuration: number;
 }
 
-export interface StatisticsProperties {
-    baseline:        DetailClass;
-    insight:         DetailClass;
-    insightDuration: Account;
+export interface Baseline {
+    average: number;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCloudtrail(json: string): AwsCloudtrail {
-        return cast(JSON.parse(json), r("AwsCloudtrail"));
+    public static toAwsCloudtrail(json: string): AwsCloudtrail[] {
+        return cast(JSON.parse(json), a(r("AwsCloudtrail")));
     }
 
-    public static awsCloudtrailToJson(value: AwsCloudtrail): string {
-        return JSON.stringify(uncast(value, r("AwsCloudtrail")), null, 2);
+    public static awsCloudtrailToJson(value: AwsCloudtrail[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCloudtrail"))), null, 2);
     }
 }
 
@@ -289,119 +199,43 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCloudtrail": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCloudtrailElement", js: "AwsCloudtrailElement", typ: r("AwsCloudtrailElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "InsightDetails", js: "InsightDetails", typ: r("InsightDetails") },
-        { json: "InsightContext", js: "InsightContext", typ: r("InsightContext") },
-        { json: "Statistics", js: "Statistics", typ: r("Statistics") },
-        { json: "Baseline", js: "Baseline", typ: r("Baseline") },
-    ], false),
-    "AwsCloudtrailElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCloudtrailElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCloudtrailElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
-    ], false),
-    "Baseline": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("BaselineProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "BaselineProperties": o([
-        { json: "average", js: "average", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("Account") },
-        { json: "eventTime", js: "eventTime", typ: r("ID") },
-        { json: "awsRegion", js: "awsRegion", typ: r("Account") },
-        { json: "eventID", js: "eventID", typ: r("ID") },
-        { json: "eventType", js: "eventType", typ: r("Account") },
-        { json: "recipientAccountId", js: "recipientAccountId", typ: r("Account") },
-        { json: "sharedEventID", js: "sharedEventID", typ: r("ID") },
-        { json: "insightDetails", js: "insightDetails", typ: r("DetailClass") },
-        { json: "eventCategory", js: "eventCategory", typ: r("Account") },
-    ], false),
-    "InsightContext": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("InsightContextProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "InsightContextProperties": o([
-        { json: "statistics", js: "statistics", typ: r("DetailClass") },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "recipientAccountId", js: "recipientAccountId", typ: "" },
+        { json: "sharedEventID", js: "sharedEventID", typ: "" },
+        { json: "insightDetails", js: "insightDetails", typ: r("InsightDetails") },
+        { json: "eventCategory", js: "eventCategory", typ: "" },
     ], false),
     "InsightDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("InsightDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "state", js: "state", typ: "" },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "insightType", js: "insightType", typ: "" },
+        { json: "insightContext", js: "insightContext", typ: r("InsightContext") },
     ], false),
-    "InsightDetailsProperties": o([
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "eventSource", js: "eventSource", typ: r("Account") },
-        { json: "eventName", js: "eventName", typ: r("Account") },
-        { json: "insightType", js: "insightType", typ: r("Account") },
-        { json: "insightContext", js: "insightContext", typ: r("DetailClass") },
+    "InsightContext": o([
+        { json: "statistics", js: "statistics", typ: r("Statistics") },
     ], false),
     "Statistics": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("StatisticsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "baseline", js: "baseline", typ: r("Baseline") },
+        { json: "insight", js: "insight", typ: r("Baseline") },
+        { json: "insightDuration", js: "insightDuration", typ: 0 },
     ], false),
-    "StatisticsProperties": o([
-        { json: "baseline", js: "baseline", typ: r("DetailClass") },
-        { json: "insight", js: "insight", typ: r("DetailClass") },
-        { json: "insightDuration", js: "insightDuration", typ: r("Account") },
+    "Baseline": o([
+        { json: "average", js: "average", typ: 0 },
     ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

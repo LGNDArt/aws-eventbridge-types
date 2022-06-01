@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSecurityhub } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSecurityhub = Convert.toAwsSecurityhub(json);
 //
@@ -8,245 +8,110 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSecurityhub {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSecurityhubElement: AwsSecurityhubElement;
-    Detail:                Detail;
-    Finding:               Finding;
-    Compliance:            Compliance;
-    ProductFields:         ProductFields;
-    Remediation:           Remediation;
-    Recommendation:        Recommendation;
-    Resource:              Resource;
-    Severity:              Severity;
-    InsightResult:         InsightResult;
-}
-
-export interface AwsSecurityhubElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSecurityhubElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSecurityhubElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Compliance {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ComplianceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ComplianceProperties {
-    Status: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    actionName:        Account;
-    actionDescription: Account;
-    insightName:       Account;
-    insightArn:        Account;
-    resultType:        Account;
-    insightResults:    Findings;
-    findings:          Findings;
-}
-
-export interface Findings {
-    type:  string;
-    items: Items;
+    actionName?:        string;
+    actionDescription?: string;
+    insightName?:       string;
+    insightArn?:        string;
+    resultType?:        string;
+    insightResults?:    InsightResult[];
+    findings?:          Finding[];
 }
 
 export interface Finding {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           FindingProperties;
-    required:             string[];
-    title:                string;
+    SchemaVersion:   Date;
+    Id:              string;
+    ProductArn:      string;
+    GeneratorId:     string;
+    AwsAccountId:    string;
+    Types:           string[];
+    FirstObservedAt: Date;
+    LastObservedAt:  Date;
+    CreatedAt:       Date;
+    UpdatedAt:       Date;
+    Severity:        Severity;
+    Confidence?:     number;
+    Title:           string;
+    Description:     string;
+    Remediation:     Remediation;
+    ProductFields:   ProductFields;
+    Resources:       Resource[];
+    RecordState:     string;
+    WorkflowState:   string;
+    Compliance?:     Compliance;
 }
 
-export interface FindingProperties {
-    SchemaVersion:   ID;
-    Id:              Account;
-    ProductArn:      Account;
-    GeneratorId:     Account;
-    AwsAccountId:    Account;
-    Types:           Resources;
-    FirstObservedAt: ID;
-    LastObservedAt:  ID;
-    CreatedAt:       ID;
-    UpdatedAt:       ID;
-    Severity:        Items;
-    Confidence:      Account;
-    Title:           Account;
-    Description:     Account;
-    Remediation:     Items;
-    ProductFields:   Items;
-    Resources:       Findings;
-    RecordState:     Account;
-    WorkflowState:   Account;
-    Compliance:      Items;
-}
-
-export interface InsightResult {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           InsightResultProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface InsightResultProperties {
-    Admin:           Account;
-    DenySlr_UI_User: Account;
+export interface Compliance {
+    Status: string;
 }
 
 export interface ProductFields {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ProductFieldsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ProductFieldsProperties {
-    "rule-arn":                      Account;
-    "tags:0":                        Account;
-    "tags:1":                        Account;
-    "themes:0/theme":                Account;
-    "themes:0/count":                ID;
-    "dlpRisk:0/risk":                ID;
-    "dlpRisk:0/count":               ID;
-    "owner:0/name":                  Account;
-    "owner:0/count":                 ID;
-    "aws/securityhub/FindingId":     Account;
-    "aws/securityhub/SeverityLabel": Account;
-    "aws/securityhub/ProductName":   Account;
-    "aws/securityhub/CompanyName":   Account;
-    StandardsGuideArn:               Account;
-    StandardsGuideSubscriptionArn:   Account;
-    RuleId:                          Account;
-    RecommendationUrl:               URL;
-    RecordState:                     Account;
-}
-
-export interface URL {
-    type:                Type;
-    format:              string;
-    "qt-uri-protocols":  string[];
-    "qt-uri-extensions": string[];
-}
-
-export interface Recommendation {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RecommendationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RecommendationProperties {
-    Text: Account;
-    Url:  URL;
+    "rule-arn"?:                     string;
+    "tags:0"?:                       string;
+    "tags:1"?:                       string;
+    "themes:0/theme"?:               string;
+    "themes:0/count"?:               string;
+    "dlpRisk:0/risk"?:               string;
+    "dlpRisk:0/count"?:              string;
+    "owner:0/name"?:                 string;
+    "owner:0/count"?:                string;
+    "aws/securityhub/FindingId":     string;
+    "aws/securityhub/SeverityLabel": string;
+    "aws/securityhub/ProductName":   string;
+    "aws/securityhub/CompanyName":   string;
+    StandardsGuideArn?:              string;
+    StandardsGuideSubscriptionArn?:  string;
+    RuleId?:                         string;
+    RecommendationUrl?:              string;
+    RecordState?:                    string;
 }
 
 export interface Remediation {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RemediationProperties;
-    required:             string[];
-    title:                string;
+    Recommendation: Recommendation;
 }
 
-export interface RemediationProperties {
-    Recommendation: Items;
+export interface Recommendation {
+    Text: string;
+    Url?: string;
 }
 
 export interface Resource {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResourceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResourceProperties {
-    Type:      Account;
-    Id:        Account;
-    Partition: Account;
-    Region:    Account;
+    Type:      string;
+    Id:        string;
+    Partition: string;
+    Region:    string;
 }
 
 export interface Severity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SeverityProperties;
-    required:             string[];
-    title:                string;
+    Product:    number;
+    Normalized: number;
 }
 
-export interface SeverityProperties {
-    Product:    Account;
-    Normalized: Account;
+export interface InsightResult {
+    Admin?:           number;
+    DenySlr_UI_User?: number;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSecurityhub(json: string): AwsSecurityhub {
-        return cast(JSON.parse(json), r("AwsSecurityhub"));
+    public static toAwsSecurityhub(json: string): AwsSecurityhub[] {
+        return cast(JSON.parse(json), a(r("AwsSecurityhub")));
     }
 
-    public static awsSecurityhubToJson(value: AwsSecurityhub): string {
-        return JSON.stringify(uncast(value, r("AwsSecurityhub")), null, 2);
+    public static awsSecurityhubToJson(value: AwsSecurityhub[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSecurityhub"))), null, 2);
     }
 }
 
@@ -384,205 +249,89 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSecurityhub": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSecurityhubElement", js: "AwsSecurityhubElement", typ: r("AwsSecurityhubElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Finding", js: "Finding", typ: r("Finding") },
-        { json: "Compliance", js: "Compliance", typ: r("Compliance") },
-        { json: "ProductFields", js: "ProductFields", typ: r("ProductFields") },
-        { json: "Remediation", js: "Remediation", typ: r("Remediation") },
-        { json: "Recommendation", js: "Recommendation", typ: r("Recommendation") },
-        { json: "Resource", js: "Resource", typ: r("Resource") },
-        { json: "Severity", js: "Severity", typ: r("Severity") },
-        { json: "InsightResult", js: "InsightResult", typ: r("InsightResult") },
-    ], false),
-    "AwsSecurityhubElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSecurityhubElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSecurityhubElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Compliance": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ComplianceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ComplianceProperties": o([
-        { json: "Status", js: "Status", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "actionName", js: "actionName", typ: r("Account") },
-        { json: "actionDescription", js: "actionDescription", typ: r("Account") },
-        { json: "insightName", js: "insightName", typ: r("Account") },
-        { json: "insightArn", js: "insightArn", typ: r("Account") },
-        { json: "resultType", js: "resultType", typ: r("Account") },
-        { json: "insightResults", js: "insightResults", typ: r("Findings") },
-        { json: "findings", js: "findings", typ: r("Findings") },
-    ], false),
-    "Findings": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
+        { json: "actionName", js: "actionName", typ: u(undefined, "") },
+        { json: "actionDescription", js: "actionDescription", typ: u(undefined, "") },
+        { json: "insightName", js: "insightName", typ: u(undefined, "") },
+        { json: "insightArn", js: "insightArn", typ: u(undefined, "") },
+        { json: "resultType", js: "resultType", typ: u(undefined, "") },
+        { json: "insightResults", js: "insightResults", typ: u(undefined, a(r("InsightResult"))) },
+        { json: "findings", js: "findings", typ: u(undefined, a(r("Finding"))) },
     ], false),
     "Finding": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("FindingProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "SchemaVersion", js: "SchemaVersion", typ: Date },
+        { json: "Id", js: "Id", typ: "" },
+        { json: "ProductArn", js: "ProductArn", typ: "" },
+        { json: "GeneratorId", js: "GeneratorId", typ: "" },
+        { json: "AwsAccountId", js: "AwsAccountId", typ: "" },
+        { json: "Types", js: "Types", typ: a("") },
+        { json: "FirstObservedAt", js: "FirstObservedAt", typ: Date },
+        { json: "LastObservedAt", js: "LastObservedAt", typ: Date },
+        { json: "CreatedAt", js: "CreatedAt", typ: Date },
+        { json: "UpdatedAt", js: "UpdatedAt", typ: Date },
+        { json: "Severity", js: "Severity", typ: r("Severity") },
+        { json: "Confidence", js: "Confidence", typ: u(undefined, 0) },
+        { json: "Title", js: "Title", typ: "" },
+        { json: "Description", js: "Description", typ: "" },
+        { json: "Remediation", js: "Remediation", typ: r("Remediation") },
+        { json: "ProductFields", js: "ProductFields", typ: r("ProductFields") },
+        { json: "Resources", js: "Resources", typ: a(r("Resource")) },
+        { json: "RecordState", js: "RecordState", typ: "" },
+        { json: "WorkflowState", js: "WorkflowState", typ: "" },
+        { json: "Compliance", js: "Compliance", typ: u(undefined, r("Compliance")) },
     ], false),
-    "FindingProperties": o([
-        { json: "SchemaVersion", js: "SchemaVersion", typ: r("ID") },
-        { json: "Id", js: "Id", typ: r("Account") },
-        { json: "ProductArn", js: "ProductArn", typ: r("Account") },
-        { json: "GeneratorId", js: "GeneratorId", typ: r("Account") },
-        { json: "AwsAccountId", js: "AwsAccountId", typ: r("Account") },
-        { json: "Types", js: "Types", typ: r("Resources") },
-        { json: "FirstObservedAt", js: "FirstObservedAt", typ: r("ID") },
-        { json: "LastObservedAt", js: "LastObservedAt", typ: r("ID") },
-        { json: "CreatedAt", js: "CreatedAt", typ: r("ID") },
-        { json: "UpdatedAt", js: "UpdatedAt", typ: r("ID") },
-        { json: "Severity", js: "Severity", typ: r("Items") },
-        { json: "Confidence", js: "Confidence", typ: r("Account") },
-        { json: "Title", js: "Title", typ: r("Account") },
-        { json: "Description", js: "Description", typ: r("Account") },
-        { json: "Remediation", js: "Remediation", typ: r("Items") },
-        { json: "ProductFields", js: "ProductFields", typ: r("Items") },
-        { json: "Resources", js: "Resources", typ: r("Findings") },
-        { json: "RecordState", js: "RecordState", typ: r("Account") },
-        { json: "WorkflowState", js: "WorkflowState", typ: r("Account") },
-        { json: "Compliance", js: "Compliance", typ: r("Items") },
-    ], false),
-    "InsightResult": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("InsightResultProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "InsightResultProperties": o([
-        { json: "Admin", js: "Admin", typ: r("Account") },
-        { json: "DenySlr_UI_User", js: "DenySlr_UI_User", typ: r("Account") },
+    "Compliance": o([
+        { json: "Status", js: "Status", typ: "" },
     ], false),
     "ProductFields": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ProductFieldsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ProductFieldsProperties": o([
-        { json: "rule-arn", js: "rule-arn", typ: r("Account") },
-        { json: "tags:0", js: "tags:0", typ: r("Account") },
-        { json: "tags:1", js: "tags:1", typ: r("Account") },
-        { json: "themes:0/theme", js: "themes:0/theme", typ: r("Account") },
-        { json: "themes:0/count", js: "themes:0/count", typ: r("ID") },
-        { json: "dlpRisk:0/risk", js: "dlpRisk:0/risk", typ: r("ID") },
-        { json: "dlpRisk:0/count", js: "dlpRisk:0/count", typ: r("ID") },
-        { json: "owner:0/name", js: "owner:0/name", typ: r("Account") },
-        { json: "owner:0/count", js: "owner:0/count", typ: r("ID") },
-        { json: "aws/securityhub/FindingId", js: "aws/securityhub/FindingId", typ: r("Account") },
-        { json: "aws/securityhub/SeverityLabel", js: "aws/securityhub/SeverityLabel", typ: r("Account") },
-        { json: "aws/securityhub/ProductName", js: "aws/securityhub/ProductName", typ: r("Account") },
-        { json: "aws/securityhub/CompanyName", js: "aws/securityhub/CompanyName", typ: r("Account") },
-        { json: "StandardsGuideArn", js: "StandardsGuideArn", typ: r("Account") },
-        { json: "StandardsGuideSubscriptionArn", js: "StandardsGuideSubscriptionArn", typ: r("Account") },
-        { json: "RuleId", js: "RuleId", typ: r("Account") },
-        { json: "RecommendationUrl", js: "RecommendationUrl", typ: r("URL") },
-        { json: "RecordState", js: "RecordState", typ: r("Account") },
-    ], false),
-    "URL": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-        { json: "qt-uri-protocols", js: "qt-uri-protocols", typ: a("") },
-        { json: "qt-uri-extensions", js: "qt-uri-extensions", typ: a("") },
-    ], false),
-    "Recommendation": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RecommendationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RecommendationProperties": o([
-        { json: "Text", js: "Text", typ: r("Account") },
-        { json: "Url", js: "Url", typ: r("URL") },
+        { json: "rule-arn", js: "rule-arn", typ: u(undefined, "") },
+        { json: "tags:0", js: "tags:0", typ: u(undefined, "") },
+        { json: "tags:1", js: "tags:1", typ: u(undefined, "") },
+        { json: "themes:0/theme", js: "themes:0/theme", typ: u(undefined, "") },
+        { json: "themes:0/count", js: "themes:0/count", typ: u(undefined, "") },
+        { json: "dlpRisk:0/risk", js: "dlpRisk:0/risk", typ: u(undefined, "") },
+        { json: "dlpRisk:0/count", js: "dlpRisk:0/count", typ: u(undefined, "") },
+        { json: "owner:0/name", js: "owner:0/name", typ: u(undefined, "") },
+        { json: "owner:0/count", js: "owner:0/count", typ: u(undefined, "") },
+        { json: "aws/securityhub/FindingId", js: "aws/securityhub/FindingId", typ: "" },
+        { json: "aws/securityhub/SeverityLabel", js: "aws/securityhub/SeverityLabel", typ: "" },
+        { json: "aws/securityhub/ProductName", js: "aws/securityhub/ProductName", typ: "" },
+        { json: "aws/securityhub/CompanyName", js: "aws/securityhub/CompanyName", typ: "" },
+        { json: "StandardsGuideArn", js: "StandardsGuideArn", typ: u(undefined, "") },
+        { json: "StandardsGuideSubscriptionArn", js: "StandardsGuideSubscriptionArn", typ: u(undefined, "") },
+        { json: "RuleId", js: "RuleId", typ: u(undefined, "") },
+        { json: "RecommendationUrl", js: "RecommendationUrl", typ: u(undefined, "") },
+        { json: "RecordState", js: "RecordState", typ: u(undefined, "") },
     ], false),
     "Remediation": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RemediationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "Recommendation", js: "Recommendation", typ: r("Recommendation") },
     ], false),
-    "RemediationProperties": o([
-        { json: "Recommendation", js: "Recommendation", typ: r("Items") },
+    "Recommendation": o([
+        { json: "Text", js: "Text", typ: "" },
+        { json: "Url", js: "Url", typ: u(undefined, "") },
     ], false),
     "Resource": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResourceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResourceProperties": o([
-        { json: "Type", js: "Type", typ: r("Account") },
-        { json: "Id", js: "Id", typ: r("Account") },
-        { json: "Partition", js: "Partition", typ: r("Account") },
-        { json: "Region", js: "Region", typ: r("Account") },
+        { json: "Type", js: "Type", typ: "" },
+        { json: "Id", js: "Id", typ: "" },
+        { json: "Partition", js: "Partition", typ: "" },
+        { json: "Region", js: "Region", typ: "" },
     ], false),
     "Severity": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SeverityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "Product", js: "Product", typ: 0 },
+        { json: "Normalized", js: "Normalized", typ: 0 },
     ], false),
-    "SeverityProperties": o([
-        { json: "Product", js: "Product", typ: r("Account") },
-        { json: "Normalized", js: "Normalized", typ: r("Account") },
+    "InsightResult": o([
+        { json: "Admin", js: "Admin", typ: u(undefined, 0) },
+        { json: "DenySlr_UI_User", js: "DenySlr_UI_User", typ: u(undefined, 0) },
     ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

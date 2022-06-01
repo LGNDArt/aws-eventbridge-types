@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsDlm } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsDlm = Convert.toAwsDlm(json);
 //
@@ -8,78 +8,32 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsDlm {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsDlmElement: AwsDlmElement;
-    Detail:        Detail;
-}
-
-export interface AwsDlmElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsDlmElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsDlmElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    state:     Account;
-    cause:     Account;
-    policy_id: Account;
+    state:     string;
+    cause:     string;
+    policy_id: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsDlm(json: string): AwsDlm {
-        return cast(JSON.parse(json), r("AwsDlm"));
+    public static toAwsDlm(json: string): AwsDlm[] {
+        return cast(JSON.parse(json), a(r("AwsDlm")));
     }
 
-    public static awsDlmToJson(value: AwsDlm): string {
-        return JSON.stringify(uncast(value, r("AwsDlm")), null, 2);
+    public static awsDlmToJson(value: AwsDlm[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsDlm"))), null, 2);
     }
 }
 
@@ -217,57 +171,19 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsDlm": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsDlmElement", js: "AwsDlmElement", typ: r("AwsDlmElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsDlmElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsDlmElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsDlmElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "cause", js: "cause", typ: r("Account") },
-        { json: "policy_id", js: "policy_id", typ: r("Account") },
+        { json: "state", js: "state", typ: "" },
+        { json: "cause", js: "cause", typ: "" },
+        { json: "policy_id", js: "policy_id", typ: "" },
     ], false),
 };

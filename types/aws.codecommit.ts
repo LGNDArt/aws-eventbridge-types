@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCodecommit } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCodecommit = Convert.toAwsCodecommit(json);
 //
@@ -8,119 +8,65 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCodecommit {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCodecommitElement: AwsCodecommitElement;
-    Detail:               Detail;
-    Repositories:         Repositories;
-}
-
-export interface AwsCodecommitElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCodecommitElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCodecommitElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    event:                             Account;
-    repositoryName:                    Account;
-    repositoryId:                      Account;
-    referenceType:                     Account;
-    referenceName:                     Account;
-    referenceFullName:                 Account;
-    commitId:                          Account;
-    oldCommitId:                       Account;
-    beforeCommitId:                    Account;
-    inReplyTo:                         Account;
-    notificationBody:                  Account;
-    commentId:                         Account;
-    afterCommitId:                     Account;
-    callerUserArn:                     Account;
-    pullRequestId:                     ID;
-    sourceReference:                   Account;
-    lastModifiedDate:                  Account;
-    author:                            Account;
-    pullRequestStatus:                 Account;
-    isMerged:                          Account;
-    destinationReference:              Account;
-    title:                             Account;
-    creationDate:                      Account;
-    repositoryNames:                   Resources;
-    destinationCommit:                 Account;
-    sourceCommit:                      Account;
-    approvalRuleTemplateContentSha256: Account;
-    approvalRuleTemplateId:            ID;
-    approvalRuleTemplateName:          Account;
-    repositories:                      Items;
-    reactionEmojis:                    Resources;
-    reactionShortcodes:                Resources;
-    reactionUnicodes:                  Resources;
+    event:                              string;
+    repositoryName?:                    string;
+    repositoryId?:                      string;
+    referenceType?:                     string;
+    referenceName?:                     string;
+    referenceFullName?:                 string;
+    commitId?:                          string;
+    oldCommitId?:                       string;
+    beforeCommitId?:                    string;
+    inReplyTo?:                         string;
+    notificationBody?:                  string;
+    commentId?:                         string;
+    afterCommitId?:                     string;
+    callerUserArn?:                     string;
+    pullRequestId?:                     string;
+    sourceReference?:                   string;
+    lastModifiedDate?:                  string;
+    author?:                            string;
+    pullRequestStatus?:                 string;
+    isMerged?:                          string;
+    destinationReference?:              string;
+    title?:                             string;
+    creationDate?:                      string;
+    repositoryNames?:                   string[];
+    destinationCommit?:                 string;
+    sourceCommit?:                      string;
+    approvalRuleTemplateContentSha256?: string;
+    approvalRuleTemplateId?:            string;
+    approvalRuleTemplateName?:          string;
+    repositories?:                      Repositories;
+    reactionEmojis?:                    string[];
+    reactionShortcodes?:                string[];
+    reactionUnicodes?:                  string[];
 }
 
 export interface Repositories {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCodecommit(json: string): AwsCodecommit {
-        return cast(JSON.parse(json), r("AwsCodecommit"));
+    public static toAwsCodecommit(json: string): AwsCodecommit[] {
+        return cast(JSON.parse(json), a(r("AwsCodecommit")));
     }
 
-    public static awsCodecommitToJson(value: AwsCodecommit): string {
-        return JSON.stringify(uncast(value, r("AwsCodecommit")), null, 2);
+    public static awsCodecommitToJson(value: AwsCodecommit[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCodecommit"))), null, 2);
     }
 }
 
@@ -258,96 +204,51 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCodecommit": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCodecommitElement", js: "AwsCodecommitElement", typ: r("AwsCodecommitElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Repositories", js: "Repositories", typ: r("Repositories") },
-    ], false),
-    "AwsCodecommitElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCodecommitElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCodecommitElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "event", js: "event", typ: r("Account") },
-        { json: "repositoryName", js: "repositoryName", typ: r("Account") },
-        { json: "repositoryId", js: "repositoryId", typ: r("Account") },
-        { json: "referenceType", js: "referenceType", typ: r("Account") },
-        { json: "referenceName", js: "referenceName", typ: r("Account") },
-        { json: "referenceFullName", js: "referenceFullName", typ: r("Account") },
-        { json: "commitId", js: "commitId", typ: r("Account") },
-        { json: "oldCommitId", js: "oldCommitId", typ: r("Account") },
-        { json: "beforeCommitId", js: "beforeCommitId", typ: r("Account") },
-        { json: "inReplyTo", js: "inReplyTo", typ: r("Account") },
-        { json: "notificationBody", js: "notificationBody", typ: r("Account") },
-        { json: "commentId", js: "commentId", typ: r("Account") },
-        { json: "afterCommitId", js: "afterCommitId", typ: r("Account") },
-        { json: "callerUserArn", js: "callerUserArn", typ: r("Account") },
-        { json: "pullRequestId", js: "pullRequestId", typ: r("ID") },
-        { json: "sourceReference", js: "sourceReference", typ: r("Account") },
-        { json: "lastModifiedDate", js: "lastModifiedDate", typ: r("Account") },
-        { json: "author", js: "author", typ: r("Account") },
-        { json: "pullRequestStatus", js: "pullRequestStatus", typ: r("Account") },
-        { json: "isMerged", js: "isMerged", typ: r("Account") },
-        { json: "destinationReference", js: "destinationReference", typ: r("Account") },
-        { json: "title", js: "title", typ: r("Account") },
-        { json: "creationDate", js: "creationDate", typ: r("Account") },
-        { json: "repositoryNames", js: "repositoryNames", typ: r("Resources") },
-        { json: "destinationCommit", js: "destinationCommit", typ: r("Account") },
-        { json: "sourceCommit", js: "sourceCommit", typ: r("Account") },
-        { json: "approvalRuleTemplateContentSha256", js: "approvalRuleTemplateContentSha256", typ: r("Account") },
-        { json: "approvalRuleTemplateId", js: "approvalRuleTemplateId", typ: r("ID") },
-        { json: "approvalRuleTemplateName", js: "approvalRuleTemplateName", typ: r("Account") },
-        { json: "repositories", js: "repositories", typ: r("Items") },
-        { json: "reactionEmojis", js: "reactionEmojis", typ: r("Resources") },
-        { json: "reactionShortcodes", js: "reactionShortcodes", typ: r("Resources") },
-        { json: "reactionUnicodes", js: "reactionUnicodes", typ: r("Resources") },
+        { json: "event", js: "event", typ: "" },
+        { json: "repositoryName", js: "repositoryName", typ: u(undefined, "") },
+        { json: "repositoryId", js: "repositoryId", typ: u(undefined, "") },
+        { json: "referenceType", js: "referenceType", typ: u(undefined, "") },
+        { json: "referenceName", js: "referenceName", typ: u(undefined, "") },
+        { json: "referenceFullName", js: "referenceFullName", typ: u(undefined, "") },
+        { json: "commitId", js: "commitId", typ: u(undefined, "") },
+        { json: "oldCommitId", js: "oldCommitId", typ: u(undefined, "") },
+        { json: "beforeCommitId", js: "beforeCommitId", typ: u(undefined, "") },
+        { json: "inReplyTo", js: "inReplyTo", typ: u(undefined, "") },
+        { json: "notificationBody", js: "notificationBody", typ: u(undefined, "") },
+        { json: "commentId", js: "commentId", typ: u(undefined, "") },
+        { json: "afterCommitId", js: "afterCommitId", typ: u(undefined, "") },
+        { json: "callerUserArn", js: "callerUserArn", typ: u(undefined, "") },
+        { json: "pullRequestId", js: "pullRequestId", typ: u(undefined, "") },
+        { json: "sourceReference", js: "sourceReference", typ: u(undefined, "") },
+        { json: "lastModifiedDate", js: "lastModifiedDate", typ: u(undefined, "") },
+        { json: "author", js: "author", typ: u(undefined, "") },
+        { json: "pullRequestStatus", js: "pullRequestStatus", typ: u(undefined, "") },
+        { json: "isMerged", js: "isMerged", typ: u(undefined, "") },
+        { json: "destinationReference", js: "destinationReference", typ: u(undefined, "") },
+        { json: "title", js: "title", typ: u(undefined, "") },
+        { json: "creationDate", js: "creationDate", typ: u(undefined, "") },
+        { json: "repositoryNames", js: "repositoryNames", typ: u(undefined, a("")) },
+        { json: "destinationCommit", js: "destinationCommit", typ: u(undefined, "") },
+        { json: "sourceCommit", js: "sourceCommit", typ: u(undefined, "") },
+        { json: "approvalRuleTemplateContentSha256", js: "approvalRuleTemplateContentSha256", typ: u(undefined, "") },
+        { json: "approvalRuleTemplateId", js: "approvalRuleTemplateId", typ: u(undefined, "") },
+        { json: "approvalRuleTemplateName", js: "approvalRuleTemplateName", typ: u(undefined, "") },
+        { json: "repositories", js: "repositories", typ: u(undefined, r("Repositories")) },
+        { json: "reactionEmojis", js: "reactionEmojis", typ: u(undefined, a("")) },
+        { json: "reactionShortcodes", js: "reactionShortcodes", typ: u(undefined, a("")) },
+        { json: "reactionUnicodes", js: "reactionUnicodes", typ: u(undefined, a("")) },
     ], false),
     "Repositories": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
     ], false),
-    "Type": [
-        "string",
-    ],
 };

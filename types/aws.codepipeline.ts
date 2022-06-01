@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCodepipeline } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCodepipeline = Convert.toAwsCodepipeline(json);
 //
@@ -8,110 +8,44 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCodepipeline {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCodepipelineElement: AwsCodepipelineElement;
-    Detail:                 Detail;
-    Type:                   Type;
-    Version:                Version;
-}
-
-export interface AwsCodepipelineElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCodepipelineElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCodepipelineElementProperties {
-    version:       Time;
-    id:            Account;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          Time;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: TypeEnum;
-}
-
-export enum TypeEnum {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Time {
-    type:    TypeEnum;
-    format?: string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    pipeline:       Account;
-    version:        Items;
-    state:          Account;
-    "execution-id": Account;
-    stage:          Account;
-    action:         Account;
-    region:         Account;
-    type:           Items;
+    pipeline:       string;
+    version:        number | string;
+    state:          string;
+    "execution-id": string;
+    stage?:         string;
+    action?:        string;
+    region?:        string;
+    type?:          Type;
 }
 
 export interface Type {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TypeProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface TypeProperties {
-    owner:    Account;
-    category: Account;
-    provider: Account;
-    version:  Account;
-}
-
-export interface Version {
-    anyOf: Time[];
-    title: string;
+    owner:    string;
+    category: string;
+    provider: string;
+    version:  number;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCodepipeline(json: string): AwsCodepipeline {
-        return cast(JSON.parse(json), r("AwsCodepipeline"));
+    public static toAwsCodepipeline(json: string): AwsCodepipeline[] {
+        return cast(JSON.parse(json), a(r("AwsCodepipeline")));
     }
 
-    public static awsCodepipelineToJson(value: AwsCodepipeline): string {
-        return JSON.stringify(uncast(value, r("AwsCodepipeline")), null, 2);
+    public static awsCodepipelineToJson(value: AwsCodepipeline[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCodepipeline"))), null, 2);
     }
 }
 
@@ -249,85 +183,30 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCodepipeline": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCodepipelineElement", js: "AwsCodepipelineElement", typ: r("AwsCodepipelineElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Type", js: "Type", typ: r("Type") },
-        { json: "Version", js: "Version", typ: r("Version") },
-    ], false),
-    "AwsCodepipelineElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCodepipelineElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCodepipelineElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("TypeEnum") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("TypeEnum") },
-        { json: "format", js: "format", typ: u(undefined, "") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "pipeline", js: "pipeline", typ: r("Account") },
-        { json: "version", js: "version", typ: r("Items") },
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "execution-id", js: "execution-id", typ: r("Account") },
-        { json: "stage", js: "stage", typ: r("Account") },
-        { json: "action", js: "action", typ: r("Account") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "type", js: "type", typ: r("Items") },
+        { json: "pipeline", js: "pipeline", typ: "" },
+        { json: "version", js: "version", typ: u(0, "") },
+        { json: "state", js: "state", typ: "" },
+        { json: "execution-id", js: "execution-id", typ: "" },
+        { json: "stage", js: "stage", typ: u(undefined, "") },
+        { json: "action", js: "action", typ: u(undefined, "") },
+        { json: "region", js: "region", typ: u(undefined, "") },
+        { json: "type", js: "type", typ: u(undefined, r("Type")) },
     ], false),
     "Type": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TypeProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "owner", js: "owner", typ: "" },
+        { json: "category", js: "category", typ: "" },
+        { json: "provider", js: "provider", typ: "" },
+        { json: "version", js: "version", typ: 0 },
     ], false),
-    "TypeProperties": o([
-        { json: "owner", js: "owner", typ: r("Account") },
-        { json: "category", js: "category", typ: r("Account") },
-        { json: "provider", js: "provider", typ: r("Account") },
-        { json: "version", js: "version", typ: r("Account") },
-    ], false),
-    "Version": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("Time")) },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "TypeEnum": [
-        "integer",
-        "string",
-    ],
 };

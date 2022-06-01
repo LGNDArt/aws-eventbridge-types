@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSsm } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSsm = Convert.toAwsSsm(json);
 //
@@ -8,176 +8,111 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSsm {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSsmElement: AwsSsmElement;
-    Detail:        Detail;
-    Parameters:    Parameters;
-    DocumentName:  DocumentName;
-    Region:        DocumentName;
-    Source:        DocumentName;
-}
-
-export interface AwsSsmElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSsmElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSsmElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Items;
-    account:       Account;
-    time:          ID;
-    region:        Items;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: Format;
-}
-
-export enum Format {
-    DateTime = "date-time",
-    Integer = "integer",
-    UUID = "uuid",
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        Source;
+    account:       string;
+    time:          Date;
+    region:        Region;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
+    "command-id"?:                          string;
+    "document-name"?:                       DocumentName;
+    "expire-after"?:                        Date;
+    parameters?:                            Parameters;
+    "requested-date-time"?:                 Date;
+    status?:                                string;
+    "instance-id"?:                         string;
+    ExecutionId?:                           string;
+    Definition?:                            string;
+    DefinitionVersion?:                     number;
+    Status?:                                string;
+    EndTime?:                               string;
+    StartTime?:                             string;
+    Time?:                                  number;
+    StepName?:                              string;
+    Action?:                                string;
+    ExecutedBy?:                            string;
+    "window-target-id"?:                    string;
+    "window-id"?:                           string;
+    "start-time"?:                          Date;
+    "end-time"?:                            Date;
+    "window-execution-id"?:                 string;
+    "task-execution-id"?:                   string;
+    "owner-information"?:                   string;
+    "window-task-id"?:                      string;
+    operation?:                             string;
+    name?:                                  string;
+    type?:                                  string;
+    description?:                           string;
+    "policy-type"?:                         string;
+    "parameter-name"?:                      string;
+    "parameter-type"?:                      string;
+    "policy-content"?:                      string;
+    "action-status"?:                       string;
+    "action-reason"?:                       string;
+    "association-id"?:                      string;
+    "association-version"?:                 string;
+    "document-version"?:                    string;
+    targets?:                               string;
+    "creation-date"?:                       Date;
+    "last-successful-execution-date"?:      Date;
+    "last-execution-date"?:                 Date;
+    "last-updated-date"?:                   Date;
+    "association-status-aggregated-count"?: string;
+    "schedule-expression"?:                 string;
+    "association-cwe-version"?:             string;
+    "detailed-status"?:                     string;
+    "error-code"?:                          string;
+    "execution-summary"?:                   string;
+    "output-url"?:                          string;
+    "instance-association-cwe-version"?:    string;
+    "last-runtime"?:                        Date;
+    "compliance-status"?:                   string;
+    "resource-type"?:                       string;
+    "resource-id"?:                         string;
+    "compliance-type"?:                     string;
+    "patch-baseline-id"?:                   string;
+    severity?:                              string;
+    state?:                                 string;
+    atTime?:                                Date;
+    event?:                                 string;
+    nextTransitionTime?:                    Date;
 }
 
-export interface DetailProperties {
-    "command-id":                          ID;
-    "document-name":                       Items;
-    "expire-after":                        ID;
-    parameters:                            Items;
-    "requested-date-time":                 ID;
-    status:                                Account;
-    "instance-id":                         Account;
-    ExecutionId:                           ID;
-    Definition:                            Account;
-    DefinitionVersion:                     Account;
-    Status:                                Account;
-    EndTime:                               Account;
-    StartTime:                             Account;
-    Time:                                  Account;
-    StepName:                              Account;
-    Action:                                Account;
-    ExecutedBy:                            Account;
-    "window-target-id":                    ID;
-    "window-id":                           Account;
-    "start-time":                          ID;
-    "end-time":                            ID;
-    "window-execution-id":                 ID;
-    "task-execution-id":                   ID;
-    "owner-information":                   Account;
-    "window-task-id":                      ID;
-    operation:                             Account;
-    name:                                  Account;
-    type:                                  Account;
-    description:                           Account;
-    "policy-type":                         Account;
-    "parameter-name":                      Account;
-    "parameter-type":                      Account;
-    "policy-content":                      Account;
-    "action-status":                       Account;
-    "action-reason":                       Account;
-    "association-id":                      ID;
-    "association-version":                 ID;
-    "document-version":                    Account;
-    targets:                               Account;
-    "creation-date":                       ID;
-    "last-successful-execution-date":      ID;
-    "last-execution-date":                 ID;
-    "last-updated-date":                   ID;
-    "association-status-aggregated-count": Account;
-    "schedule-expression":                 Account;
-    "association-cwe-version":             Account;
-    "detailed-status":                     Account;
-    "error-code":                          Account;
-    "execution-summary":                   Account;
-    "output-url":                          Account;
-    "instance-association-cwe-version":    ID;
-    "last-runtime":                        ID;
-    "compliance-status":                   Account;
-    "resource-type":                       Account;
-    "resource-id":                         Account;
-    "compliance-type":                     Account;
-    "patch-baseline-id":                   Account;
-    severity:                              Account;
-    state:                                 Account;
-    atTime:                                ID;
-    event:                                 Account;
-    nextTransitionTime:                    ID;
-}
-
-export interface DocumentName {
-    type:  Type;
-    enum:  string[];
-    title: string;
+export enum DocumentName {
+    AWSRunPowerShellScript = "AWS-RunPowerShellScript",
+    MyCustomDocument = "my-custom-document",
 }
 
 export interface Parameters {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ParametersProperties;
-    required:             string[];
-    title:                string;
+    executionTimeout: string[];
+    commands:         string[];
 }
 
-export interface ParametersProperties {
-    executionTimeout: ExecutionTimeout;
-    commands:         Resources;
+export enum Region {
+    UsEast1 = "us-east-1",
+    UsWest1 = "us-west-1",
+    UsWest2 = "us-west-2",
 }
 
-export interface ExecutionTimeout {
-    type:  string;
-    items: ID;
+export enum Source {
+    AwsSsm = "aws.ssm",
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSsm(json: string): AwsSsm {
-        return cast(JSON.parse(json), r("AwsSsm"));
+    public static toAwsSsm(json: string): AwsSsm[] {
+        return cast(JSON.parse(json), a(r("AwsSsm")));
     }
 
-    public static awsSsmToJson(value: AwsSsm): string {
-        return JSON.stringify(uncast(value, r("AwsSsm")), null, 2);
+    public static awsSsmToJson(value: AwsSsm[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSsm"))), null, 2);
     }
 }
 
@@ -315,149 +250,94 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSsm": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSsmElement", js: "AwsSsmElement", typ: r("AwsSsmElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Parameters", js: "Parameters", typ: r("Parameters") },
-        { json: "DocumentName", js: "DocumentName", typ: r("DocumentName") },
-        { json: "Region", js: "Region", typ: r("DocumentName") },
-        { json: "Source", js: "Source", typ: r("DocumentName") },
-    ], false),
-    "AwsSsmElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSsmElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSsmElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Items") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Items") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: r("Format") },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: r("Source") },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: r("Region") },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "command-id", js: "command-id", typ: r("ID") },
-        { json: "document-name", js: "document-name", typ: r("Items") },
-        { json: "expire-after", js: "expire-after", typ: r("ID") },
-        { json: "parameters", js: "parameters", typ: r("Items") },
-        { json: "requested-date-time", js: "requested-date-time", typ: r("ID") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "instance-id", js: "instance-id", typ: r("Account") },
-        { json: "ExecutionId", js: "ExecutionId", typ: r("ID") },
-        { json: "Definition", js: "Definition", typ: r("Account") },
-        { json: "DefinitionVersion", js: "DefinitionVersion", typ: r("Account") },
-        { json: "Status", js: "Status", typ: r("Account") },
-        { json: "EndTime", js: "EndTime", typ: r("Account") },
-        { json: "StartTime", js: "StartTime", typ: r("Account") },
-        { json: "Time", js: "Time", typ: r("Account") },
-        { json: "StepName", js: "StepName", typ: r("Account") },
-        { json: "Action", js: "Action", typ: r("Account") },
-        { json: "ExecutedBy", js: "ExecutedBy", typ: r("Account") },
-        { json: "window-target-id", js: "window-target-id", typ: r("ID") },
-        { json: "window-id", js: "window-id", typ: r("Account") },
-        { json: "start-time", js: "start-time", typ: r("ID") },
-        { json: "end-time", js: "end-time", typ: r("ID") },
-        { json: "window-execution-id", js: "window-execution-id", typ: r("ID") },
-        { json: "task-execution-id", js: "task-execution-id", typ: r("ID") },
-        { json: "owner-information", js: "owner-information", typ: r("Account") },
-        { json: "window-task-id", js: "window-task-id", typ: r("ID") },
-        { json: "operation", js: "operation", typ: r("Account") },
-        { json: "name", js: "name", typ: r("Account") },
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "description", js: "description", typ: r("Account") },
-        { json: "policy-type", js: "policy-type", typ: r("Account") },
-        { json: "parameter-name", js: "parameter-name", typ: r("Account") },
-        { json: "parameter-type", js: "parameter-type", typ: r("Account") },
-        { json: "policy-content", js: "policy-content", typ: r("Account") },
-        { json: "action-status", js: "action-status", typ: r("Account") },
-        { json: "action-reason", js: "action-reason", typ: r("Account") },
-        { json: "association-id", js: "association-id", typ: r("ID") },
-        { json: "association-version", js: "association-version", typ: r("ID") },
-        { json: "document-version", js: "document-version", typ: r("Account") },
-        { json: "targets", js: "targets", typ: r("Account") },
-        { json: "creation-date", js: "creation-date", typ: r("ID") },
-        { json: "last-successful-execution-date", js: "last-successful-execution-date", typ: r("ID") },
-        { json: "last-execution-date", js: "last-execution-date", typ: r("ID") },
-        { json: "last-updated-date", js: "last-updated-date", typ: r("ID") },
-        { json: "association-status-aggregated-count", js: "association-status-aggregated-count", typ: r("Account") },
-        { json: "schedule-expression", js: "schedule-expression", typ: r("Account") },
-        { json: "association-cwe-version", js: "association-cwe-version", typ: r("Account") },
-        { json: "detailed-status", js: "detailed-status", typ: r("Account") },
-        { json: "error-code", js: "error-code", typ: r("Account") },
-        { json: "execution-summary", js: "execution-summary", typ: r("Account") },
-        { json: "output-url", js: "output-url", typ: r("Account") },
-        { json: "instance-association-cwe-version", js: "instance-association-cwe-version", typ: r("ID") },
-        { json: "last-runtime", js: "last-runtime", typ: r("ID") },
-        { json: "compliance-status", js: "compliance-status", typ: r("Account") },
-        { json: "resource-type", js: "resource-type", typ: r("Account") },
-        { json: "resource-id", js: "resource-id", typ: r("Account") },
-        { json: "compliance-type", js: "compliance-type", typ: r("Account") },
-        { json: "patch-baseline-id", js: "patch-baseline-id", typ: r("Account") },
-        { json: "severity", js: "severity", typ: r("Account") },
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "atTime", js: "atTime", typ: r("ID") },
-        { json: "event", js: "event", typ: r("Account") },
-        { json: "nextTransitionTime", js: "nextTransitionTime", typ: r("ID") },
-    ], false),
-    "DocumentName": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "enum", js: "enum", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "command-id", js: "command-id", typ: u(undefined, "") },
+        { json: "document-name", js: "document-name", typ: u(undefined, r("DocumentName")) },
+        { json: "expire-after", js: "expire-after", typ: u(undefined, Date) },
+        { json: "parameters", js: "parameters", typ: u(undefined, r("Parameters")) },
+        { json: "requested-date-time", js: "requested-date-time", typ: u(undefined, Date) },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "instance-id", js: "instance-id", typ: u(undefined, "") },
+        { json: "ExecutionId", js: "ExecutionId", typ: u(undefined, "") },
+        { json: "Definition", js: "Definition", typ: u(undefined, "") },
+        { json: "DefinitionVersion", js: "DefinitionVersion", typ: u(undefined, 0) },
+        { json: "Status", js: "Status", typ: u(undefined, "") },
+        { json: "EndTime", js: "EndTime", typ: u(undefined, "") },
+        { json: "StartTime", js: "StartTime", typ: u(undefined, "") },
+        { json: "Time", js: "Time", typ: u(undefined, 0) },
+        { json: "StepName", js: "StepName", typ: u(undefined, "") },
+        { json: "Action", js: "Action", typ: u(undefined, "") },
+        { json: "ExecutedBy", js: "ExecutedBy", typ: u(undefined, "") },
+        { json: "window-target-id", js: "window-target-id", typ: u(undefined, "") },
+        { json: "window-id", js: "window-id", typ: u(undefined, "") },
+        { json: "start-time", js: "start-time", typ: u(undefined, Date) },
+        { json: "end-time", js: "end-time", typ: u(undefined, Date) },
+        { json: "window-execution-id", js: "window-execution-id", typ: u(undefined, "") },
+        { json: "task-execution-id", js: "task-execution-id", typ: u(undefined, "") },
+        { json: "owner-information", js: "owner-information", typ: u(undefined, "") },
+        { json: "window-task-id", js: "window-task-id", typ: u(undefined, "") },
+        { json: "operation", js: "operation", typ: u(undefined, "") },
+        { json: "name", js: "name", typ: u(undefined, "") },
+        { json: "type", js: "type", typ: u(undefined, "") },
+        { json: "description", js: "description", typ: u(undefined, "") },
+        { json: "policy-type", js: "policy-type", typ: u(undefined, "") },
+        { json: "parameter-name", js: "parameter-name", typ: u(undefined, "") },
+        { json: "parameter-type", js: "parameter-type", typ: u(undefined, "") },
+        { json: "policy-content", js: "policy-content", typ: u(undefined, "") },
+        { json: "action-status", js: "action-status", typ: u(undefined, "") },
+        { json: "action-reason", js: "action-reason", typ: u(undefined, "") },
+        { json: "association-id", js: "association-id", typ: u(undefined, "") },
+        { json: "association-version", js: "association-version", typ: u(undefined, "") },
+        { json: "document-version", js: "document-version", typ: u(undefined, "") },
+        { json: "targets", js: "targets", typ: u(undefined, "") },
+        { json: "creation-date", js: "creation-date", typ: u(undefined, Date) },
+        { json: "last-successful-execution-date", js: "last-successful-execution-date", typ: u(undefined, Date) },
+        { json: "last-execution-date", js: "last-execution-date", typ: u(undefined, Date) },
+        { json: "last-updated-date", js: "last-updated-date", typ: u(undefined, Date) },
+        { json: "association-status-aggregated-count", js: "association-status-aggregated-count", typ: u(undefined, "") },
+        { json: "schedule-expression", js: "schedule-expression", typ: u(undefined, "") },
+        { json: "association-cwe-version", js: "association-cwe-version", typ: u(undefined, "") },
+        { json: "detailed-status", js: "detailed-status", typ: u(undefined, "") },
+        { json: "error-code", js: "error-code", typ: u(undefined, "") },
+        { json: "execution-summary", js: "execution-summary", typ: u(undefined, "") },
+        { json: "output-url", js: "output-url", typ: u(undefined, "") },
+        { json: "instance-association-cwe-version", js: "instance-association-cwe-version", typ: u(undefined, "") },
+        { json: "last-runtime", js: "last-runtime", typ: u(undefined, Date) },
+        { json: "compliance-status", js: "compliance-status", typ: u(undefined, "") },
+        { json: "resource-type", js: "resource-type", typ: u(undefined, "") },
+        { json: "resource-id", js: "resource-id", typ: u(undefined, "") },
+        { json: "compliance-type", js: "compliance-type", typ: u(undefined, "") },
+        { json: "patch-baseline-id", js: "patch-baseline-id", typ: u(undefined, "") },
+        { json: "severity", js: "severity", typ: u(undefined, "") },
+        { json: "state", js: "state", typ: u(undefined, "") },
+        { json: "atTime", js: "atTime", typ: u(undefined, Date) },
+        { json: "event", js: "event", typ: u(undefined, "") },
+        { json: "nextTransitionTime", js: "nextTransitionTime", typ: u(undefined, Date) },
     ], false),
     "Parameters": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ParametersProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "executionTimeout", js: "executionTimeout", typ: a("") },
+        { json: "commands", js: "commands", typ: a("") },
     ], false),
-    "ParametersProperties": o([
-        { json: "executionTimeout", js: "executionTimeout", typ: r("ExecutionTimeout") },
-        { json: "commands", js: "commands", typ: r("Resources") },
-    ], false),
-    "ExecutionTimeout": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ID") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
+    "DocumentName": [
+        "AWS-RunPowerShellScript",
+        "my-custom-document",
     ],
-    "Format": [
-        "date-time",
-        "integer",
-        "uuid",
+    "Region": [
+        "us-east-1",
+        "us-west-1",
+        "us-west-2",
+    ],
+    "Source": [
+        "aws.ssm",
     ],
 };

@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsDevopsGuru } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsDevopsGuru = Convert.toAwsDevopsGuru(json);
 //
@@ -8,255 +8,97 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsDevopsGuru {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsDevopsGuruElement: AwsDevopsGuruElement;
-    Detail:               Detail;
-    Anomaly:              Anomaly;
-    SourceDetail:         SourceDetail;
-    DataIdentifiers:      DataIdentifiers;
-    Dimension:            Dimension;
-    Recommendation:       Recommendation;
-    RelatedAnomaly:       RelatedAnomaly;
-    Resource:             Resource;
-    SourceDetails:        SourceDetailsClass;
-    CloudWatchMetric:     CloudWatchMetric;
-    Dimensions:           Dimensions;
-}
-
-export interface Anomaly {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AnomalyProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AnomalyProperties {
-    startTime:     EndTime;
-    id:            EndTime;
-    sourceDetails: SourceDetails;
-    endTime:       EndTime;
-}
-
-export interface EndTime {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface SourceDetails {
-    type:  string;
-    items: DetailClass;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface AwsDevopsGuruElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsDevopsGuruElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsDevopsGuruElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": EndTime;
-    source:        EndTime;
-    account:       EndTime;
-    time:          ID;
-    region:        EndTime;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: RelatedEventsItems;
-}
-
-export interface RelatedEventsItems {
-}
-
-export interface CloudWatchMetric {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           CloudWatchMetricProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface CloudWatchMetricProperties {
-    metricName: EndTime;
-    namespace:  EndTime;
-}
-
-export interface DataIdentifiers {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DataIdentifiersProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DataIdentifiersProperties {
-    period:       ID;
-    stat:         EndTime;
-    unit:         EndTime;
-    name:         EndTime;
-    namespace:    EndTime;
-    dimensions:   DetailClass;
-    ResourceId:   EndTime;
-    ResourceType: EndTime;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    insightSeverity?:    string;
+    insightDescription?: string;
+    insightType?:        string;
+    anomalies?:          Anomaly[];
+    accountId:           string;
+    messageType:         string;
+    insightUrl?:         string;
+    startTime?:          string;
+    insightId:           string;
+    region:              string;
+    endTime?:            string;
+    recommendations?:    Recommendation[];
 }
 
-export interface DetailProperties {
-    insightSeverity:    EndTime;
-    insightDescription: EndTime;
-    insightType:        EndTime;
-    anomalies:          SourceDetails;
-    accountId:          EndTime;
-    messageType:        EndTime;
-    insightUrl:         InsightURL;
-    startTime:          EndTime;
-    insightId:          EndTime;
-    region:             EndTime;
-    endTime:            EndTime;
-    recommendations:    SourceDetails;
-}
-
-export interface InsightURL {
-    type:                 Type;
-    format:               string;
-    "qt-uri-protocols":   string[];
-    "qt-uri-extensions"?: string[];
-}
-
-export interface Dimension {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DimensionProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DimensionProperties {
-    name:  EndTime;
-    value: EndTime;
-}
-
-export interface Dimensions {
-    anyOf: AnyOf[];
-    title: string;
-}
-
-export interface AnyOf {
-    type?:  string;
-    items?: DetailClass;
-    $ref?:  string;
-}
-
-export interface Recommendation {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RecommendationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RecommendationProperties {
-    name:             EndTime;
-    description:      EndTime;
-    reason:           EndTime;
-    link:             InsightURL;
-    relatedEvents:    Resources;
-    relatedAnomalies: SourceDetails;
-}
-
-export interface RelatedAnomaly {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RelatedAnomalyProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RelatedAnomalyProperties {
-    sourceDetails: DetailClass;
-    resources:     SourceDetails;
-}
-
-export interface Resource {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResourceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResourceProperties {
-    name: EndTime;
-    type: EndTime;
+export interface Anomaly {
+    startTime:     string;
+    id:            string;
+    sourceDetails: SourceDetail[];
+    endTime?:      string;
 }
 
 export interface SourceDetail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SourceDetailProperties;
-    required:             string[];
-    title:                string;
+    dataSource:      string;
+    dataIdentifiers: DataIdentifiers;
 }
 
-export interface SourceDetailProperties {
-    dataSource:      EndTime;
-    dataIdentifiers: DetailClass;
+export interface DataIdentifiers {
+    period:        string;
+    stat:          string;
+    unit:          string;
+    name:          string;
+    namespace:     string;
+    dimensions:    Dimension[] | Dimension;
+    ResourceId?:   string;
+    ResourceType?: string;
 }
 
-export interface SourceDetailsClass {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SourceDetailsProperties;
-    required:             string[];
-    title:                string;
+export interface Dimension {
+    name:  string;
+    value: string;
 }
 
-export interface SourceDetailsProperties {
-    cloudWatchMetrics: SourceDetails;
+export interface Recommendation {
+    name:             string;
+    description:      string;
+    reason:           string;
+    link:             string;
+    relatedEvents:    any[];
+    relatedAnomalies: RelatedAnomaly[];
+}
+
+export interface RelatedAnomaly {
+    sourceDetails: SourceDetails;
+    resources:     Resource[];
+}
+
+export interface Resource {
+    name: string;
+    type: string;
+}
+
+export interface SourceDetails {
+    cloudWatchMetrics: CloudWatchMetric[];
+}
+
+export interface CloudWatchMetric {
+    metricName: string;
+    namespace:  string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsDevopsGuru(json: string): AwsDevopsGuru {
-        return cast(JSON.parse(json), r("AwsDevopsGuru"));
+    public static toAwsDevopsGuru(json: string): AwsDevopsGuru[] {
+        return cast(JSON.parse(json), a(r("AwsDevopsGuru")));
     }
 
-    public static awsDevopsGuruToJson(value: AwsDevopsGuru): string {
-        return JSON.stringify(uncast(value, r("AwsDevopsGuru")), null, 2);
+    public static awsDevopsGuruToJson(value: AwsDevopsGuru[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsDevopsGuru"))), null, 2);
     }
 }
 
@@ -394,210 +236,75 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsDevopsGuru": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsDevopsGuruElement", js: "AwsDevopsGuruElement", typ: r("AwsDevopsGuruElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Anomaly", js: "Anomaly", typ: r("Anomaly") },
-        { json: "SourceDetail", js: "SourceDetail", typ: r("SourceDetail") },
-        { json: "DataIdentifiers", js: "DataIdentifiers", typ: r("DataIdentifiers") },
-        { json: "Dimension", js: "Dimension", typ: r("Dimension") },
-        { json: "Recommendation", js: "Recommendation", typ: r("Recommendation") },
-        { json: "RelatedAnomaly", js: "RelatedAnomaly", typ: r("RelatedAnomaly") },
-        { json: "Resource", js: "Resource", typ: r("Resource") },
-        { json: "SourceDetails", js: "SourceDetails", typ: r("SourceDetailsClass") },
-        { json: "CloudWatchMetric", js: "CloudWatchMetric", typ: r("CloudWatchMetric") },
-        { json: "Dimensions", js: "Dimensions", typ: r("Dimensions") },
-    ], false),
-    "Anomaly": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AnomalyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AnomalyProperties": o([
-        { json: "startTime", js: "startTime", typ: r("EndTime") },
-        { json: "id", js: "id", typ: r("EndTime") },
-        { json: "sourceDetails", js: "sourceDetails", typ: r("SourceDetails") },
-        { json: "endTime", js: "endTime", typ: r("EndTime") },
-    ], false),
-    "EndTime": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "SourceDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "AwsDevopsGuruElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsDevopsGuruElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsDevopsGuruElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("EndTime") },
-        { json: "source", js: "source", typ: r("EndTime") },
-        { json: "account", js: "account", typ: r("EndTime") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("EndTime") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("RelatedEventsItems") },
-    ], false),
-    "RelatedEventsItems": o([
-    ], false),
-    "CloudWatchMetric": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("CloudWatchMetricProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "CloudWatchMetricProperties": o([
-        { json: "metricName", js: "metricName", typ: r("EndTime") },
-        { json: "namespace", js: "namespace", typ: r("EndTime") },
-    ], false),
-    "DataIdentifiers": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataIdentifiersProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DataIdentifiersProperties": o([
-        { json: "period", js: "period", typ: r("ID") },
-        { json: "stat", js: "stat", typ: r("EndTime") },
-        { json: "unit", js: "unit", typ: r("EndTime") },
-        { json: "name", js: "name", typ: r("EndTime") },
-        { json: "namespace", js: "namespace", typ: r("EndTime") },
-        { json: "dimensions", js: "dimensions", typ: r("DetailClass") },
-        { json: "ResourceId", js: "ResourceId", typ: r("EndTime") },
-        { json: "ResourceType", js: "ResourceType", typ: r("EndTime") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "insightSeverity", js: "insightSeverity", typ: u(undefined, "") },
+        { json: "insightDescription", js: "insightDescription", typ: u(undefined, "") },
+        { json: "insightType", js: "insightType", typ: u(undefined, "") },
+        { json: "anomalies", js: "anomalies", typ: u(undefined, a(r("Anomaly"))) },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "messageType", js: "messageType", typ: "" },
+        { json: "insightUrl", js: "insightUrl", typ: u(undefined, "") },
+        { json: "startTime", js: "startTime", typ: u(undefined, "") },
+        { json: "insightId", js: "insightId", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "endTime", js: "endTime", typ: u(undefined, "") },
+        { json: "recommendations", js: "recommendations", typ: u(undefined, a(r("Recommendation"))) },
     ], false),
-    "DetailProperties": o([
-        { json: "insightSeverity", js: "insightSeverity", typ: r("EndTime") },
-        { json: "insightDescription", js: "insightDescription", typ: r("EndTime") },
-        { json: "insightType", js: "insightType", typ: r("EndTime") },
-        { json: "anomalies", js: "anomalies", typ: r("SourceDetails") },
-        { json: "accountId", js: "accountId", typ: r("EndTime") },
-        { json: "messageType", js: "messageType", typ: r("EndTime") },
-        { json: "insightUrl", js: "insightUrl", typ: r("InsightURL") },
-        { json: "startTime", js: "startTime", typ: r("EndTime") },
-        { json: "insightId", js: "insightId", typ: r("EndTime") },
-        { json: "region", js: "region", typ: r("EndTime") },
-        { json: "endTime", js: "endTime", typ: r("EndTime") },
-        { json: "recommendations", js: "recommendations", typ: r("SourceDetails") },
-    ], false),
-    "InsightURL": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-        { json: "qt-uri-protocols", js: "qt-uri-protocols", typ: a("") },
-        { json: "qt-uri-extensions", js: "qt-uri-extensions", typ: u(undefined, a("")) },
-    ], false),
-    "Dimension": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DimensionProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DimensionProperties": o([
-        { json: "name", js: "name", typ: r("EndTime") },
-        { json: "value", js: "value", typ: r("EndTime") },
-    ], false),
-    "Dimensions": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("AnyOf")) },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AnyOf": o([
-        { json: "type", js: "type", typ: u(undefined, "") },
-        { json: "items", js: "items", typ: u(undefined, r("DetailClass")) },
-        { json: "$ref", js: "$ref", typ: u(undefined, "") },
-    ], false),
-    "Recommendation": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RecommendationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RecommendationProperties": o([
-        { json: "name", js: "name", typ: r("EndTime") },
-        { json: "description", js: "description", typ: r("EndTime") },
-        { json: "reason", js: "reason", typ: r("EndTime") },
-        { json: "link", js: "link", typ: r("InsightURL") },
-        { json: "relatedEvents", js: "relatedEvents", typ: r("Resources") },
-        { json: "relatedAnomalies", js: "relatedAnomalies", typ: r("SourceDetails") },
-    ], false),
-    "RelatedAnomaly": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RelatedAnomalyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RelatedAnomalyProperties": o([
-        { json: "sourceDetails", js: "sourceDetails", typ: r("DetailClass") },
-        { json: "resources", js: "resources", typ: r("SourceDetails") },
-    ], false),
-    "Resource": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResourceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResourceProperties": o([
-        { json: "name", js: "name", typ: r("EndTime") },
-        { json: "type", js: "type", typ: r("EndTime") },
+    "Anomaly": o([
+        { json: "startTime", js: "startTime", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "sourceDetails", js: "sourceDetails", typ: a(r("SourceDetail")) },
+        { json: "endTime", js: "endTime", typ: u(undefined, "") },
     ], false),
     "SourceDetail": o([
+        { json: "dataSource", js: "dataSource", typ: "" },
+        { json: "dataIdentifiers", js: "dataIdentifiers", typ: r("DataIdentifiers") },
+    ], false),
+    "DataIdentifiers": o([
+        { json: "period", js: "period", typ: "" },
+        { json: "stat", js: "stat", typ: "" },
+        { json: "unit", js: "unit", typ: "" },
+        { json: "name", js: "name", typ: "" },
+        { json: "namespace", js: "namespace", typ: "" },
+        { json: "dimensions", js: "dimensions", typ: u(a(r("Dimension")), r("Dimension")) },
+        { json: "ResourceId", js: "ResourceId", typ: u(undefined, "") },
+        { json: "ResourceType", js: "ResourceType", typ: u(undefined, "") },
+    ], false),
+    "Dimension": o([
+        { json: "name", js: "name", typ: "" },
+        { json: "value", js: "value", typ: "" },
+    ], false),
+    "Recommendation": o([
+        { json: "name", js: "name", typ: "" },
+        { json: "description", js: "description", typ: "" },
+        { json: "reason", js: "reason", typ: "" },
+        { json: "link", js: "link", typ: "" },
+        { json: "relatedEvents", js: "relatedEvents", typ: a("any") },
+        { json: "relatedAnomalies", js: "relatedAnomalies", typ: a(r("RelatedAnomaly")) },
+    ], false),
+    "RelatedAnomaly": o([
+        { json: "sourceDetails", js: "sourceDetails", typ: r("SourceDetails") },
+        { json: "resources", js: "resources", typ: a(r("Resource")) },
+    ], false),
+    "Resource": o([
+        { json: "name", js: "name", typ: "" },
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SourceDetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
     ], false),
-    "SourceDetailProperties": o([
-        { json: "dataSource", js: "dataSource", typ: r("EndTime") },
-        { json: "dataIdentifiers", js: "dataIdentifiers", typ: r("DetailClass") },
+    "SourceDetails": o([
+        { json: "cloudWatchMetrics", js: "cloudWatchMetrics", typ: a(r("CloudWatchMetric")) },
     ], false),
-    "SourceDetailsClass": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SourceDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+    "CloudWatchMetric": o([
+        { json: "metricName", js: "metricName", typ: "" },
+        { json: "namespace", js: "namespace", typ: "" },
     ], false),
-    "SourceDetailsProperties": o([
-        { json: "cloudWatchMetrics", js: "cloudWatchMetrics", typ: r("SourceDetails") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

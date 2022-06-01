@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCodeartifact } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCodeartifact = Convert.toAwsCodeartifact(json);
 //
@@ -8,112 +8,50 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCodeartifact {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCodeartifactElement: AwsCodeartifactElement;
-    Detail:                 Detail;
-    Changes:                Changes;
-}
-
-export interface AwsCodeartifactElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCodeartifactElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCodeartifactElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Integer = "integer",
-    Null = "null",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Changes {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ChangesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ChangesProperties {
-    assetsAdded:     Account;
-    assetsRemoved:   Account;
-    metadataUpdated: Account;
-    assetsUpdated:   Account;
-    statusChanged:   Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    domainName:             string;
+    domainOwner:            string;
+    repositoryName:         string;
+    packageFormat:          string;
+    packageNamespace:       null;
+    packageName:            string;
+    packageVersion:         string;
+    packageVersionState:    string;
+    packageVersionRevision: string;
+    changes:                Changes;
+    operationType:          string;
+    sequenceNumber:         number;
+    eventDeduplicationId:   string;
 }
 
-export interface DetailProperties {
-    domainName:             Account;
-    domainOwner:            Account;
-    repositoryName:         Account;
-    packageFormat:          Account;
-    packageNamespace:       Account;
-    packageName:            Account;
-    packageVersion:         Account;
-    packageVersionState:    Account;
-    packageVersionRevision: Account;
-    changes:                Items;
-    operationType:          Account;
-    sequenceNumber:         Account;
-    eventDeduplicationId:   Account;
+export interface Changes {
+    assetsAdded:     number;
+    assetsRemoved:   number;
+    metadataUpdated: boolean;
+    assetsUpdated:   number;
+    statusChanged:   boolean;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCodeartifact(json: string): AwsCodeartifact {
-        return cast(JSON.parse(json), r("AwsCodeartifact"));
+    public static toAwsCodeartifact(json: string): AwsCodeartifact[] {
+        return cast(JSON.parse(json), a(r("AwsCodeartifact")));
     }
 
-    public static awsCodeartifactToJson(value: AwsCodeartifact): string {
-        return JSON.stringify(uncast(value, r("AwsCodeartifact")), null, 2);
+    public static awsCodeartifactToJson(value: AwsCodeartifact[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCodeartifact"))), null, 2);
     }
 }
 
@@ -251,88 +189,36 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCodeartifact": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCodeartifactElement", js: "AwsCodeartifactElement", typ: r("AwsCodeartifactElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Changes", js: "Changes", typ: r("Changes") },
-    ], false),
-    "AwsCodeartifactElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCodeartifactElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCodeartifactElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Changes": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ChangesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ChangesProperties": o([
-        { json: "assetsAdded", js: "assetsAdded", typ: r("Account") },
-        { json: "assetsRemoved", js: "assetsRemoved", typ: r("Account") },
-        { json: "metadataUpdated", js: "metadataUpdated", typ: r("Account") },
-        { json: "assetsUpdated", js: "assetsUpdated", typ: r("Account") },
-        { json: "statusChanged", js: "statusChanged", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "domainName", js: "domainName", typ: "" },
+        { json: "domainOwner", js: "domainOwner", typ: "" },
+        { json: "repositoryName", js: "repositoryName", typ: "" },
+        { json: "packageFormat", js: "packageFormat", typ: "" },
+        { json: "packageNamespace", js: "packageNamespace", typ: null },
+        { json: "packageName", js: "packageName", typ: "" },
+        { json: "packageVersion", js: "packageVersion", typ: "" },
+        { json: "packageVersionState", js: "packageVersionState", typ: "" },
+        { json: "packageVersionRevision", js: "packageVersionRevision", typ: "" },
+        { json: "changes", js: "changes", typ: r("Changes") },
+        { json: "operationType", js: "operationType", typ: "" },
+        { json: "sequenceNumber", js: "sequenceNumber", typ: 0 },
+        { json: "eventDeduplicationId", js: "eventDeduplicationId", typ: "" },
     ], false),
-    "DetailProperties": o([
-        { json: "domainName", js: "domainName", typ: r("Account") },
-        { json: "domainOwner", js: "domainOwner", typ: r("Account") },
-        { json: "repositoryName", js: "repositoryName", typ: r("Account") },
-        { json: "packageFormat", js: "packageFormat", typ: r("Account") },
-        { json: "packageNamespace", js: "packageNamespace", typ: r("Account") },
-        { json: "packageName", js: "packageName", typ: r("Account") },
-        { json: "packageVersion", js: "packageVersion", typ: r("Account") },
-        { json: "packageVersionState", js: "packageVersionState", typ: r("Account") },
-        { json: "packageVersionRevision", js: "packageVersionRevision", typ: r("Account") },
-        { json: "changes", js: "changes", typ: r("Items") },
-        { json: "operationType", js: "operationType", typ: r("Account") },
-        { json: "sequenceNumber", js: "sequenceNumber", typ: r("Account") },
-        { json: "eventDeduplicationId", js: "eventDeduplicationId", typ: r("Account") },
+    "Changes": o([
+        { json: "assetsAdded", js: "assetsAdded", typ: 0 },
+        { json: "assetsRemoved", js: "assetsRemoved", typ: 0 },
+        { json: "metadataUpdated", js: "metadataUpdated", typ: true },
+        { json: "assetsUpdated", js: "assetsUpdated", typ: 0 },
+        { json: "statusChanged", js: "statusChanged", typ: true },
     ], false),
-    "Type": [
-        "boolean",
-        "integer",
-        "null",
-        "string",
-    ],
 };

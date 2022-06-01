@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsGlue } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsGlue = Convert.toAwsGlue(json);
 //
@@ -8,108 +8,48 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsGlue {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsGlueElement:        AwsGlueElement;
-    Detail:                Detail;
-    NotificationCondition: NotificationCondition;
-}
-
-export interface AwsGlueElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsGlueElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsGlueElementProperties {
-    version:       Time;
-    id:            Account;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          Time;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface Time {
-    type:   Type;
-    format: string;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    jobName:               Account;
-    severity:              Account;
-    state:                 Account;
-    jobRunId:              Account;
-    message:               Account;
-    notificationCondition: Items;
-    startedOn:             Time;
-    databaseName:          Account;
-    changedPartitions:     Resources;
-    typeOfChange:          Account;
-    tableName:             Account;
-    accountId:             Account;
-    crawlerName:           Account;
-    startTime:             Time;
-    changedTables:         Resources;
+    jobName?:               string;
+    severity?:              string;
+    state?:                 string;
+    jobRunId?:              string;
+    message?:               string;
+    notificationCondition?: NotificationCondition;
+    startedOn?:             Date;
+    databaseName?:          string;
+    changedPartitions?:     string[];
+    typeOfChange?:          string;
+    tableName?:             string;
+    accountId?:             string;
+    crawlerName?:           string;
+    startTime?:             Date;
+    changedTables?:         string[];
 }
 
 export interface NotificationCondition {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           NotificationConditionProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface NotificationConditionProperties {
-    NotifyDelayAfter: Account;
+    NotifyDelayAfter: number;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsGlue(json: string): AwsGlue {
-        return cast(JSON.parse(json), r("AwsGlue"));
+    public static toAwsGlue(json: string): AwsGlue[] {
+        return cast(JSON.parse(json), a(r("AwsGlue")));
     }
 
-    public static awsGlueToJson(value: AwsGlue): string {
-        return JSON.stringify(uncast(value, r("AwsGlue")), null, 2);
+    public static awsGlueToJson(value: AwsGlue[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsGlue"))), null, 2);
     }
 }
 
@@ -247,84 +187,34 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsGlue": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsGlueElement", js: "AwsGlueElement", typ: r("AwsGlueElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "NotificationCondition", js: "NotificationCondition", typ: r("NotificationCondition") },
-    ], false),
-    "AwsGlueElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsGlueElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsGlueElementProperties": o([
-        { json: "version", js: "version", typ: r("Time") },
-        { json: "id", js: "id", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("Time") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "Time": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "jobName", js: "jobName", typ: r("Account") },
-        { json: "severity", js: "severity", typ: r("Account") },
-        { json: "state", js: "state", typ: r("Account") },
-        { json: "jobRunId", js: "jobRunId", typ: r("Account") },
-        { json: "message", js: "message", typ: r("Account") },
-        { json: "notificationCondition", js: "notificationCondition", typ: r("Items") },
-        { json: "startedOn", js: "startedOn", typ: r("Time") },
-        { json: "databaseName", js: "databaseName", typ: r("Account") },
-        { json: "changedPartitions", js: "changedPartitions", typ: r("Resources") },
-        { json: "typeOfChange", js: "typeOfChange", typ: r("Account") },
-        { json: "tableName", js: "tableName", typ: r("Account") },
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "crawlerName", js: "crawlerName", typ: r("Account") },
-        { json: "startTime", js: "startTime", typ: r("Time") },
-        { json: "changedTables", js: "changedTables", typ: r("Resources") },
+        { json: "jobName", js: "jobName", typ: u(undefined, "") },
+        { json: "severity", js: "severity", typ: u(undefined, "") },
+        { json: "state", js: "state", typ: u(undefined, "") },
+        { json: "jobRunId", js: "jobRunId", typ: u(undefined, "") },
+        { json: "message", js: "message", typ: u(undefined, "") },
+        { json: "notificationCondition", js: "notificationCondition", typ: u(undefined, r("NotificationCondition")) },
+        { json: "startedOn", js: "startedOn", typ: u(undefined, Date) },
+        { json: "databaseName", js: "databaseName", typ: u(undefined, "") },
+        { json: "changedPartitions", js: "changedPartitions", typ: u(undefined, a("")) },
+        { json: "typeOfChange", js: "typeOfChange", typ: u(undefined, "") },
+        { json: "tableName", js: "tableName", typ: u(undefined, "") },
+        { json: "accountId", js: "accountId", typ: u(undefined, "") },
+        { json: "crawlerName", js: "crawlerName", typ: u(undefined, "") },
+        { json: "startTime", js: "startTime", typ: u(undefined, Date) },
+        { json: "changedTables", js: "changedTables", typ: u(undefined, a("")) },
     ], false),
     "NotificationCondition": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("NotificationConditionProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "NotifyDelayAfter", js: "NotifyDelayAfter", typ: 0 },
     ], false),
-    "NotificationConditionProperties": o([
-        { json: "NotifyDelayAfter", js: "NotifyDelayAfter", typ: r("Account") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

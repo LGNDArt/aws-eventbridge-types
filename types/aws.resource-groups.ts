@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsResourceGroups } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsResourceGroups = Convert.toAwsResourceGroups(json);
 //
@@ -8,246 +8,107 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsResourceGroups {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsResourceGroup:    AwsResourceGroup;
-    Detail:              Detail;
-    RequestParameters:   RequestParameters;
-    ResourceQuery:       ResourceQuery;
-    ResponseElements:    ResponseElements;
-    Group:               Group;
-    GroupQuery:          GroupQuery;
-    UserIdentity:        UserIdentity;
-    SessionContext:      SessionContext;
-    Attributes:          Attributes;
-    SessionIssuer:       SessionIssuer;
-    WebIDFederationData: WebIDFederationData;
-}
-
-export interface Attributes {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AttributesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AttributesProperties {
-    creationDate:     CreationDate;
-    mfaAuthenticated: CreationDate;
-}
-
-export interface CreationDate {
-    type:   Type;
-    format: string;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    String = "string",
-}
-
-export interface AwsResourceGroup {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsResourceGroupProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsResourceGroupProperties {
-    version:       CreationDate;
-    id:            CreationDate;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          CreationDate;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    eventVersion:       Account;
-    userIdentity:       DetailClass;
-    eventTime:          CreationDate;
-    eventSource:        Account;
-    eventName:          Account;
-    awsRegion:          Account;
-    sourceIPAddress:    Account;
-    userAgent:          Account;
-    requestParameters:  DetailClass;
-    responseElements:   DetailClass;
-    requestID:          CreationDate;
-    eventID:            CreationDate;
-    readOnly:           Account;
-    eventType:          Account;
-    managementEvent:    Account;
-    recipientAccountId: Account;
-    eventCategory:      Account;
-}
-
-export interface Group {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           GroupProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface GroupProperties {
-    GroupArn:    Account;
-    Name:        Account;
-    Description: Account;
-    OwnerId:     Account;
-}
-
-export interface GroupQuery {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           GroupQueryProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface GroupQueryProperties {
-    GroupName:     Account;
-    ResourceQuery: DetailClass;
+    eventVersion:       string;
+    userIdentity:       UserIdentity;
+    eventTime:          Date;
+    eventSource:        string;
+    eventName:          string;
+    awsRegion:          string;
+    sourceIPAddress:    string;
+    userAgent:          string;
+    requestParameters:  RequestParameters;
+    responseElements:   ResponseElements;
+    requestID:          string;
+    eventID:            string;
+    readOnly:           boolean;
+    eventType:          string;
+    managementEvent:    boolean;
+    recipientAccountId: string;
+    eventCategory:      string;
 }
 
 export interface RequestParameters {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RequestParametersProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RequestParametersProperties {
-    Description:   Account;
-    Name:          Account;
-    ResourceQuery: DetailClass;
-    Group:         Account;
+    Description?:  string;
+    Name?:         string;
+    ResourceQuery: ResourceQuery;
+    Group?:        string;
 }
 
 export interface ResourceQuery {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResourceQueryProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResourceQueryProperties {
-    Type:  Account;
-    Query: Account;
+    Type:  string;
+    Query: string;
 }
 
 export interface ResponseElements {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResponseElementsProperties;
-    required:             any[];
-    title:                string;
+    Group?:         Group;
+    ResourceQuery?: ResourceQuery;
+    GroupQuery?:    GroupQuery;
 }
 
-export interface ResponseElementsProperties {
-    Group:         DetailClass;
-    ResourceQuery: DetailClass;
-    GroupQuery:    DetailClass;
+export interface Group {
+    GroupArn:    string;
+    Name:        string;
+    Description: string;
+    OwnerId:     string;
 }
 
-export interface SessionContext {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionContextProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionContextProperties {
-    sessionIssuer:       DetailClass;
-    webIdFederationData: DetailClass;
-    attributes:          DetailClass;
-}
-
-export interface SessionIssuer {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionIssuerProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionIssuerProperties {
-    type:        Account;
-    principalId: Account;
-    arn:         Account;
-    accountId:   Account;
-    userName:    Account;
+export interface GroupQuery {
+    GroupName:     string;
+    ResourceQuery: ResourceQuery;
 }
 
 export interface UserIdentity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UserIdentityProperties;
-    required:             string[];
-    title:                string;
+    type:           string;
+    principalId:    string;
+    arn:            string;
+    accountId:      string;
+    accessKeyId:    string;
+    sessionContext: SessionContext;
 }
 
-export interface UserIdentityProperties {
-    type:           Account;
-    principalId:    Account;
-    arn:            Account;
-    accountId:      Account;
-    accessKeyId:    Account;
-    sessionContext: DetailClass;
+export interface SessionContext {
+    sessionIssuer:       SessionIssuer;
+    webIdFederationData: WebIDFederationData;
+    attributes:          Attributes;
+}
+
+export interface Attributes {
+    creationDate:     Date;
+    mfaAuthenticated: string;
+}
+
+export interface SessionIssuer {
+    type:        string;
+    principalId: string;
+    arn:         string;
+    accountId:   string;
+    userName:    string;
 }
 
 export interface WebIDFederationData {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsResourceGroups(json: string): AwsResourceGroups {
-        return cast(JSON.parse(json), r("AwsResourceGroups"));
+    public static toAwsResourceGroups(json: string): AwsResourceGroups[] {
+        return cast(JSON.parse(json), a(r("AwsResourceGroups")));
     }
 
-    public static awsResourceGroupsToJson(value: AwsResourceGroups): string {
-        return JSON.stringify(uncast(value, r("AwsResourceGroups")), null, 2);
+    public static awsResourceGroupsToJson(value: AwsResourceGroups[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsResourceGroups"))), null, 2);
     }
 }
 
@@ -385,204 +246,84 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsResourceGroups": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsResourceGroup", js: "AwsResourceGroup", typ: r("AwsResourceGroup") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "RequestParameters", js: "RequestParameters", typ: r("RequestParameters") },
-        { json: "ResourceQuery", js: "ResourceQuery", typ: r("ResourceQuery") },
-        { json: "ResponseElements", js: "ResponseElements", typ: r("ResponseElements") },
-        { json: "Group", js: "Group", typ: r("Group") },
-        { json: "GroupQuery", js: "GroupQuery", typ: r("GroupQuery") },
-        { json: "UserIdentity", js: "UserIdentity", typ: r("UserIdentity") },
-        { json: "SessionContext", js: "SessionContext", typ: r("SessionContext") },
-        { json: "Attributes", js: "Attributes", typ: r("Attributes") },
-        { json: "SessionIssuer", js: "SessionIssuer", typ: r("SessionIssuer") },
-        { json: "WebIDFederationData", js: "WebIDFederationData", typ: r("WebIDFederationData") },
-    ], false),
-    "Attributes": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AttributesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AttributesProperties": o([
-        { json: "creationDate", js: "creationDate", typ: r("CreationDate") },
-        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: r("CreationDate") },
-    ], false),
-    "CreationDate": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "AwsResourceGroup": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsResourceGroupProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsResourceGroupProperties": o([
-        { json: "version", js: "version", typ: r("CreationDate") },
-        { json: "id", js: "id", typ: r("CreationDate") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("CreationDate") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("Account") },
-        { json: "userIdentity", js: "userIdentity", typ: r("DetailClass") },
-        { json: "eventTime", js: "eventTime", typ: r("CreationDate") },
-        { json: "eventSource", js: "eventSource", typ: r("Account") },
-        { json: "eventName", js: "eventName", typ: r("Account") },
-        { json: "awsRegion", js: "awsRegion", typ: r("Account") },
-        { json: "sourceIPAddress", js: "sourceIPAddress", typ: r("Account") },
-        { json: "userAgent", js: "userAgent", typ: r("Account") },
-        { json: "requestParameters", js: "requestParameters", typ: r("DetailClass") },
-        { json: "responseElements", js: "responseElements", typ: r("DetailClass") },
-        { json: "requestID", js: "requestID", typ: r("CreationDate") },
-        { json: "eventID", js: "eventID", typ: r("CreationDate") },
-        { json: "readOnly", js: "readOnly", typ: r("Account") },
-        { json: "eventType", js: "eventType", typ: r("Account") },
-        { json: "managementEvent", js: "managementEvent", typ: r("Account") },
-        { json: "recipientAccountId", js: "recipientAccountId", typ: r("Account") },
-        { json: "eventCategory", js: "eventCategory", typ: r("Account") },
-    ], false),
-    "Group": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("GroupProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "GroupProperties": o([
-        { json: "GroupArn", js: "GroupArn", typ: r("Account") },
-        { json: "Name", js: "Name", typ: r("Account") },
-        { json: "Description", js: "Description", typ: r("Account") },
-        { json: "OwnerId", js: "OwnerId", typ: r("Account") },
-    ], false),
-    "GroupQuery": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("GroupQueryProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "GroupQueryProperties": o([
-        { json: "GroupName", js: "GroupName", typ: r("Account") },
-        { json: "ResourceQuery", js: "ResourceQuery", typ: r("DetailClass") },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "userIdentity", js: "userIdentity", typ: r("UserIdentity") },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "sourceIPAddress", js: "sourceIPAddress", typ: "" },
+        { json: "userAgent", js: "userAgent", typ: "" },
+        { json: "requestParameters", js: "requestParameters", typ: r("RequestParameters") },
+        { json: "responseElements", js: "responseElements", typ: r("ResponseElements") },
+        { json: "requestID", js: "requestID", typ: "" },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "readOnly", js: "readOnly", typ: true },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "managementEvent", js: "managementEvent", typ: true },
+        { json: "recipientAccountId", js: "recipientAccountId", typ: "" },
+        { json: "eventCategory", js: "eventCategory", typ: "" },
     ], false),
     "RequestParameters": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RequestParametersProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RequestParametersProperties": o([
-        { json: "Description", js: "Description", typ: r("Account") },
-        { json: "Name", js: "Name", typ: r("Account") },
-        { json: "ResourceQuery", js: "ResourceQuery", typ: r("DetailClass") },
-        { json: "Group", js: "Group", typ: r("Account") },
+        { json: "Description", js: "Description", typ: u(undefined, "") },
+        { json: "Name", js: "Name", typ: u(undefined, "") },
+        { json: "ResourceQuery", js: "ResourceQuery", typ: r("ResourceQuery") },
+        { json: "Group", js: "Group", typ: u(undefined, "") },
     ], false),
     "ResourceQuery": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResourceQueryProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResourceQueryProperties": o([
-        { json: "Type", js: "Type", typ: r("Account") },
-        { json: "Query", js: "Query", typ: r("Account") },
+        { json: "Type", js: "Type", typ: "" },
+        { json: "Query", js: "Query", typ: "" },
     ], false),
     "ResponseElements": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResponseElementsProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "Group", js: "Group", typ: u(undefined, r("Group")) },
+        { json: "ResourceQuery", js: "ResourceQuery", typ: u(undefined, r("ResourceQuery")) },
+        { json: "GroupQuery", js: "GroupQuery", typ: u(undefined, r("GroupQuery")) },
     ], false),
-    "ResponseElementsProperties": o([
-        { json: "Group", js: "Group", typ: r("DetailClass") },
-        { json: "ResourceQuery", js: "ResourceQuery", typ: r("DetailClass") },
-        { json: "GroupQuery", js: "GroupQuery", typ: r("DetailClass") },
+    "Group": o([
+        { json: "GroupArn", js: "GroupArn", typ: "" },
+        { json: "Name", js: "Name", typ: "" },
+        { json: "Description", js: "Description", typ: "" },
+        { json: "OwnerId", js: "OwnerId", typ: "" },
     ], false),
-    "SessionContext": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionContextProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionContextProperties": o([
-        { json: "sessionIssuer", js: "sessionIssuer", typ: r("DetailClass") },
-        { json: "webIdFederationData", js: "webIdFederationData", typ: r("DetailClass") },
-        { json: "attributes", js: "attributes", typ: r("DetailClass") },
-    ], false),
-    "SessionIssuer": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionIssuerProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionIssuerProperties": o([
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "principalId", js: "principalId", typ: r("Account") },
-        { json: "arn", js: "arn", typ: r("Account") },
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "userName", js: "userName", typ: r("Account") },
+    "GroupQuery": o([
+        { json: "GroupName", js: "GroupName", typ: "" },
+        { json: "ResourceQuery", js: "ResourceQuery", typ: r("ResourceQuery") },
     ], false),
     "UserIdentity": o([
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UserIdentityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "accessKeyId", js: "accessKeyId", typ: "" },
+        { json: "sessionContext", js: "sessionContext", typ: r("SessionContext") },
     ], false),
-    "UserIdentityProperties": o([
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "principalId", js: "principalId", typ: r("Account") },
-        { json: "arn", js: "arn", typ: r("Account") },
-        { json: "accountId", js: "accountId", typ: r("Account") },
-        { json: "accessKeyId", js: "accessKeyId", typ: r("Account") },
-        { json: "sessionContext", js: "sessionContext", typ: r("DetailClass") },
+    "SessionContext": o([
+        { json: "sessionIssuer", js: "sessionIssuer", typ: r("SessionIssuer") },
+        { json: "webIdFederationData", js: "webIdFederationData", typ: r("WebIDFederationData") },
+        { json: "attributes", js: "attributes", typ: r("Attributes") },
+    ], false),
+    "Attributes": o([
+        { json: "creationDate", js: "creationDate", typ: Date },
+        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: "" },
+    ], false),
+    "SessionIssuer": o([
+        { json: "type", js: "type", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "userName", js: "userName", typ: "" },
     ], false),
     "WebIDFederationData": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
     ], false),
-    "Type": [
-        "boolean",
-        "string",
-    ],
 };

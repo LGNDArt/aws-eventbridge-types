@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsNetworkmanager } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsNetworkmanager = Convert.toAwsNetworkmanager(json);
 //
@@ -8,88 +8,38 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsNetworkmanager {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsNetworkmanagerElement: AwsNetworkmanagerElement;
-    Detail:                   Detail;
-}
-
-export interface AwsNetworkmanagerElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsNetworkmanagerElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsNetworkmanagerElementProperties {
-    account:       Account;
-    region:        Account;
-    "detail-type": Account;
-    source:        Account;
-    version:       ID;
-    time:          ID;
-    id:            ID;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    account:       string;
+    region:        string;
+    "detail-type": string;
+    source:        string;
+    version:       string;
+    time:          Date;
+    id:            string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    "change-type":                     Account;
-    "change-description":              Account;
-    region:                            Account;
-    "transit-gateway-arn":             Account;
-    "transit-gateway-attachment-arn":  Account;
-    "vpn-connection-arn":              Account;
-    "outside-ip-address":              Account;
-    "transit-gateway-route-table-arn": Account;
-    "peer-transit-gateway-arn":        Account;
+    "change-type":                      string;
+    "change-description":               string;
+    region:                             string;
+    "transit-gateway-arn":              string;
+    "transit-gateway-attachment-arn":   string;
+    "vpn-connection-arn"?:              string;
+    "outside-ip-address"?:              string;
+    "transit-gateway-route-table-arn"?: string;
+    "peer-transit-gateway-arn"?:        string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsNetworkmanager(json: string): AwsNetworkmanager {
-        return cast(JSON.parse(json), r("AwsNetworkmanager"));
+    public static toAwsNetworkmanager(json: string): AwsNetworkmanager[] {
+        return cast(JSON.parse(json), a(r("AwsNetworkmanager")));
     }
 
-    public static awsNetworkmanagerToJson(value: AwsNetworkmanager): string {
-        return JSON.stringify(uncast(value, r("AwsNetworkmanager")), null, 2);
+    public static awsNetworkmanagerToJson(value: AwsNetworkmanager[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsNetworkmanager"))), null, 2);
     }
 }
 
@@ -227,66 +177,25 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsNetworkmanager": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsNetworkmanagerElement", js: "AwsNetworkmanagerElement", typ: r("AwsNetworkmanagerElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsNetworkmanagerElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsNetworkmanagerElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsNetworkmanagerElementProperties": o([
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "account", js: "account", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "id", js: "id", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "change-type", js: "change-type", typ: "" },
+        { json: "change-description", js: "change-description", typ: "" },
+        { json: "region", js: "region", typ: "" },
+        { json: "transit-gateway-arn", js: "transit-gateway-arn", typ: "" },
+        { json: "transit-gateway-attachment-arn", js: "transit-gateway-attachment-arn", typ: "" },
+        { json: "vpn-connection-arn", js: "vpn-connection-arn", typ: u(undefined, "") },
+        { json: "outside-ip-address", js: "outside-ip-address", typ: u(undefined, "") },
+        { json: "transit-gateway-route-table-arn", js: "transit-gateway-route-table-arn", typ: u(undefined, "") },
+        { json: "peer-transit-gateway-arn", js: "peer-transit-gateway-arn", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "change-type", js: "change-type", typ: r("Account") },
-        { json: "change-description", js: "change-description", typ: r("Account") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "transit-gateway-arn", js: "transit-gateway-arn", typ: r("Account") },
-        { json: "transit-gateway-attachment-arn", js: "transit-gateway-attachment-arn", typ: r("Account") },
-        { json: "vpn-connection-arn", js: "vpn-connection-arn", typ: r("Account") },
-        { json: "outside-ip-address", js: "outside-ip-address", typ: r("Account") },
-        { json: "transit-gateway-route-table-arn", js: "transit-gateway-route-table-arn", typ: r("Account") },
-        { json: "peer-transit-gateway-arn", js: "peer-transit-gateway-arn", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

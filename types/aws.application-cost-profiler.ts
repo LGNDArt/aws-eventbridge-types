@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsApplicationCostProfiler } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsApplicationCostProfiler = Convert.toAwsApplicationCostProfiler(json);
 //
@@ -8,79 +8,30 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsApplicationCostProfiler {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsApplicationCostProfilerElement: AwsApplicationCostProfilerElement;
-    Detail:                            Detail;
-}
-
-export interface AwsApplicationCostProfilerElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsApplicationCostProfilerElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsApplicationCostProfilerElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    message: Account;
+    message: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsApplicationCostProfiler(json: string): AwsApplicationCostProfiler {
-        return cast(JSON.parse(json), r("AwsApplicationCostProfiler"));
+    public static toAwsApplicationCostProfiler(json: string): AwsApplicationCostProfiler[] {
+        return cast(JSON.parse(json), a(r("AwsApplicationCostProfiler")));
     }
 
-    public static awsApplicationCostProfilerToJson(value: AwsApplicationCostProfiler): string {
-        return JSON.stringify(uncast(value, r("AwsApplicationCostProfiler")), null, 2);
+    public static awsApplicationCostProfilerToJson(value: AwsApplicationCostProfiler[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsApplicationCostProfiler"))), null, 2);
     }
 }
 
@@ -218,57 +169,17 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsApplicationCostProfiler": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsApplicationCostProfilerElement", js: "AwsApplicationCostProfilerElement", typ: r("AwsApplicationCostProfilerElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsApplicationCostProfilerElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsApplicationCostProfilerElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsApplicationCostProfilerElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "message", js: "message", typ: r("Account") },
+        { json: "message", js: "message", typ: "" },
     ], false),
 };

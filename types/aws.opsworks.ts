@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsOpsworks } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsOpsworks = Convert.toAwsOpsworks(json);
 //
@@ -8,99 +8,43 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsOpsworks {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsOpswork: AwsOpswork;
-    Detail:     Detail;
-}
-
-export interface AwsOpswork {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsOpsworkProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsOpsworkProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             any[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    initiated_by:      Account;
-    hostname:          Account;
-    "stack-id":        ID;
-    "layer-ids":       IDS;
-    "instance-id":     ID;
-    "ec2-instance-id": Account;
-    status:            Account;
-    "command-id":      ID;
-    type:              Account;
-    duration:          Account;
-    "instance-ids":    IDS;
-    "deployment-id":   ID;
-    command:           Account;
-    message:           Account;
-}
-
-export interface IDS {
-    type:  string;
-    items: ID;
+    initiated_by?:      string;
+    hostname?:          string;
+    "stack-id"?:        string;
+    "layer-ids"?:       string[];
+    "instance-id"?:     string;
+    "ec2-instance-id"?: string;
+    status?:            string;
+    "command-id"?:      string;
+    type?:              string;
+    duration?:          number;
+    "instance-ids"?:    string[];
+    "deployment-id"?:   string;
+    command?:           string;
+    message?:           string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsOpsworks(json: string): AwsOpsworks {
-        return cast(JSON.parse(json), r("AwsOpsworks"));
+    public static toAwsOpsworks(json: string): AwsOpsworks[] {
+        return cast(JSON.parse(json), a(r("AwsOpsworks")));
     }
 
-    public static awsOpsworksToJson(value: AwsOpsworks): string {
-        return JSON.stringify(uncast(value, r("AwsOpsworks")), null, 2);
+    public static awsOpsworksToJson(value: AwsOpsworks[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsOpsworks"))), null, 2);
     }
 }
 
@@ -238,76 +182,30 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsOpsworks": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsOpswork", js: "AwsOpswork", typ: r("AwsOpswork") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsOpswork": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsOpsworkProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsOpsworkProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("any") },
-        { json: "title", js: "title", typ: "" },
+        { json: "initiated_by", js: "initiated_by", typ: u(undefined, "") },
+        { json: "hostname", js: "hostname", typ: u(undefined, "") },
+        { json: "stack-id", js: "stack-id", typ: u(undefined, "") },
+        { json: "layer-ids", js: "layer-ids", typ: u(undefined, a("")) },
+        { json: "instance-id", js: "instance-id", typ: u(undefined, "") },
+        { json: "ec2-instance-id", js: "ec2-instance-id", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "command-id", js: "command-id", typ: u(undefined, "") },
+        { json: "type", js: "type", typ: u(undefined, "") },
+        { json: "duration", js: "duration", typ: u(undefined, 0) },
+        { json: "instance-ids", js: "instance-ids", typ: u(undefined, a("")) },
+        { json: "deployment-id", js: "deployment-id", typ: u(undefined, "") },
+        { json: "command", js: "command", typ: u(undefined, "") },
+        { json: "message", js: "message", typ: u(undefined, "") },
     ], false),
-    "DetailProperties": o([
-        { json: "initiated_by", js: "initiated_by", typ: r("Account") },
-        { json: "hostname", js: "hostname", typ: r("Account") },
-        { json: "stack-id", js: "stack-id", typ: r("ID") },
-        { json: "layer-ids", js: "layer-ids", typ: r("IDS") },
-        { json: "instance-id", js: "instance-id", typ: r("ID") },
-        { json: "ec2-instance-id", js: "ec2-instance-id", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "command-id", js: "command-id", typ: r("ID") },
-        { json: "type", js: "type", typ: r("Account") },
-        { json: "duration", js: "duration", typ: r("Account") },
-        { json: "instance-ids", js: "instance-ids", typ: r("IDS") },
-        { json: "deployment-id", js: "deployment-id", typ: r("ID") },
-        { json: "command", js: "command", typ: r("Account") },
-        { json: "message", js: "message", typ: r("Account") },
-    ], false),
-    "IDS": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ID") },
-    ], false),
-    "Type": [
-        "integer",
-        "string",
-    ],
 };

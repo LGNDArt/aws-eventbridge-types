@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsCodeguruProfiler } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsCodeguruProfiler = Convert.toAwsCodeguruProfiler(json);
 //
@@ -8,119 +8,51 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsCodeguruProfiler {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsCodeguruProfilerElement: AwsCodeguruProfilerElement;
-    Detail:                     Detail;
-    Recommendation:             Recommendation;
-    Title:                      Title;
-}
-
-export interface AwsCodeguruProfilerElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsCodeguruProfilerElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsCodeguruProfilerElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: Type;
-}
-
-export enum Type {
-    String = "string",
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    schema:              ID;
-    expiresOn:           ID;
-    sourceUrl:           Account;
-    deduplicationId:     Account;
-    title:               Items;
-    eventStartTime:      ID;
-    eventEndTime:        ID;
-    severity:            Account;
-    status:              Account;
-    computeInstanceArns: Resources;
-    recommendation:      Items;
+    schema:              Date;
+    expiresOn:           Date;
+    sourceUrl:           string;
+    deduplicationId:     string;
+    title:               Title;
+    eventStartTime:      Date;
+    eventEndTime:        Date;
+    severity:            string;
+    status:              string;
+    computeInstanceArns: string[];
+    recommendation:      Recommendation;
 }
 
 export interface Recommendation {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RecommendationProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RecommendationProperties {
-    name:            Items;
-    description:     Items;
-    resolutionSteps: Items;
-    reason:          Items;
+    name:            Title;
+    description:     Title;
+    resolutionSteps: Title;
+    reason:          Title;
 }
 
 export interface Title {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           TitleProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface TitleProperties {
-    value: Account;
+    value: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsCodeguruProfiler(json: string): AwsCodeguruProfiler {
-        return cast(JSON.parse(json), r("AwsCodeguruProfiler"));
+    public static toAwsCodeguruProfiler(json: string): AwsCodeguruProfiler[] {
+        return cast(JSON.parse(json), a(r("AwsCodeguruProfiler")));
     }
 
-    public static awsCodeguruProfilerToJson(value: AwsCodeguruProfiler): string {
-        return JSON.stringify(uncast(value, r("AwsCodeguruProfiler")), null, 2);
+    public static awsCodeguruProfilerToJson(value: AwsCodeguruProfiler[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsCodeguruProfiler"))), null, 2);
     }
 }
 
@@ -258,93 +190,36 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsCodeguruProfiler": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsCodeguruProfilerElement", js: "AwsCodeguruProfilerElement", typ: r("AwsCodeguruProfilerElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "Recommendation", js: "Recommendation", typ: r("Recommendation") },
-        { json: "Title", js: "Title", typ: r("Title") },
-    ], false),
-    "AwsCodeguruProfilerElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsCodeguruProfilerElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsCodeguruProfilerElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "schema", js: "schema", typ: r("ID") },
-        { json: "expiresOn", js: "expiresOn", typ: r("ID") },
-        { json: "sourceUrl", js: "sourceUrl", typ: r("Account") },
-        { json: "deduplicationId", js: "deduplicationId", typ: r("Account") },
-        { json: "title", js: "title", typ: r("Items") },
-        { json: "eventStartTime", js: "eventStartTime", typ: r("ID") },
-        { json: "eventEndTime", js: "eventEndTime", typ: r("ID") },
-        { json: "severity", js: "severity", typ: r("Account") },
-        { json: "status", js: "status", typ: r("Account") },
-        { json: "computeInstanceArns", js: "computeInstanceArns", typ: r("Resources") },
-        { json: "recommendation", js: "recommendation", typ: r("Items") },
+        { json: "schema", js: "schema", typ: Date },
+        { json: "expiresOn", js: "expiresOn", typ: Date },
+        { json: "sourceUrl", js: "sourceUrl", typ: "" },
+        { json: "deduplicationId", js: "deduplicationId", typ: "" },
+        { json: "title", js: "title", typ: r("Title") },
+        { json: "eventStartTime", js: "eventStartTime", typ: Date },
+        { json: "eventEndTime", js: "eventEndTime", typ: Date },
+        { json: "severity", js: "severity", typ: "" },
+        { json: "status", js: "status", typ: "" },
+        { json: "computeInstanceArns", js: "computeInstanceArns", typ: a("") },
+        { json: "recommendation", js: "recommendation", typ: r("Recommendation") },
     ], false),
     "Recommendation": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RecommendationProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RecommendationProperties": o([
-        { json: "name", js: "name", typ: r("Items") },
-        { json: "description", js: "description", typ: r("Items") },
-        { json: "resolutionSteps", js: "resolutionSteps", typ: r("Items") },
-        { json: "reason", js: "reason", typ: r("Items") },
+        { json: "name", js: "name", typ: r("Title") },
+        { json: "description", js: "description", typ: r("Title") },
+        { json: "resolutionSteps", js: "resolutionSteps", typ: r("Title") },
+        { json: "reason", js: "reason", typ: r("Title") },
     ], false),
     "Title": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TitleProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "value", js: "value", typ: "" },
     ], false),
-    "TitleProperties": o([
-        { json: "value", js: "value", typ: r("Account") },
-    ], false),
-    "Type": [
-        "string",
-    ],
 };

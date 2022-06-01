@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsA4B } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsA4B = Convert.toAwsA4B(json);
 //
@@ -8,93 +8,38 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsA4B {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsA4BElement: AwsA4BElement;
-    Detail:        Detail;
-    CalendarEvent: CalendarEvent;
-}
-
-export interface AwsA4BElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsA4BElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsA4BElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Account;
-}
-
-export interface CalendarEvent {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           CalendarEventProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface CalendarEventProperties {
-    provider: Account;
-    id:       Account;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    version:          string;
+    "event-type":     string;
+    mode:             string;
+    "calendar-event": CalendarEvent;
 }
 
-export interface DetailProperties {
-    version:          ID;
-    "event-type":     Account;
-    mode:             Account;
-    "calendar-event": Items;
+export interface CalendarEvent {
+    provider: string;
+    id:       string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsA4B(json: string): AwsA4B {
-        return cast(JSON.parse(json), r("AwsA4B"));
+    public static toAwsA4B(json: string): AwsA4B[] {
+        return cast(JSON.parse(json), a(r("AwsA4B")));
     }
 
-    public static awsA4BToJson(value: AwsA4B): string {
-        return JSON.stringify(uncast(value, r("AwsA4B")), null, 2);
+    public static awsA4BToJson(value: AwsA4B[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsA4B"))), null, 2);
     }
 }
 
@@ -232,70 +177,24 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsA4B": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsA4BElement", js: "AwsA4BElement", typ: r("AwsA4BElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "CalendarEvent", js: "CalendarEvent", typ: r("CalendarEvent") },
-    ], false),
-    "AwsA4BElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsA4BElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsA4BElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Account") },
-    ], false),
-    "CalendarEvent": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("CalendarEventProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "CalendarEventProperties": o([
-        { json: "provider", js: "provider", typ: r("Account") },
-        { json: "id", js: "id", typ: r("Account") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "version", js: "version", typ: "" },
+        { json: "event-type", js: "event-type", typ: "" },
+        { json: "mode", js: "mode", typ: "" },
+        { json: "calendar-event", js: "calendar-event", typ: r("CalendarEvent") },
     ], false),
-    "DetailProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "event-type", js: "event-type", typ: r("Account") },
-        { json: "mode", js: "mode", typ: r("Account") },
-        { json: "calendar-event", js: "calendar-event", typ: r("Items") },
+    "CalendarEvent": o([
+        { json: "provider", js: "provider", typ: "" },
+        { json: "id", js: "id", typ: "" },
     ], false),
 };

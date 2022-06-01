@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsSignin } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsSignin = Convert.toAwsSignin(json);
 //
@@ -8,146 +8,59 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsSignin {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsSigninElement:    AwsSigninElement;
-    Detail:              Detail;
-    AdditionalEventData: AdditionalEventData;
-    ResponseElements:    ResponseElements;
-    UserIdentity:        UserIdentity;
-}
-
-export interface AdditionalEventData {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AdditionalEventDataProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AdditionalEventDataProperties {
-    LoginTo:       LoginTo;
-    MobileVersion: MfaUsed;
-    MFAUsed:       MfaUsed;
-}
-
-export interface LoginTo {
-    type:               Type;
-    format:             string;
-    "qt-uri-protocols": string[];
-}
-
-export enum Type {
-    Null = "null",
-    String = "string",
-}
-
-export interface MfaUsed {
-    type: Type;
-}
-
-export interface AwsSigninElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsSigninElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsSigninElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": MfaUsed;
-    source:        MfaUsed;
-    account:       MfaUsed;
-    time:          ID;
-    region:        MfaUsed;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    eventVersion:        string;
+    userIdentity:        UserIdentity;
+    eventTime:           Date;
+    eventSource:         string;
+    eventName:           string;
+    awsRegion:           string;
+    sourceIPAddress:     string;
+    userAgent:           string;
+    requestParameters:   null;
+    responseElements:    ResponseElements;
+    additionalEventData: AdditionalEventData;
+    eventID:             string;
+    eventType:           string;
 }
 
-export interface DetailProperties {
-    eventVersion:        MfaUsed;
-    userIdentity:        DetailClass;
-    eventTime:           ID;
-    eventSource:         MfaUsed;
-    eventName:           MfaUsed;
-    awsRegion:           MfaUsed;
-    sourceIPAddress:     MfaUsed;
-    userAgent:           MfaUsed;
-    requestParameters:   MfaUsed;
-    responseElements:    DetailClass;
-    additionalEventData: DetailClass;
-    eventID:             ID;
-    eventType:           MfaUsed;
+export interface AdditionalEventData {
+    LoginTo:       string;
+    MobileVersion: string;
+    MFAUsed:       string;
 }
 
 export interface ResponseElements {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResponseElementsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResponseElementsProperties {
-    ConsoleLogin: MfaUsed;
+    ConsoleLogin: string;
 }
 
 export interface UserIdentity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UserIdentityProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface UserIdentityProperties {
-    type:        MfaUsed;
-    principalId: MfaUsed;
-    arn:         MfaUsed;
-    accountId:   MfaUsed;
+    type:        string;
+    principalId: string;
+    arn:         string;
+    accountId:   string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsSignin(json: string): AwsSignin {
-        return cast(JSON.parse(json), r("AwsSignin"));
+    public static toAwsSignin(json: string): AwsSignin[] {
+        return cast(JSON.parse(json), a(r("AwsSignin")));
     }
 
-    public static awsSigninToJson(value: AwsSignin): string {
-        return JSON.stringify(uncast(value, r("AwsSignin")), null, 2);
+    public static awsSigninToJson(value: AwsSignin[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsSignin"))), null, 2);
     }
 }
 
@@ -285,116 +198,43 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsSignin": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsSigninElement", js: "AwsSigninElement", typ: r("AwsSigninElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "AdditionalEventData", js: "AdditionalEventData", typ: r("AdditionalEventData") },
-        { json: "ResponseElements", js: "ResponseElements", typ: r("ResponseElements") },
-        { json: "UserIdentity", js: "UserIdentity", typ: r("UserIdentity") },
-    ], false),
-    "AdditionalEventData": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AdditionalEventDataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AdditionalEventDataProperties": o([
-        { json: "LoginTo", js: "LoginTo", typ: r("LoginTo") },
-        { json: "MobileVersion", js: "MobileVersion", typ: r("MfaUsed") },
-        { json: "MFAUsed", js: "MFAUsed", typ: r("MfaUsed") },
-    ], false),
-    "LoginTo": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-        { json: "qt-uri-protocols", js: "qt-uri-protocols", typ: a("") },
-    ], false),
-    "MfaUsed": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "AwsSigninElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsSigninElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsSigninElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("MfaUsed") },
-        { json: "source", js: "source", typ: r("MfaUsed") },
-        { json: "account", js: "account", typ: r("MfaUsed") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("MfaUsed") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "userIdentity", js: "userIdentity", typ: r("UserIdentity") },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "sourceIPAddress", js: "sourceIPAddress", typ: "" },
+        { json: "userAgent", js: "userAgent", typ: "" },
+        { json: "requestParameters", js: "requestParameters", typ: null },
+        { json: "responseElements", js: "responseElements", typ: r("ResponseElements") },
+        { json: "additionalEventData", js: "additionalEventData", typ: r("AdditionalEventData") },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "eventType", js: "eventType", typ: "" },
     ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("MfaUsed") },
-        { json: "userIdentity", js: "userIdentity", typ: r("DetailClass") },
-        { json: "eventTime", js: "eventTime", typ: r("ID") },
-        { json: "eventSource", js: "eventSource", typ: r("MfaUsed") },
-        { json: "eventName", js: "eventName", typ: r("MfaUsed") },
-        { json: "awsRegion", js: "awsRegion", typ: r("MfaUsed") },
-        { json: "sourceIPAddress", js: "sourceIPAddress", typ: r("MfaUsed") },
-        { json: "userAgent", js: "userAgent", typ: r("MfaUsed") },
-        { json: "requestParameters", js: "requestParameters", typ: r("MfaUsed") },
-        { json: "responseElements", js: "responseElements", typ: r("DetailClass") },
-        { json: "additionalEventData", js: "additionalEventData", typ: r("DetailClass") },
-        { json: "eventID", js: "eventID", typ: r("ID") },
-        { json: "eventType", js: "eventType", typ: r("MfaUsed") },
+    "AdditionalEventData": o([
+        { json: "LoginTo", js: "LoginTo", typ: "" },
+        { json: "MobileVersion", js: "MobileVersion", typ: "" },
+        { json: "MFAUsed", js: "MFAUsed", typ: "" },
     ], false),
     "ResponseElements": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResponseElementsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResponseElementsProperties": o([
-        { json: "ConsoleLogin", js: "ConsoleLogin", typ: r("MfaUsed") },
+        { json: "ConsoleLogin", js: "ConsoleLogin", typ: "" },
     ], false),
     "UserIdentity": o([
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UserIdentityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
     ], false),
-    "UserIdentityProperties": o([
-        { json: "type", js: "type", typ: r("MfaUsed") },
-        { json: "principalId", js: "principalId", typ: r("MfaUsed") },
-        { json: "arn", js: "arn", typ: r("MfaUsed") },
-        { json: "accountId", js: "accountId", typ: r("MfaUsed") },
-    ], false),
-    "Type": [
-        "null",
-        "string",
-    ],
 };

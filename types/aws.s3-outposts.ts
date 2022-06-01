@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsS3Outposts } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsS3Outposts = Convert.toAwsS3Outposts(json);
 //
@@ -8,217 +8,93 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsS3Outposts {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsS3Outpost:        AwsS3Outpost;
-    Detail:              Detail;
-    AdditionalEventData: AdditionalEventData;
-    EdgeDeviceDetails:   EdgeDeviceDetails;
-    RequestParameters:   RequestParameters;
-    Resource:            Resource;
-    UserIdentity:        UserIdentity;
-    SessionContext:      SessionContext;
-    Attributes:          Attributes;
-}
-
-export interface AdditionalEventData {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AdditionalEventDataProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AdditionalEventDataProperties {
-    CipherSuite:          AuthenticationMethod;
-    bytesTransferredIn:   AuthenticationMethod;
-    "x-amz-id-2":         AuthenticationMethod;
-    SignatureVersion:     AuthenticationMethod;
-    bytesTransferredOut:  AuthenticationMethod;
-    AuthenticationMethod: AuthenticationMethod;
-}
-
-export interface AuthenticationMethod {
-    type: Type;
-}
-
-export enum Type {
-    Boolean = "boolean",
-    Integer = "integer",
-    Null = "null",
-    String = "string",
-}
-
-export interface Attributes {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AttributesProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AttributesProperties {
-    creationDate:     CreationDate;
-    mfaAuthenticated: CreationDate;
-}
-
-export interface CreationDate {
-    type:   Type;
-    format: string;
-}
-
-export interface AwsS3Outpost {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsS3OutpostProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsS3OutpostProperties {
-    version:       CreationDate;
-    id:            CreationDate;
-    "detail-type": AuthenticationMethod;
-    source:        AuthenticationMethod;
-    account:       AuthenticationMethod;
-    time:          CreationDate;
-    region:        AuthenticationMethod;
-    resources:     PurpleResources;
-    detail:        DetailClass;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface PurpleResources {
-    type:  string;
-    items: PurpleItems;
-}
-
-export interface PurpleItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
+    eventVersion:        string;
+    userIdentity:        UserIdentity;
+    eventTime:           Date;
+    eventSource:         string;
+    eventName:           string;
+    awsRegion:           string;
+    sourceIPAddress:     string;
+    userAgent:           string;
+    requestParameters:   RequestParameters;
+    responseElements:    null;
+    additionalEventData: AdditionalEventData;
+    requestID:           string;
+    eventID:             string;
+    readOnly:            boolean;
+    resources:           Resource[];
+    eventType:           string;
+    managementEvent:     boolean;
+    recipientAccountId:  string;
+    edgeDeviceDetails:   EdgeDeviceDetails;
+    eventCategory:       string;
 }
 
-export interface DetailProperties {
-    eventVersion:        AuthenticationMethod;
-    userIdentity:        DetailClass;
-    eventTime:           CreationDate;
-    eventSource:         AuthenticationMethod;
-    eventName:           AuthenticationMethod;
-    awsRegion:           AuthenticationMethod;
-    sourceIPAddress:     AuthenticationMethod;
-    userAgent:           AuthenticationMethod;
-    requestParameters:   DetailClass;
-    responseElements:    AuthenticationMethod;
-    additionalEventData: DetailClass;
-    requestID:           AuthenticationMethod;
-    eventID:             CreationDate;
-    readOnly:            AuthenticationMethod;
-    resources:           FluffyResources;
-    eventType:           AuthenticationMethod;
-    managementEvent:     AuthenticationMethod;
-    recipientAccountId:  AuthenticationMethod;
-    edgeDeviceDetails:   DetailClass;
-    eventCategory:       AuthenticationMethod;
-}
-
-export interface FluffyResources {
-    type:  string;
-    items: DetailClass;
+export interface AdditionalEventData {
+    CipherSuite:          string;
+    bytesTransferredIn:   number;
+    "x-amz-id-2":         string;
+    SignatureVersion:     string;
+    bytesTransferredOut:  number;
+    AuthenticationMethod: string;
 }
 
 export interface EdgeDeviceDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           EdgeDeviceDetailsProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface EdgeDeviceDetailsProperties {
-    type:     AuthenticationMethod;
-    deviceID: AuthenticationMethod;
+    type:     string;
+    deviceID: string;
 }
 
 export interface RequestParameters {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           RequestParametersProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface RequestParametersProperties {
-    bucketName: AuthenticationMethod;
-    Key:        AuthenticationMethod;
+    bucketName: string;
+    Key:        string;
 }
 
 export interface Resource {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           ResourceProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface ResourceProperties {
-    accountId: AuthenticationMethod;
-    type:      AuthenticationMethod;
-    ARN:       AuthenticationMethod;
+    accountId: string;
+    type:      string;
+    ARN:       string;
 }
 
 export interface SessionContext {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           SessionContextProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface SessionContextProperties {
-    sessionIssuer: DetailClass;
-    attributes:    DetailClass;
+    sessionIssuer: UserIdentity;
+    attributes:    Attributes;
 }
 
 export interface UserIdentity {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           UserIdentityProperties;
-    required:             string[];
-    title:                string;
+    type:            string;
+    principalId:     string;
+    arn:             string;
+    accountId:       string;
+    sessionContext?: SessionContext;
+    userName?:       string;
 }
 
-export interface UserIdentityProperties {
-    type:           AuthenticationMethod;
-    principalId:    AuthenticationMethod;
-    arn:            AuthenticationMethod;
-    accountId:      AuthenticationMethod;
-    sessionContext: DetailClass;
-    userName:       AuthenticationMethod;
+export interface Attributes {
+    creationDate:     Date;
+    mfaAuthenticated: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsS3Outposts(json: string): AwsS3Outposts {
-        return cast(JSON.parse(json), r("AwsS3Outposts"));
+    public static toAwsS3Outposts(json: string): AwsS3Outposts[] {
+        return cast(JSON.parse(json), a(r("AwsS3Outposts")));
     }
 
-    public static awsS3OutpostsToJson(value: AwsS3Outposts): string {
-        return JSON.stringify(uncast(value, r("AwsS3Outposts")), null, 2);
+    public static awsS3OutpostsToJson(value: AwsS3Outposts[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsS3Outposts"))), null, 2);
     }
 }
 
@@ -356,179 +232,73 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsS3Outposts": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsS3Outpost", js: "AwsS3Outpost", typ: r("AwsS3Outpost") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "AdditionalEventData", js: "AdditionalEventData", typ: r("AdditionalEventData") },
-        { json: "EdgeDeviceDetails", js: "EdgeDeviceDetails", typ: r("EdgeDeviceDetails") },
-        { json: "RequestParameters", js: "RequestParameters", typ: r("RequestParameters") },
-        { json: "Resource", js: "Resource", typ: r("Resource") },
-        { json: "UserIdentity", js: "UserIdentity", typ: r("UserIdentity") },
-        { json: "SessionContext", js: "SessionContext", typ: r("SessionContext") },
-        { json: "Attributes", js: "Attributes", typ: r("Attributes") },
-    ], false),
-    "AdditionalEventData": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AdditionalEventDataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AdditionalEventDataProperties": o([
-        { json: "CipherSuite", js: "CipherSuite", typ: r("AuthenticationMethod") },
-        { json: "bytesTransferredIn", js: "bytesTransferredIn", typ: r("AuthenticationMethod") },
-        { json: "x-amz-id-2", js: "x-amz-id-2", typ: r("AuthenticationMethod") },
-        { json: "SignatureVersion", js: "SignatureVersion", typ: r("AuthenticationMethod") },
-        { json: "bytesTransferredOut", js: "bytesTransferredOut", typ: r("AuthenticationMethod") },
-        { json: "AuthenticationMethod", js: "AuthenticationMethod", typ: r("AuthenticationMethod") },
-    ], false),
-    "AuthenticationMethod": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Attributes": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AttributesProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AttributesProperties": o([
-        { json: "creationDate", js: "creationDate", typ: r("CreationDate") },
-        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: r("CreationDate") },
-    ], false),
-    "CreationDate": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "AwsS3Outpost": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsS3OutpostProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsS3OutpostProperties": o([
-        { json: "version", js: "version", typ: r("CreationDate") },
-        { json: "id", js: "id", typ: r("CreationDate") },
-        { json: "detail-type", js: "detail-type", typ: r("AuthenticationMethod") },
-        { json: "source", js: "source", typ: r("AuthenticationMethod") },
-        { json: "account", js: "account", typ: r("AuthenticationMethod") },
-        { json: "time", js: "time", typ: r("CreationDate") },
-        { json: "region", js: "region", typ: r("AuthenticationMethod") },
-        { json: "resources", js: "resources", typ: r("PurpleResources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "PurpleResources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("PurpleItems") },
-    ], false),
-    "PurpleItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "eventVersion", js: "eventVersion", typ: "" },
+        { json: "userIdentity", js: "userIdentity", typ: r("UserIdentity") },
+        { json: "eventTime", js: "eventTime", typ: Date },
+        { json: "eventSource", js: "eventSource", typ: "" },
+        { json: "eventName", js: "eventName", typ: "" },
+        { json: "awsRegion", js: "awsRegion", typ: "" },
+        { json: "sourceIPAddress", js: "sourceIPAddress", typ: "" },
+        { json: "userAgent", js: "userAgent", typ: "" },
+        { json: "requestParameters", js: "requestParameters", typ: r("RequestParameters") },
+        { json: "responseElements", js: "responseElements", typ: null },
+        { json: "additionalEventData", js: "additionalEventData", typ: r("AdditionalEventData") },
+        { json: "requestID", js: "requestID", typ: "" },
+        { json: "eventID", js: "eventID", typ: "" },
+        { json: "readOnly", js: "readOnly", typ: true },
+        { json: "resources", js: "resources", typ: a(r("Resource")) },
+        { json: "eventType", js: "eventType", typ: "" },
+        { json: "managementEvent", js: "managementEvent", typ: true },
+        { json: "recipientAccountId", js: "recipientAccountId", typ: "" },
+        { json: "edgeDeviceDetails", js: "edgeDeviceDetails", typ: r("EdgeDeviceDetails") },
+        { json: "eventCategory", js: "eventCategory", typ: "" },
     ], false),
-    "DetailProperties": o([
-        { json: "eventVersion", js: "eventVersion", typ: r("AuthenticationMethod") },
-        { json: "userIdentity", js: "userIdentity", typ: r("DetailClass") },
-        { json: "eventTime", js: "eventTime", typ: r("CreationDate") },
-        { json: "eventSource", js: "eventSource", typ: r("AuthenticationMethod") },
-        { json: "eventName", js: "eventName", typ: r("AuthenticationMethod") },
-        { json: "awsRegion", js: "awsRegion", typ: r("AuthenticationMethod") },
-        { json: "sourceIPAddress", js: "sourceIPAddress", typ: r("AuthenticationMethod") },
-        { json: "userAgent", js: "userAgent", typ: r("AuthenticationMethod") },
-        { json: "requestParameters", js: "requestParameters", typ: r("DetailClass") },
-        { json: "responseElements", js: "responseElements", typ: r("AuthenticationMethod") },
-        { json: "additionalEventData", js: "additionalEventData", typ: r("DetailClass") },
-        { json: "requestID", js: "requestID", typ: r("AuthenticationMethod") },
-        { json: "eventID", js: "eventID", typ: r("CreationDate") },
-        { json: "readOnly", js: "readOnly", typ: r("AuthenticationMethod") },
-        { json: "resources", js: "resources", typ: r("FluffyResources") },
-        { json: "eventType", js: "eventType", typ: r("AuthenticationMethod") },
-        { json: "managementEvent", js: "managementEvent", typ: r("AuthenticationMethod") },
-        { json: "recipientAccountId", js: "recipientAccountId", typ: r("AuthenticationMethod") },
-        { json: "edgeDeviceDetails", js: "edgeDeviceDetails", typ: r("DetailClass") },
-        { json: "eventCategory", js: "eventCategory", typ: r("AuthenticationMethod") },
-    ], false),
-    "FluffyResources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
+    "AdditionalEventData": o([
+        { json: "CipherSuite", js: "CipherSuite", typ: "" },
+        { json: "bytesTransferredIn", js: "bytesTransferredIn", typ: 0 },
+        { json: "x-amz-id-2", js: "x-amz-id-2", typ: "" },
+        { json: "SignatureVersion", js: "SignatureVersion", typ: "" },
+        { json: "bytesTransferredOut", js: "bytesTransferredOut", typ: 0 },
+        { json: "AuthenticationMethod", js: "AuthenticationMethod", typ: "" },
     ], false),
     "EdgeDeviceDetails": o([
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("EdgeDeviceDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "EdgeDeviceDetailsProperties": o([
-        { json: "type", js: "type", typ: r("AuthenticationMethod") },
-        { json: "deviceID", js: "deviceID", typ: r("AuthenticationMethod") },
+        { json: "deviceID", js: "deviceID", typ: "" },
     ], false),
     "RequestParameters": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("RequestParametersProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "RequestParametersProperties": o([
-        { json: "bucketName", js: "bucketName", typ: r("AuthenticationMethod") },
-        { json: "Key", js: "Key", typ: r("AuthenticationMethod") },
+        { json: "bucketName", js: "bucketName", typ: "" },
+        { json: "Key", js: "Key", typ: "" },
     ], false),
     "Resource": o([
+        { json: "accountId", js: "accountId", typ: "" },
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResourceProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "ResourceProperties": o([
-        { json: "accountId", js: "accountId", typ: r("AuthenticationMethod") },
-        { json: "type", js: "type", typ: r("AuthenticationMethod") },
-        { json: "ARN", js: "ARN", typ: r("AuthenticationMethod") },
+        { json: "ARN", js: "ARN", typ: "" },
     ], false),
     "SessionContext": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("SessionContextProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "SessionContextProperties": o([
-        { json: "sessionIssuer", js: "sessionIssuer", typ: r("DetailClass") },
-        { json: "attributes", js: "attributes", typ: r("DetailClass") },
+        { json: "sessionIssuer", js: "sessionIssuer", typ: r("UserIdentity") },
+        { json: "attributes", js: "attributes", typ: r("Attributes") },
     ], false),
     "UserIdentity": o([
         { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("UserIdentityProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "principalId", js: "principalId", typ: "" },
+        { json: "arn", js: "arn", typ: "" },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "sessionContext", js: "sessionContext", typ: u(undefined, r("SessionContext")) },
+        { json: "userName", js: "userName", typ: u(undefined, "") },
     ], false),
-    "UserIdentityProperties": o([
-        { json: "type", js: "type", typ: r("AuthenticationMethod") },
-        { json: "principalId", js: "principalId", typ: r("AuthenticationMethod") },
-        { json: "arn", js: "arn", typ: r("AuthenticationMethod") },
-        { json: "accountId", js: "accountId", typ: r("AuthenticationMethod") },
-        { json: "sessionContext", js: "sessionContext", typ: r("DetailClass") },
-        { json: "userName", js: "userName", typ: r("AuthenticationMethod") },
+    "Attributes": o([
+        { json: "creationDate", js: "creationDate", typ: Date },
+        { json: "mfaAuthenticated", js: "mfaAuthenticated", typ: "" },
     ], false),
-    "Type": [
-        "boolean",
-        "integer",
-        "null",
-        "string",
-    ],
 };

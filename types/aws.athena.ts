@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsAthena } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsAthena = Convert.toAwsAthena(json);
 //
@@ -8,85 +8,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsAthena {
-    $schema:     string;
-    type:        string;
-    items:       DetailClass;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsAthenaElement: AwsAthenaElement;
-    Detail:           Detail;
-}
-
-export interface AwsAthenaElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsAthenaElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsAthenaElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Account;
-    source:        Account;
-    account:       Account;
-    time:          ID;
-    region:        Account;
-    resources:     Resources;
-    detail:        DetailClass;
-}
-
-export interface Account {
-    type: string;
-}
-
-export interface DetailClass {
-    $ref: string;
-}
-
-export interface ID {
-    type:   string;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: ResourcesItems;
-}
-
-export interface ResourcesItems {
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     any[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    versionId:        ID;
-    currentState:     Account;
-    previousState:    Account;
-    statementType:    Account;
-    queryExecutionId: ID;
-    workgroupName:    Account;
-    sequenceNumber:   ID;
+    versionId:        string;
+    currentState:     string;
+    previousState:    string;
+    statementType:    string;
+    queryExecutionId: string;
+    workgroupName:    string;
+    sequenceNumber:   string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsAthena(json: string): AwsAthena {
-        return cast(JSON.parse(json), r("AwsAthena"));
+    public static toAwsAthena(json: string): AwsAthena[] {
+        return cast(JSON.parse(json), a(r("AwsAthena")));
     }
 
-    public static awsAthenaToJson(value: AwsAthena): string {
-        return JSON.stringify(uncast(value, r("AwsAthena")), null, 2);
+    public static awsAthenaToJson(value: AwsAthena[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsAthena"))), null, 2);
     }
 }
 
@@ -224,63 +175,23 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsAthena": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("DetailClass") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsAthenaElement", js: "AwsAthenaElement", typ: r("AwsAthenaElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-    ], false),
-    "AwsAthenaElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsAthenaElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsAthenaElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Account") },
-        { json: "source", js: "source", typ: r("Account") },
-        { json: "account", js: "account", typ: r("Account") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Account") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("DetailClass") },
-    ], false),
-    "Account": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DetailClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("ResourcesItems") },
-    ], false),
-    "ResourcesItems": o([
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("any") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "versionId", js: "versionId", typ: r("ID") },
-        { json: "currentState", js: "currentState", typ: r("Account") },
-        { json: "previousState", js: "previousState", typ: r("Account") },
-        { json: "statementType", js: "statementType", typ: r("Account") },
-        { json: "queryExecutionId", js: "queryExecutionId", typ: r("ID") },
-        { json: "workgroupName", js: "workgroupName", typ: r("Account") },
-        { json: "sequenceNumber", js: "sequenceNumber", typ: r("ID") },
+        { json: "versionId", js: "versionId", typ: "" },
+        { json: "currentState", js: "currentState", typ: "" },
+        { json: "previousState", js: "previousState", typ: "" },
+        { json: "statementType", js: "statementType", typ: "" },
+        { json: "queryExecutionId", js: "queryExecutionId", typ: "" },
+        { json: "workgroupName", js: "workgroupName", typ: "" },
+        { json: "sequenceNumber", js: "sequenceNumber", typ: "" },
     ], false),
 };

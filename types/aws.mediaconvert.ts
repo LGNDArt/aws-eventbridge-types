@@ -1,6 +1,6 @@
 // To parse this data:
 //
-//   import { Convert, AwsMediaconvert } from "./file";
+//   import { Convert } from "./file";
 //
 //   const awsMediaconvert = Convert.toAwsMediaconvert(json);
 //
@@ -8,186 +8,83 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface AwsMediaconvert {
-    $schema:     string;
-    type:        string;
-    items:       Items;
-    definitions: Definitions;
-}
-
-export interface Definitions {
-    AwsMediaconvertElement: AwsMediaconvertElement;
-    Detail:                 Detail;
-    InputDetail:            InputDetail;
-    Audio:                  Audio;
-    Video:                  Video;
-    OutputGroupDetail:      OutputGroupDetail;
-    OutputDetail:           OutputDetail;
-    VideoDetails:           VideoDetails;
-    UserMetadata:           UserMetadata;
-}
-
-export interface Audio {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AudioProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AudioProperties {
-    streamId:   Channels;
-    codec:      Channels;
-    channels:   Channels;
-    sampleRate: Channels;
-    language:   Channels;
-}
-
-export interface Channels {
-    type: Type;
-}
-
-export enum Type {
-    Integer = "integer",
-    Null = "null",
-    Number = "number",
-    String = "string",
-}
-
-export interface AwsMediaconvertElement {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           AwsMediaconvertElementProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface AwsMediaconvertElementProperties {
-    version:       ID;
-    id:            ID;
-    "detail-type": Channels;
-    source:        Channels;
-    account:       Channels;
-    time:          ID;
-    region:        Channels;
-    resources:     Resources;
-    detail:        Items;
-}
-
-export interface Items {
-    $ref: string;
-}
-
-export interface ID {
-    type:   Type;
-    format: string;
-}
-
-export interface Resources {
-    type:  string;
-    items: Channels;
+    version:       string;
+    id:            string;
+    "detail-type": string;
+    source:        string;
+    account:       string;
+    time:          Date;
+    region:        string;
+    resources:     string[];
+    detail:        Detail;
 }
 
 export interface Detail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           DetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface DetailProperties {
-    timestamp:          Channels;
-    accountId:          Channels;
-    queue:              Channels;
-    jobId:              Channels;
-    status:             Channels;
-    userMetadata:       Items;
-    inputDetails:       InputDetails;
-    outputGroupDetails: InputDetails;
-}
-
-export interface InputDetails {
-    type:  string;
-    items: Items;
+    timestamp:           number;
+    accountId:           string;
+    queue:               string;
+    jobId:               string;
+    status:              string;
+    userMetadata:        UserMetadata;
+    inputDetails?:       InputDetail[];
+    outputGroupDetails?: OutputGroupDetail[];
 }
 
 export interface InputDetail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           InputDetailProperties;
-    required:             string[];
-    title:                string;
+    id:    number;
+    uri:   string;
+    video: Video[];
+    audio: Audio[];
+    data:  null;
 }
 
-export interface InputDetailProperties {
-    id:    Channels;
-    uri:   Channels;
-    video: InputDetails;
-    audio: InputDetails;
-    data:  Channels;
-}
-
-export interface OutputDetail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           OutputDetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface OutputDetailProperties {
-    durationInMs: Channels;
-    videoDetails: Items;
-}
-
-export interface OutputGroupDetail {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           OutputGroupDetailProperties;
-    required:             string[];
-    title:                string;
-}
-
-export interface OutputGroupDetailProperties {
-    outputDetails: InputDetails;
-}
-
-export interface UserMetadata {
-    type:                 string;
-    additionalProperties: boolean;
-    title:                string;
+export interface Audio {
+    streamId:   number;
+    codec:      string;
+    channels:   number;
+    sampleRate: number;
+    language:   string;
 }
 
 export interface Video {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           { [key: string]: Channels };
-    required:             string[];
-    title:                string;
+    streamId:      number;
+    width:         number;
+    height:        number;
+    frameRate:     number;
+    sar:           string;
+    bitDepth:      number;
+    interlaceMode: string;
+    colorFormat:   string;
+    standard:      string;
+    fourCC:        string;
+}
+
+export interface OutputGroupDetail {
+    outputDetails: OutputDetail[];
+}
+
+export interface OutputDetail {
+    durationInMs: number;
+    videoDetails: VideoDetails;
 }
 
 export interface VideoDetails {
-    type:                 string;
-    additionalProperties: boolean;
-    properties:           VideoDetailsProperties;
-    required:             string[];
-    title:                string;
+    widthInPx:  number;
+    heightInPx: number;
 }
 
-export interface VideoDetailsProperties {
-    widthInPx:  Channels;
-    heightInPx: Channels;
+export interface UserMetadata {
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toAwsMediaconvert(json: string): AwsMediaconvert {
-        return cast(JSON.parse(json), r("AwsMediaconvert"));
+    public static toAwsMediaconvert(json: string): AwsMediaconvert[] {
+        return cast(JSON.parse(json), a(r("AwsMediaconvert")));
     }
 
-    public static awsMediaconvertToJson(value: AwsMediaconvert): string {
-        return JSON.stringify(uncast(value, r("AwsMediaconvert")), null, 2);
+    public static awsMediaconvertToJson(value: AwsMediaconvert[]): string {
+        return JSON.stringify(uncast(value, a(r("AwsMediaconvert"))), null, 2);
     }
 }
 
@@ -325,151 +222,63 @@ function r(name: string) {
 
 const typeMap: any = {
     "AwsMediaconvert": o([
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "AwsMediaconvertElement", js: "AwsMediaconvertElement", typ: r("AwsMediaconvertElement") },
-        { json: "Detail", js: "Detail", typ: r("Detail") },
-        { json: "InputDetail", js: "InputDetail", typ: r("InputDetail") },
-        { json: "Audio", js: "Audio", typ: r("Audio") },
-        { json: "Video", js: "Video", typ: r("Video") },
-        { json: "OutputGroupDetail", js: "OutputGroupDetail", typ: r("OutputGroupDetail") },
-        { json: "OutputDetail", js: "OutputDetail", typ: r("OutputDetail") },
-        { json: "VideoDetails", js: "VideoDetails", typ: r("VideoDetails") },
-        { json: "UserMetadata", js: "UserMetadata", typ: r("UserMetadata") },
-    ], false),
-    "Audio": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AudioProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AudioProperties": o([
-        { json: "streamId", js: "streamId", typ: r("Channels") },
-        { json: "codec", js: "codec", typ: r("Channels") },
-        { json: "channels", js: "channels", typ: r("Channels") },
-        { json: "sampleRate", js: "sampleRate", typ: r("Channels") },
-        { json: "language", js: "language", typ: r("Channels") },
-    ], false),
-    "Channels": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "AwsMediaconvertElement": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AwsMediaconvertElementProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "AwsMediaconvertElementProperties": o([
-        { json: "version", js: "version", typ: r("ID") },
-        { json: "id", js: "id", typ: r("ID") },
-        { json: "detail-type", js: "detail-type", typ: r("Channels") },
-        { json: "source", js: "source", typ: r("Channels") },
-        { json: "account", js: "account", typ: r("Channels") },
-        { json: "time", js: "time", typ: r("ID") },
-        { json: "region", js: "region", typ: r("Channels") },
-        { json: "resources", js: "resources", typ: r("Resources") },
-        { json: "detail", js: "detail", typ: r("Items") },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "ID": o([
-        { json: "type", js: "type", typ: r("Type") },
-        { json: "format", js: "format", typ: "" },
-    ], false),
-    "Resources": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Channels") },
+        { json: "version", js: "version", typ: "" },
+        { json: "id", js: "id", typ: "" },
+        { json: "detail-type", js: "detail-type", typ: "" },
+        { json: "source", js: "source", typ: "" },
+        { json: "account", js: "account", typ: "" },
+        { json: "time", js: "time", typ: Date },
+        { json: "region", js: "region", typ: "" },
+        { json: "resources", js: "resources", typ: a("") },
+        { json: "detail", js: "detail", typ: r("Detail") },
     ], false),
     "Detail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "DetailProperties": o([
-        { json: "timestamp", js: "timestamp", typ: r("Channels") },
-        { json: "accountId", js: "accountId", typ: r("Channels") },
-        { json: "queue", js: "queue", typ: r("Channels") },
-        { json: "jobId", js: "jobId", typ: r("Channels") },
-        { json: "status", js: "status", typ: r("Channels") },
-        { json: "userMetadata", js: "userMetadata", typ: r("Items") },
-        { json: "inputDetails", js: "inputDetails", typ: r("InputDetails") },
-        { json: "outputGroupDetails", js: "outputGroupDetails", typ: r("InputDetails") },
-    ], false),
-    "InputDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "items", js: "items", typ: r("Items") },
+        { json: "timestamp", js: "timestamp", typ: 0 },
+        { json: "accountId", js: "accountId", typ: "" },
+        { json: "queue", js: "queue", typ: "" },
+        { json: "jobId", js: "jobId", typ: "" },
+        { json: "status", js: "status", typ: "" },
+        { json: "userMetadata", js: "userMetadata", typ: r("UserMetadata") },
+        { json: "inputDetails", js: "inputDetails", typ: u(undefined, a(r("InputDetail"))) },
+        { json: "outputGroupDetails", js: "outputGroupDetails", typ: u(undefined, a(r("OutputGroupDetail"))) },
     ], false),
     "InputDetail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("InputDetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "id", js: "id", typ: 0 },
+        { json: "uri", js: "uri", typ: "" },
+        { json: "video", js: "video", typ: a(r("Video")) },
+        { json: "audio", js: "audio", typ: a(r("Audio")) },
+        { json: "data", js: "data", typ: null },
     ], false),
-    "InputDetailProperties": o([
-        { json: "id", js: "id", typ: r("Channels") },
-        { json: "uri", js: "uri", typ: r("Channels") },
-        { json: "video", js: "video", typ: r("InputDetails") },
-        { json: "audio", js: "audio", typ: r("InputDetails") },
-        { json: "data", js: "data", typ: r("Channels") },
-    ], false),
-    "OutputDetail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OutputDetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "OutputDetailProperties": o([
-        { json: "durationInMs", js: "durationInMs", typ: r("Channels") },
-        { json: "videoDetails", js: "videoDetails", typ: r("Items") },
-    ], false),
-    "OutputGroupDetail": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OutputGroupDetailProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-    ], false),
-    "OutputGroupDetailProperties": o([
-        { json: "outputDetails", js: "outputDetails", typ: r("InputDetails") },
-    ], false),
-    "UserMetadata": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "title", js: "title", typ: "" },
+    "Audio": o([
+        { json: "streamId", js: "streamId", typ: 0 },
+        { json: "codec", js: "codec", typ: "" },
+        { json: "channels", js: "channels", typ: 0 },
+        { json: "sampleRate", js: "sampleRate", typ: 0 },
+        { json: "language", js: "language", typ: "" },
     ], false),
     "Video": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: m(r("Channels")) },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "streamId", js: "streamId", typ: 0 },
+        { json: "width", js: "width", typ: 0 },
+        { json: "height", js: "height", typ: 0 },
+        { json: "frameRate", js: "frameRate", typ: 3.14 },
+        { json: "sar", js: "sar", typ: "" },
+        { json: "bitDepth", js: "bitDepth", typ: 0 },
+        { json: "interlaceMode", js: "interlaceMode", typ: "" },
+        { json: "colorFormat", js: "colorFormat", typ: "" },
+        { json: "standard", js: "standard", typ: "" },
+        { json: "fourCC", js: "fourCC", typ: "" },
+    ], false),
+    "OutputGroupDetail": o([
+        { json: "outputDetails", js: "outputDetails", typ: a(r("OutputDetail")) },
+    ], false),
+    "OutputDetail": o([
+        { json: "durationInMs", js: "durationInMs", typ: 0 },
+        { json: "videoDetails", js: "videoDetails", typ: r("VideoDetails") },
     ], false),
     "VideoDetails": o([
-        { json: "type", js: "type", typ: "" },
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("VideoDetailsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
+        { json: "widthInPx", js: "widthInPx", typ: 0 },
+        { json: "heightInPx", js: "heightInPx", typ: 0 },
     ], false),
-    "VideoDetailsProperties": o([
-        { json: "widthInPx", js: "widthInPx", typ: r("Channels") },
-        { json: "heightInPx", js: "heightInPx", typ: r("Channels") },
+    "UserMetadata": o([
     ], false),
-    "Type": [
-        "integer",
-        "null",
-        "number",
-        "string",
-    ],
 };
